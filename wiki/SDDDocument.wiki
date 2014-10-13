@@ -1,0 +1,37 @@
+#labels Phase-Design,SDD,SequenceDiagram,UML,ClassDiagram
+Overview : 
+
+I) Requirements
+
+  1. Subjects and actors
+
+  2. Internal functions of the system
+
+II) Use Case Diagram
+
+III) Scenarios
+
+IV) Sequence Diagrams
+
+  1. Connection Sequence
+
+  2. Disconnection Sequence
+
+  3. Sending Sequence
+
+  4. Receiving Sequence
+
+V) Class diagram
+
+ANNEXE
+
+  1. Connection Sequence
+
+  2. Disconnection Sequence
+
+  3. Sending Sequence
+
+  4. Receiving Sequence
+
+
+https://drive.google.com/#folders/0BwkfmHCUJDDRWDkyM29Oa2pGb1U
