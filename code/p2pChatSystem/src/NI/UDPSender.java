@@ -25,7 +25,7 @@ public class UDPSender extends AbstractSender {
 	 * On dÃ©finit les constructeurs
 	 */
 	private UDPSender(){
-		this.setPort(5000);
+		this.setPortEnvoi(5000);
 	}
 	
 	/*
@@ -45,22 +45,23 @@ public class UDPSender extends AbstractSender {
 		/** creation d'un socket UDP**/
 		DatagramSocket socket = null;
 		try {
-			socket = new DatagramSocket (this.getPort()) ;
+			socket = new DatagramSocket (this.getPortEnvoi()) ;
+			System.out.println("Creation du socket UDPSender") ;
 			
-					
 			if (message.getTypeContenu() == typeContenu.HELLO) {
 				/** Creation du Datagram Packet **/
 				ByteArrayOutputStream bos = new ByteArrayOutputStream();
 				ObjectOutput out = null;
 				try {
-				  out = new ObjectOutputStream(bos);   
-				  out.writeObject(typeContenu.HELLO);
-				  byte[] buf = bos.toByteArray();
-				  DatagramPacket packet = new DatagramPacket (buf, buf.length, InetAddress.getByName("255.255.255.255"), this.getPort()) ;
-				  
-				  /** Envoi du paquet **/
-				  socket.send(packet);
+					out = new ObjectOutputStream(bos);
+				  	out.writeObject(message);
+				  	byte[] buf = bos.toByteArray();
+				  	DatagramPacket packet = new DatagramPacket (buf, buf.length, InetAddress.getByName("255.255.255.255"), this.getPortEcoute()) ;
+				  	System.out.println("Paquet concu ! ") ;
 
+				  	/** Envoi du paquet **/
+				  	socket.send(packet);
+				  	System.out.println("Paquet envoyé!") ;
 				} catch (IOException e) {
 					System.out.println("Erreur lors de l'écriture dans le UDP Sender") ;
 				}
