@@ -1,6 +1,9 @@
 package NI;
 
+import java.io.*;
 import java.net.*;
+import Signals.*;
+import userModel.* ;
 
 public class UDPReceiver extends AbstractReceiver {
 
@@ -30,19 +33,46 @@ public class UDPReceiver extends AbstractReceiver {
 	 */
 	public void listen(){
 		/** creation d'un socket UDP**/
+		DatagramSocket socket = null;
 		try {
-		DatagramSocket socket = new DatagramSocket (this.getPort()) ;
+		socket = new DatagramSocket (this.getPort()) ;
+		
+		//while (this.isListening()) {
+			/** creation du paquet DatagramPacket **/
+			byte[] buf = new byte[5000] ;
+			DatagramPacket packet = new DatagramPacket (buf, buf.length);
+			
+			socket.receive(packet) ;
+			
+			ByteArrayInputStream byteIn = new ByteArrayInputStream(buf);
+			ObjectInput in = new ObjectInputStream(byteIn);
+			AbstractMessage message = (AbstractMessage) in.readObject() ;
+			if (message.getTypeContenu() == typeContenu.HELLO) {
+				/** Ajout du nouvel User dans la HashMap **/
+				NetworkInformation NI = null ;
+				NI = NI.getInstance() ;
+				User user = NI.addUser(message.getNickname(), socket.getInetAddress()) ;
+				// processHello(user) ;
+				System.out.println("Hello, I am " +user.getNickname()) ;
+				
+			}
+		//}
 		
 		} catch (BindException e1) {
 			System.out.println("Port for UDP SocketReceiver already used.") ;
-		}
-		catch (SocketException e2) {
+		} catch (SocketException e2) {
 			System.out.println("Creation of UDP SocketReceiver failed.") ;
+		} catch (IOException e3) {
+			System.out.println("IOException during Receive.") ;
+		} catch (ClassNotFoundException e4) {
+			System.out.println("Lecture du message en réception impossible.") ;			
+		}
+		finally {
+			if (socket != null)
+				socket.close() ;
 		}
 		
-		while (true) {
-			
-		}
+
 	}
 	
 }

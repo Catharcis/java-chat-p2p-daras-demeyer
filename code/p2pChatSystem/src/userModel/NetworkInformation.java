@@ -29,8 +29,10 @@ public class NetworkInformation extends Observable {
 	}
 	
 	/** Methode qui crée un User et l'ajoute à la liste  **/
-	public void addUser (String nickname, InetAddress ip) {
-		this.usersIPAddress.put(new User (nickname), ip) ;
+	public User addUser (String nickname, InetAddress ip) {
+		User user = new User (nickname) ;
+		this.usersIPAddress.put(user, ip) ;
+		return user; 
 	}
 	
 	/** Methode qui supprime un User grâce à son adresse IP **/
