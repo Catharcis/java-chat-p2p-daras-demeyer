@@ -48,28 +48,24 @@ public class UDPSender extends AbstractSender {
 			socket = new DatagramSocket (this.getPortEnvoi()) ;
 			System.out.println("Creation du socket UDPSender") ;
 			
-			if (message.getTypeContenu() == typeContenu.HELLO) {
-				/** Creation du Datagram Packet **/
-				ByteArrayOutputStream bos = new ByteArrayOutputStream();
-				ObjectOutput out = null;
-				try {
-					out = new ObjectOutputStream(bos);
-				  	out.writeObject(message);
-				  	byte[] buf = bos.toByteArray();
-				  	DatagramPacket packet = new DatagramPacket (buf, buf.length, InetAddress.getByName("255.255.255.255"), this.getPortEcoute()) ;
-				  	System.out.println("Paquet concu ! ") ;
 
-				  	/** Envoi du paquet **/
-				  	socket.send(packet);
-				  	System.out.println("Paquet envoyé!") ;
-				} catch (IOException e) {
-					System.out.println("Erreur lors de l'écriture dans le UDP Sender") ;
-				}
+			/** Creation du Datagram Packet **/
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			ObjectOutput out = null;
+			try {
+				out = new ObjectOutputStream(bos);
+			  	out.writeObject(message);
+			  	byte[] buf = bos.toByteArray();
+			  	DatagramPacket packet = new DatagramPacket (buf, buf.length, InetAddress.getByName("255.255.255.255"), this.getPortEcoute()) ;
+			  	System.out.println("Paquet concu ! ") ;
+
+			  	/** Envoi du paquet **/
+			  	socket.send(packet);
+			  	System.out.println("Paquet envoyé!") ;
+			} catch (IOException e) {
+				System.out.println("Erreur lors de l'écriture dans le UDP Sender") ;
 			}
 
-			if (message.getTypeContenu() == typeContenu.GOODBYE) {
-				
-			}
 		} catch (BindException e1) {
 			System.out.println("Port for UDP SocketSender already used.") ;
 		} catch (SocketException e2) {
