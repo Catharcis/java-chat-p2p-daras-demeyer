@@ -2,6 +2,8 @@ package NI;
 
 import java.io.*;
 import java.net.*;
+import java.util.Iterator;
+
 import Signals.*;
 import userModel.* ;
 
@@ -74,9 +76,9 @@ public class UDPReceiver extends AbstractReceiver {
 				/** Ajout du nouvel User dans la HashMap **/
 				NetworkInformation NI = null ;
 				NI = NI.getInstance() ;
-				//User user = NI.getUserList() ;
+				User user = NI.getUserWithInetAddress(socket.getInetAddress());
 				// processGoodbye(user) ;
-				//System.out.println("Goodbye, I am " +user.getNickname()) ;
+				//System.out.println("Goodbye, my name was " +user.getNickname()) ;
 				NI.removeUser(socket.getInetAddress()) ;
 			}
 		//}
