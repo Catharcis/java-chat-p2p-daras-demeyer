@@ -76,7 +76,7 @@ public class UDPReceiver extends AbstractReceiver {
 				/** Ajout du nouvel User dans la HashMap **/
 				NetworkInformation NI = null ;
 				NI = NI.getInstance() ;
-				User user = NI.getUserWithInetAddress(socket.getInetAddress());
+				User user = NI.getUserList().get(socket.getInetAddress());
 				// processGoodbye(user) ;
 				//System.out.println("Goodbye, my name was " +user.getNickname()) ;
 				NI.removeUser(socket.getInetAddress()) ;
