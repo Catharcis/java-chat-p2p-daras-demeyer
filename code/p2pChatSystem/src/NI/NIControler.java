@@ -21,7 +21,7 @@ public class NIControler extends Thread {
 		
 	}
 	
-	public static NIControler getInstance () {
+	public NIControler getInstance () {
 		if (NISingleton == null) {
 			NISingleton = new NIControler () ;
 		}
