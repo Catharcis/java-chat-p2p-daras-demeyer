@@ -42,7 +42,9 @@ public class UDPReceiver extends AbstractReceiver {
 			byte[] buf = new byte[5000] ;
 			DatagramPacket packet = new DatagramPacket (buf, buf.length);
 			
+			System.out.println("En attente d'une réception...") ;
 			socket.receive(packet) ;
+			System.out.println("Paquet recu!") ;
 			
 			ByteArrayInputStream byteIn = new ByteArrayInputStream(buf);
 			ObjectInput in = new ObjectInputStream(byteIn);
@@ -55,6 +57,27 @@ public class UDPReceiver extends AbstractReceiver {
 				// processHello(user) ;
 				System.out.println("Hello, I am " +user.getNickname()) ;
 				
+			}
+			
+			if (message.getTypeContenu() == typeContenu.HELLOACK) {
+				/** Ajout du nouvel User dans la HashMap **/
+				NetworkInformation NI = null ;
+				NI = NI.getInstance() ;
+				User user = NI.addUser(message.getNickname(), socket.getInetAddress()) ;
+				// processHelloAck(user) ;
+				System.out.println("Hello, I am " +user.getNickname()) ;
+				
+			}
+			
+			
+			if (message.getTypeContenu() == typeContenu.GOODBYE) {
+				/** Ajout du nouvel User dans la HashMap **/
+				NetworkInformation NI = null ;
+				NI = NI.getInstance() ;
+				User user = NI.getUserList().
+				// processGoodbye(user) ;
+				System.out.println("Goodbye, I am " +user.getNickname()) ;
+				NI.removeUser(socket.getInetAddress()) ;
 			}
 		//}
 		
