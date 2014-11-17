@@ -1,5 +1,5 @@
 package NI;
 
-public abstract class AbstractSender implements NetworkInterface {
+public abstract class AbstractSender extends AbstractNetwork {
 
 }
