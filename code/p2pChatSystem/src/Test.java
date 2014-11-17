@@ -1,4 +1,5 @@
 import NI.NIControler;
+import Signals.*;
 
 
 
@@ -8,7 +9,6 @@ public class Test {
 		NIControler NI = null ;
 		NI = NI.getInstance() ;
 		NI.getUDPReceiver().listen() ;
-		
 	}
 
 }

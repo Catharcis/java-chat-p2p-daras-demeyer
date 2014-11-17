@@ -78,7 +78,7 @@ public class UDPReceiver extends AbstractReceiver {
 				NI = NI.getInstance() ;
 				User user = NI.getUserList().get(socket.getInetAddress());
 				// processGoodbye(user) ;
-				//System.out.println("Goodbye, my name was " +user.getNickname()) ;
+				System.out.println("Goodbye, my name was " +user.getNickname()) ;
 				NI.removeUser(socket.getInetAddress()) ;
 			}
 		//}

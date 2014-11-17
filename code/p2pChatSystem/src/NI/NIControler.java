@@ -19,6 +19,7 @@ public class NIControler extends Thread {
 	private NIControler () 
 	{
 		this.udpReceiver = udpReceiver.getInstanceUDPReceiver() ;
+		this.udpSender = udpSender.getInstanceUDPSender() ;
 	}
 	
 	public static NIControler getInstance () {
@@ -30,6 +31,10 @@ public class NIControler extends Thread {
 	
 	public UDPReceiver getUDPReceiver () {
 		return udpReceiver ;
+	}
+	
+	public UDPSender getUDPSender () {
+		return udpSender ;
 	}
 	
 	public void sendHello (User user) {
