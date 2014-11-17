@@ -43,6 +43,19 @@ public class NetworkInformation extends Observable {
 		this.usersIPAddress.remove(ip) ;
 	}
 	
+	/** Méthode qui récupère l'adresse IP d'un utilisateur **/
+	public InetAddress getIPAddressOfUser(User user){
+		InetAddress ip = null;
+		Iterator<Entry<InetAddress, User>> it = usersIPAddress.entrySet().iterator();
+		while (it.hasNext() && ip == null){
+			Entry<InetAddress,User> entry = it.next();
+			if (entry.getValue().getIdUser() == user.getIdUser()){
+				ip = entry.getKey();
+			}
+		}
+		return ip;
+	}
+	
 	/** Methodes en relation avec la classe Observable **/
 	
 }
