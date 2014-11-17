@@ -6,7 +6,7 @@ import java.util.Observable;
 public class NetworkInformation extends Observable {
 
 	/** Singleton **/
-	private NetworkInformation InfoSingleton ;
+	private static NetworkInformation InfoSingleton ;
 	
 	/** Correspondance entre User et adresse IP **/
 	private HashMap<User, InetAddress> usersIPAddress ;
@@ -17,7 +17,7 @@ public class NetworkInformation extends Observable {
 	}
 	
 	/** Methode creant une instance de classe si necessaire et renvoie l'objet**/
-	public NetworkInformation getInstance () {
+	public static NetworkInformation getInstance () {
 		if (InfoSingleton == null)
 			InfoSingleton = new NetworkInformation () ;
 		return InfoSingleton ;
@@ -36,7 +36,7 @@ public class NetworkInformation extends Observable {
 	}
 	
 	/** Methode qui supprime un User grâce à son adresse IP **/
-	public void remove (InetAddress ip) {
+	public void removeUser (InetAddress ip) {
 		this.usersIPAddress.remove(ip) ;
 	}
 	

@@ -18,14 +18,18 @@ public class NIControler extends Thread {
 	
 	private NIControler () 
 	{
-		
+		this.udpReceiver = udpReceiver.getInstanceUDPReceiver() ;
 	}
 	
-	public NIControler getInstance () {
+	public static NIControler getInstance () {
 		if (NISingleton == null) {
 			NISingleton = new NIControler () ;
 		}
 		return NISingleton ;
+	}
+	
+	public UDPReceiver getUDPReceiver () {
+		return udpReceiver ;
 	}
 	
 	public void sendHello (User user) {
