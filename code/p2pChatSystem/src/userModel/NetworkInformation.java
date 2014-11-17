@@ -18,4 +18,10 @@ public class NetworkInformation extends Observable {
 			InfoSingleton = new NetworkInformation () ;
 		return InfoSingleton ;
 	}
+	
+	public HashMap<User,InetAddress> getUserList () {
+		return usersIPAddress ;		
+	}
+	
+	public 
 }
