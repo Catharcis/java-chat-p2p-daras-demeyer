@@ -50,25 +50,12 @@ public class NetworkInformation extends Observable {
 		this.listOfUsers.remove(listOfUsers.indexOf(user));
 	}
 	
-	/** Méthode qui permet de récupérer l'adresse IP connaissant le nickname de l'utilisateur **/
-	public InetAddress getIPAddressWithNickname(String nickname){
+	/** Méthode qui permet de récupérer le user connaissant son ID **/
+	public User getUserWithID(int id){
 		User user = null;
 		int i = 0;
 		while (i < listOfUsers.size() && user == null){
-			if (listOfUsers.get(i).getNickname() == nickname){
-				user = listOfUsers.get(i);
-			}
-			i++;
-		}
-		return usersIPAddress.get(user);
-	}
-	
-	/** Méthode qui permet de récupérer l'adresse IP connaissant le nickname de l'utilisateur **/
-	public User getUserWithNickname(String nickname){
-		User user = null;
-		int i = 0;
-		while (i < listOfUsers.size() && user == null){
-			if (listOfUsers.get(i).getNickname() == nickname){
+			if (listOfUsers.get(i).getIdUser() == id){
 				user = listOfUsers.get(i);
 			}
 			i++;
