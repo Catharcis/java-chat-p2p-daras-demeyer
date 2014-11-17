@@ -17,7 +17,7 @@ public class UDPReceiver extends AbstractReceiver {
 	 * On définit les constructeurs
 	 */
 	private UDPReceiver(){
-		this.setPort(9876);
+		this.setPortEcoute(9876);
 	}
 	
 	/*
@@ -37,7 +37,7 @@ public class UDPReceiver extends AbstractReceiver {
 		/** creation d'un socket UDP**/
 		DatagramSocket socket = null;
 		try {
-		socket = new DatagramSocket (this.getPort()) ;
+		socket = new DatagramSocket (this.getPortEcoute()) ;
 		
 		//while (this.isListening()) {
 			/** creation du paquet DatagramPacket **/
