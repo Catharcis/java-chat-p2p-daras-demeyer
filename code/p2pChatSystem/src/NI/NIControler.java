@@ -7,6 +7,9 @@ public class NIControler {
 	private NIControler () { }
 	
 	public static NIControler getInstance () {
+		if (NISingleton == null) {
+			NISingleton = new NIControler () ;
+		}
 		return NISingleton ;
 	}
 	
