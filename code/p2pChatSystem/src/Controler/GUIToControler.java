@@ -8,8 +8,6 @@ public class GUIToControler {
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
 	
-	private User localUser;
-	
 	private static GUIToControler guiToContSingleton;
 	
 	
