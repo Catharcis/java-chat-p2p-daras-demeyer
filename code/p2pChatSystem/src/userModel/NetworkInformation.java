@@ -44,6 +44,11 @@ public class NetworkInformation extends Observable {
 	 * 				GETTERS & SETTERS 
 	 ************************************************/
 	
+	/** Getter du localUser **/
+	public User getLocalUser () {
+		return localUser ;
+	}
+	
 	/** Getter du UsersIPAddress **/
 	public HashMap<InetAddress,User> getUserList () {
 		return usersIPAddress ;		
