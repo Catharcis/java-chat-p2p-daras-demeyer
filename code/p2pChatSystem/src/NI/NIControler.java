@@ -40,6 +40,10 @@ public class NIControler extends Thread {
 		return NISingleton ;
 	}
 	
+	/************************************************* 
+	 * 				GETTERS & SETTERS
+	 ************************************************/
+	
 	public UDPReceiver getUDPReceiver () {
 		return udpReceiver ;
 	}
@@ -47,6 +51,11 @@ public class NIControler extends Thread {
 	public UDPSender getUDPSender () {
 		return udpSender ;
 	}
+	
+	
+	/************************************************* 
+	 * 					METHODS 
+	 ************************************************/
 	
 	public void sendHello (User user) {
 		AbstractMessage message = new Hello (user.getNickname()) ;

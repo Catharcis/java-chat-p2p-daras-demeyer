@@ -30,6 +30,10 @@ public class GUIToControler {
 	}
 	
 	
+	/************************************************* 
+	 * 					METHODS
+	 ************************************************/
+	
 	/** Différentes méthodes de type perform() permettant d'envoyer un signal au NI**/
 	
 	public void performConnect(){
