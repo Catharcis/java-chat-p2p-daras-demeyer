@@ -6,8 +6,17 @@ import userModel.*;
 
 public class NetworkToControler {
 
+	/************************************************* 
+	 * 				ATTRIBUTS & FIELDS 
+	 ************************************************/
+	
 	private static NetworkToControler netToContSingleton;
 	
+	
+	
+	/************************************************* 
+	 * 				CONSTRUCTOR 
+	 ************************************************/
 	
 	private NetworkToControler(){
 		
@@ -21,6 +30,10 @@ public class NetworkToControler {
 			return netToContSingleton ;
 	}
 	
+	
+	/************************************************* 
+	 * 					METHODS
+	 ************************************************/
 	
 	/** Méthodes de type process() indiquant la réception d'un message sur le réseau au GUI **/
 	

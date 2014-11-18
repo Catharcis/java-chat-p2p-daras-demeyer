@@ -17,13 +17,17 @@ import userModel.*;
 
 public class UDPSender extends AbstractSender {
 
-	// On a comme champ le singleton de la classe
+	/************************************************* 
+	 * 				ATTRIBUTS & FIELDS 
+	 ************************************************/
+	
 	private static UDPSender singleton = null;
 	
 	
-	/*
-	 * On définit les constructeurs
-	 */
+	/************************************************* 
+	 * 				CONSTRUCTOR 
+	 ************************************************/
+	
 	private UDPSender(){
 		this.setPortEnvoi(5000);
 		this.setPortEcoute(9876) ;

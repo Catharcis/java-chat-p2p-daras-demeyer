@@ -9,20 +9,22 @@ import userModel.* ;
 
 public class UDPReceiver extends AbstractReceiver {
 
-	// On a comme champ le singleton de la classe
+	/************************************************* 
+	 * 				ATTRIBUTS & FIELDS 
+	 ************************************************/
+	
 	private static UDPReceiver singleton = null;
 	
 	
-	/*
-	 * On définit les constructeurs
-	 */
+	
+	/************************************************* 
+	 * 				CONSTRUCTOR 
+	 ************************************************/
+	
 	private UDPReceiver(){
 		this.setPortEcoute(9876);
 	}
 	
-	/*
-	 * Méthode pour récupérer l'instance 
-	 */
 	public static UDPReceiver getInstanceUDPReceiver(){
 		if (singleton == null){
 			singleton = new UDPReceiver();
@@ -30,9 +32,11 @@ public class UDPReceiver extends AbstractReceiver {
 		return singleton;
 	}
 	
-	/*
-	 * Redéfinition de la méthode d'écoute des paquets UDP sur le réseau
-	 */
+	
+	/************************************************* 
+	 * 					METHODS 
+	 ************************************************/
+	
 	public void listen(){
 		/** creation d'un socket UDP**/
 		DatagramSocket socket = null;

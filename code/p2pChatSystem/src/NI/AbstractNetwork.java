@@ -2,10 +2,19 @@ package NI;
 
 public abstract class AbstractNetwork {
 
+	/************************************************* 
+	 * 				ATTRIBUTS & FIELDS 
+	 ************************************************/
+	
 	/**  Port d'ecoute **/
 	private int portEcoute;
 	
-	/** Permet d'obtenir le port d'écoute **/
+	
+	/************************************************* 
+	 * 				GETTERS & SETTERS 
+	 ************************************************/
+	
+	/** Permet d'obtenir le port d'ecoute **/
 	public int getPortEcoute(){
 		return this.portEcoute;
 	}
