@@ -7,6 +7,10 @@ import Signals.* ;
 
 public class NIControler extends Thread {
 
+	/************************************************* 
+	 * 				ATTRIBUTS & FIELDS 
+	 ************************************************/
+	
 	private UDPSender udpSender ;
 	
 	private UDPReceiver udpReceiver ;
@@ -16,6 +20,12 @@ public class NIControler extends Thread {
 	private TCPServer tcpServer ;
 	
 	private static NIControler NISingleton ;
+	
+	
+	
+	/************************************************* 
+	 * 				CONSTRUCTOR 
+	 ************************************************/
 	
 	private NIControler () 
 	{
@@ -44,8 +54,10 @@ public class NIControler extends Thread {
 	}
 	
 	public void sendHelloAck (User user) {
+		ArrayList <User> userList = new ArrayList<User> () ;
+		userList.add(user) ;
 		AbstractMessage message = new HelloAck (user.getNickname()) ;
-		this.udpSender.sendBroadcast(message); 
+		this.udpSender.send(message, userList); 
 	}
 	
 	public void sendGoodbye (User user) {

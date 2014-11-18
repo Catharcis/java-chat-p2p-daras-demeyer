@@ -2,10 +2,19 @@ package Controler;
 
 public class GUIToControler {
 
+	/************************************************* 
+	 * 				ATTRIBUTS & FIELDS 
+	 ************************************************/
+	
 	private String myNickname;
 	
 	private static GUIToControler guiToContSingleton;
 	
+	
+	
+	/************************************************* 
+	 * 				CONSTRUCTOR 
+	 ************************************************/
 	
 	private GUIToControler(){
 		
