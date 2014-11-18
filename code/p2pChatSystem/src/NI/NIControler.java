@@ -2,7 +2,7 @@ package NI;
 import java.io.File;
 import java.util.ArrayList;
 import userModel.* ;
-
+import Signals.* ;
 
 public class NIControler extends Thread {
 
@@ -38,19 +38,30 @@ public class NIControler extends Thread {
 	}
 	
 	public void sendHello (User user) {
-		
+		AbstractMessage message = new Hello (user.getNickname()) ;
+		this.udpSender.sendBroadcast(message); 
 	}
 	
 	public void sendHelloAck (User user) {
-		
+		AbstractMessage message = new HelloAck (user.getNickname()) ;
+		this.udpSender.sendBroadcast(message); 
 	}
 	
 	public void sendGoodbye (User user) {
-		
+		AbstractMessage message = new Goodbye (user.getNickname()) ;
+		this.udpSender.sendBroadcast(message); 
 	}
 	
-	public void sendTextMessage (ArrayList<User> userList, String message) {
+	public void sendTextMessage (ArrayList<User> userList, String data) {
+		/** Construction d'une List de String sous format NICKNAME@XX.XX.XX.XX**/
+		ArrayList<String> nicknameList = new ArrayList <String> () ;
+		for (int i = 0 ; i< userList.size() ; i++) {
+			
+		}
 		
+		/** Construction de l'Abstract message à envoyer **/
+		AbstractMessage message = new TextMessage (data, nicknameList) ;
+		this.udpSender.sendBroadcast(message); 
 	}
 	
 	public void sendFileMessage (ArrayList<User> userList, File file) {
