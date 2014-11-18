@@ -2,6 +2,10 @@ package userModel;
 
 public class User {
 
+	/************************************************* 
+	 * 				ATTRIBUTS & FIELDS 
+	 ************************************************/
+	
 	/** Identificateur unique d'un User **/
 	private int idUser ;
 	
@@ -11,11 +15,22 @@ public class User {
 	/** Identificateur statique **/
 	private static int lastID = 0 ;
 	
+	
+	
+	/************************************************* 
+	 * 					CONSTRUCTOR
+	 ************************************************/
+	
 	/** Constructeur du User **/
 	public User (String nickname) {
 		this.nickname = nickname ;
 		this.idUser = lastID++ ;
 	}
+	
+	
+	/************************************************* 
+	 * 				GETTERS & SETTERS 
+	 ************************************************/
 	
 	/** Getter du idUser **/
 	public int getIdUser () {

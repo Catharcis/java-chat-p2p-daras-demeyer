@@ -8,12 +8,20 @@ import java.util.Observable;
 
 public class NetworkInformation extends Observable {
 
+	/************************************************* 
+	 * 				ATTRIBUTS & FIELDS 
+	 ************************************************/
+	
 	/** Singleton **/
 	private static NetworkInformation InfoSingleton ;
 	
 	/** Correspondance entre User et adresse IP **/
 	private HashMap<InetAddress, User> usersIPAddress ;
 	
+	
+	/************************************************* 
+	 * 					CONSTRUCTOR
+	 ************************************************/
 	/** Constructeur **/
 	private NetworkInformation () { 
 		usersIPAddress = new HashMap <InetAddress, User> () ;
@@ -26,19 +34,30 @@ public class NetworkInformation extends Observable {
 		return InfoSingleton ;
 	}
 	
+	
+	
+	/************************************************* 
+	 * 				GETTERS & SETTERS 
+	 ************************************************/
+	
 	/** Getter du UsersIPAddress **/
 	public HashMap<InetAddress,User> getUserList () {
 		return usersIPAddress ;		
 	}
+
 	
-	/** M�thode qui cr�e un User et l'ajoute � la liste et � la HashMap  **/
+	/************************************************* 
+	 * 					METHODS 
+	 ************************************************/
+	
+	/** Methode qui cree un User et l'ajoute a la HashMap  **/
 	public User addUser (String nickname, InetAddress ip) {
 		User user = new User (nickname) ;
 		this.usersIPAddress.put(ip, user) ;
 		return user; 
 	}
 	
-	/** Methode qui supprime un User grâce à son adresse IP **/
+	/** Methode qui supprime un User grace a� son adresse IP **/
 	public void removeUser (InetAddress ip) {
 		this.usersIPAddress.remove(ip) ;
 	}

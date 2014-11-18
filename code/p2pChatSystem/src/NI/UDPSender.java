@@ -43,9 +43,12 @@ public class UDPSender extends AbstractSender {
 		return singleton;
 	}
 	
-	/*
-	 * Methode permettant d'envoyer un message en broadcast
-	 */
+	
+	/************************************************* 
+	 * 					METHODS
+	 ************************************************/
+	
+	/**Methode permettant d'envoyer un message en broadcast **/
 	public void sendBroadcast(AbstractMessage message){
 		/** creation d'un socket UDP**/
 		DatagramSocket socket = null;
@@ -81,9 +84,7 @@ public class UDPSender extends AbstractSender {
 		}
 	}
 	
-	/*
-	 * Methode permettant d'envoyer un message Ã  une liste d'utilisateurs
-	 */
+	/** Methode permettant d'envoyer un message Ã  une liste d'utilisateurs **/
 	public void send(AbstractMessage message, ArrayList<User> listOfUsers){
 		/** On récupère les informations réseaux **/
 		NetworkInformation NI = null;
