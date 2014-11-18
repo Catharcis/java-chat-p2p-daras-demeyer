@@ -106,7 +106,7 @@ public class UDPSender extends AbstractSender {
 					out = new ObjectOutputStream(bos);
 				  	out.writeObject(message);
 				  	byte[] buf = bos.toByteArray();
-				  	InetAddress ip = InetAddress.getByName((NI.getIPAddressOfUser(listOfUsers.get(i))).toString()) ;
+				  	InetAddress ip = NI.getIPAddressOfUser(listOfUsers.get(i)) ;
 				  	DatagramPacket packet = new DatagramPacket (buf, buf.length, ip, this.getPortEcoute()) ;
 				  	System.out.println("Paquet concu ! Adresse IP destinataire : " + ip) ;
 	
