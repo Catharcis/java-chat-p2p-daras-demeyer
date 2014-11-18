@@ -1,6 +1,7 @@
 package NI;
 import java.io.File;
 import java.util.ArrayList;
+
 import userModel.* ;
 import Signals.* ;
 
@@ -52,16 +53,20 @@ public class NIControler extends Thread {
 		this.udpSender.sendBroadcast(message); 
 	}
 	
+	
 	public void sendTextMessage (ArrayList<User> userList, String data) {
 		/** Construction d'une List de String sous format NICKNAME@XX.XX.XX.XX**/
 		ArrayList<String> nicknameList = new ArrayList <String> () ;
 		for (int i = 0 ; i< userList.size() ; i++) {
-			
+			/** On récupère les informations réseaux **/
+			NetworkInformation NI = null;
+			NI = NI.getInstance();
+			nicknameList.add(userList.get(i).getNickname()+"@"+(NI.getIPAddressOfUser(userList.get(i))).toString()) ;
 		}
 		
 		/** Construction de l'Abstract message à envoyer **/
 		AbstractMessage message = new TextMessage (data, nicknameList) ;
-		this.udpSender.sendBroadcast(message); 
+		this.udpSender.send(message, userList); 
 	}
 	
 	public void sendFileMessage (ArrayList<User> userList, File file) {
