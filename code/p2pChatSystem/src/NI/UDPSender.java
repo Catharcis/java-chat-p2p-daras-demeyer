@@ -26,6 +26,7 @@ public class UDPSender extends AbstractSender {
 	 */
 	private UDPSender(){
 		this.setPortEnvoi(5000);
+		this.setPortEcoute(9876) ;
 	}
 	
 	/*
@@ -70,8 +71,6 @@ public class UDPSender extends AbstractSender {
 			System.out.println("Port for UDP SocketSender already used.") ;
 		} catch (SocketException e2) {
 			System.out.println("Creation of UDP SocketSender failed.") ;
-		} catch (IOException e3) {
-			System.out.println("IOException during Sending.") ;
 		} finally {
 			if (socket != null)
 				socket.close() ;
@@ -86,21 +85,15 @@ public class UDPSender extends AbstractSender {
 		NetworkInformation NI = null;
 		NI = NI.getInstance();
 		
-		/** Récupération des utilisateurs concernés **/
-		ArrayList<InetAddress> listOfIPs = new ArrayList<InetAddress>();
-		
-		for (int i = 0; i < listOfUsers.size(); i++){
-			listOfIPs.add(NI.getIPAddressOfUser(listOfUsers.get(i)));
-		}
-		
-		for (int i = 0; i < listOfIPs.size(); i++){
-			/** creation d'un socket UDP**/
-			DatagramSocket socket = null;
-			try {
-				socket = new DatagramSocket (this.getPortEnvoi()) ;
-				System.out.println("Creation du socket UDPSender") ;
-				
-	
+		/** Creation d'un socket UDP**/
+		DatagramSocket socket = null;
+		try {
+			socket = new DatagramSocket (this.getPortEnvoi()) ;
+			System.out.println("Creation du socket UDPSender") ;
+			
+			/** Envoi des paquets a chaque User de la liste **/
+			for (int i = 0; i < listOfUsers.size(); i++) {
+			
 				/** Creation du Datagram Packet **/
 				ByteArrayOutputStream bos = new ByteArrayOutputStream();
 				ObjectOutput out = null;
@@ -108,8 +101,9 @@ public class UDPSender extends AbstractSender {
 					out = new ObjectOutputStream(bos);
 				  	out.writeObject(message);
 				  	byte[] buf = bos.toByteArray();
-				  	DatagramPacket packet = new DatagramPacket (buf, buf.length, listOfIPs.get(i), this.getPortEcoute()) ;
-				  	System.out.println("Paquet concu ! Adresse IP destinataire : " + listOfIPs.get(i)) ;
+				  	InetAddress ip = InetAddress.getByName((NI.getIPAddressOfUser(listOfUsers.get(i))).toString()) ;
+				  	DatagramPacket packet = new DatagramPacket (buf, buf.length, ip, this.getPortEcoute()) ;
+				  	System.out.println("Paquet concu ! Adresse IP destinataire : " + ip) ;
 	
 				  	/** Envoi du paquet **/
 				  	socket.send(packet);
@@ -117,16 +111,15 @@ public class UDPSender extends AbstractSender {
 				} catch (IOException e) {
 					System.out.println("Erreur lors de l'écriture dans le UDP Sender") ;
 				}
-	
-			} catch (BindException e1) {
-				System.out.println("Port for UDP SocketSender already used.") ;
-			} catch (SocketException e2) {
-				System.out.println("Creation of UDP SocketSender failed.") ;
-			} finally {
-				if (socket != null)
-					socket.close() ;
 			}
+		} catch (BindException e1) {
+			System.out.println("Port for UDP SocketSender already used.") ;
+		} catch (SocketException e2) {
+			System.out.println("Creation of UDP SocketSender failed.") ;
+		} finally {
+			if (socket != null)
+				socket.close() ;
 		}
 	}
-	
 }
+	
