@@ -1,12 +1,14 @@
 package Controler;
 
+import userModel.User;
+
 public class GUIToControler {
 
 	/************************************************* 
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
 	
-	private String myNickname;
+	private User localUser;
 	
 	private static GUIToControler guiToContSingleton;
 	
