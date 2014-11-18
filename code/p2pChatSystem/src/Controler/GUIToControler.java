@@ -10,6 +10,7 @@ public class GUIToControler {
 	
 	private static GUIToControler guiToContSingleton;
 	
+	// attribut pour la relation avec le NI !
 	
 	
 	/************************************************* 
@@ -17,7 +18,7 @@ public class GUIToControler {
 	 ************************************************/
 	
 	private GUIToControler(){
-		
+		// getInstance du NI
 	}
 	
 	
