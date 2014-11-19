@@ -1,10 +1,14 @@
 package userModel;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Observable; 
+
+import Signals.AbstractMessage;
+import Signals.Hello;
 
 public class NetworkInformation extends Observable {
 
@@ -28,7 +32,9 @@ public class NetworkInformation extends Observable {
 	/** Constructeur **/
 	private NetworkInformation () { 
 		usersIPAddress = new HashMap <InetAddress, User> () ;
-		this.localUser = null ;
+		// A CORRIGER ! Enlever l'argument 
+		this.localUser = new User("BestBinome") ;
+		
 	}
 	
 	/** Methode creant une instance de classe si necessaire et renvoie l'objet**/
@@ -66,12 +72,12 @@ public class NetworkInformation extends Observable {
 		return user; 
 	}
 	
-	/** Methode qui supprime un User grace a  son adresse IP **/
+	/** Methode qui supprime un User grace aï¿½ son adresse IP **/
 	public void removeUser (InetAddress ip) {
 		this.usersIPAddress.remove(ip) ;
 	}
 	
-	/** Méthode qui récupère l'adresse IP d'un utilisateur **/
+	/** Methode qui recupere l'adresse IP d'un utilisateur **/
 	public InetAddress getIPAddressOfUser(User user){
 		InetAddress ip = null;
 		Iterator<Entry<InetAddress, User>> it = usersIPAddress.entrySet().iterator();
@@ -82,6 +88,24 @@ public class NetworkInformation extends Observable {
 			}
 		}
 		return ip;
+	}
+	
+	/** Methode qui ajoute le pattern @IP au nickname 
+	 * @throws UnknownHostException **/
+	public String getNicknameWithIP (User user) throws UnknownHostException {
+		NetworkInformation NI = null;
+		NI = NI.getInstance();
+		if (user.getIdUser() == NI.getLocalUser().getIdUser()) {
+			try {
+				return (user.getNickname()+"@"+(InetAddress.getLocalHost()).getHostAddress()) ;
+			} catch (UnknownHostException e) {
+				System.out.println("Erreur lors de l'acquisition de l'@IP locale") ;
+				return "0" ;
+			}
+			
+		}
+		else 
+			return (user.getNickname()+"@"+(NI.getIPAddressOfUser(user)).toString()) ;
 	}
 	
 	/** Methodes en relation avec la classe Observable **/
