@@ -7,7 +7,7 @@ import java.util.Iterator;
 import Signals.*;
 import userModel.* ;
 
-public class UDPReceiver extends AbstractReceiver {
+public class UDPReceiver extends AbstractReceiver implements Runnable {
 
 	/************************************************* 
 	 * 				ATTRIBUTS & FIELDS 
@@ -85,6 +85,17 @@ public class UDPReceiver extends AbstractReceiver {
 				System.out.println("Goodbye, my name was " +user.getNickname()) ;
 				NI.removeUser(socket.getInetAddress()) ;
 			}
+		/* A FAIRE 	
+			if (message.getTypeContenu() == typeContenu.TEXTMESSAGE) {
+				// Ajout des nouveaux User dans la HashMap 
+				NetworkInformation NI = null ;
+				NI = NI.getInstance() ;
+				User user = NI.getUserList().get(socket.getInetAddress());
+				// processGoodbye(user) ;
+				System.out.println("Goodbye, my name was " +user.getNickname()) ;
+				NI.removeUser(socket.getInetAddress()) ;
+			} 
+		*/
 		//}
 		
 		} catch (BindException e1) {
@@ -93,6 +104,7 @@ public class UDPReceiver extends AbstractReceiver {
 			System.out.println("Creation of UDP SocketReceiver failed.") ;
 		} catch (IOException e3) {
 			System.out.println("IOException during Receive.") ;
+			// fermer la socket ?
 		} catch (ClassNotFoundException e4) {
 			System.out.println("Lecture du message en réception impossible.") ;			
 		}
@@ -102,6 +114,11 @@ public class UDPReceiver extends AbstractReceiver {
 		}
 		
 
+	}
+
+	/** Redefiniton de la methode run du Runnable **/
+	public void run() {
+		listen() ;
 	}
 	
 }
