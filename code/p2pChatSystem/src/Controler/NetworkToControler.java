@@ -18,6 +18,8 @@ public class NetworkToControler {
 	// il n'a connaissance que du GUIControler (pas du NI car il ne communique pas avec lui, c'est lui qui communique avec cette classe)
 	private static GUIControler guiCont;
 	
+	private static NetworkInformation NI;
+	
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
@@ -25,6 +27,7 @@ public class NetworkToControler {
 	
 	private NetworkToControler(){
 		guiCont = guiCont.getInstance();
+		NI = NI.getInstance();
 	}
 	
 	/** Méthode qui permet d'obtenir l'instance de la classe **/
@@ -44,8 +47,6 @@ public class NetworkToControler {
 	
 	public void processHello(String name, InetAddress ipAddress){
 		
-		NetworkInformation NI = null;
-		NI = NI.getInstance();
 		String nameWithoutPattern = NI.getNicknameWithoutIP(name);
 		System.out.println("Name = " +nameWithoutPattern);
 		User user = NI.addUser(nameWithoutPattern, ipAddress) ;
@@ -55,8 +56,6 @@ public class NetworkToControler {
 	
 	public void processHelloAck(String name, InetAddress ipAddress){
 		
-		NetworkInformation NI = null;
-		NI = NI.getInstance();
 		String nameWithoutPattern = NI.getNicknameWithoutIP(name);
 		System.out.println("Name = " +nameWithoutPattern);
 		User user = NI.addUser(nameWithoutPattern, ipAddress) ;
@@ -66,8 +65,6 @@ public class NetworkToControler {
 	
 	public void processGoodbye(String name, InetAddress ipAddress){
 		
-		NetworkInformation NI = null;
-		NI = NI.getInstance();
 		String nameWithoutPattern = NI.getNicknameWithoutIP(name);
 		NI.removeUser(ipAddress);
 		System.out.println("Name = " +nameWithoutPattern);
@@ -76,8 +73,6 @@ public class NetworkToControler {
 	
 	public void processTextMessage(String message, ArrayList<String> listOfUsernames) throws UnknownHostException{
 		
-		NetworkInformation NI = null;
-		NI = NI.getInstance();
 		ArrayList<User> listOfUsers = new ArrayList<User>();
 		for (int i = 0; i < listOfUsernames.size(); i++){
 			String ipString = NI.getIPOfPattern(listOfUsernames.get(i));
