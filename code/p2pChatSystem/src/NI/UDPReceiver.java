@@ -2,10 +2,11 @@ package NI;
 
 import java.io.*;
 import java.net.*;
-import java.util.Iterator;
 
+import Controler.NetworkInformation;
+import Controler.NetworkToControler;
+import Controler.User;
 import Signals.*;
-import userModel.* ;
 
 public class UDPReceiver extends AbstractReceiver implements Runnable {
 
@@ -56,34 +57,29 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 			ObjectInput in = new ObjectInputStream(byteIn);
 			AbstractMessage message = (AbstractMessage) in.readObject() ;
 			if (message.getTypeContenu() == typeContenu.HELLO) {
-				/** Ajout du nouvel User dans la HashMap **/
-				NetworkInformation NI = null ;
-				NI = NI.getInstance() ;
-				User user = NI.addUser(message.getNickname(), socket.getInetAddress()) ;
-				// processHello(user) ;
-				System.out.println("Hello, I am " +user.getNickname()) ;
+				NetworkToControler netToCont = null;
+				netToCont = netToCont.getInstance();
+				String name = message.getNickname();
+				netToCont.processHello(name, socket.getInetAddress());
+				System.out.println("Hello, I am " +name) ;
 				
 			}
 			
 			if (message.getTypeContenu() == typeContenu.HELLOACK) {
-				/** Ajout du nouvel User dans la HashMap **/
-				NetworkInformation NI = null ;
-				NI = NI.getInstance() ;
-				User user = NI.addUser(message.getNickname(), socket.getInetAddress()) ;
-				// processHelloAck(user) ;
-				System.out.println("Hello, I am " +user.getNickname()) ;
+				NetworkToControler netToCont = null;
+				netToCont = netToCont.getInstance();
+				String name = message.getNickname();
+				netToCont.processHelloAck(name, socket.getInetAddress()) ;
+				System.out.println("Hello, I am " +name) ;
 				
 			}
 			
-			
 			if (message.getTypeContenu() == typeContenu.GOODBYE) {
-				/** Ajout du nouvel User dans la HashMap **/
-				NetworkInformation NI = null ;
-				NI = NI.getInstance() ;
-				User user = NI.getUserList().get(socket.getInetAddress());
-				// processGoodbye(user) ;
-				System.out.println("Goodbye, my name was " +user.getNickname()) ;
-				NI.removeUser(socket.getInetAddress()) ;
+				NetworkToControler netToCont = null;
+				netToCont = netToCont.getInstance();
+				String name = message.getNickname();
+				netToCont.processGoodbye(name, socket.getInetAddress());
+				System.out.println("Goodbye, my name was " +name) ;
 			}
 		/* A FAIRE 	
 			if (message.getTypeContenu() == typeContenu.TEXTMESSAGE) {

@@ -1,4 +1,4 @@
-package userModel;
+package Controler;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Observable; 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import Signals.AbstractMessage;
 import Signals.Hello;
@@ -106,6 +108,19 @@ public class NetworkInformation extends Observable {
 		}
 		else 
 			return (user.getNickname()+"@"+(NI.getIPAddressOfUser(user)).toString()) ;
+	}
+	
+	/** Methode qui enleve le pattern @IP au nickname **/
+	public String getNicknameWithoutIP (String name){
+		 Pattern pattern = Pattern.compile("@(.*$)");
+	     Matcher matcher = pattern.matcher(name);
+	     if (matcher.find()){
+	    	 return matcher.group(1);
+	     }
+	     else
+	     {
+	    	return name; 
+	     }
 	}
 	
 	/** Methodes en relation avec la classe Observable **/

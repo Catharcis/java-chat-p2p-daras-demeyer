@@ -1,6 +1,11 @@
 package Controler;
 
-import userModel.User;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+
+import NI.NIControler;
+
 
 public class GUIToControler {
 
@@ -10,7 +15,10 @@ public class GUIToControler {
 	
 	private static GUIToControler guiToContSingleton;
 	
-	// attribut pour la relation avec le NI !
+	// il n'a connaissance que du NIControler (pas du GUI car il ne communique pas avec lui, c'est lui qui communique avec cette classe)
+	private static NIControler niCont;
+	
+	private static NetworkInformation NI;
 	
 	
 	/************************************************* 
@@ -18,7 +26,8 @@ public class GUIToControler {
 	 ************************************************/
 	
 	private GUIToControler(){
-		// getInstance du NI
+		niCont = niCont.getInstance();
+		NI = NI.getInstance();
 	}
 	
 	
@@ -38,14 +47,48 @@ public class GUIToControler {
 	/** Différentes méthodes de type perform() permettant d'envoyer un signal au NI**/
 	
 	public void performConnect(){
-		
+		try {
+			String nameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
+			niCont.sendHello(nameWithPattern);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void performSendHelloAck(User destUser){
+		try {
+			String localNameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
+			String destNameWithPattern = NI.getNicknameWithIP(destUser);
+			niCont.sendHelloAck(localNameWithPattern,destNameWithPattern,NI.getIPAddressOfUser(destUser));
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void performDisconnect(){
-		
+		try {
+			String nameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
+			niCont.sendGoodbye(nameWithPattern);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 	
-	public void performSendTextMessage(){
+	public void performSendTextMessage(String message, ArrayList<User> userList) throws UnknownHostException{
+		
+		/** Construction d'une List de String sous format NICKNAME@XX.XX.XX.XX**/
+		ArrayList<String> nicknameList = new ArrayList <String> () ;
+		ArrayList<InetAddress> ipAddressesList = new ArrayList<InetAddress>();
+		for (int i = 0 ; i< userList.size() ; i++) {
+			/** On recupere les informations reseaux **/
+			nicknameList.add(NI.getNicknameWithIP(userList.get(i))) ;
+			ipAddressesList.add(NI.getIPAddressOfUser(userList.get(i)));
+		}
+		
+		niCont.sendTextMessage(nicknameList, message, ipAddressesList);
 		
 	}
 	
