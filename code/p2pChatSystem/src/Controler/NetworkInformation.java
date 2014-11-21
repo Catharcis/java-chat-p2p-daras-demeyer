@@ -35,7 +35,13 @@ public class NetworkInformation extends Observable {
 	private NetworkInformation () { 
 		usersIPAddress = new HashMap <InetAddress, User> () ;
 		// A CORRIGER ! Enlever l'argument 
-		this.localUser = new User("BestBinome") ;
+		this.localUser = new User("BestBinomeEver") ;
+		try {
+			usersIPAddress.put(InetAddress.getByName(InetAddress.getLocalHost().getHostAddress()), localUser);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

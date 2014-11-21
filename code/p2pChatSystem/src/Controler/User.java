@@ -42,4 +42,9 @@ public class User {
 		return nickname ;
 	}
 	
+	/** Redefinition de la methode toString() **/
+	public String toString(){
+		return "[id = "+this.idUser+", name = "+this.nickname+"]";
+	}
+	
 }
