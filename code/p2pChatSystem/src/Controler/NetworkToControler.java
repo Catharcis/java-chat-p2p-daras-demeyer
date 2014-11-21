@@ -70,6 +70,8 @@ public class NetworkToControler {
 	
 	public void processTextMessage(String message, ArrayList<String> listOfUsernames){
 		
+		
+		
 	}
 	
 	public void processFileMessage(){

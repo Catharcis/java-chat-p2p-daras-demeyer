@@ -111,8 +111,20 @@ public class NetworkInformation extends Observable {
 	}
 	
 	/** Methode qui enleve le pattern @IP au nickname **/
-	public String getNicknameWithoutIP (String name){
-		 Pattern pattern = Pattern.compile("@(.*$)");
+	public String getIPOfPattern (String name){
+		 Pattern pattern = Pattern.compile("^(.*)@(([0-9]{1,3}[.]){3}[0-9]{1,3})");
+	     Matcher matcher = pattern.matcher(name);
+	     if (matcher.find()){
+	    	 return matcher.group(2);
+	     }
+	     else
+	     {
+	    	return name; 
+	     }
+	}
+	
+	public String getNicknameWithoutIP(String name){
+		Pattern pattern = Pattern.compile("^(.*)@(([0-9]{1,3}[.]){3}[0-9]{1,3})");
 	     Matcher matcher = pattern.matcher(name);
 	     if (matcher.find()){
 	    	 return matcher.group(1);
