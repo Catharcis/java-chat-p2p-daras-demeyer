@@ -1,8 +1,9 @@
 package NI;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 
-import userModel.*;
+import Controler.User;
 import Signals.*;
 
 public abstract class AbstractSender extends AbstractNetwork {
@@ -40,7 +41,7 @@ public abstract class AbstractSender extends AbstractNetwork {
 	public abstract void sendBroadcast(AbstractMessage message);
 	
 	/** Permet d'envoyer un TextMessage en UDP à la liste d'utilisateurs en paramètres **/
-	public abstract void send(AbstractMessage message, ArrayList<User> listDest);
+	public abstract void send(AbstractMessage message, ArrayList<String> listDest, ArrayList<InetAddress> listIPDest);
 	
 
 	

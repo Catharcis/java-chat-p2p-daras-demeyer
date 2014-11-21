@@ -12,8 +12,8 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
 
+import Controler.NetworkInformation;
 import Signals.*;
-import userModel.*;
 
 public class UDPSender extends AbstractSender {
 
@@ -85,7 +85,7 @@ public class UDPSender extends AbstractSender {
 	}
 	
 	/** Methode permettant d'envoyer un message Ã  une liste d'utilisateurs **/
-	public void send(AbstractMessage message, ArrayList<User> listOfUsers){
+	public void send(AbstractMessage message, ArrayList<String> listOfUsers, ArrayList<InetAddress> ipAddressesList){
 		/** On récupère les informations réseaux **/
 		NetworkInformation NI = null;
 		NI = NI.getInstance();
@@ -97,7 +97,7 @@ public class UDPSender extends AbstractSender {
 			System.out.println("Creation du socket UDPSender") ;
 			
 			/** Envoi des paquets a chaque User de la liste **/
-			for (int i = 0; i < listOfUsers.size(); i++) {
+			for (int i = 0; i < ipAddressesList.size(); i++) {
 			
 				/** Creation du Datagram Packet **/
 				ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -106,9 +106,8 @@ public class UDPSender extends AbstractSender {
 					out = new ObjectOutputStream(bos);
 				  	out.writeObject(message);
 				  	byte[] buf = bos.toByteArray();
-				  	InetAddress ip = NI.getIPAddressOfUser(listOfUsers.get(i)) ;
-				  	DatagramPacket packet = new DatagramPacket (buf, buf.length, ip, this.getPortEcoute()) ;
-				  	System.out.println("Paquet concu ! Adresse IP destinataire : " + ip) ;
+				  	DatagramPacket packet = new DatagramPacket (buf, buf.length, ipAddressesList.get(i), this.getPortEcoute()) ;
+				  	System.out.println("Paquet concu ! Adresse IP destinataire : " + ipAddressesList.get(i)) ;
 	
 				  	/** Envoi du paquet **/
 				  	socket.send(packet);

@@ -1,4 +1,4 @@
-package userModel;
+package Controler;
 
 public class User {
 

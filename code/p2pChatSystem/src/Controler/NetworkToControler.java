@@ -1,8 +1,10 @@
 package Controler;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 
-import userModel.*;
+import GUI.GUIControler;
+
 
 public class NetworkToControler {
 
@@ -12,6 +14,8 @@ public class NetworkToControler {
 	
 	private static NetworkToControler netToContSingleton;
 	
+	// il n'a connaissance que du GUIControler (pas du NI car il ne communique pas avec lui, c'est lui qui communique avec cette classe)
+	private static GUIControler guiCont;
 	
 	
 	/************************************************* 
@@ -19,7 +23,7 @@ public class NetworkToControler {
 	 ************************************************/
 	
 	private NetworkToControler(){
-		
+		guiCont = guiCont.getInstance();
 	}
 	
 	/** Méthode qui permet d'obtenir l'instance de la classe **/
@@ -37,19 +41,34 @@ public class NetworkToControler {
 	
 	/** Méthodes de type process() indiquant la réception d'un message sur le réseau au GUI **/
 	
-	public void processHello(User user){
+	public void processHello(String name, InetAddress ipAddress){
+		
+		NetworkInformation NI = null;
+		NI = NI.getInstance();
+		String nameWithoutPattern = NI.getNicknameWithoutIP(name);
+		User user = NI.addUser(nameWithoutPattern, ipAddress) ;
 		
 	}
 	
-	public void processHelloAck(User user){
+	public void processHelloAck(String name, InetAddress ipAddress){
+		
+		NetworkInformation NI = null;
+		NI = NI.getInstance();
+		String nameWithoutPattern = NI.getNicknameWithoutIP(name);
+		User user = NI.addUser(nameWithoutPattern, ipAddress) ;
 		
 	}
 	
-	public void processGoodbye(User user){
+	public void processGoodbye(String name, InetAddress ipAddress){
+		
+		NetworkInformation NI = null;
+		NI = NI.getInstance();
+		String nameWithoutPattern = NI.getNicknameWithoutIP(name);
+		NI.removeUser(ipAddress);
 		
 	}
 	
-	public void processTextMessage(String message, ArrayList<User> listOfUsers){
+	public void processTextMessage(String message, ArrayList<String> listOfUsernames){
 		
 	}
 	
