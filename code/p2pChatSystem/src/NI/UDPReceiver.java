@@ -81,17 +81,15 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 				netToCont.processGoodbye(name, socket.getInetAddress());
 				System.out.println("Goodbye, my name was " +name) ;
 			}
-		/* A FAIRE 	
+			
 			if (message.getTypeContenu() == typeContenu.TEXTMESSAGE) {
-				// Ajout des nouveaux User dans la HashMap 
-				NetworkInformation NI = null ;
-				NI = NI.getInstance() ;
-				User user = NI.getUserList().get(socket.getInetAddress());
-				// processGoodbye(user) ;
-				System.out.println("Goodbye, my name was " +user.getNickname()) ;
-				NI.removeUser(socket.getInetAddress()) ;
+
+				TextMessage textMessage = (TextMessage) message;
+				NetworkToControler netToCont = null;
+				netToCont = netToCont.getInstance();
+				netToCont.processTextMessage(textMessage.getMessage(),textMessage.getListNicknamesDest()) ;
 			} 
-		*/
+			
 		//}
 		
 		} catch (BindException e1) {

@@ -95,6 +95,7 @@ public class NIControler {
 		/** Construction de l'Abstract message a envoye **/
 		AbstractMessage message = new TextMessage (data, usernameList) ;
 		this.udpSender.send(message, usernameList, ipAddressList); 
+		
 	}
 	
 	public void sendFileMessage (ArrayList<User> userList, File file) {
