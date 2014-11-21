@@ -70,7 +70,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 				netToCont = netToCont.getInstance();
 				String name = message.getNickname();
 				netToCont.processHelloAck(name, socket.getInetAddress()) ;
-				System.out.println("Hello, I am " +name) ;
+				System.out.println("Hello (Ack), I am " +name) ;
 				
 			}
 			
