@@ -9,6 +9,7 @@ import java.util.Observable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import GUI.ConnectDisconnectFenetre;
 import Signals.AbstractMessage;
 import Signals.Hello;
 
@@ -27,12 +28,17 @@ public class NetworkInformation extends Observable {
 	/** Correspondance entre User et adresse IP **/
 	private HashMap<InetAddress, User> usersIPAddress ;
 	
+	/** Singleton **/
+	private static ConnectDisconnectFenetre conDisFen;
+	
 	
 	/************************************************* 
 	 * 					CONSTRUCTOR
 	 ************************************************/
 	/** Constructeur **/
 	private NetworkInformation () { 
+		conDisFen = conDisFen.getInstance();
+		addObserver(conDisFen);
 		usersIPAddress = new HashMap <InetAddress, User> () ;
 		// A CORRIGER ! Enlever l'argument 
 		this.localUser = new User("BestBinomeEver") ;
@@ -42,6 +48,8 @@ public class NetworkInformation extends Observable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		setChanged();
+		notifyObservers();
 		
 	}
 	
