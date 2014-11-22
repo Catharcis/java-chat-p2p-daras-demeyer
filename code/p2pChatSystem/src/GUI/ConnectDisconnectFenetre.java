@@ -103,7 +103,9 @@ public class ConnectDisconnectFenetre extends AbstractFenetre implements MouseLi
 	@Override
 	public void update(Observable arg0, Object arg1) {
 
-		System.out.println("Oh ! L'utilisateur local a changé !");
+		if (arg0 instanceof NetworkInformation){
+			System.out.println("Oh ! Les informations du réseau ont changés !");
+		}
 		
 	}
 
