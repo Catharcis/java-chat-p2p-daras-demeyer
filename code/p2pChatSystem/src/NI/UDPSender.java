@@ -69,9 +69,9 @@ public class UDPSender extends AbstractSender {
 
 			  	/** Envoi du paquet **/
 			  	socket.send(packet);
-			  	System.out.println("Paquet envoyé!") ;
+			  	System.out.println("Paquet envoyï¿½!") ;
 			} catch (IOException e) {
-				System.out.println("Erreur lors de l'écriture dans le UDP Sender") ;
+				System.out.println("Erreur lors de l'ï¿½criture dans le UDP Sender") ;
 			}
 
 		} catch (BindException e1) {
@@ -86,7 +86,7 @@ public class UDPSender extends AbstractSender {
 	
 	/** Methode permettant d'envoyer un message Ã  une liste d'utilisateurs **/
 	public void send(AbstractMessage message, ArrayList<String> listOfUsers, ArrayList<InetAddress> ipAddressesList){
-		/** On récupère les informations réseaux **/
+		/** On rï¿½cupï¿½re les informations rï¿½seaux **/
 		NetworkInformation NI = null;
 		NI = NI.getInstance();
 		
@@ -111,9 +111,9 @@ public class UDPSender extends AbstractSender {
 	
 				  	/** Envoi du paquet **/
 				  	socket.send(packet);
-				  	System.out.println("Paquet envoyé!") ;
+				  	System.out.println("Paquet envoyï¿½!") ;
 				} catch (IOException e) {
-					System.out.println("Erreur lors de l'écriture dans le UDP Sender") ;
+					System.out.println("Erreur lors de l'ï¿½criture dans le UDP Sender") ;
 				}
 			}
 		} catch (BindException e1) {

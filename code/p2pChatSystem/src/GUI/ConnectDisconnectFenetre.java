@@ -77,18 +77,18 @@ public class ConnectDisconnectFenetre extends AbstractFenetre implements MouseLi
 	}
 	
 	/*
-	 * Attention, les méthodes suivantes :
+	 * Attention, les mï¿½thodes suivantes :
 	 * public void actionPerformed(ActionEvent arg0)
 	 * public void update(Observable arg0, Object arg1)
-	 * doivent être implémenter dans les classes filles
+	 * doivent ï¿½tre implï¿½menter dans les classes filles
 	 */
 
 	public void initializeComponents(){
-		this.setTitle("Connexion/Déconnexion"); //On donne un titre à l'application
-		this.setSize(320,100); //On donne une taille à notre fenêtre
-		this.setLocationRelativeTo(null); //On centre la fenêtre sur l'écran
+		this.setTitle("Connexion/Dï¿½connexion"); //On donne un titre ï¿½ l'application
+		this.setSize(320,100); //On donne une taille ï¿½ notre fenï¿½tre
+		this.setLocationRelativeTo(null); //On centre la fenï¿½tre sur l'ï¿½cran
 		this.setResizable(true); //On permet le redimensionnement
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE); //On dit à l'application de se fermer lors du clic sur la croix
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE); //On dit ï¿½ l'application de se fermer lors du clic sur la croix
 		this.nameOfLocalUser.addMouseListener(this);
 		this.buttonConnectOnOff.addActionListener(this);
 		JPanel panel = new JPanel();
@@ -104,7 +104,7 @@ public class ConnectDisconnectFenetre extends AbstractFenetre implements MouseLi
 	public void update(Observable arg0, Object arg1) {
 
 		if (arg0 instanceof NetworkInformation){
-			System.out.println("Oh ! Les informations du réseau ont changés !");
+			System.out.println("Oh ! Les informations du reseau ont changes !");
 		}
 		
 	}
@@ -114,7 +114,7 @@ public class ConnectDisconnectFenetre extends AbstractFenetre implements MouseLi
 
 		if (arg0.getSource() == this.buttonConnectOnOff){
 			if (this.buttonConnectOnOff.getText() == "Connexion"){
-				this.buttonConnectOnOff.setText("Déconnexion");
+				this.buttonConnectOnOff.setText("Deconnexion");
 				this.nameOfLocalUser.setEnabled(false);;
 				NetworkInformation NI = null;
 				NI = NI.getInstance();

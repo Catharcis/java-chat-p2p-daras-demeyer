@@ -82,8 +82,8 @@ public class NetworkInformation extends Observable {
 	public User addUser (String nickname, InetAddress ip) {
 		User user = new User (nickname) ;
 		this.usersIPAddress.put(ip, user) ;
-		//setChanged();
-		//notifyObservers();
+		setChanged();
+		notifyObservers();
 		return user; 
 	}
 	
