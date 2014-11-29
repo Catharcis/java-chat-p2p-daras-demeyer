@@ -11,6 +11,7 @@ public class GUIView implements Observer{
 	
 	private static GUIView singleton;
 	
+	private ChatFenetre chatFenetre;
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
@@ -29,6 +30,7 @@ public class GUIView implements Observer{
 	/************************************************* 
 	 * 					METHODS 
 	 ************************************************/
+
 	
 	public static GUIView getInstance(){
 		if (singleton == null){

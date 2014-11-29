@@ -4,8 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.Observable;
 
+import javax.swing.JPanel;
+
 @SuppressWarnings("serial")
-public class ContactsListFenetre extends AbstractFenetre{
+public class ContactsListPanel extends JPanel{
 
 	/************************************************* 
 	 * 				ATTRIBUTS & FIELDS 
@@ -41,41 +43,6 @@ public class ContactsListFenetre extends AbstractFenetre{
 
 	public void miseAJour(Observable arg0) {
 
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }
