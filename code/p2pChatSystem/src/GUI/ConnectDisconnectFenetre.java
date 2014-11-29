@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import Controler.NetworkInformation;
 
 @SuppressWarnings("serial")
-public class ConnectDisconnectFenetre extends AbstractFenetre implements MouseListener{
+public class ConnectDisconnectFenetre extends AbstractFenetre{
 
 	/************************************************* 
 	 * 				ATTRIBUTS & FIELDS 
@@ -100,12 +100,11 @@ public class ConnectDisconnectFenetre extends AbstractFenetre implements MouseLi
 	
 	}
 
-	@Override
-	public void update(Observable arg0, Object arg1) {
+	/*
+	 * Permet de mettre à jour la fenêtre dans le cas où un objet observé a été modifié
+	 */
+	public void miseAJour(Observable arg0) {
 
-		if (arg0 instanceof NetworkInformation){
-			System.out.println("Oh ! Les informations du reseau ont changes !");
-		}
 		
 	}
 

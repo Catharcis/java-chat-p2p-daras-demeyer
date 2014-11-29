@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import GUI.ConnectDisconnectFenetre;
+import GUI.GUIView;
 import Signals.AbstractMessage;
 import Signals.Hello;
 
@@ -29,7 +30,7 @@ public class NetworkInformation extends Observable {
 	private HashMap<InetAddress, User> usersIPAddress ;
 	
 	/** Singleton **/
-	private static ConnectDisconnectFenetre conDisFen;
+	private static GUIView guiView;
 	
 	
 	/************************************************* 
@@ -37,8 +38,8 @@ public class NetworkInformation extends Observable {
 	 ************************************************/
 	/** Constructeur **/
 	private NetworkInformation () { 
-		conDisFen = conDisFen.getInstance();
-		addObserver(conDisFen);
+		guiView = guiView.getInstance();
+		addObserver(guiView);
 		usersIPAddress = new HashMap <InetAddress, User> () ;
 		// A CORRIGER ! Enlever l'argument 
 		try {
