@@ -9,7 +9,7 @@ import java.util.Observable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import GUI.ConnectDisconnectFenetre;
+import GUI.ConnectDisconnectPanel;
 import GUI.GUIView;
 import Signals.AbstractMessage;
 import Signals.Hello;

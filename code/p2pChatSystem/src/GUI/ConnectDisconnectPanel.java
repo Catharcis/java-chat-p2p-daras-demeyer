@@ -14,13 +14,13 @@ import javax.swing.JTextField;
 import Controler.NetworkInformation;
 
 @SuppressWarnings("serial")
-public class ConnectDisconnectFenetre extends AbstractFenetre{
+public class ConnectDisconnectPanel extends JPanel{
 
 	/************************************************* 
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
 	
-	private static ConnectDisconnectFenetre conDisFen;
+	private static ConnectDisconnectPanel conDisFen;
 	
 	private JLabel labelNickname;
 	
@@ -32,7 +32,7 @@ public class ConnectDisconnectFenetre extends AbstractFenetre{
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
-	private ConnectDisconnectFenetre(){
+	private ConnectDisconnectPanel(){
 		labelNickname = new JLabel("Nom :");
 		nameOfLocalUser = new JTextField("Entrez votre nom ici");
 		buttonConnectOnOff = new JButton("Connexion");
@@ -69,9 +69,9 @@ public class ConnectDisconnectFenetre extends AbstractFenetre{
 	 * 					METHODS 
 	 ************************************************/
 
-	public static ConnectDisconnectFenetre getInstance(){
+	public static ConnectDisconnectPanel getInstance(){
 		if (conDisFen == null){
-			conDisFen = new ConnectDisconnectFenetre();
+			conDisFen = new ConnectDisconnectPanel();
 		}
 		return conDisFen;
 	}
@@ -83,80 +83,11 @@ public class ConnectDisconnectFenetre extends AbstractFenetre{
 	 * doivent ï¿½tre implï¿½menter dans les classes filles
 	 */
 
-	public void initializeComponents(){
-		this.setTitle("Connexion/Dï¿½connexion"); //On donne un titre ï¿½ l'application
-		this.setSize(320,100); //On donne une taille ï¿½ notre fenï¿½tre
-		this.setLocationRelativeTo(null); //On centre la fenï¿½tre sur l'ï¿½cran
-		this.setResizable(true); //On permet le redimensionnement
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE); //On dit ï¿½ l'application de se fermer lors du clic sur la croix
-		this.nameOfLocalUser.addMouseListener(this);
-		this.buttonConnectOnOff.addActionListener(this);
-		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout());
-		panel.add(labelNickname);
-		panel.add(nameOfLocalUser);
-		panel.add(buttonConnectOnOff);
-		this.setContentPane(panel);
-	
-	}
-
 	/*
 	 * Permet de mettre à jour la fenêtre dans le cas où un objet observé a été modifié
 	 */
 	public void miseAJour(Observable arg0) {
 
-		
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-
-		if (arg0.getSource() == this.buttonConnectOnOff){
-			if (this.buttonConnectOnOff.getText() == "Connexion"){
-				this.buttonConnectOnOff.setText("Deconnexion");
-				this.nameOfLocalUser.setEnabled(false);;
-				NetworkInformation NI = null;
-				NI = NI.getInstance();
-			}
-			else
-			{
-				this.nameOfLocalUser.setEnabled(true);
-				this.buttonConnectOnOff.setText("Connexion");
-			}
-		}
-		
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		
-		if (this.nameOfLocalUser.isEnabled()){
-			this.nameOfLocalUser.setText("");
-		}
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 	
