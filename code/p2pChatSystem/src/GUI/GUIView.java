@@ -12,13 +12,15 @@ public class GUIView implements Observer{
 	private static GUIView singleton;
 	
 	private ChatFenetre chatFenetre;
+
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
 	private GUIView(){
-		
+		chatFenetre = chatFenetre.getInstance();
+		chatFenetre.setVisible(true);
 	}
 	
 	/************************************************* 
@@ -37,6 +39,10 @@ public class GUIView implements Observer{
 			singleton = new GUIView();
 		}
 		return singleton;
+	}
+	
+	public void initChatSystem(){
+		
 	}
 
 	@Override
