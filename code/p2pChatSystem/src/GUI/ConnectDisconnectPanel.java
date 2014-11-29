@@ -20,7 +20,7 @@ public class ConnectDisconnectPanel extends JPanel{
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
 	
-	private static ConnectDisconnectPanel conDisFen;
+	private static ConnectDisconnectPanel singleton;
 	
 	private JLabel labelNickname;
 	
@@ -33,9 +33,14 @@ public class ConnectDisconnectPanel extends JPanel{
 	 ************************************************/
 	
 	private ConnectDisconnectPanel(){
+		// On initialise les paramètres
 		labelNickname = new JLabel("Nom :");
 		nameOfLocalUser = new JTextField("Entrez votre nom ici");
 		buttonConnectOnOff = new JButton("Connexion");
+		// On les ajoute à notre panel
+		this.add(labelNickname);
+		this.add(nameOfLocalUser);
+		this.add(buttonConnectOnOff);
 		this.setVisible(true);
 		}
 	
@@ -69,10 +74,10 @@ public class ConnectDisconnectPanel extends JPanel{
 	 ************************************************/
 
 	public static ConnectDisconnectPanel getInstance(){
-		if (conDisFen == null){
-			conDisFen = new ConnectDisconnectPanel();
+		if (singleton == null){
+			singleton = new ConnectDisconnectPanel();
 		}
-		return conDisFen;
+		return singleton;
 	}
 	
 	/*

@@ -1,11 +1,13 @@
 package GUI;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.Observable;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class ChatFenetre extends AbstractFenetre{
@@ -16,11 +18,24 @@ public class ChatFenetre extends AbstractFenetre{
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
 	
+	private static ChatFenetre singleton;
+	
+	private ConnectDisconnectPanel connectDisconnectPanel;
+	
+	private ContactsListPanel contactsListPanel;
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
+	private ChatFenetre(){
+
+		// On récupère les deux panels
+		connectDisconnectPanel = connectDisconnectPanel.getInstance();
+		contactsListPanel = contactsListPanel.getInstance();
+	    
+	    this.initializeComponents();
+	}
 
 	
 	/************************************************* 
@@ -33,9 +48,28 @@ public class ChatFenetre extends AbstractFenetre{
 	 * 					METHODS 
 	 ************************************************/
 
+	public static ChatFenetre getInstance(){
+		if (singleton == null){
+			singleton = new ChatFenetre();
+		}
+		return singleton;
+	}
+	
 	@Override
 	public void initializeComponents() {
+		// On les réunit au sein d'un seule et même panel
+		GridLayout grid = new GridLayout(2,1);
+		this.setLayout(grid);
+
+		this.getContentPane().add(connectDisconnectPanel);
+		this.getContentPane().add(contactsListPanel);
 		
+		// On ajoute les informations utiles à la fenêtre
+		this.setTitle("Chat System");
+		this.setLocationRelativeTo(null);
+	    this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+	    this.pack();
+		connectDisconnectPanel.getButtonConnectOnOff().addActionListener(this);
 	}
 
 	@Override
@@ -47,7 +81,9 @@ public class ChatFenetre extends AbstractFenetre{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
-		
+		if (arg0.getSource() == connectDisconnectPanel.getButtonConnectOnOff()){
+			System.out.println("Bouton appuyé !");
+		}
 	}
 
 	@Override
