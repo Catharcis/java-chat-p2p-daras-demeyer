@@ -58,7 +58,11 @@ public class GUIToControler {
 		NI.setLocalUser(name);
 		try {
 			String nameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
-			niCon.sendHello(nameWithPattern);
+			if (niCon == null) {
+				System.out.println("niCon null!") ;
+			}
+			else 
+				niCon.sendHello(nameWithPattern);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
