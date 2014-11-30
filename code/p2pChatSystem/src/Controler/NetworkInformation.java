@@ -65,8 +65,6 @@ public class NetworkInformation extends Observable {
 			this.localUser = null ;
 		else 
 			this.localUser = new User(name) ;
-		setChanged();
-		notifyObservers();
 	}
 	
 	/** Getter du UsersIPAddress **/
@@ -88,6 +86,7 @@ public class NetworkInformation extends Observable {
 	public User addUser (String nickname, InetAddress ip) {
 		User user = new User (nickname) ;
 		this.usersIPAddress.put(ip, user) ;
+		System.out.println("GUIView is notify that a user has been added");
 		setChanged();
 		notifyObservers();
 		return user; 
@@ -96,6 +95,7 @@ public class NetworkInformation extends Observable {
 	/** Methode qui supprime un User grace a son adresse IP **/
 	public void removeUser (InetAddress ip) {
 		this.usersIPAddress.remove(ip) ;
+		System.out.println("GUIView is notify that a user has been removed");
 		setChanged();
 		notifyObservers();
 	}

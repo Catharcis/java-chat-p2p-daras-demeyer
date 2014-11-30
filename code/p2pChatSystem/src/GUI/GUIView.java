@@ -63,6 +63,7 @@ public class GUIView implements Observer{
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		/** connexion d'un local user **/
+		System.out.println("Update GUIVIEW");
 		if (guiControler.getEtat() == Etats.disconnected) {
 			/** on passe a l'etat connected **/
 			guiControler.setEtatConnect();
@@ -74,10 +75,9 @@ public class GUIView implements Observer{
 		
 		else {
 			/** le bouton connect change d'aspect **/
-			this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Connexion");	
-		
-			/** Cas de la deconnexion **/
-			guiControler.setEtatDisconnect();
+			this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Connexion");
+			
+			System.out.println("Etat : "+guiControler.getEtat()) ;
 			
 		} 
 			
