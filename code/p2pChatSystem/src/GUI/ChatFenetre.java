@@ -95,7 +95,7 @@ public class ChatFenetre extends AbstractFenetre{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == connectDisconnectPanel.getButtonConnectOnOff()){
-			if (guiView.getGUIControler().getEtat() == Etats.disconnected){
+			if (guiView.getGUIControler().getEtat() == Etats.disconnected) {
 				getGUIView().Connection(connectDisconnectPanel.getNameOfLocalUser());
 			}
 			else

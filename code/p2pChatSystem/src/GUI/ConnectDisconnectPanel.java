@@ -34,8 +34,8 @@ public class ConnectDisconnectPanel extends JPanel {
 	
 	private ConnectDisconnectPanel(){
 		// On initialise les paramètres
-		labelNickname = new JLabel("Nom :");
-		nameOfLocalUser = new JTextField("Entrez votre nom ici");
+		labelNickname = new JLabel("Please choose your nickname : ");
+		nameOfLocalUser = new JTextField(10) ;
 		buttonConnectOnOff = new JButton("Connexion");
 		// On les ajoute à notre panel
 		this.add(labelNickname);
@@ -54,6 +54,10 @@ public class ConnectDisconnectPanel extends JPanel {
 
 	public String getNameOfLocalUser() {
 		return nameOfLocalUser.getText();
+	}
+	
+	public JTextField getNicknameFiled () {
+		return nameOfLocalUser ;
 	}
 
 	public void setNameOfLocalUser(JTextField nameOfLocalUser) {
