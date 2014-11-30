@@ -1,6 +1,6 @@
 package NI;
 
-public abstract class AbstractReceiver extends AbstractNetwork {
+public abstract class AbstractReceiver extends AbstractNetwork{
 
 	// Boolean indiquant si les sockets doivent écouter
 	private boolean stateListen = true;

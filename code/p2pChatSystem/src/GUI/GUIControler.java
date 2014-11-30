@@ -35,6 +35,9 @@ public class GUIControler {
 	 * 				GETTERS & SETTERS
 	 ************************************************/
 	
+	public GUIToControler getGUIToControler(){
+		return guiToCon;
+	}
 
 	
 	

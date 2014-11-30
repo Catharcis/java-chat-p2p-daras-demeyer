@@ -3,6 +3,7 @@ package GUI;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
 import java.util.Observable;
 
 import javax.swing.JButton;
@@ -34,7 +35,7 @@ public class ChatFenetre extends AbstractFenetre{
 		// On récupère les deux panels
 		connectDisconnectPanel = connectDisconnectPanel.getInstance();
 		contactsListPanel = contactsListPanel.getInstance();
-		
+		this.addWindowListener(this);
 	    this.initializeComponents();
 	}
 
@@ -51,7 +52,11 @@ public class ChatFenetre extends AbstractFenetre{
 	 ************************************************/
 	
 	public void setGuiView (GUIView view) {
-		this.guiView = view.getInstance() ;
+		guiView = view.getInstance() ;
+	}
+	
+	public static GUIView getGUIView() {
+		return guiView;
 	}
 	
 	
@@ -89,7 +94,7 @@ public class ChatFenetre extends AbstractFenetre{
 		if (arg0.getSource() == connectDisconnectPanel.getButtonConnectOnOff()){
 			System.out.println("Bouton Connexion appuyé !");
 			System.out.println(connectDisconnectPanel.getNameOfLocalUser()) ;
-			guiView.newConnection(connectDisconnectPanel.getNameOfLocalUser());
+			getGUIView().newConnection(connectDisconnectPanel.getNameOfLocalUser());
 		}
 	}
 
@@ -122,6 +127,47 @@ public class ChatFenetre extends AbstractFenetre{
 
 		
 	}
+
+	@Override
+	public void windowActivated(WindowEvent arg0) {
+		
+	}
+
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		
+		System.out.println("Arrêt du Chat System...");
+		this.getGUIView().getGUIControler().getGUIToControler().performDisconnect();
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		
+	}
+
+
 
 	
 }

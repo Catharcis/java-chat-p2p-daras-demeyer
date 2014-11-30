@@ -39,7 +39,7 @@ public class NetworkInformation extends Observable {
 	/** Constructeur **/
 	private NetworkInformation () { 
 		usersIPAddress = new HashMap <InetAddress, User> () ;
-		this.localUser = null ;		
+		this.localUser = new User("BestBinome") ;		
 	}
 	
 	/** Methode creant une instance de classe si necessaire et renvoie l'objet**/

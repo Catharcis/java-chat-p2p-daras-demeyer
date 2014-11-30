@@ -18,12 +18,20 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 	
 	private static NIControler NiCon ;
 	
+	private DatagramSocket socket;
+	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
 	private UDPReceiver(){
 		this.setPortEcoute(9876);
+		try {
+			socket = new DatagramSocket (this.getPortEcoute()) ;
+		} catch (SocketException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static UDPReceiver getInstanceUDPReceiver(){
@@ -34,26 +42,32 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 	}
 	
 	public void setNiCon (NIControler NiCont){
-	this.NiCon = NiCont.getInstance() ;
+		this.NiCon = NiCont.getInstance() ;
 	}
+	
+	
+	/************************************************* 
+	 * 				GETTERS & SETTERS
+	 ************************************************/
+	
+	public DatagramSocket getSocket(){
+		return socket;
+	}
+	
+	
 	/************************************************* 
 	 * 					METHODS 
 	 ************************************************/
 	
 	public void listen(){
-		/** creation d'un socket UDP**/
-		DatagramSocket socket = null;
 		try {
-		socket = new DatagramSocket (this.getPortEcoute()) ;
-		
-		//while (this.isListening()) {
+		while (this.isListening()) {
 			/** creation du paquet DatagramPacket **/
 			byte[] buf = new byte[5000] ;
 			DatagramPacket packet = new DatagramPacket (buf, buf.length);
 			
 			System.out.println("UDPReceiver : En attente d'une reception...") ;
 			socket.receive(packet) ;
-			System.out.println("UDPReceiver : Paquet recu!") ;
 			
 			AbstractMessage message = this.bufToMessage(buf) ;
 			if (message.getTypeContenu() == typeContenu.HELLO) {
@@ -81,7 +95,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 				NiCon.receivedTextMessage (textMessage.getMessage(),textMessage.getListNicknamesDest()) ;
 			} 
 			
-		//}
+		}
 		
 		} catch (BindException e1) {
 			System.out.println("UDPReceiver : Port for UDP SocketReceiver already used.") ;
@@ -89,7 +103,6 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 			System.out.println("UDPReceiver : Creation of UDP SocketReceiver failed.") ;
 		} catch (IOException e3) {
 			System.out.println("UDPReceiver : IOException during Receive.") ;
-			// fermer la socket ?
 		} catch (ClassNotFoundException e4) {
 			System.out.println("UDPReceiver : Lecture du message en réception impossible.") ;			
 		}
@@ -97,6 +110,9 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 			if (socket != null)
 				socket.close() ;
 		}
+		System.out.println("RESUME DE FERMETURE : \n{\nListen : "+Boolean.toString(this.isListening()).toUpperCase()+"\nSocket connected ? : "+Boolean.toString(socket.isConnected()).toUpperCase()+
+																	"\nSocket closed ? : "+Boolean.toString(socket.isClosed()).toUpperCase()+"\n}");
+		
 	}
 
 	/**
