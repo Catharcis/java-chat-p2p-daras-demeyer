@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import Controler.NetworkInformation;
 
 @SuppressWarnings("serial")
-public class ConnectDisconnectPanel extends JPanel{
+public class ConnectDisconnectPanel extends JPanel {
 
 	/************************************************* 
 	 * 				ATTRIBUTS & FIELDS 
