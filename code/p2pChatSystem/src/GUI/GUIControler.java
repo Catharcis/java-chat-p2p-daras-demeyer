@@ -1,11 +1,6 @@
 package GUI;
 
 import Controler.GUIToControler;
-import NI.NIControler;
-import NI.TCPSender;
-import NI.TCPServer;
-import NI.UDPReceiver;
-import NI.UDPSender;
 
 public class GUIControler {
 

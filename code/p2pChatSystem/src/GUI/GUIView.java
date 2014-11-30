@@ -72,7 +72,7 @@ public class GUIView implements Observer{
 			/** le bouton connect change d'aspect **/
 			this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Deconnexion");
 		}
-		
+
 		else {
 			/** le bouton connect change d'aspect **/
 			this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Connexion");
