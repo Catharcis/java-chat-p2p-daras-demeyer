@@ -82,22 +82,22 @@ public class ChatFenetre extends AbstractFenetre{
 		connectDisconnectPanel.getButtonConnectOnOff().addActionListener(this);
 	}
 
-	@Override
-	public void miseAJour(Observable arg0) {
 
-		
-	}
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
 		if (arg0.getSource() == connectDisconnectPanel.getButtonConnectOnOff()){
-			System.out.println("Bouton Connexion appuyé !");
-			System.out.println(connectDisconnectPanel.getNameOfLocalUser()) ;
 			getGUIView().newConnection(connectDisconnectPanel.getNameOfLocalUser());
 		}
 	}
 
+	@Override
+	public void miseAJour(Observable arg0) {
+		
+	}
+
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
@@ -166,6 +166,7 @@ public class ChatFenetre extends AbstractFenetre{
 	public void windowOpened(WindowEvent e) {
 		
 	}
+
 
 
 
