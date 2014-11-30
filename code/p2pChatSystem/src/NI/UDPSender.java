@@ -54,7 +54,7 @@ public class UDPSender extends AbstractSender {
 		DatagramSocket socket = null;
 		try {
 			socket = new DatagramSocket (this.getPortEnvoi()) ;
-			System.out.println("Creation du socket UDPSender") ;
+			System.out.println("UDPSender : Creation du socket UDPSender") ;
 			
 
 			/** Creation du Datagram Packet **/
@@ -65,28 +65,28 @@ public class UDPSender extends AbstractSender {
 			  	out.writeObject(message);
 			  	byte[] buf = bos.toByteArray();
 			  	DatagramPacket packet = new DatagramPacket (buf, buf.length, InetAddress.getByName("255.255.255.255"), this.getPortEcoute()) ;
-			  	System.out.println("Paquet concu ! ") ;
+			  	System.out.println("UDPSender : Paquet concu ! ") ;
 
 			  	/** Envoi du paquet **/
 			  	socket.send(packet);
-			  	System.out.println("Paquet envoyï¿½!") ;
+			  	System.out.println("UDPSender : Paquet envoye!") ;
 			} catch (IOException e) {
-				System.out.println("Erreur lors de l'ï¿½criture dans le UDP Sender") ;
+				System.out.println("UDPSender : Erreur lors de l'ecriture dans le UDP Sender") ;
 			}
 
 		} catch (BindException e1) {
-			System.out.println("Port for UDP SocketSender already used.") ;
+			System.out.println("UDPSender : Port for UDP SocketSender already used.") ;
 		} catch (SocketException e2) {
-			System.out.println("Creation of UDP SocketSender failed.") ;
+			System.out.println("UDPSender : Creation of UDP SocketSender failed.") ;
 		} finally {
 			if (socket != null)
 				socket.close() ;
 		}
 	}
 	
-	/** Methode permettant d'envoyer un message Ã  une liste d'utilisateurs **/
+	/** Methode permettant d'envoyer un message a  une liste d'utilisateurs **/
 	public void send(AbstractMessage message, ArrayList<String> listOfUsers, ArrayList<InetAddress> ipAddressesList){
-		/** On rï¿½cupï¿½re les informations rï¿½seaux **/
+		/** On rï¿½cupï¿½re les informations reseaux **/
 		NetworkInformation NI = null;
 		NI = NI.getInstance();
 		
@@ -94,7 +94,7 @@ public class UDPSender extends AbstractSender {
 		DatagramSocket socket = null;
 		try {
 			socket = new DatagramSocket (this.getPortEnvoi()) ;
-			System.out.println("Creation du socket UDPSender") ;
+			System.out.println("UDPSender : Creation du socket UDPSender") ;
 			
 			/** Envoi des paquets a chaque User de la liste **/
 			for (int i = 0; i < ipAddressesList.size(); i++) {
@@ -107,19 +107,19 @@ public class UDPSender extends AbstractSender {
 				  	out.writeObject(message);
 				  	byte[] buf = bos.toByteArray();
 				  	DatagramPacket packet = new DatagramPacket (buf, buf.length, ipAddressesList.get(i), this.getPortEcoute()) ;
-				  	System.out.println("Paquet concu ! Adresse IP destinataire : " + ipAddressesList.get(i)) ;
+				  	System.out.println("UDPSender : Paquet concu ! Adresse IP destinataire : " + ipAddressesList.get(i)) ;
 	
 				  	/** Envoi du paquet **/
 				  	socket.send(packet);
-				  	System.out.println("Paquet envoyï¿½!") ;
+				  	System.out.println("UDPSender : Paquet envoye!") ;
 				} catch (IOException e) {
-					System.out.println("Erreur lors de l'ï¿½criture dans le UDP Sender") ;
+					System.out.println("UDPSender : Erreur lors de l'ecriture") ;
 				}
 			}
 		} catch (BindException e1) {
-			System.out.println("Port for UDP SocketSender already used.") ;
+			System.out.println("UDPSender : Port for UDP SocketSender already used.") ;
 		} catch (SocketException e2) {
-			System.out.println("Creation of UDP SocketSender failed.") ;
+			System.out.println("UDPSender : Creation of UDP SocketSender failed.") ;
 		} finally {
 			if (socket != null)
 				socket.close() ;
