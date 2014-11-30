@@ -41,6 +41,10 @@ public class GUIView implements Observer{
 		return this.chatFenetre ;
 	}
 	
+	public GUIControler getGUIControler(){
+		return this.guiControler;
+	}
+	
 	/************************************************* 
 	 * 					METHODS 
 	 ************************************************/

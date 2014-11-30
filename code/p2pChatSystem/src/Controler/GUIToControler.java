@@ -83,7 +83,9 @@ public class GUIToControler {
 	public void performDisconnect(){
 		try {
 			String nameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
+			niCon.getUDPReceiver().setStateListen(false);
 			niCon.sendGoodbye(nameWithPattern);
+			
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

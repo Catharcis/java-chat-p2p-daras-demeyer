@@ -27,4 +27,8 @@ public abstract class AbstractMessage implements Serializable {
 	public void setTypeContenu(typeContenu type){
 		this.type = type;
 	}
+	
+	public String toString(){
+		return type.toString();
+	}
 }

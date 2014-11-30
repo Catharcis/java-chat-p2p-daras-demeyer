@@ -65,11 +65,11 @@ public class UDPSender extends AbstractSender {
 			  	out.writeObject(message);
 			  	byte[] buf = bos.toByteArray();
 			  	DatagramPacket packet = new DatagramPacket (buf, buf.length, InetAddress.getByName("255.255.255.255"), this.getPortEcoute()) ;
-			  	System.out.println("UDPSender : Paquet concu ! ") ;
+			  	System.out.println("UDPSender : "+message.toString()+" concu !") ;
 
 			  	/** Envoi du paquet **/
 			  	socket.send(packet);
-			  	System.out.println("UDPSender : Paquet envoye!") ;
+			  	System.out.println("UDPSender : "+message.toString()+" envoye!") ;
 			} catch (IOException e) {
 				System.out.println("UDPSender : Erreur lors de l'ecriture dans le UDP Sender") ;
 			}

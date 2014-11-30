@@ -3,13 +3,14 @@ package GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowListener;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JFrame;
 
 
-public abstract class AbstractFenetre extends JFrame implements ActionListener, MouseListener{
+public abstract class AbstractFenetre extends JFrame implements ActionListener, MouseListener, WindowListener{
 
 	/************************************************* 
 	 * 				ATTRIBUTS & FIELDS 

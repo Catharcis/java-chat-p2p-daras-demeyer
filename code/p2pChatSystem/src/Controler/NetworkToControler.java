@@ -57,18 +57,14 @@ public class NetworkToControler {
 	public void processHello(String name, InetAddress ipAddress){
 		
 		String nameWithoutPattern = NI.getNicknameWithoutIP(name);
-		System.out.println("Name = " +nameWithoutPattern);
 		User user = NI.addUser(nameWithoutPattern, ipAddress) ;
-		System.out.println("IP = " +NI.getIPOfPattern(name));
 		
 	}
 	
 	public void processHelloAck(String name, InetAddress ipAddress){
 		
 		String nameWithoutPattern = NI.getNicknameWithoutIP(name);
-		System.out.println("Name = " +nameWithoutPattern);
 		User user = NI.addUser(nameWithoutPattern, ipAddress) ;
-		System.out.println("IP = " +NI.getIPOfPattern(name));
 		
 	}
 	
@@ -76,8 +72,6 @@ public class NetworkToControler {
 		
 		String nameWithoutPattern = NI.getNicknameWithoutIP(name);
 		NI.removeUser(ipAddress);
-		System.out.println("Name = " +nameWithoutPattern);
-		System.out.println("IP = " +NI.getIPOfPattern(name));
 	}
 	
 	public void processTextMessage(String message, ArrayList<String> listOfUsernames) throws UnknownHostException{
