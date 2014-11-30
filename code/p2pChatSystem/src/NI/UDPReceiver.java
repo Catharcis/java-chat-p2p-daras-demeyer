@@ -16,6 +16,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 	
 	private static UDPReceiver singleton = null;
 	
+	NetworkToControler netToCont = null;
 	
 	
 	/************************************************* 
@@ -24,6 +25,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 	
 	private UDPReceiver(){
 		this.setPortEcoute(9876);
+		netToCont = netToCont.getInstance();
 	}
 	
 	public static UDPReceiver getInstanceUDPReceiver(){
@@ -57,8 +59,6 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 			ObjectInput in = new ObjectInputStream(byteIn);
 			AbstractMessage message = (AbstractMessage) in.readObject() ;
 			if (message.getTypeContenu() == typeContenu.HELLO) {
-				NetworkToControler netToCont = null;
-				netToCont = netToCont.getInstance();
 				String name = message.getNickname();
 				netToCont.processHello(name, socket.getInetAddress());
 				System.out.println("Hello, I am " +name) ;
@@ -66,8 +66,6 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 			}
 			
 			if (message.getTypeContenu() == typeContenu.HELLOACK) {
-				NetworkToControler netToCont = null;
-				netToCont = netToCont.getInstance();
 				String name = message.getNickname();
 				netToCont.processHelloAck(name, socket.getInetAddress()) ;
 				System.out.println("Hello (Ack), I am " +name) ;
@@ -75,18 +73,13 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 			}
 			
 			if (message.getTypeContenu() == typeContenu.GOODBYE) {
-				NetworkToControler netToCont = null;
-				netToCont = netToCont.getInstance();
 				String name = message.getNickname();
 				netToCont.processGoodbye(name, socket.getInetAddress());
 				System.out.println("Goodbye, my name was " +name) ;
 			}
 			
 			if (message.getTypeContenu() == typeContenu.TEXTMESSAGE) {
-
 				TextMessage textMessage = (TextMessage) message;
-				NetworkToControler netToCont = null;
-				netToCont = netToCont.getInstance();
 				netToCont.processTextMessage(textMessage.getMessage(),textMessage.getListNicknamesDest()) ;
 			} 
 			
