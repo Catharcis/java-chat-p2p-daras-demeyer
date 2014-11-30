@@ -113,19 +113,19 @@ public class NIControler {
 		
 	}
 	
-	public void receivedHello (String name, InetAddress address) {
+	protected void receivedHello (String name, InetAddress address) {
 		netToCont.processHello(name, address);
 	}
 	
-	public void receivedHelloAck (String name, InetAddress address) {
+	protected void receivedHelloAck (String name, InetAddress address) {
 		netToCont.processHelloAck(name, address) ;
 	}
 	
-	public void receivedGoodbye (String name, InetAddress address) {
+	protected void receivedGoodbye (String name, InetAddress address) {
 		netToCont.processGoodbye(name, address) ;
 	}
 	
-	public void receivedTextMessage (String text, ArrayList <String> ListNicknames) throws UnknownHostException {
+	protected void receivedTextMessage (String text, ArrayList <String> ListNicknames) throws UnknownHostException {
 		netToCont.processTextMessage(text, ListNicknames) ;
 	}
 	
