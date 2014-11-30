@@ -82,6 +82,7 @@ public class GUIView implements Observer{
 			JOptionPane.showMessageDialog(null, "Please choose a nickname.", "Error", JOptionPane.ERROR_MESSAGE);
 		else {
 			initChatSystem(this) ;
+			this.chatFenetre.getContactsListPanel().initComponents();
 			guiControler.Connection(name);
 		}
 	}

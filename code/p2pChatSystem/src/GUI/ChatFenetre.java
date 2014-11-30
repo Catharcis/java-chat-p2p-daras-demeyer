@@ -67,6 +67,9 @@ public class ChatFenetre extends AbstractFenetre{
 		return this.connectDisconnectPanel ;
 	}
 	
+	public ContactsListPanel getContactsListPanel () {
+		return this.contactsListPanel ;
+	}
 	
 	/************************************************* 
 	 * 					METHODS 
