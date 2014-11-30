@@ -93,11 +93,11 @@ public class NetworkInformation extends Observable {
 		return user; 
 	}
 	
-	/** Methode qui supprime un User grace a� son adresse IP **/
+	/** Methode qui supprime un User grace a son adresse IP **/
 	public void removeUser (InetAddress ip) {
 		this.usersIPAddress.remove(ip) ;
-		//setChanged();
-		//notifyObservers();
+		setChanged();
+		notifyObservers();
 	}
 	
 	/** Methode qui recupere l'adresse IP d'un utilisateur **/

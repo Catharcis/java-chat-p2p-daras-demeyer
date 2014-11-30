@@ -66,6 +66,7 @@ public class GUIView implements Observer{
 		if (guiControler.getEtat() == Etats.disconnected) {
 			/** on passe a l'etat connected **/
 			guiControler.setEtatConnect();
+			System.out.println("Etat : "+guiControler.getEtat()) ;
 			
 			/** le bouton connect change d'aspect **/
 			this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Deconnexion");
