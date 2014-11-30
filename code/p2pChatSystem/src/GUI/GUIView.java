@@ -3,6 +3,8 @@ package GUI;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JOptionPane;
+
 import Controler.GUIToControler;
 import Controler.NetworkInformation;
 import Controler.NetworkToControler;
@@ -76,8 +78,12 @@ public class GUIView implements Observer{
 	}	
 	
 	protected void Connection (String name) {
-		initChatSystem(this) ;
-		guiControler.Connection(name);
+		if (name.length() == 0)
+			JOptionPane.showMessageDialog(null, "Please choose a nickname.", "Error", JOptionPane.ERROR_MESSAGE);
+		else {
+			initChatSystem(this) ;
+			guiControler.Connection(name);
+		}
 	}
 
 	protected void Disconnection () {
