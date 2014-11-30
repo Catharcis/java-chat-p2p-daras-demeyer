@@ -62,9 +62,15 @@ public class GUIControler {
 	
 	protected void Connection (String name) {
 		guiToCon.performConnect(name) ;
+		
+		/** Cas de la connexion **/
+		this.setEtatConnect();
 	}
 	
 	protected void Disconnection () {
 		guiToCon.performDisconnect();
+		
+		/** Cas de la deconnexion **/
+		this.setEtatDisconnect();
 	}
 }

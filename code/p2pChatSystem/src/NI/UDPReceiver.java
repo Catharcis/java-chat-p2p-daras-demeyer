@@ -70,31 +70,37 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 			socket.receive(packet) ;
 			
 			AbstractMessage message = this.bufToMessage(buf) ;
-			if (message.getTypeContenu() == typeContenu.HELLO) {
-				String name = message.getNickname();
-				NiCon.receivedHello(name, socket.getInetAddress()) ;
-				System.out.println("UDPReceiver : Hello, I am " +name) ;
+			
+			String myUsername = NiCon.getNetInfo().getLocalUser().getNickname()+"@"+(InetAddress.getLocalHost()).getHostAddress();
+			
+			if (!(message.getNickname().equals(myUsername)) || (message.getTypeContenu() == typeContenu.GOODBYE)){
+			
+				if (message.getTypeContenu() == typeContenu.HELLO) {
+					String name = message.getNickname();
+					NiCon.receivedHello(name, socket.getInetAddress()) ;
+					System.out.println("UDPReceiver : Hello, I am " +name) ;
+					
+				}
+				
+				if (message.getTypeContenu() == typeContenu.HELLOACK) {
+					String name = message.getNickname();
+					NiCon.receivedHelloAck(name, socket.getInetAddress()) ;
+					System.out.println("UDPReceiver : Hello (Ack), I am " +name) ;
+					
+				}
+				
+				if (message.getTypeContenu() == typeContenu.GOODBYE) {
+					String name = message.getNickname();
+					NiCon.receivedGoodbye(name, socket.getInetAddress()) ;
+					System.out.println("UDPReceiver : Goodbye, my name was " +name) ;
+				}
+				
+				if (message.getTypeContenu() == typeContenu.TEXTMESSAGE) {
+					TextMessage textMessage = (TextMessage) message;
+					NiCon.receivedTextMessage (textMessage.getMessage(),textMessage.getListNicknamesDest()) ;
+				} 
 				
 			}
-			
-			if (message.getTypeContenu() == typeContenu.HELLOACK) {
-				String name = message.getNickname();
-				NiCon.receivedHelloAck(name, socket.getInetAddress()) ;
-				System.out.println("UDPReceiver : Hello (Ack), I am " +name) ;
-				
-			}
-			
-			if (message.getTypeContenu() == typeContenu.GOODBYE) {
-				String name = message.getNickname();
-				NiCon.receivedGoodbye(name, socket.getInetAddress()) ;
-				System.out.println("UDPReceiver : Goodbye, my name was " +name) ;
-			}
-			
-			if (message.getTypeContenu() == typeContenu.TEXTMESSAGE) {
-				TextMessage textMessage = (TextMessage) message;
-				NiCon.receivedTextMessage (textMessage.getMessage(),textMessage.getListNicknamesDest()) ;
-			} 
-			
 		}
 		
 		} catch (BindException e1) {
