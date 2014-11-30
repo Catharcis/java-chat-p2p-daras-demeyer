@@ -12,15 +12,25 @@ public class GUIView implements Observer{
 	private static GUIView singleton;
 	
 	private ChatFenetre chatFenetre;
+	
+	private GUIControler guiControler ;
 
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
-	private GUIView(){
+	private GUIView() {
 		chatFenetre = chatFenetre.getInstance();
 		chatFenetre.setVisible(true);
+		guiControler = guiControler.getInstance() ;
+	}
+	
+	public static GUIView getInstance(){
+		if (singleton == null){
+			singleton = new GUIView();
+		}
+		return singleton;
 	}
 	
 	/************************************************* 
@@ -34,17 +44,17 @@ public class GUIView implements Observer{
 	 ************************************************/
 
 	
-	public static GUIView getInstance(){
-		if (singleton == null){
-			singleton = new GUIView();
-		}
-		return singleton;
-	}
+	
 	
 	public void initChatSystem(){
 		
 	}
 
+	
+	protected void newConnection (String name) {
+		guiControler.newConnection(name);
+	}
+	
 	@Override
 	public void update(Observable arg0, Object arg1) {
 

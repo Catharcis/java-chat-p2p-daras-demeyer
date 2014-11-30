@@ -33,9 +33,9 @@ public class UDPSender extends AbstractSender {
 		this.setPortEcoute(9876) ;
 	}
 	
-	/*
-	 * Méthode pour récupérer l'instance 
-	 */
+	/**
+	 * Methode pour recuperer l'instance 
+	 **/
 	public static UDPSender getInstanceUDPSender(){
 		if (singleton == null){
 			singleton = new UDPSender();

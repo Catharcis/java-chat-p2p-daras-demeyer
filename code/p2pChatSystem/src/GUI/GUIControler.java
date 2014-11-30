@@ -1,5 +1,6 @@
 package GUI;
 
+import Controler.GUIToControler;
 import NI.NIControler;
 import NI.TCPSender;
 import NI.TCPServer;
@@ -13,14 +14,14 @@ public class GUIControler {
 	
 	private static GUIControler GUISingleton ;
 	
-	
+	private GUIToControler guiToCon ;
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
 	private GUIControler () {
-		
+		guiToCon = guiToCon.getInstance() ;
 	}
 	
 	public static GUIControler getInstance () {
@@ -41,10 +42,7 @@ public class GUIControler {
 	 * 					METHODS 
 	 ************************************************/
 	
-	/*
-	 * Permet d'ajouter un utilisateur à une liste visuelle
-	 */
-	public void addUserToVisualList(){
-		
+	protected void newConnection (String name) {
+		guiToCon.performConnect(name) ;
 	}
 }
