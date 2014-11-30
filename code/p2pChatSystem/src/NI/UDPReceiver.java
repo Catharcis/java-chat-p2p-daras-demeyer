@@ -51,29 +51,29 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 			byte[] buf = new byte[5000] ;
 			DatagramPacket packet = new DatagramPacket (buf, buf.length);
 			
-			System.out.println("En attente d'une réception...") ;
+			System.out.println("UDPReceiver : En attente d'une reception...") ;
 			socket.receive(packet) ;
-			System.out.println("Paquet recu!") ;
+			System.out.println("UDPReceiver : Paquet recu!") ;
 			
 			AbstractMessage message = this.bufToMessage(buf) ;
 			if (message.getTypeContenu() == typeContenu.HELLO) {
 				String name = message.getNickname();
 				netToCont.processHello(name, socket.getInetAddress());
-				System.out.println("Hello, I am " +name) ;
+				System.out.println("UDPReceiver : Hello, I am " +name) ;
 				
 			}
 			
 			if (message.getTypeContenu() == typeContenu.HELLOACK) {
 				String name = message.getNickname();
 				netToCont.processHelloAck(name, socket.getInetAddress()) ;
-				System.out.println("Hello (Ack), I am " +name) ;
+				System.out.println("UDPReceiver : Hello (Ack), I am " +name) ;
 				
 			}
 			
 			if (message.getTypeContenu() == typeContenu.GOODBYE) {
 				String name = message.getNickname();
 				netToCont.processGoodbye(name, socket.getInetAddress());
-				System.out.println("Goodbye, my name was " +name) ;
+				System.out.println("UDPReceiver : Goodbye, my name was " +name) ;
 			}
 			
 			if (message.getTypeContenu() == typeContenu.TEXTMESSAGE) {
@@ -84,14 +84,14 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 		//}
 		
 		} catch (BindException e1) {
-			System.out.println("Port for UDP SocketReceiver already used.") ;
+			System.out.println("UDPReceiver : Port for UDP SocketReceiver already used.") ;
 		} catch (SocketException e2) {
-			System.out.println("Creation of UDP SocketReceiver failed.") ;
+			System.out.println("UDPReceiver : Creation of UDP SocketReceiver failed.") ;
 		} catch (IOException e3) {
-			System.out.println("IOException during Receive.") ;
+			System.out.println("UDPReceiver : IOException during Receive.") ;
 			// fermer la socket ?
 		} catch (ClassNotFoundException e4) {
-			System.out.println("Lecture du message en réception impossible.") ;			
+			System.out.println("UDPReceiver : Lecture du message en réception impossible.") ;			
 		}
 		finally {
 			if (socket != null)
