@@ -37,7 +37,8 @@ public static void initChatSystem () {
 	netToCon.getNetInfo().setGuiView(guiView);
 	guiToCon.setGuiCon(niCon);
 	guiView.getChatFenetre().setGuiView(guiView);
-	
+	niCon.setNetToCon(netToCon);
+	niCon.getUDPReceiver().setNiCon(niCon);
 }
 	
 	public static void main(String[] args) throws UnknownHostException {

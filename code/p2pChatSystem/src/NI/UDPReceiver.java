@@ -16,8 +16,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 	
 	private static UDPReceiver singleton = null;
 	
-	NetworkToControler netToCont = null;
-	
+	private static NIControler NiCon ;
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
@@ -25,7 +24,6 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 	
 	private UDPReceiver(){
 		this.setPortEcoute(9876);
-		netToCont = netToCont.getInstance();
 	}
 	
 	public static UDPReceiver getInstanceUDPReceiver(){
@@ -35,7 +33,9 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 		return singleton;
 	}
 	
-	
+	public void setNiCon (NIControler NiCont){
+	this.NiCon = NiCont.getInstance() ;
+	}
 	/************************************************* 
 	 * 					METHODS 
 	 ************************************************/
@@ -58,27 +58,27 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 			AbstractMessage message = this.bufToMessage(buf) ;
 			if (message.getTypeContenu() == typeContenu.HELLO) {
 				String name = message.getNickname();
-				netToCont.processHello(name, socket.getInetAddress());
+				NiCon.receivedHello(name, socket.getInetAddress()) ;
 				System.out.println("UDPReceiver : Hello, I am " +name) ;
 				
 			}
 			
 			if (message.getTypeContenu() == typeContenu.HELLOACK) {
 				String name = message.getNickname();
-				netToCont.processHelloAck(name, socket.getInetAddress()) ;
+				NiCon.receivedHelloAck(name, socket.getInetAddress()) ;
 				System.out.println("UDPReceiver : Hello (Ack), I am " +name) ;
 				
 			}
 			
 			if (message.getTypeContenu() == typeContenu.GOODBYE) {
 				String name = message.getNickname();
-				netToCont.processGoodbye(name, socket.getInetAddress());
+				NiCon.receivedGoodbye(name, socket.getInetAddress()) ;
 				System.out.println("UDPReceiver : Goodbye, my name was " +name) ;
 			}
 			
 			if (message.getTypeContenu() == typeContenu.TEXTMESSAGE) {
 				TextMessage textMessage = (TextMessage) message;
-				netToCont.processTextMessage(textMessage.getMessage(),textMessage.getListNicknamesDest()) ;
+				NiCon.receivedTextMessage (textMessage.getMessage(),textMessage.getListNicknamesDest()) ;
 			} 
 			
 		//}

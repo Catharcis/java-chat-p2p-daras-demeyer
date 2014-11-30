@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Controler.NetworkInformation;
+import Controler.NetworkToControler;
 import Controler.User;
 import Signals.* ;
 
@@ -28,6 +29,8 @@ public class NIControler {
 	private static NIControler NISingleton ;
 	
 	private NetworkInformation NI ;
+	
+	protected static NetworkToControler netToCont ;
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
@@ -64,6 +67,10 @@ public class NIControler {
 	public NetworkInformation getNetInfo () {
 		return NI ;
 	}
+	public void setNetToCon (NetworkToControler netCon) {
+		netToCont = netCon.getInstance();	
+	}
+	
 	
 	/************************************************* 
 	 * 					METHODS 
@@ -105,5 +112,22 @@ public class NIControler {
 	public void sendFileMessage (ArrayList<User> userList, File file) {
 		
 	}
+	
+	public void receivedHello (String name, InetAddress address) {
+		netToCont.processHello(name, address);
+	}
+	
+	public void receivedHelloAck (String name, InetAddress address) {
+		netToCont.processHelloAck(name, address) ;
+	}
+	
+	public void receivedGoodbye (String name, InetAddress address) {
+		netToCont.processGoodbye(name, address) ;
+	}
+	
+	public void receivedTextMessage (String text, ArrayList <String> ListNicknames) throws UnknownHostException {
+		netToCont.processTextMessage(text, ListNicknames) ;
+	}
+	
 	
 }
