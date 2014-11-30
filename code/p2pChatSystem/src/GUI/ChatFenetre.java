@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import GUI.GUIControler.Etats;
+
 public class ChatFenetre extends AbstractFenetre{
 
 
@@ -59,6 +61,10 @@ public class ChatFenetre extends AbstractFenetre{
 		return guiView;
 	}
 	
+	public ConnectDisconnectPanel getConnectDisconnectPanel () {
+		return this.connectDisconnectPanel ;
+	}
+	
 	
 	/************************************************* 
 	 * 					METHODS 
@@ -86,9 +92,12 @@ public class ChatFenetre extends AbstractFenetre{
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-
 		if (arg0.getSource() == connectDisconnectPanel.getButtonConnectOnOff()){
-			getGUIView().newConnection(connectDisconnectPanel.getNameOfLocalUser());
+			if (guiView.getGUIControler().getEtat() == Etats.disconnected)
+				getGUIView().Connection(connectDisconnectPanel.getNameOfLocalUser());
+			else
+				getGUIView().Disconnection() ;
+			
 		}
 	}
 

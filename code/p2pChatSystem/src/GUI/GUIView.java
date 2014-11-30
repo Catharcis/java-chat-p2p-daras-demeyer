@@ -52,8 +52,12 @@ public class GUIView implements Observer{
 	 ************************************************/
 
 		
-	protected void newConnection (String name) {
+	protected void Connection (String name) {
 		guiControler.Connection(name);
+	}
+
+	protected void Disconnection () {
+		guiControler.Disconnection();
 	}
 	
 	@Override
@@ -64,8 +68,18 @@ public class GUIView implements Observer{
 			guiControler.setEtatConnect();
 			
 			/** le bouton connect change d'aspect **/
-			
+			this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Deconnexion");
 		}
+		
+		else {
+			/** le bouton connect change d'aspect **/
+			this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Connexion");	
+		
+			/** Cas de la deconnexion **/
+			guiControler.setEtatDisconnect();
+			
+		} 
+			
 	}
 
 	
