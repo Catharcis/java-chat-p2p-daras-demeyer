@@ -43,6 +43,10 @@ public class GUIControler {
 	 ************************************************/
 	
 	protected void newConnection (String name) {
-		guiToCon.performConnect(name) ;
+		if (guiToCon == null) {
+			System.out.println("Erreur in NewConnection - GUIControler : guiToCon null") ;
+		}
+		else 
+			guiToCon.performConnect(name) ;
 	}
 }

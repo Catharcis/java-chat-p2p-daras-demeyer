@@ -20,10 +20,10 @@ public class Test {
 public static void initChatSystem () {
 	/** Initialisation du Controler **/
 	NetworkToControler netToCon = null ;
-	netToCon.getInstance() ;
+	netToCon = netToCon.getInstance() ;
 	
 	GUIToControler guiToCon = null ;
-	guiToCon.getInstance() ;
+	guiToCon = guiToCon.getInstance() ;
 	
 	/** Initialisation du NI **/
 	NIControler niCon = null ;
@@ -34,13 +34,10 @@ public static void initChatSystem () {
 	guiView = guiView.getInstance() ;
 	
 	/** Creation des liens **/
+	netToCon.getNetInfo().setGuiView(guiView);
+	guiToCon.setGuiCon(niCon);
 	guiView.getChatFenetre().setGuiView(guiView);
-	if (netToCon == null) {
-		System.out.println("netToCon null") ;
-	}
-	else 
-		netToCon.getNetInfo().setGuiView(guiView);
-
+	
 }
 	
 	public static void main(String[] args) throws UnknownHostException {

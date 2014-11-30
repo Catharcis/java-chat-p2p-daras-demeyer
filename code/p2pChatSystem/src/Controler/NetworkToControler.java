@@ -13,7 +13,7 @@ public class NetworkToControler {
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
 	
-	private static NetworkToControler netToContSingleton = null ;
+	private static NetworkToControler netToContSingleton ;
 	
 	private static GUIControler guiCon;
 	
