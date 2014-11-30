@@ -95,12 +95,14 @@ public class GUIView implements Observer{
 				
 				/** le bouton connect change d'aspect **/
 				this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Deconnexion");
+				this.chatFenetre.getConnectDisconnectPanel().getNicknameFiled().setEditable(false);
 				guiControler.setEtatConnect();
 			}
 			
 			else if (NI.getLastChange().equals(typeOfChange.DISCONNECTION)) {
 				/** le bouton connect change d'aspect **/
 				this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Connexion");
+				this.chatFenetre.getConnectDisconnectPanel().getNicknameFiled().setEditable(true);
 				guiControler.setEtatDisconnect();
 			}
 			
