@@ -3,6 +3,8 @@ package GUI;
 import java.util.Observable;
 import java.util.Observer;
 
+import GUI.GUIControler.Etats;
+
 public class GUIView implements Observer{
 
 	/************************************************* 
@@ -49,22 +51,21 @@ public class GUIView implements Observer{
 	 * 					METHODS 
 	 ************************************************/
 
-	
-	
-	
-	public void initChatGUI(){
 		
-	}
-
-	
 	protected void newConnection (String name) {
-		guiControler.newConnection(name);
+		guiControler.Connection(name);
 	}
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
-
-		
+		/** connexion d'un local user **/
+		if (guiControler.getEtat() == Etats.disconnected) {
+			/** on passe a l'etat connected **/
+			guiControler.setEtatConnect();
+			
+			/** le bouton connect change d'aspect **/
+			
+		}
 	}
 
 	
