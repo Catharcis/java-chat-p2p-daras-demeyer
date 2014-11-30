@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Controler.NetworkInformation;
+import Controler.typeOfChange;
 import GUI.GUIControler.Etats;
 
 public class ChatFenetre extends AbstractFenetre{
@@ -154,7 +156,9 @@ public class ChatFenetre extends AbstractFenetre{
 	public void windowClosing(WindowEvent e) {
 		
 		System.out.println("Arrêt du Chat System...");
-		this.getGUIView().getGUIControler().getGUIToControler().performDisconnect();
+		if (NetworkInformation.getInstance().getLastChange() != typeOfChange.DISCONNECTION){
+			this.getGUIView().getGUIControler().getGUIToControler().performDisconnect();
+		}
 		
 	}
 

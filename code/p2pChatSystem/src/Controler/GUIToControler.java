@@ -63,6 +63,7 @@ public class GUIToControler {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		NI.notifyLastChange(typeOfChange.CONNECTION);
 	}
 	
 	public void performSendHelloAck(User destUser){
@@ -81,7 +82,7 @@ public class GUIToControler {
 			String nameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
 			niCon.getUDPReceiver().setStateListen(false);
 			niCon.sendGoodbye(nameWithPattern);
-			
+			NI.notifyLastChange(typeOfChange.DISCONNECTION);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
