@@ -24,18 +24,16 @@ public class ChatFenetre extends AbstractFenetre{
 	
 	private ContactsListPanel contactsListPanel;
 	
-	private GUIView guiView ;
+	private static GUIView guiView ;
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
 	private ChatFenetre(){
-
 		// On récupère les deux panels
 		connectDisconnectPanel = connectDisconnectPanel.getInstance();
 		contactsListPanel = contactsListPanel.getInstance();
-	  //  guiView = guiView.getInstance() ;
 		
 	    this.initializeComponents();
 	}
@@ -47,11 +45,14 @@ public class ChatFenetre extends AbstractFenetre{
 		return singleton;
 	}
 
-	
+
 	/************************************************* 
 	 * 				GETTERS & SETTERS
 	 ************************************************/
-
+	
+	public void setGuiView (GUIView view) {
+		this.guiView = view.getInstance() ;
+	}
 	
 	
 	/************************************************* 

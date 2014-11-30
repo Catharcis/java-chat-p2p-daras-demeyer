@@ -4,6 +4,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+import GUI.GUIControler;
 import NI.NIControler;
 
 
@@ -15,7 +16,7 @@ public class GUIToControler {
 	
 	private static GUIToControler guiToContSingleton;
 	
-	private static NIControler niCont;
+	private static NIControler niCon;
 	
 	private static NetworkInformation NI;
 	
@@ -25,7 +26,6 @@ public class GUIToControler {
 	 ************************************************/
 	
 	private GUIToControler(){
-		niCont = niCont.getInstance();
 		NI = NI.getInstance();
 	}
 	
@@ -36,6 +36,15 @@ public class GUIToControler {
 			guiToContSingleton = new GUIToControler() ;
 		}
 		return guiToContSingleton ;
+	}
+	
+
+	/************************************************* 
+	 * 				GETTERS & SETTERS
+	 ************************************************/
+	
+	public void setGuiCon (NIControler niCont) {
+		this.niCon = niCont.getInstance();
 	}
 	
 	
@@ -49,7 +58,7 @@ public class GUIToControler {
 		NI.setLocalUser(name);
 		try {
 			String nameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
-			niCont.sendHello(nameWithPattern);
+			niCon.sendHello(nameWithPattern);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,7 +69,7 @@ public class GUIToControler {
 		try {
 			String localNameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
 			String destNameWithPattern = NI.getNicknameWithIP(destUser);
-			niCont.sendHelloAck(localNameWithPattern,destNameWithPattern,NI.getIPAddressOfUser(destUser));
+			niCon.sendHelloAck(localNameWithPattern,destNameWithPattern,NI.getIPAddressOfUser(destUser));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,7 +79,7 @@ public class GUIToControler {
 	public void performDisconnect(){
 		try {
 			String nameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
-			niCont.sendGoodbye(nameWithPattern);
+			niCon.sendGoodbye(nameWithPattern);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -88,7 +97,7 @@ public class GUIToControler {
 			ipAddressesList.add(NI.getIPAddressOfUser(userList.get(i)));
 		}
 		
-		niCont.sendTextMessage(nicknameList, message, ipAddressesList);
+		niCon.sendTextMessage(nicknameList, message, ipAddressesList);
 		
 	}
 	

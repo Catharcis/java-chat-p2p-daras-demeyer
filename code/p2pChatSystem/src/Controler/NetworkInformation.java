@@ -38,8 +38,6 @@ public class NetworkInformation extends Observable {
 	 ************************************************/
 	/** Constructeur **/
 	private NetworkInformation () { 
-		guiView = guiView.getInstance();
-		addObserver(guiView);
 		usersIPAddress = new HashMap <InetAddress, User> () ;
 		this.localUser = null ;		
 	}
@@ -72,6 +70,11 @@ public class NetworkInformation extends Observable {
 		return usersIPAddress ;		
 	}
 
+	/** Setter du GUIView**/
+	public void setGuiView (GUIView guiview) {
+		guiView = guiView.getInstance();
+		addObserver(guiView);
+	}
 	
 	/************************************************* 
 	 * 					METHODS 

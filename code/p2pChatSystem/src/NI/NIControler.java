@@ -67,6 +67,7 @@ public class NIControler {
 	
 	/************************************************* 
 	 * 					METHODS 
+	 * 
 	 * @throws UnknownHostException 
 	 * 
 	 * REMARQUE : On doit envoyer le nom au format "nom@adresseIP"

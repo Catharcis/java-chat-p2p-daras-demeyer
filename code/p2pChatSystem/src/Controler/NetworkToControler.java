@@ -13,10 +13,9 @@ public class NetworkToControler {
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
 	
-	private static NetworkToControler netToContSingleton;
+	private static NetworkToControler netToContSingleton = null ;
 	
-	// il n'a connaissance que du GUIControler (pas du NI car il ne communique pas avec lui, c'est lui qui communique avec cette classe)
-	private static GUIControler guiCont;
+	private static GUIControler guiCon;
 	
 	private static NetworkInformation NI;
 	
@@ -26,7 +25,6 @@ public class NetworkToControler {
 	 ************************************************/
 	
 	private NetworkToControler(){
-		guiCont = guiCont.getInstance();
 		NI = NI.getInstance();
 	}
 	
@@ -37,7 +35,18 @@ public class NetworkToControler {
 			}
 			return netToContSingleton ;
 	}
+
+	/************************************************* 
+	 * 				GETTERS & SETTERS
+	 ************************************************/
 	
+	public void setGuiCon (GUIControler guiCont) {
+		this.guiCon = guiCont.getInstance();
+	}
+	
+	public NetworkInformation getNetInfo () {
+		return NI ;
+	}
 	
 	/************************************************* 
 	 * 					METHODS

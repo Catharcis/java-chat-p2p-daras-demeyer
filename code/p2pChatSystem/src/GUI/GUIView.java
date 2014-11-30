@@ -37,7 +37,9 @@ public class GUIView implements Observer{
 	 * 				GETTERS & SETTERS
 	 ************************************************/
 	
-	
+	public ChatFenetre getChatFenetre () {
+		return this.chatFenetre ;
+	}
 	
 	/************************************************* 
 	 * 					METHODS 
@@ -46,7 +48,7 @@ public class GUIView implements Observer{
 	
 	
 	
-	public void initChatSystem(){
+	public void initChatGUI(){
 		
 	}
 
