@@ -3,9 +3,12 @@ package GUI;
 import java.util.Observable;
 import java.util.Observer;
 
+import Controler.GUIToControler;
 import Controler.NetworkInformation;
+import Controler.NetworkToControler;
 import Controler.typeOfChange;
 import GUI.GUIControler.Etats;
+import NI.NIControler;
 
 public class GUIView implements Observer{
 
@@ -53,8 +56,27 @@ public class GUIView implements Observer{
 	 * 					METHODS 
 	 ************************************************/
 
+	public static void initChatSystem (GUIView guiView) {
+		/** Initialisation du Controler **/
+		NetworkToControler netToCon = null ;
+		netToCon = netToCon.getInstance() ;
 		
+		GUIToControler guiToCon = null ;
+		guiToCon = guiToCon.getInstance() ;
+		
+		/** Initialisation du NI **/
+		NIControler niCon = null ;
+		niCon = niCon.getInstance() ;
+		
+		/** Creation des liens **/
+		netToCon.getNetInfo().setGuiView(guiView);
+		guiToCon.setGuiCon(niCon);
+		niCon.setNetToCon(netToCon);
+		niCon.getUDPReceiver().setNiCon(niCon);
+	}	
+	
 	protected void Connection (String name) {
+		initChatSystem(this) ;
 		guiControler.Connection(name);
 	}
 
