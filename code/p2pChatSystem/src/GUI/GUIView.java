@@ -3,6 +3,8 @@ package GUI;
 import java.util.Observable;
 import java.util.Observer;
 
+import Controler.NetworkInformation;
+import Controler.typeOfChange;
 import GUI.GUIControler.Etats;
 
 public class GUIView implements Observer{
@@ -62,24 +64,36 @@ public class GUIView implements Observer{
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		/** connexion d'un local user **/
-		System.out.println("Update GUIVIEW");
-		if (guiControler.getEtat() == Etats.disconnected) {
-			/** on passe a l'etat connected **/
-			guiControler.setEtatConnect();
-			System.out.println("Etat : "+guiControler.getEtat()) ;
+		
+		if (arg0 instanceof NetworkInformation){
 			
-			/** le bouton connect change d'aspect **/
-			this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Deconnexion");
+			NetworkInformation NI = NetworkInformation.getInstance();
+			
+			if (NI.getLastChange().equals(typeOfChange.CONNECTION)) {
+				
+				/** le bouton connect change d'aspect **/
+				this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Deconnexion");
+				guiControler.setEtatConnect();
+			}
+			
+			else if (NI.getLastChange().equals(typeOfChange.DISCONNECTION)) {
+				/** le bouton connect change d'aspect **/
+				this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Connexion");
+				guiControler.setEtatDisconnect();
+			}
+			
+			else if (NI.getLastChange().equals(typeOfChange.ADDUSER)){
+				
+			}
+			
+			else if (NI.getLastChange().equals(typeOfChange.REMOVEUSER)) {
+				
+			}
+			
 		}
 
-		else {
-			/** le bouton connect change d'aspect **/
-			this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Connexion");
-			
-			System.out.println("Etat : "+guiControler.getEtat()) ;
-			
-		} 
+		// Permet de placer correctement l'ensemble des composants
+		this.getChatFenetre().pack();
 			
 	}
 

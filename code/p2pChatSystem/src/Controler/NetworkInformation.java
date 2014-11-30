@@ -13,6 +13,7 @@ import GUI.ConnectDisconnectPanel;
 import GUI.GUIView;
 import Signals.AbstractMessage;
 import Signals.Hello;
+import Controler.typeOfChange;
 
 public class NetworkInformation extends Observable {
 
@@ -32,13 +33,17 @@ public class NetworkInformation extends Observable {
 	/** Singleton **/
 	private static GUIView guiView;
 	
+	/** Indique le dernier changement effectué sur les informations du réseau **/
+	private typeOfChange lastChange;
+	
 	
 	/************************************************* 
 	 * 					CONSTRUCTOR
 	 ************************************************/
 	/** Constructeur **/
 	private NetworkInformation () { 
-		usersIPAddress = new HashMap <InetAddress, User> () ;	
+		usersIPAddress = new HashMap <InetAddress, User> () ;
+		lastChange = typeOfChange.DISCONNECTION;
 	}
 	
 	/** Methode creant une instance de classe si necessaire et renvoie l'objet**/
@@ -78,26 +83,36 @@ public class NetworkInformation extends Observable {
 		addObserver(guiView);
 	}
 	
+	public typeOfChange getLastChange(){
+		return lastChange;
+	}
+	
 	/************************************************* 
 	 * 					METHODS 
 	 ************************************************/
+	
+	// Permet d'indiquer aux observateurs qu'il y a eut un changement et de quel type
+	public void notifyLastChange(typeOfChange lastChange){
+		
+		System.out.println("Observer is notified : " + lastChange);
+		this.lastChange = lastChange;
+		setChanged();
+		notifyObservers();
+		
+	}
 	
 	/** Methode qui cree un User et l'ajoute a la HashMap  **/
 	public User addUser (String nickname, InetAddress ip) {
 		User user = new User (nickname) ;
 		this.usersIPAddress.put(ip, user) ;
-		System.out.println("GUIView is notify that a user has been added");
-		setChanged();
-		notifyObservers();
+		notifyLastChange(typeOfChange.ADDUSER);		
 		return user; 
 	}
 	
 	/** Methode qui supprime un User grace a son adresse IP **/
 	public void removeUser (InetAddress ip) {
 		this.usersIPAddress.remove(ip) ;
-		System.out.println("GUIView is notify that a user has been removed");
-		setChanged();
-		notifyObservers();
+		notifyLastChange(typeOfChange.REMOVEUSER);
 	}
 	
 	/** Methode qui recupere l'adresse IP d'un utilisateur **/
