@@ -55,9 +55,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 			socket.receive(packet) ;
 			System.out.println("Paquet recu!") ;
 			
-			ByteArrayInputStream byteIn = new ByteArrayInputStream(buf);
-			ObjectInput in = new ObjectInputStream(byteIn);
-			AbstractMessage message = (AbstractMessage) in.readObject() ;
+			AbstractMessage message = this.bufToMessage(buf) ;
 			if (message.getTypeContenu() == typeContenu.HELLO) {
 				String name = message.getNickname();
 				netToCont.processHello(name, socket.getInetAddress());
@@ -99,10 +97,18 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 			if (socket != null)
 				socket.close() ;
 		}
-		
-
 	}
 
+	/**
+	 * @throws IOException  
+	 * @throws ClassNotFoundException **/
+	private AbstractMessage bufToMessage (byte[] buf) throws IOException, ClassNotFoundException {
+		ByteArrayInputStream byteIn = new ByteArrayInputStream(buf);
+		ObjectInput in = new ObjectInputStream(byteIn);
+		return (AbstractMessage) in.readObject() ;
+	}
+	
+	
 	/** Redefiniton de la methode run du Runnable **/
 	public void run() {
 		listen() ;
