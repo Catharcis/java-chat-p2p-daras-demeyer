@@ -24,6 +24,8 @@ public class ChatFenetre extends AbstractFenetre{
 	
 	private ContactsListPanel contactsListPanel;
 	
+	private GUIView guiView ;
+	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
 	 ************************************************/
@@ -33,8 +35,16 @@ public class ChatFenetre extends AbstractFenetre{
 		// On récupère les deux panels
 		connectDisconnectPanel = connectDisconnectPanel.getInstance();
 		contactsListPanel = contactsListPanel.getInstance();
-	    
+	  //  guiView = guiView.getInstance() ;
+		
 	    this.initializeComponents();
+	}
+
+	public static ChatFenetre getInstance(){
+		if (singleton == null){
+			singleton = new ChatFenetre();
+		}
+		return singleton;
 	}
 
 	
@@ -48,12 +58,6 @@ public class ChatFenetre extends AbstractFenetre{
 	 * 					METHODS 
 	 ************************************************/
 
-	public static ChatFenetre getInstance(){
-		if (singleton == null){
-			singleton = new ChatFenetre();
-		}
-		return singleton;
-	}
 	
 	@Override
 	public void initializeComponents() {
@@ -82,7 +86,9 @@ public class ChatFenetre extends AbstractFenetre{
 	public void actionPerformed(ActionEvent arg0) {
 
 		if (arg0.getSource() == connectDisconnectPanel.getButtonConnectOnOff()){
-			System.out.println("Bouton appuyé !");
+			System.out.println("Bouton Connexion appuyé !");
+			System.out.println(connectDisconnectPanel.getNameOfLocalUser()) ;
+			guiView.newConnection(connectDisconnectPanel.getNameOfLocalUser());
 		}
 	}
 

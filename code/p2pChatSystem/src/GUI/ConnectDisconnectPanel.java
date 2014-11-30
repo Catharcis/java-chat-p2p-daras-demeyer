@@ -48,16 +48,12 @@ public class ConnectDisconnectPanel extends JPanel {
 	 * 				GETTERS & SETTERS
 	 ************************************************/
 	
-	public JLabel getLabelNickname() {
-		return labelNickname;
-	}
-
 	public void setLabelNickname(JLabel labelNickname) {
 		this.labelNickname = labelNickname;
 	}
 
-	public JTextField getNameOfLocalUser() {
-		return nameOfLocalUser;
+	public String getNameOfLocalUser() {
+		return nameOfLocalUser.getText();
 	}
 
 	public void setNameOfLocalUser(JTextField nameOfLocalUser) {

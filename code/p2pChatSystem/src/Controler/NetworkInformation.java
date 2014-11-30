@@ -41,14 +41,7 @@ public class NetworkInformation extends Observable {
 		guiView = guiView.getInstance();
 		addObserver(guiView);
 		usersIPAddress = new HashMap <InetAddress, User> () ;
-		// A CORRIGER ! Enlever l'argument 
-		try {
-			this.localUser = this.addUser("BestBinomeEver", InetAddress.getByName(InetAddress.getLocalHost().getHostAddress()));
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		this.localUser = null ;		
 	}
 	
 	/** Methode creant une instance de classe si necessaire et renvoie l'objet**/
@@ -67,6 +60,11 @@ public class NetworkInformation extends Observable {
 	/** Getter du localUser **/
 	public User getLocalUser () {
 		return localUser ;
+	}
+	
+	/** Setter du localUser **/
+	public void setLocalUser (String name) {
+		this.localUser = new User(name) ;
 	}
 	
 	/** Getter du UsersIPAddress **/
