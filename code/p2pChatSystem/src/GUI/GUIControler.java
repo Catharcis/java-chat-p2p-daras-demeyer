@@ -64,7 +64,7 @@ public class GUIControler {
 		guiToCon.performConnect(name) ;
 	}
 	
-	protected void Deconnection () {
+	protected void Disconnection () {
 		guiToCon.performDisconnect();
 	}
 }

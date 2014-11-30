@@ -61,7 +61,10 @@ public class NetworkInformation extends Observable {
 	
 	/** Setter du localUser **/
 	public void setLocalUser (String name) {
-		this.localUser = new User(name) ;
+		if (name == null) 
+			this.localUser = null ;
+		else 
+			this.localUser = new User(name) ;
 		setChanged();
 		notifyObservers();
 	}
