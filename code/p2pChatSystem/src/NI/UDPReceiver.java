@@ -60,6 +60,17 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 	 ************************************************/
 	
 	public void listen(){
+		
+		// Cas où la socket aurait déjà été utilisée et que l'on relance le programme
+		if (socket.equals(null) && socket.isClosed()){
+			try {
+				socket = new DatagramSocket(this.getPortEcoute());
+			} catch (SocketException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		try {
 		while (this.isListening()) {
 			/** creation du paquet DatagramPacket **/
