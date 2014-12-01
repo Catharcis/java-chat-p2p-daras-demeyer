@@ -63,6 +63,11 @@ public class GUIToControler {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		if (niCon.getUDPReceiver().getSocket().isClosed()){
+			niCon.createThreadUDPReceiver();
+		}
+		
 		NI.notifyLastChange(typeOfChange.CONNECTION);
 	}
 	
