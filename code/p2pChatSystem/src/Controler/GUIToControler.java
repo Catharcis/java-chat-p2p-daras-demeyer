@@ -88,6 +88,7 @@ public class GUIToControler {
 			niCon.getUDPReceiver().setStateListen(false);
 			niCon.sendGoodbye(nameWithPattern);
 			NI.notifyLastChange(typeOfChange.DISCONNECTION);
+			NI.reinitializeVariables();
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
