@@ -171,6 +171,13 @@ public class NetworkInformation extends Observable {
 	     }
 	}
 	
+	public void reinitializeVariables(){
+		
+		this.usersIPAddress.clear();
+		this.localUser = null;
+		
+	}
+	
 	/** Methodes en relation avec la classe Observable **/
 	
 }
