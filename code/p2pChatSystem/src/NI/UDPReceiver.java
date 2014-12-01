@@ -61,14 +61,16 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 	
 	public void listen(){
 		
-		// Cas où la socket aurait déjà été utilisée et que l'on relance le programme
-		if (socket.equals(null) && socket.isClosed()){
+		// Cas ou la socket aurait deja ete utilisee et que l'on relance le programme
+		if (!socket.equals(null) && socket.isClosed()){
 			try {
 				socket = new DatagramSocket(this.getPortEcoute());
+				this.setStateListen(true);
 			} catch (SocketException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+				
 		}
 		
 		try {

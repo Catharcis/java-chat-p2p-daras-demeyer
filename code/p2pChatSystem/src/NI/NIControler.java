@@ -39,8 +39,7 @@ public class NIControler {
 	private NIControler () 
 	{
 		udpReceiver = udpReceiver.getInstanceUDPReceiver() ;
-		Thread tUdpReceiver = new Thread (udpReceiver, "ThreadUdpReceiver") ;
-		tUdpReceiver.start() ;
+		createThreadUDPReceiver();
 		this.udpSender = udpSender.getInstanceUDPSender() ;
 		NI = NI.getInstance();
 	}
@@ -80,6 +79,11 @@ public class NIControler {
 	 * REMARQUE : On doit envoyer le nom au format "nom@adresseIP"
 	 * 
 	 ************************************************/
+	
+	public void createThreadUDPReceiver(){
+		Thread tUdpReceiver = new Thread (udpReceiver, "ThreadUdpReceiver") ;
+		tUdpReceiver.start() ;
+	}
 	
 	public void sendHello (String name) throws UnknownHostException {
 		AbstractMessage message = new Hello (name) ;
