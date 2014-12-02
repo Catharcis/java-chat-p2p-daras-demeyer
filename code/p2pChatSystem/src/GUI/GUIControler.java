@@ -1,5 +1,7 @@
 package GUI;
 
+import java.util.ArrayList;
+
 import Controler.GUIToControler;
 
 public class GUIControler {
@@ -68,4 +70,5 @@ public class GUIControler {
 		/** Cas de la deconnexion **/
 		this.setEtatDisconnect();
 	}
+	
 }

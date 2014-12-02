@@ -39,6 +39,7 @@ public class ContactsListPanel extends JPanel{
 	private ContactsListPanel(){
 		DefaultListModel dlm = new DefaultListModel();
 		this.list = new JList(dlm);
+		this.add(list);
 		this.arrayIdListToIdUser = new ArrayList<String> () ;
 	}
 

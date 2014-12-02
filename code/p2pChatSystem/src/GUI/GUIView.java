@@ -3,7 +3,10 @@ package GUI;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 
 import Controler.GUIToControler;
 import Controler.NetworkInformation;
@@ -107,6 +110,7 @@ public class GUIView implements Observer{
 			}
 			
 			else if (NI.getLastChange().equals(typeOfChange.DISCONNECTION)) {
+				
 				/** le bouton connect change d'aspect **/
 				this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Connexion");
 				this.chatFenetre.getConnectDisconnectPanel().getNicknameFiled().setEditable(true);
@@ -115,9 +119,38 @@ public class GUIView implements Observer{
 			
 			else if (NI.getLastChange().equals(typeOfChange.ADDUSER)){
 				
+				int idUser = (Integer)arg1;
+				String nickname = guiControler.getGUIToControler().getNicknameOfId(idUser);
+				ListModel<String> list = this.chatFenetre.getContactsListPanel().getList().getModel();
+				DefaultListModel<String> newList = new DefaultListModel<String>();
+				for (int i = 0; i < list.getSize(); i++){
+					newList.addElement(list.getElementAt(i));
+				}
+				newList.addElement(nickname);
+				this.chatFenetre.getContactsListPanel().getList().setModel(newList);;
+				this.chatFenetre.pack();
+				this.guiControler.getGUIToControler().addIDListModel(idUser);
+				
 			}
 			
 			else if (NI.getLastChange().equals(typeOfChange.REMOVEUSER)) {
+				
+				int idUser = (Integer)arg1;
+				String nickname = guiControler.getGUIToControler().getNicknameOfId(idUser);
+				ListModel<String> list = this.chatFenetre.getContactsListPanel().getList().getModel();
+				DefaultListModel<String> newList = new DefaultListModel<String>();
+				for (int i = 0; i < list.getSize(); i++){
+					if (list.getElementAt(i) != nickname){
+						newList.addElement(list.getElementAt(i));
+					}
+				}
+				this.chatFenetre.getContactsListPanel().getList().setModel(newList);;
+				this.chatFenetre.pack();
+				this.guiControler.getGUIToControler().removeIDListModel(idUser);
+				
+			}
+			
+			else if (NI.getLastChange().equals(typeOfChange.NEWINCOMINGTEXTMESSAGE)){
 				
 			}
 			
