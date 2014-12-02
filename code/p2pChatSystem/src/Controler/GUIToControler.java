@@ -3,6 +3,8 @@ package Controler;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 import GUI.GUIControler;
 import NI.NIControler;
@@ -111,6 +113,44 @@ public class GUIToControler {
 	}
 	
 	public void performSendFile(){
+		
+	}
+	
+	public String getNicknameOfId(int id){
+		
+		String nickname = null;
+		User user = null;
+		Collection<User> listOfUsers = NI.getUserList().values();
+		Iterator<User> it = listOfUsers.iterator();
+		while (it.hasNext() && nickname == null){
+			user = it.next();
+			if (user.getIdUser() == id){
+				nickname = user.getNickname();
+			}
+		}
+	
+		return nickname;
+	}
+	
+	public void addIDListModel(int id){
+		
+		NI.getArrayPositionsListModel().add(id);
+		
+	}
+	
+public void removeIDListModel(int id){
+		
+		boolean find = false;
+		int compteur = -1;
+		ArrayList<Integer> array = NI.getArrayPositionsListModel();
+		Iterator<Integer> it = array.iterator();
+		while (it.hasNext() && !find){
+			compteur++;
+			if (it.next() == id){
+				find = true;
+			}
+		}
+		NI.getArrayPositionsListModel().remove(compteur);
 		
 	}
 }

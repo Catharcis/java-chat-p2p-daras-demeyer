@@ -36,6 +36,8 @@ public class NetworkInformation extends Observable {
 	/** Indique le dernier changement effectué sur les informations du réseau **/
 	private typeOfChange lastChange;
 	
+	/** Contient les indices de positions des utilisateurs dans la liste visuelle de la view **/
+	private ArrayList<Integer> arrayPositionsListModel;
 	
 	/************************************************* 
 	 * 					CONSTRUCTOR
@@ -44,6 +46,7 @@ public class NetworkInformation extends Observable {
 	private NetworkInformation () { 
 		usersIPAddress = new HashMap <InetAddress, User> () ;
 		lastChange = typeOfChange.DISCONNECTION;
+		arrayPositionsListModel = new ArrayList<Integer>();
 	}
 	
 	/** Methode creant une instance de classe si necessaire et renvoie l'objet**/
@@ -87,6 +90,10 @@ public class NetworkInformation extends Observable {
 		return lastChange;
 	}
 	
+	public ArrayList<Integer> getArrayPositionsListModel(){
+		return arrayPositionsListModel;
+	}
+	
 	/************************************************* 
 	 * 					METHODS 
 	 ************************************************/
@@ -94,10 +101,20 @@ public class NetworkInformation extends Observable {
 	// Permet d'indiquer aux observateurs qu'il y a eut un changement et de quel type
 	public void notifyLastChange(typeOfChange lastChange){
 		
-		System.out.println("Observer is notified : " + lastChange);
 		this.lastChange = lastChange;
+		System.out.println("Observer is notified : " + lastChange);
 		setChanged();
 		notifyObservers();
+		
+	}
+	
+	// Permet d'indiquer aux observateurs qu'il y a eut un changement ,de quel type et un objet
+	public void notifyLastChange(typeOfChange lastChange, Object arg1){
+		
+		this.lastChange = lastChange;
+		System.out.println("Observer is notified : " + lastChange);
+		setChanged();
+		notifyObservers(arg1);
 		
 	}
 	
@@ -105,14 +122,16 @@ public class NetworkInformation extends Observable {
 	public User addUser (String nickname, InetAddress ip) {
 		User user = new User (nickname) ;
 		this.usersIPAddress.put(ip, user) ;
-		notifyLastChange(typeOfChange.ADDUSER);		
+		notifyLastChange(typeOfChange.ADDUSER,user.getIdUser());		
 		return user; 
 	}
 	
 	/** Methode qui supprime un User grace a son adresse IP **/
 	public void removeUser (InetAddress ip) {
+		int idUser = usersIPAddress.get(ip).getIdUser();
+		notifyLastChange(typeOfChange.REMOVEUSER,idUser);
 		this.usersIPAddress.remove(ip) ;
-		notifyLastChange(typeOfChange.REMOVEUSER);
+		
 	}
 	
 	/** Methode qui recupere l'adresse IP d'un utilisateur **/
@@ -175,6 +194,7 @@ public class NetworkInformation extends Observable {
 		
 		this.usersIPAddress.clear();
 		this.localUser = null;
+		this.arrayPositionsListModel.clear();
 		
 	}
 	

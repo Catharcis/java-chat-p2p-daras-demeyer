@@ -76,15 +76,22 @@ public class NetworkToControler {
 	
 	public void processTextMessage(String message, ArrayList<String> listOfUsernames) throws UnknownHostException{
 		
-		ArrayList<User> listOfUsers = new ArrayList<User>();
+		ArrayList<Integer> listOfIDs = new ArrayList<Integer>();
+		User user = null;
 		for (int i = 0; i < listOfUsernames.size(); i++){
 			String ipString = NI.getIPOfPattern(listOfUsernames.get(i));
 			InetAddress ip = InetAddress.getByName(ipString);
-			listOfUsers.add(NI.getUserList().get(ip));
+			if ((user = NI.getUserList().get(ip)) != null){
+				listOfIDs.add(user.getIdUser());
+			}
+			else{
+				System.out.println("ERREUR - ProcessTextMessage - User who has the ip address "+ip+" doesn't exist");
+			}
 		}
-		System.out.println("Liste des utilisateurs concernés : " + listOfUsers.toString());
+		System.out.println("Liste des utilisateurs concernés : " + listOfIDs.toString());
 		System.out.println("Message : " + message);
 		
+		NI.notifyLastChange(typeOfChange.NEWINCOMINGTEXTMESSAGE, listOfIDs);
 	}
 	
 	public void processFileMessage(){
