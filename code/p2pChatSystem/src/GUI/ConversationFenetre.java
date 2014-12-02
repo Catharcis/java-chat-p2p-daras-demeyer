@@ -1,9 +1,15 @@
 package GUI;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.util.Observable;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
 public class ConversationFenetre extends AbstractFenetre{
@@ -12,12 +18,30 @@ public class ConversationFenetre extends AbstractFenetre{
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
 	
+	private JTextArea historic;
 	
+	private JTextArea writerArea;
+	
+	private JButton sendButton;
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
+	public ConversationFenetre(){
+		historic = new JTextArea(20,30);
+		JScrollPane scrollPane = new JScrollPane( historic );
+		writerArea = new JTextArea(10,30);
+		sendButton = new JButton("Send");
+		initializeComponents();
+		JPanel panel = new JPanel();
+		panel.add(historic);
+		panel.add(writerArea);
+		panel.add(sendButton);
+		this.getContentPane().add(panel);
+		this.pack();
+		this.setVisible(true);
+	}
 	
 	/************************************************* 
 	 * 				GETTERS & SETTERS
@@ -38,6 +62,10 @@ public class ConversationFenetre extends AbstractFenetre{
 	
 	public void initializeComponents(){
 		
+		historic.setEditable(false);
+		writerArea.setSize(400, 100);
+		sendButton.addActionListener(this);
+		
 	}
 
 	public void miseAJour(Observable arg0) {
@@ -47,6 +75,10 @@ public class ConversationFenetre extends AbstractFenetre{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
+		if (arg0.getSource() == sendButton){
+			
+		}
+		
 	}
 
 	@Override
