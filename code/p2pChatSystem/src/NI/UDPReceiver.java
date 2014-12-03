@@ -2,6 +2,7 @@ package NI;
 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 
 import Controler.NetworkInformation;
 import Controler.NetworkToControler;
@@ -86,7 +87,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 			
 			String myUsername = NiCon.getNetInfo().getLocalUser().getNickname()+"@"+(InetAddress.getLocalHost()).getHostAddress();
 			
-			if (!(message.getNickname().equals(myUsername))){
+			//if (!(message.getNickname().equals(myUsername))){
 			
 				if (message.getTypeContenu() == typeContenu.HELLO) {
 					String name = message.getNickname();
@@ -110,11 +111,24 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 				
 				if (message.getTypeContenu() == typeContenu.TEXTMESSAGE) {
 					TextMessage textMessage = (TextMessage) message;
-					NiCon.receivedTextMessage (textMessage.getMessage(),textMessage.getListNicknamesDest()) ;
+					// On ajoute l'utilisateur distant et on nous retire de la liste
+					ArrayList<String> list = textMessage.getListNicknamesDest();
+					if (list.remove(myUsername)){
+						System.out.println("UDPReceiver - TextMessage - Remove myUsername success");
+					}
+					else{
+						System.out.println("UDPReceiver - TextMessage - [ERROR] This message was not for us");
+					}
+					
+					// On ajoute l'utilisateur qui nous a envoyé le message
+					list.add(textMessage.getNickname());
+					
+					// On envoie les paramètres au NIControler
+					NiCon.receivedTextMessage (textMessage.getMessage(),list) ;
 				} 
 				
 			}
-		}
+		//}
 		
 		} catch (BindException e1) {
 			System.out.println("UDPReceiver : Port for UDP SocketReceiver already used.") ;
