@@ -3,6 +3,7 @@ package Controler;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 import GUI.GUIControler;
 
@@ -13,10 +14,13 @@ public class NetworkToControler {
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
 	
+	// Reference a NetworkToControler
 	private static NetworkToControler netToContSingleton ;
 	
+	// Reference a GUIControler
 	private static GUIControler guiCon;
 	
+	// Reference a NetworkInformation
 	private static NetworkInformation NI;
 	
 	
@@ -24,11 +28,14 @@ public class NetworkToControler {
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
+	/**
+	 * Constructeur par defaut
+	 */
 	private NetworkToControler(){
 		NI = NI.getInstance();
 	}
 	
-	/** MÈthode qui permet d'obtenir l'instance de la classe **/
+	/** Methode qui permet d'obtenir l'instance de la classe **/
 	public static NetworkToControler getInstance(){
 			if (netToContSingleton == null) {
 				netToContSingleton = new NetworkToControler() ;
@@ -40,10 +47,18 @@ public class NetworkToControler {
 	 * 				GETTERS & SETTERS
 	 ************************************************/
 	
+	/**
+	 * Permet de fixer le GUIControler
+	 * @param guiCont : le guiControler
+	 */
 	public void setGuiCon (GUIControler guiCont) {
 		this.guiCon = guiCont.getInstance();
 	}
 	
+	/**
+	 * Getter recuperant NetworkInformation
+	 * @return NetworkInformation
+	 */
 	public NetworkInformation getNetInfo () {
 		return NI ;
 	}
@@ -52,8 +67,11 @@ public class NetworkToControler {
 	 * 					METHODS
 	 ************************************************/
 	
-	/** MÈthodes de type process() indiquant la rÈception d'un message sur le rÈseau au GUI **/
-	
+	/** 
+	 * Methode permettant de traiter la reception d'un Hello sur le reseau
+	 * @param name : nom de la personne envoyant le message (au format "nom@IP")
+	 * @param ipAddress : l'adresse IP de la personne
+	 */
 	public void processHello(String name, InetAddress ipAddress){
 		
 		String nameWithoutPattern = NI.getNicknameWithoutIP(name);
@@ -61,6 +79,11 @@ public class NetworkToControler {
 		
 	}
 	
+	/**
+	 * Methode permettant de traiter la reception d'un HelloAck sur le reseau
+	 * @param name : nom de la personne envoyant le message (au format "nom@IP")
+	 * @param ipAddress : l'adresse IP de la personne
+	 */
 	public void processHelloAck(String name, InetAddress ipAddress){
 		
 		String nameWithoutPattern = NI.getNicknameWithoutIP(name);
@@ -68,19 +91,37 @@ public class NetworkToControler {
 		
 	}
 	
+	/**
+	 * Methode permettant de traiter la reception d'un Goodbye sur le reseau
+	 * @param name : nom de la personne envoyant le message (au format "nom@IP")
+	 * @param ipAddress : l'adresse IP de la personne
+	 */
 	public void processGoodbye(String name, InetAddress ipAddress){
 		
 		String nameWithoutPattern = NI.getNicknameWithoutIP(name);
 		NI.removeUser(ipAddress);
 	}
 	
+	/**
+	 * Methode permettant de triater la reception d'un TextMessage sur le reseau
+	 * @param message : le message envoye aux utilisateurs
+	 * @param listOfUsernames : la liste des noms d'utilisateurs
+	 * @throws UnknownHostException
+	 */
 	public void processTextMessage(String message, ArrayList<String> listOfUsernames) throws UnknownHostException{
 		
-		ArrayList<Integer> listOfIDs = new ArrayList<Integer>();
+		// On cr√©e une liste d'ID Utilisateurs
+		TreeSet<Integer> listOfIDs = new TreeSet<Integer>();
+		
+		// On d√©clare un utilisateur pointant sur null pour une utilisation par la suite
 		User user = null;
+		String ipString = null;
+		InetAddress ip = null;
+		
+		// On r√©cup√®re l'ensemble des id de chaque utilisateur concern√© par le message
 		for (int i = 0; i < listOfUsernames.size(); i++){
-			String ipString = NI.getIPOfPattern(listOfUsernames.get(i));
-			InetAddress ip = InetAddress.getByName(ipString);
+			ipString = NI.getIPOfPattern(listOfUsernames.get(i));
+			ip = InetAddress.getByName(ipString);
 			if ((user = NI.getUserList().get(ip)) != null){
 				listOfIDs.add(user.getIdUser());
 			}
@@ -88,9 +129,22 @@ public class NetworkToControler {
 				System.out.println("ERREUR - ProcessTextMessage - User who has the ip address "+ip+" doesn't exist");
 			}
 		}
-		System.out.println("Liste des utilisateurs concernÈs : " + listOfIDs.toString());
+		
+		System.out.println("Liste des utilisateurs concernes : " + listOfIDs.toString());
 		System.out.println("Message : " + message);
 		
+		// On d√©finit le format d'affichage du message
+		String finalMessage = user.getNickname()+" : "+message+"\n";
+		
+		// Ajouter le message √† l'historique et notifier la vue
+		if (NI.getHistoricConversations().containsKey(listOfIDs)){
+			NI.getHistoricConversations().get(listOfIDs).concat(finalMessage);
+		}
+		else {
+			NI.getHistoricConversations().put(listOfIDs, finalMessage);
+		}
+		
+		// Notification envoy√©e √† la vue
 		NI.notifyLastChange(typeOfChange.NEWINCOMINGTEXTMESSAGE, listOfIDs);
 	}
 	

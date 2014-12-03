@@ -16,10 +16,13 @@ public class GUIToControler {
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
 	
+	// Reference a GUIToControler
 	private static GUIToControler guiToContSingleton;
 	
+	// Reference a NIControler
 	private static NIControler niCon;
 	
+	// Reference a NetworkInformation
 	private static NetworkInformation NI;
 	
 	
@@ -27,12 +30,14 @@ public class GUIToControler {
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
+	// Constructeur par défaut
 	private GUIToControler(){
+		// On récupère l'instance du NI
 		NI = NI.getInstance();
 	}
 	
 	
-	/** M�thode qui permet de r�cup�rer l'instance de la classe **/
+	/** Methode qui permet de recuperer l'instance de la classe **/
 	public static GUIToControler getInstance(){
 		if (guiToContSingleton == null) {
 			guiToContSingleton = new GUIToControler() ;
@@ -45,7 +50,8 @@ public class GUIToControler {
 	 * 				GETTERS & SETTERS
 	 ************************************************/
 	
-	public void setGuiCon (NIControler niCont) {
+	// Permet d'assigner la valeur du NIControler
+	public void setNiCon (NIControler niCont) {
 		this.niCon = niCont.getInstance();
 	}
 	
@@ -54,11 +60,14 @@ public class GUIToControler {
 	 * 					METHODS
 	 ************************************************/
 	
-	/** Diff�rentes m�thodes de type perform() permettant d'envoyer un signal au NI**/
+	/** Differentes methodes de type perform() permettant d'envoyer un signal au NI**/
 	
 	public void performConnect(String name){
+		
+		// On crée le local user grâce à son nom
 		NI.setLocalUser(name);
 		try {
+			// On envoie un hello sur le réseau avec : "nom@IP"
 			String nameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
 			niCon.sendHello(nameWithPattern);
 		} catch (UnknownHostException e) {
@@ -66,15 +75,18 @@ public class GUIToControler {
 			e.printStackTrace();
 		}
 		
+		// Si la socket est dans l'etat "closed", cela indique qu'elle a deja ete ouverte et qu'il faut la remplace
 		if (niCon.getUDPReceiver().getSocket().isClosed()){
 			niCon.createThreadUDPReceiver();
 		}
 		
+		// On notifie la vue du dernier changement
 		NI.notifyLastChange(typeOfChange.CONNECTION);
 	}
 	
 	public void performSendHelloAck(User destUser){
 		try {
+			// On envoie un HelloAck à celui qui nous a envoyé un Hello
 			String localNameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
 			String destNameWithPattern = NI.getNicknameWithIP(destUser);
 			niCon.sendHelloAck(localNameWithPattern,destNameWithPattern,NI.getIPAddressOfUser(destUser));
@@ -86,9 +98,11 @@ public class GUIToControler {
 	
 	public void performDisconnect(){
 		try {
+			// On envoie un Goodbye à l'ensemble du reseau
 			String nameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
 			niCon.getUDPReceiver().setStateListen(false);
 			niCon.sendGoodbye(nameWithPattern);
+			// On notifie la vue et on réinitialise des variables
 			NI.notifyLastChange(typeOfChange.DISCONNECTION);
 			NI.reinitializeVariables();
 		} catch (UnknownHostException e) {
@@ -108,6 +122,7 @@ public class GUIToControler {
 			ipAddressesList.add(NI.getIPAddressOfUser(userList.get(i)));
 		}
 		
+		// On envoie le message sur le reseau
 		niCon.sendTextMessage(nicknameList, message, ipAddressesList);
 		
 	}
@@ -116,10 +131,16 @@ public class GUIToControler {
 		
 	}
 	
+	/**
+	 * Permet d'obtenir le nom d'un User en connaissant son id
+	 * @param id : id du User
+	 * @return le nom du User
+	 */
 	public String getNicknameOfId(int id){
 		
 		String nickname = null;
 		User user = null;
+		// On parcourt l'ensemble de la hashmap pour retrouver l'utilisateur
 		Collection<User> listOfUsers = NI.getUserList().values();
 		Iterator<User> it = listOfUsers.iterator();
 		while (it.hasNext() && nickname == null){
@@ -132,13 +153,21 @@ public class GUIToControler {
 		return nickname;
 	}
 	
+	/**
+	 * Permet d'ajouter l'id user a la liste des positions du composant graphique JList
+	 * @param id : id de l'utilisateur
+	 */
 	public void addIDListModel(int id){
 		
 		NI.getArrayPositionsListModel().add(id);
 		
 	}
 	
-public void removeIDListModel(int id){
+	/**
+	 * Permet de retirer l'id user en parametre a la liste des positions du composant graphique JList
+	 * @param id : id du User
+	 */
+	public void removeIDListModel(int id){
 		
 		boolean find = false;
 		int compteur = -1;

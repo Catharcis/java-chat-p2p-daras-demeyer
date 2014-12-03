@@ -1,7 +1,12 @@
 package GUI;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.TreeSet;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -26,6 +31,7 @@ public class GUIView implements Observer{
 	private ChatFenetre chatFenetre;
 	
 	private GUIControler guiControler ;
+
 
 	
 	/************************************************* 
@@ -75,7 +81,7 @@ public class GUIView implements Observer{
 		
 		/** Creation des liens **/
 		netToCon.getNetInfo().setGuiView(guiView);
-		guiToCon.setGuiCon(niCon);
+		guiToCon.setNiCon(niCon);
 		niCon.setNetToCon(netToCon);
 		niCon.getUDPReceiver().setNiCon(niCon);
 	}	
@@ -130,7 +136,7 @@ public class GUIView implements Observer{
 				this.chatFenetre.getContactsListPanel().getList().setModel(newList);;
 				this.chatFenetre.pack();
 				this.guiControler.getGUIToControler().addIDListModel(idUser);
-				
+				// On vérifie si une fenêtre est ouverte
 			}
 			
 			else if (NI.getLastChange().equals(typeOfChange.REMOVEUSER)) {
@@ -151,6 +157,13 @@ public class GUIView implements Observer{
 			}
 			
 			else if (NI.getLastChange().equals(typeOfChange.NEWINCOMINGTEXTMESSAGE)){
+				
+				// On récupère la conversation
+				String conversation = NI.getHistoricConversations().get((TreeSet<Integer>)arg1);
+				
+				// On vérifie si une fenêtre est ouverte
+				this.chatFenetre.getContactsListPanel().getList().getComponent(0).setBackground(Color.blue);
+				
 				
 			}
 			

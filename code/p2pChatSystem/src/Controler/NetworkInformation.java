@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Observable; 
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,11 +34,14 @@ public class NetworkInformation extends Observable {
 	/** Singleton **/
 	private static GUIView guiView;
 	
-	/** Indique le dernier changement effectué sur les informations du réseau **/
+	/** Indique le dernier changement effectuï¿½ sur les informations du rï¿½seau **/
 	private typeOfChange lastChange;
 	
 	/** Contient les indices de positions des utilisateurs dans la liste visuelle de la view **/
 	private ArrayList<Integer> arrayPositionsListModel;
+	
+	/** Contient l'historique de toutes les conversations **/
+	private HashMap<TreeSet<Integer>, String> historicConversations;
 	
 	/************************************************* 
 	 * 					CONSTRUCTOR
@@ -47,6 +51,7 @@ public class NetworkInformation extends Observable {
 		usersIPAddress = new HashMap <InetAddress, User> () ;
 		lastChange = typeOfChange.DISCONNECTION;
 		arrayPositionsListModel = new ArrayList<Integer>();
+		historicConversations = new HashMap<TreeSet<Integer>,String>();
 	}
 	
 	/** Methode creant une instance de classe si necessaire et renvoie l'objet**/
@@ -86,19 +91,29 @@ public class NetworkInformation extends Observable {
 		addObserver(guiView);
 	}
 	
+	/** Getter du champ lastChange **/
 	public typeOfChange getLastChange(){
 		return lastChange;
 	}
 	
+	/** Getter du tableau des positions du composant JList **/
 	public ArrayList<Integer> getArrayPositionsListModel(){
 		return arrayPositionsListModel;
+	}
+	
+	/** Getter de la hashmap contenant l'historique des conversations **/
+	public HashMap<TreeSet<Integer>,String> getHistoricConversations(){
+		return historicConversations;
 	}
 	
 	/************************************************* 
 	 * 					METHODS 
 	 ************************************************/
 	
-	// Permet d'indiquer aux observateurs qu'il y a eut un changement et de quel type
+	/**
+	 * Permet d'indiquer aux observateurs qu'il y a eut un changement et de quel type
+	 * @param lastChange : dernier changement a indique a l'observateur
+	 */
 	public void notifyLastChange(typeOfChange lastChange){
 		
 		this.lastChange = lastChange;
@@ -108,7 +123,11 @@ public class NetworkInformation extends Observable {
 		
 	}
 	
-	// Permet d'indiquer aux observateurs qu'il y a eut un changement ,de quel type et un objet
+	/**
+	 * Permet d'indiquer aux observateurs qu'il y a eut un changement ,de quel type et un objet
+	 * @param lastChange : dernier changement a indique a l'observateur
+	 * @param arg1 : un objet en plus permettant de preciser le changement
+	 */
 	public void notifyLastChange(typeOfChange lastChange, Object arg1){
 		
 		this.lastChange = lastChange;
@@ -118,7 +137,12 @@ public class NetworkInformation extends Observable {
 		
 	}
 	
-	/** Methode qui cree un User et l'ajoute a la HashMap  **/
+	/** 
+	 * Methode qui cree un User et l'ajoute a la HashMap  
+	 * @param nickname : nom de l'utilisateur
+	 * @param ip : son adresse IP
+	 * @return l'objet User contenant les informations passees en parametres
+	 */
 	public User addUser (String nickname, InetAddress ip) {
 		User user = new User (nickname) ;
 		this.usersIPAddress.put(ip, user) ;
@@ -126,7 +150,10 @@ public class NetworkInformation extends Observable {
 		return user; 
 	}
 	
-	/** Methode qui supprime un User grace a son adresse IP **/
+	/** 
+	 * Methode qui supprime un User grace a son adresse IP *
+	 * @param ip : adresse ip de l'utilisateur a supprimes
+	 */
 	public void removeUser (InetAddress ip) {
 		int idUser = usersIPAddress.get(ip).getIdUser();
 		notifyLastChange(typeOfChange.REMOVEUSER,idUser);
@@ -134,7 +161,11 @@ public class NetworkInformation extends Observable {
 		
 	}
 	
-	/** Methode qui recupere l'adresse IP d'un utilisateur **/
+	/**
+	 *  Methode qui recupere l'adresse IP d'un utilisateur 
+	 * @param user : User dont on veut l'adresse ip
+	 * @return l'adresse ip du User
+	 */
 	public InetAddress getIPAddressOfUser(User user){
 		InetAddress ip = null;
 		Iterator<Entry<InetAddress, User>> it = usersIPAddress.entrySet().iterator();
@@ -147,8 +178,13 @@ public class NetworkInformation extends Observable {
 		return ip;
 	}
 	
-	/** Methode qui ajoute le pattern @IP au nickname 
-	 * @throws UnknownHostException **/
+	/**
+	 *  Methode qui ajoute le pattern @IP au nickname 
+	 * @param user : le User contenant le nom
+	 * @return "nom@IP"
+	 * @throws UnknownHostException
+	 */
+	 
 	public String getNicknameWithIP (User user) throws UnknownHostException {
 		NetworkInformation NI = null;
 		NI = NI.getInstance();
@@ -165,7 +201,11 @@ public class NetworkInformation extends Observable {
 			return (user.getNickname()+"@"+(NI.getIPAddressOfUser(user)).toString()) ;
 	}
 	
-	/** Methode qui enleve le pattern @IP au nickname **/
+	/** 
+	 * Methode qui recupere l'adresse ip contenu dans le nom
+	 * @param name : nom contenant l'adresse ip
+	 * @return l'adresse ip sans le "nom@"
+	 */
 	public String getIPOfPattern (String name){
 		 Pattern pattern = Pattern.compile("^(.*)@(([0-9]{1,3}[.]){3}[0-9]{1,3})");
 	     Matcher matcher = pattern.matcher(name);
@@ -178,6 +218,11 @@ public class NetworkInformation extends Observable {
 	     }
 	}
 	
+	/**
+	 * Methode qui enleve le pattern @IP au nickname 
+	 * @param name : nom contenant l'adresse ip
+	 * @return le nom sans l'adresse ip
+	 */
 	public String getNicknameWithoutIP(String name){
 		Pattern pattern = Pattern.compile("^(.*)@(([0-9]{1,3}[.]){3}[0-9]{1,3})");
 	     Matcher matcher = pattern.matcher(name);
@@ -190,14 +235,16 @@ public class NetworkInformation extends Observable {
 	     }
 	}
 	
+	/**
+	 * Methodes permettant de reinitialise les variables du systeme en cas de plusieurs connexions/deconnexions
+	 */
 	public void reinitializeVariables(){
 		
 		this.usersIPAddress.clear();
 		this.localUser = null;
 		this.arrayPositionsListModel.clear();
+		this.historicConversations.clear();
 		
 	}
-	
-	/** Methodes en relation avec la classe Observable **/
 	
 }
