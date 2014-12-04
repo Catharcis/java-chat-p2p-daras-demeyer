@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -34,13 +35,6 @@ public class ConversationFenetre extends AbstractFenetre{
 		writerArea = new JTextArea(10,30);
 		sendButton = new JButton("Send");
 		initializeComponents();
-		JPanel panel = new JPanel();
-		panel.add(historic);
-		panel.add(writerArea);
-		panel.add(sendButton);
-		this.getContentPane().add(panel);
-		this.pack();
-		this.setVisible(true);
 	}
 	
 	/************************************************* 
@@ -54,10 +48,10 @@ public class ConversationFenetre extends AbstractFenetre{
 	 ************************************************/
 
 	/*
-	 * Attention, les méthodes suivantes :
+	 * Attention, les mï¿½thodes suivantes :
 	 * public void actionPerformed(ActionEvent arg0)
 	 * public void update(Observable arg0, Object arg1)
-	 * doivent être implémenter dans les classes filles
+	 * doivent ï¿½tre implï¿½menter dans les classes filles
 	 */
 	
 	public void initializeComponents(){
@@ -65,6 +59,17 @@ public class ConversationFenetre extends AbstractFenetre{
 		historic.setEditable(false);
 		writerArea.setSize(400, 100);
 		sendButton.addActionListener(this);
+		JPanel generalPanel = new JPanel(new BorderLayout());
+		JPanel writePartPanel = new JPanel();
+		JPanel historicPanel = new JPanel();
+		historicPanel.add(historic);
+		writePartPanel.add(writerArea);
+		writePartPanel.add(sendButton);
+		generalPanel.add(historicPanel,BorderLayout.NORTH);
+		generalPanel.add(writePartPanel,BorderLayout.SOUTH);
+		this.getContentPane().add(generalPanel);
+		this.pack();
+		this.setVisible(true);
 		
 	}
 
