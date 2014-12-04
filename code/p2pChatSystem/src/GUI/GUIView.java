@@ -9,6 +9,8 @@ import java.util.Observer;
 import java.util.TreeSet;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
@@ -112,6 +114,7 @@ public class GUIView implements Observer{
 				/** le bouton connect change d'aspect **/
 				this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Deconnexion");
 				this.chatFenetre.getConnectDisconnectPanel().getNicknameField().setEditable(false);
+				this.chatFenetre.getConnectDisconnectPanel().setImage(new ImageIcon("online.png"));
 				guiControler.setEtatConnect();
 			}
 			

@@ -3,22 +3,19 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.util.Observable;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import Controler.NetworkInformation;
 import Controler.typeOfChange;
 import GUI.GUIControler.Etats;
 
 public class ChatFenetre extends AbstractFenetre{
-
 
 
 	/************************************************* 
@@ -81,7 +78,7 @@ public class ChatFenetre extends AbstractFenetre{
 	@Override
 	public void initializeComponents() {
 		
-		// On les r�unit au sein d'un seule et m�me panel
+		// On les reunit au sein d'un seule et meme panel
 		JPanel generalPanel = new JPanel(new BorderLayout());
 		JPanel textFieldAndButton = new JPanel(new BorderLayout());
 		JPanel statusAndImagePanel = new JPanel(new GridLayout(1,2));
@@ -90,10 +87,9 @@ public class ChatFenetre extends AbstractFenetre{
 		
 		textFieldAndButton.add(connectDisconnectPanel.getTextFieldNameOfLocalUser(),BorderLayout.WEST);
 		textFieldAndButton.add(connectDisconnectPanel.getButtonConnectOnOff(),BorderLayout.EAST);
+			
 		
-		
-		
-		// On les ajoute � notre panel
+		// On les ajoute a notre panel
 		statusAndImagePanel.add(connectDisconnectPanel.getStatus());
 		statusAndImagePanel.add(connectDisconnectPanel.getImage());
 		
@@ -108,12 +104,13 @@ public class ChatFenetre extends AbstractFenetre{
 		
 		this.getContentPane().add(generalPanel);
 		
-		// On ajoute les informations utiles � la fen�tre
+		// On ajoute les informations utiles a la fenetre
 		this.setTitle("Chat System");
 		this.setLocationRelativeTo(null);
 	    this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	    this.pack();
 		connectDisconnectPanel.getButtonConnectOnOff().addActionListener(this);
+		connectDisconnectPanel.getNicknameField().addKeyListener(this);
 	}
 
 
@@ -183,7 +180,7 @@ public class ChatFenetre extends AbstractFenetre{
 	@Override
 	public void windowClosing(WindowEvent e) {
 		
-		System.out.println("Arr�t du Chat System...");
+		System.out.println("Arret du Chat System...");
 		if (NetworkInformation.getInstance().getLastChange() != typeOfChange.DISCONNECTION){
 			this.getGUIView().getGUIControler().getGUIToControler().performDisconnect();
 		}
@@ -207,6 +204,30 @@ public class ChatFenetre extends AbstractFenetre{
 
 	@Override
 	public void windowOpened(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		if (arg0.getSource() == connectDisconnectPanel.getNicknameField()) {
+			if (arg0.getKeyCode() == KeyEvent.VK_ENTER ) {
+				if (guiView.getGUIControler().getEtat() == Etats.disconnected) {
+					getGUIView().Connection(connectDisconnectPanel.getNameOfLocalUser());
+					this.pack();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
 
