@@ -250,7 +250,8 @@ public class NetworkInformation extends Observable {
  */
 	public User getUserWithId (int id) {
 		User user = null ;
-		for (int i = 0; i<this.userList.size(); i++) {
+		// on commence a id-1 pour optimiser le parcours : c'est la premier position possible
+		for (int i = id-1; i<this.userList.size(); i++) {
 			if (userList.get(i).getIdUser() == id) {
 				user = userList.get(i) ;
 			break ;
@@ -263,15 +264,12 @@ public class NetworkInformation extends Observable {
 	/**
 	 * Methodes permettant de reinitialise les variables du systeme en cas de plusieurs connexions/deconnexions
 	 */
-	public void reinitializeVariables(){
-		
+	public void reinitializeVariables() {
 		this.usersIPAddress.clear();
 		this.localUser = null;
 		this.arrayPositionsListModel.clear();
 		this.historicConversations.clear();
-		
 	}
 	
- 
 	
 }
