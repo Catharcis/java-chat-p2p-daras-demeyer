@@ -1,16 +1,21 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.util.Observable;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.border.Border;
 
 @SuppressWarnings("serial")
 public class ConversationFenetre extends AbstractFenetre{
@@ -25,6 +30,8 @@ public class ConversationFenetre extends AbstractFenetre{
 	
 	private JButton sendButton;
 	
+	private JButton invite;
+	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
 	 ************************************************/
@@ -34,6 +41,7 @@ public class ConversationFenetre extends AbstractFenetre{
 		JScrollPane scrollPane = new JScrollPane( historic );
 		writerArea = new JTextArea(10,30);
 		sendButton = new JButton("Send");
+		invite = new JButton("Invite");
 		initializeComponents();
 	}
 	
@@ -59,13 +67,20 @@ public class ConversationFenetre extends AbstractFenetre{
 		historic.setEditable(false);
 		writerArea.setSize(400, 100);
 		sendButton.addActionListener(this);
+		historic.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+		writerArea.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 		JPanel generalPanel = new JPanel(new BorderLayout());
 		JPanel writePartPanel = new JPanel();
+		JPanel invitePanel = new JPanel();
+		JPanel historicAndInvitePanel = new JPanel(new BorderLayout());
 		JPanel historicPanel = new JPanel();
-		historicPanel.add(historic);
+		invitePanel.add(invite);
+		historicPanel.add(historic,BorderLayout.EAST);
+		historicAndInvitePanel.add(invitePanel,BorderLayout.NORTH);
+		historicAndInvitePanel.add(historicPanel,BorderLayout.SOUTH);
 		writePartPanel.add(writerArea);
 		writePartPanel.add(sendButton);
-		generalPanel.add(historicPanel,BorderLayout.NORTH);
+		generalPanel.add(historicAndInvitePanel,BorderLayout.NORTH);
 		generalPanel.add(writePartPanel,BorderLayout.SOUTH);
 		this.getContentPane().add(generalPanel);
 		this.pack();

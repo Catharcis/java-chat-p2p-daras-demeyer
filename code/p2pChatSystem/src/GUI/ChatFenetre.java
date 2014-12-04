@@ -1,11 +1,13 @@
 package GUI;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.util.Observable;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -36,7 +38,7 @@ public class ChatFenetre extends AbstractFenetre{
 	 ************************************************/
 	
 	private ChatFenetre(){
-		// On récupère les deux panels
+		// On rï¿½cupï¿½re les deux panels
 		connectDisconnectPanel = connectDisconnectPanel.getInstance();
 		contactsListPanel = contactsListPanel.getInstance();
 		this.addWindowListener(this);
@@ -78,14 +80,35 @@ public class ChatFenetre extends AbstractFenetre{
 	
 	@Override
 	public void initializeComponents() {
-		// On les réunit au sein d'un seule et même panel
-		GridLayout grid = new GridLayout(2,1);
-		this.setLayout(grid);
-
-		this.getContentPane().add(connectDisconnectPanel);
-		this.getContentPane().add(contactsListPanel);
 		
-		// On ajoute les informations utiles à la fenêtre
+		// On les rï¿½unit au sein d'un seule et mï¿½me panel
+		JPanel generalPanel = new JPanel(new BorderLayout());
+		JPanel textFieldAndButton = new JPanel(new BorderLayout());
+		JPanel statusAndImagePanel = new JPanel(new GridLayout(1,2));
+		JPanel nicknameAndStatusAndImagePanel = new JPanel(new BorderLayout());
+		JPanel generalConnectPanel = new JPanel(new BorderLayout());
+		
+		textFieldAndButton.add(connectDisconnectPanel.getTextFieldNameOfLocalUser(),BorderLayout.WEST);
+		textFieldAndButton.add(connectDisconnectPanel.getButtonConnectOnOff(),BorderLayout.EAST);
+		
+		
+		
+		// On les ajoute ï¿½ notre panel
+		statusAndImagePanel.add(connectDisconnectPanel.getStatus());
+		statusAndImagePanel.add(connectDisconnectPanel.getImage());
+		
+		nicknameAndStatusAndImagePanel.add(statusAndImagePanel,BorderLayout.NORTH);
+		nicknameAndStatusAndImagePanel.add(connectDisconnectPanel.getLabelNickname(),BorderLayout.SOUTH);
+		
+		generalConnectPanel.add(nicknameAndStatusAndImagePanel,BorderLayout.NORTH);
+		generalConnectPanel.add(textFieldAndButton,BorderLayout.SOUTH);
+		
+		generalPanel.add(generalConnectPanel,BorderLayout.NORTH);
+		generalPanel.add(contactsListPanel,BorderLayout.SOUTH);
+		
+		this.getContentPane().add(generalPanel);
+		
+		// On ajoute les informations utiles ï¿½ la fenï¿½tre
 		this.setTitle("Chat System");
 		this.setLocationRelativeTo(null);
 	    this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -100,10 +123,12 @@ public class ChatFenetre extends AbstractFenetre{
 		if (arg0.getSource() == connectDisconnectPanel.getButtonConnectOnOff()){
 			if (guiView.getGUIControler().getEtat() == Etats.disconnected) {
 				getGUIView().Connection(connectDisconnectPanel.getNameOfLocalUser());
+				this.pack();
 			}
 			else
 			{
 				getGUIView().Disconnection() ;
+				this.pack();
 			}
 		}
 	}
@@ -158,7 +183,7 @@ public class ChatFenetre extends AbstractFenetre{
 	@Override
 	public void windowClosing(WindowEvent e) {
 		
-		System.out.println("Arrêt du Chat System...");
+		System.out.println("Arrï¿½t du Chat System...");
 		if (NetworkInformation.getInstance().getLastChange() != typeOfChange.DISCONNECTION){
 			this.getGUIView().getGUIControler().getGUIToControler().performDisconnect();
 		}
