@@ -127,13 +127,7 @@ public class GUIView implements Observer{
 				
 				int idUser = (Integer)arg1;
 				String nickname = guiControler.getGUIToControler().getNicknameOfId(idUser);
-				ListModel<String> list = this.chatFenetre.getContactsListPanel().getList().getModel();
-				DefaultListModel<String> newList = new DefaultListModel<String>();
-				for (int i = 0; i < list.getSize(); i++){
-					newList.addElement(list.getElementAt(i));
-				}
-				newList.addElement(nickname);
-				this.chatFenetre.getContactsListPanel().getList().setModel(newList);;
+				this.chatFenetre.getContactsListPanel().getDefaultListModel().addElement(nickname);
 				this.chatFenetre.pack();
 				this.guiControler.getGUIToControler().addIDListModel(idUser);
 				// On vérifie si une fenêtre est ouverte
@@ -143,14 +137,12 @@ public class GUIView implements Observer{
 				
 				int idUser = (Integer)arg1;
 				String nickname = guiControler.getGUIToControler().getNicknameOfId(idUser);
-				ListModel<String> list = this.chatFenetre.getContactsListPanel().getList().getModel();
-				DefaultListModel<String> newList = new DefaultListModel<String>();
-				for (int i = 0; i < list.getSize(); i++){
-					if (list.getElementAt(i) != nickname){
-						newList.addElement(list.getElementAt(i));
-					}
+				if (this.chatFenetre.getContactsListPanel().getDefaultListModel().removeElement(nickname)){
+					System.out.println("JList : remove "+nickname+" success");
 				}
-				this.chatFenetre.getContactsListPanel().getList().setModel(newList);;
+				else{
+					System.out.println("JList - ERROR : remove "+nickname+" failed !");
+				}
 				this.chatFenetre.pack();
 				this.guiControler.getGUIToControler().removeIDListModel(idUser);
 				
