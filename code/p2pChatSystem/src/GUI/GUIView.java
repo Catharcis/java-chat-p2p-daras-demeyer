@@ -111,7 +111,7 @@ public class GUIView implements Observer{
 				
 				/** le bouton connect change d'aspect **/
 				this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Deconnexion");
-				this.chatFenetre.getConnectDisconnectPanel().getNicknameFiled().setEditable(false);
+				this.chatFenetre.getConnectDisconnectPanel().getNicknameField().setEditable(false);
 				guiControler.setEtatConnect();
 			}
 			
@@ -119,7 +119,7 @@ public class GUIView implements Observer{
 				
 				/** le bouton connect change d'aspect **/
 				this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Connexion");
-				this.chatFenetre.getConnectDisconnectPanel().getNicknameFiled().setEditable(true);
+				this.chatFenetre.getConnectDisconnectPanel().getNicknameField().setEditable(true);
 				guiControler.setEtatDisconnect();
 			}
 			

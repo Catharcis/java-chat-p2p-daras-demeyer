@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Observable;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,19 +29,21 @@ public class ConnectDisconnectPanel extends JPanel {
 	
 	private JButton buttonConnectOnOff;
 	
+	private JLabel status;
+	
+	private JLabel image;
+	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
 	private ConnectDisconnectPanel(){
-		// On initialise les paramètres
+		// On initialise les paramï¿½tres
 		labelNickname = new JLabel("Please choose your nickname : ");
+		status = new JLabel("Status : ");
 		nameOfLocalUser = new JTextField(10) ;
 		buttonConnectOnOff = new JButton("Connexion");
-		// On les ajoute à notre panel
-		this.add(labelNickname);
-		this.add(nameOfLocalUser);
-		this.add(buttonConnectOnOff);
+		image = new JLabel(new ImageIcon("offline.png"));
 		this.setVisible(true);
 		}
 	
@@ -51,12 +54,20 @@ public class ConnectDisconnectPanel extends JPanel {
 	public void setLabelNickname(JLabel labelNickname) {
 		this.labelNickname = labelNickname;
 	}
+	
+	public JLabel getLabelNickname(){
+		return labelNickname;
+	}
 
+	public JTextField getTextFieldNameOfLocalUser(){
+		return nameOfLocalUser;
+	}
+	
 	public String getNameOfLocalUser() {
 		return nameOfLocalUser.getText();
 	}
 	
-	public JTextField getNicknameFiled () {
+	public JTextField getNicknameField () {
 		return nameOfLocalUser ;
 	}
 
@@ -66,6 +77,14 @@ public class ConnectDisconnectPanel extends JPanel {
 
 	public JButton getButtonConnectOnOff() {
 		return buttonConnectOnOff;
+	}
+	
+	public JLabel getStatus(){
+		return status;
+	}
+	
+	public JLabel getImage(){
+		return image;
 	}
 	
 	
@@ -88,7 +107,7 @@ public class ConnectDisconnectPanel extends JPanel {
 	 */
 
 	/*
-	 * Permet de mettre à jour la fenêtre dans le cas où un objet observé a été modifié
+	 * Permet de mettre ï¿½ jour la fenï¿½tre dans le cas oï¿½ un objet observï¿½ a ï¿½tï¿½ modifiï¿½
 	 */
 	public void miseAJour(Observable arg0) {
 
