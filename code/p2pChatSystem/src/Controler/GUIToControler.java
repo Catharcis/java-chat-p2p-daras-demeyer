@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.TreeSet;
 
 import GUI.GUIControler;
 import NI.NIControler;
@@ -111,15 +112,30 @@ public class GUIToControler {
 		}		
 	}
 	
-	public void performSendTextMessage(String message, ArrayList<User> userList) throws UnknownHostException{
+	public void performSendTextMessage(String message, TreeSet <Integer> listOfId) throws UnknownHostException{
+		/** Gestion des conversations **/
+		/** Conversation existante **/
+		if (NI.getHistoricConversations().containsKey(listOfId)) {
+			/** ajout du message a envoyer **/
+			String historic = NI.getHistoricConversations().get(listOfId) + NI.getLocalUser().getNickname()+" : "+message+"\n";
+			NI.getHistoricConversations().put(listOfId, historic);
+		}
+		/** Conversation non existante et donc a creer **/
+		else {
+			NI.getHistoricConversations().put(listOfId, NI.getLocalUser().getNickname()+" : "+message+"\n") ;
+		}
 		
 		/** Construction d'une List de String sous format NICKNAME@XX.XX.XX.XX**/
 		ArrayList<String> nicknameList = new ArrayList <String> () ;
 		ArrayList<InetAddress> ipAddressesList = new ArrayList<InetAddress>();
-		for (int i = 0 ; i< userList.size() ; i++) {
+		Iterator l = listOfId.iterator() ;
+		for (Integer i : listOfId) {
+			int id = (int) i ;
+			User user = NI.getUserWithId(id) ;
+			
 			/** On recupere les informations reseaux **/
-			nicknameList.add(NI.getNicknameWithIP(userList.get(i))) ;
-			ipAddressesList.add(NI.getIPAddressOfUser(userList.get(i)));
+			nicknameList.add(NI.getNicknameWithIP(user)) ;
+			ipAddressesList.add(NI.getIPAddressOfUser(user));
 		}
 		
 		// On envoie le message sur le reseau

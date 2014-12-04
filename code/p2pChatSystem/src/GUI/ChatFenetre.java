@@ -35,7 +35,7 @@ public class ChatFenetre extends AbstractFenetre{
 	 ************************************************/
 	
 	private ChatFenetre(){
-		// On r�cup�re les deux panels
+		// On recupere les deux panels
 		connectDisconnectPanel = connectDisconnectPanel.getInstance();
 		contactsListPanel = contactsListPanel.getInstance();
 		this.addWindowListener(this);
