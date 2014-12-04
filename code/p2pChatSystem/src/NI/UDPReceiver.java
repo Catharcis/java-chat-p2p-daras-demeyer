@@ -97,13 +97,13 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 				
 				if (message.getTypeContenu() == typeContenu.HELLOACK) {
 					String name = message.getNickname();
-					NiCon.receivedHelloAck(name, socket.getInetAddress()) ;
+					NiCon.receivedHelloAck(name, packet.getAddress()) ;
 					System.out.println("UDPReceiver : Hello (Ack), I am " +name) ;	
 				}
 				
 				if (message.getTypeContenu() == typeContenu.GOODBYE) {
 					String name = message.getNickname();
-					NiCon.receivedGoodbye(name, socket.getInetAddress()) ;
+					NiCon.receivedGoodbye(name, packet.getAddress()) ;
 					System.out.println("UDPReceiver : Goodbye, my name was " +name) ;
 				}
 				
