@@ -193,6 +193,9 @@ public class NetworkInformation extends Observable {
 	 */
 	 
 	public String getNicknameWithIP (User user) throws UnknownHostException {
+		if (user == null) {
+			System.out.println("USER NULL ") ;
+		}
 		NetworkInformation NI = null;
 		NI = NI.getInstance();
 		if (user.getIdUser() == NI.getLocalUser().getIdUser()) {
@@ -204,8 +207,10 @@ public class NetworkInformation extends Observable {
 			}
 			
 		}
-		else 
+		else {
+			System.out.println("USER IP @ : "+ NI.getIPAddressOfUser(user)) ;
 			return (user.getNickname()+"@"+(NI.getIPAddressOfUser(user)).toString()) ;
+		}
 	}
 	
 	/** 
