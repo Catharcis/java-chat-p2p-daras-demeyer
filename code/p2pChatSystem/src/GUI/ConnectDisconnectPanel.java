@@ -1,9 +1,5 @@
 package GUI;
 
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.Observable;
 
 import javax.swing.ImageIcon;
@@ -11,8 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import Controler.NetworkInformation;
 
 @SuppressWarnings("serial")
 public class ConnectDisconnectPanel extends JPanel {
@@ -38,7 +32,7 @@ public class ConnectDisconnectPanel extends JPanel {
 	 ************************************************/
 	
 	private ConnectDisconnectPanel(){
-		// On initialise les param�tres
+		// On initialise les parametres
 		labelNickname = new JLabel("Please choose your nickname : ");
 		status = new JLabel("Status : ");
 		nameOfLocalUser = new JTextField(10) ;
@@ -85,6 +79,10 @@ public class ConnectDisconnectPanel extends JPanel {
 	
 	public JLabel getImage(){
 		return image;
+	}
+	
+	public void setImage(ImageIcon newIcon) {
+		this.image = new JLabel(newIcon) ;
 	}
 	
 	
