@@ -87,7 +87,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 			
 			String myUsername = NiCon.getNetInfo().getLocalUser().getNickname()+"@"+(InetAddress.getLocalHost()).getHostAddress();
 			
-			//if (!(message.getNickname().equals(myUsername))){
+			if (!(message.getNickname().equals(myUsername))){
 			
 				if (message.getTypeContenu() == typeContenu.HELLO) {
 					String name = message.getNickname();
@@ -120,15 +120,15 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 						System.out.println("UDPReceiver - TextMessage - [ERROR] This message was not for us");
 					}
 					
-					// On ajoute l'utilisateur qui nous a envoyé le message
+					// On ajoute l'utilisateur qui nous a envoye le message
 					list.add(textMessage.getNickname());
 					
-					// On envoie les paramètres au NIControler
+					// On envoie les parametres au NIControler
 					NiCon.receivedTextMessage (textMessage.getMessage(),list) ;
 				} 
 				
 			}
-		//}
+		}
 		
 		} catch (BindException e1) {
 			System.out.println("UDPReceiver : Port for UDP SocketReceiver already used.") ;
