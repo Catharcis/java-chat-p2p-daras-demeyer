@@ -28,13 +28,16 @@ public class NetworkInformation extends Observable {
 	/** Local User **/
 	private User localUser ;
 	
+	/** Liste de User **/
+	ArrayList<User> userList ;
+	
 	/** Correspondance entre User et adresse IP **/
 	private HashMap<InetAddress, User> usersIPAddress ;
 	
 	/** Singleton **/
 	private static GUIView guiView;
 	
-	/** Indique le dernier changement effectu� sur les informations du r�seau **/
+	/** Indique le dernier changement effectue sur les informations du reseau **/
 	private typeOfChange lastChange;
 	
 	/** Contient les indices de positions des utilisateurs dans la liste visuelle de la view **/
@@ -43,12 +46,14 @@ public class NetworkInformation extends Observable {
 	/** Contient l'historique de toutes les conversations **/
 	private HashMap<TreeSet<Integer>, String> historicConversations;
 	
+	
 	/************************************************* 
 	 * 					CONSTRUCTOR
 	 ************************************************/
 	/** Constructeur **/
 	private NetworkInformation () { 
 		usersIPAddress = new HashMap <InetAddress, User> () ;
+		userList = new ArrayList<User> () ;
 		lastChange = typeOfChange.DISCONNECTION;
 		arrayPositionsListModel = new ArrayList<Integer>();
 		historicConversations = new HashMap<TreeSet<Integer>,String>();
@@ -146,6 +151,7 @@ public class NetworkInformation extends Observable {
 	public User addUser (String nickname, InetAddress ip) {
 		User user = new User (nickname) ;
 		this.usersIPAddress.put(ip, user) ;
+		this.userList.add(user) ;
 		notifyLastChange(typeOfChange.ADDUSER,user.getIdUser());		
 		return user; 
 	}
@@ -158,6 +164,7 @@ public class NetworkInformation extends Observable {
 		int idUser = usersIPAddress.get(ip).getIdUser();
 		notifyLastChange(typeOfChange.REMOVEUSER,idUser);
 		this.usersIPAddress.remove(ip) ;
+		// on ne supprime jamais les utilisateurs de la liste - inutile et couteux
 		
 	}
 	
@@ -235,6 +242,24 @@ public class NetworkInformation extends Observable {
 	     }
 	}
 	
+
+/**
+ * 
+ * @param id
+ * @return
+ */
+	public User getUserWithId (int id) {
+		User user = null ;
+		for (int i = 0; i<this.userList.size(); i++) {
+			if (userList.get(i).getIdUser() == id) {
+				user = userList.get(i) ;
+			break ;
+			}
+		}
+		return user ;
+	}
+	
+	
 	/**
 	 * Methodes permettant de reinitialise les variables du systeme en cas de plusieurs connexions/deconnexions
 	 */
@@ -246,5 +271,7 @@ public class NetworkInformation extends Observable {
 		this.historicConversations.clear();
 		
 	}
+	
+ 
 	
 }

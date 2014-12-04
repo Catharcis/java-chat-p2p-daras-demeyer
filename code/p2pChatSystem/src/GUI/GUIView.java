@@ -3,6 +3,8 @@ package GUI;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
@@ -34,7 +36,7 @@ public class GUIView implements Observer{
 	
 	private GUIControler guiControler ;
 
-
+	private ConversationFenetre conversationFenetre ;
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
@@ -44,6 +46,14 @@ public class GUIView implements Observer{
 		chatFenetre = chatFenetre.getInstance();
 		chatFenetre.setVisible(true);
 		guiControler = guiControler.getInstance() ;
+		ArrayList<String> nicknames = new ArrayList() ;
+		nicknames.add("name1") ;
+		//nicknames.add("name2") ;
+		TreeSet<Integer> listIds = new TreeSet() ;
+		listIds.add(0) ;
+		//listIds.add(1) ;
+		System.out.println("Fin construction view") ;
+		conversationFenetre = conversationFenetre.getInstance(nicknames, listIds) ;
 	}
 	
 	public static GUIView getInstance(){
@@ -63,6 +73,10 @@ public class GUIView implements Observer{
 	
 	public GUIControler getGUIControler(){
 		return this.guiControler;
+	}
+	
+	public ConversationFenetre getConversationFenetre () {
+		return this.conversationFenetre ;
 	}
 	
 	/************************************************* 
@@ -100,6 +114,10 @@ public class GUIView implements Observer{
 
 	protected void Disconnection () {
 		guiControler.Disconnection();
+	}
+	
+	protected void TextMessage (String message, TreeSet <Integer> listOfId) throws UnknownHostException {
+		guiControler.TextMessage(message, listOfId) ;
 	}
 	
 	@Override

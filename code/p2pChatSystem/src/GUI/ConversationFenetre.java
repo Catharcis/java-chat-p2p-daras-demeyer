@@ -7,7 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Observable;
+import java.util.TreeSet;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -18,12 +21,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
 
+import org.omg.CORBA.portable.UnknownException;
+
+import GUI.GUIControler.Etats;
+
 @SuppressWarnings("serial")
 public class ConversationFenetre extends AbstractFenetre{
 
 	/************************************************* 
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
+	private static ConversationFenetre singleton ;
+	
+	private static GUIView guiView ;
 	
 	private JTextArea historic;
 	
@@ -33,43 +43,70 @@ public class ConversationFenetre extends AbstractFenetre{
 	
 	private JButton invite;
 	
+	private TreeSet <Integer> listOfId ;
+	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
-	public ConversationFenetre(){
+	private ConversationFenetre(ArrayList<String> nicknames, TreeSet <Integer> listOfId) {
+		System.out.println("Debut de constructeur Conversation") ;
+		String title = new String();
+		for (int i = 0 ; i<nicknames.size(); i++ ) {
+			// cas du dernier nom de la liste
+			if (i == nicknames.size()-1)
+				title = title+nicknames.get(i) ;
+			else
+				title = title + nicknames.get(i)+", " ;
+		}
+		
+		this.setTitle(title);
 		historic = new JTextArea(20,30);
-		JScrollPane scrollPane = new JScrollPane( historic );
+		JScrollPane scrollPane = new JScrollPane(historic);
 		writerArea = new JTextArea(10,30);
 		sendButton = new JButton("Send");
 		invite = new JButton("Invite");
 		initializeComponents();
+		this.listOfId = listOfId ;
+	}
+	
+	public static ConversationFenetre getInstance(ArrayList<String> nicknames, TreeSet<Integer> listIds) {
+		System.out.println("Debut getInstance") ;
+		if (singleton == null){
+			singleton = new ConversationFenetre(nicknames, listIds);
+		}
+		return singleton;
 	}
 	
 	/************************************************* 
 	 * 				GETTERS & SETTERS
 	 ************************************************/
 	
+	public static GUIView getGUIView() {
+		return guiView;
+	}
+
 	
+	public void setGuiView (GUIView view) {
+		guiView = view.getInstance() ;
+	}
 	
 	/************************************************* 
 	 * 					METHODS 
 	 ************************************************/
 
 	/*
-	 * Attention, les m�thodes suivantes :
+	 * Attention, les methodes suivantes :
 	 * public void actionPerformed(ActionEvent arg0)
 	 * public void update(Observable arg0, Object arg1)
-	 * doivent �tre impl�menter dans les classes filles
+	 * doivent etre implementer dans les classes filles
 	 */
 	
 	public void initializeComponents(){
-		
 		historic.setEditable(false);
-		writerArea.setSize(400, 100);
-		sendButton.addActionListener(this);
 		historic.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 		writerArea.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+		sendButton.addActionListener(this);
 		JPanel generalPanel = new JPanel(new BorderLayout());
 		JPanel writePartPanel = new JPanel();
 		JPanel invitePanel = new JPanel();
@@ -97,7 +134,15 @@ public class ConversationFenetre extends AbstractFenetre{
 	public void actionPerformed(ActionEvent arg0) {
 
 		if (arg0.getSource() == sendButton){
-			
+			if (guiView.getGUIControler().getEtat() == Etats.connected) {
+				if (this.writerArea.getText() != null) {
+					try {
+						getGUIView().TextMessage(this.writerArea.getText(), listOfId);
+					} catch (UnknownHostException e) {
+						System.out.println("ERREUR Conversation : UnknownHostException") ;
+					}
+				}
+			}
 		}
 		
 	}
@@ -184,5 +229,7 @@ public class ConversationFenetre extends AbstractFenetre{
 		// TODO Auto-generated method stub
 		
 	}
+
+
 	
 }

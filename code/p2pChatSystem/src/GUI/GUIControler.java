@@ -1,6 +1,8 @@
 package GUI;
 
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 import Controler.GUIToControler;
 
@@ -69,6 +71,10 @@ public class GUIControler {
 		
 		/** Cas de la deconnexion **/
 		this.setEtatDisconnect();
+	}
+	
+	protected void TextMessage (String message, TreeSet <Integer> listOfId) throws UnknownHostException {
+		guiToCon.performSendTextMessage(message, listOfId);
 	}
 	
 }
