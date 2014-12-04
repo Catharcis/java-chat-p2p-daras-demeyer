@@ -88,12 +88,13 @@ public class GUIToControler {
 		NI.notifyLastChange(typeOfChange.CONNECTION);
 	}
 	
-	public void performSendHelloAck(User destUser){
+	public void performSendHelloAck(int idDestUser){
 		try {
-			// On envoie un HelloAck à celui qui nous a envoyé un Hello
+			// On envoie un HelloAck a� celui qui nous a envoye un Hello
 			String localNameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
-			String destNameWithPattern = NI.getNicknameWithIP(destUser);
-			niCon.sendHelloAck(localNameWithPattern,destNameWithPattern,NI.getIPAddressOfUser(destUser));
+			
+			String destNameWithPattern = NI.getNicknameWithIP(this.NI.getUserWithId(idDestUser));
+			niCon.sendHelloAck(localNameWithPattern,destNameWithPattern,NI.getIPAddressOfUser(this.NI.getUserWithId(idDestUser)));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

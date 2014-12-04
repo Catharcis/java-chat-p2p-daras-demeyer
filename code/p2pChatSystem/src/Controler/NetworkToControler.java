@@ -73,10 +73,9 @@ public class NetworkToControler {
 	 * @param ipAddress : l'adresse IP de la personne
 	 */
 	public void processHello(String name, InetAddress ipAddress){
-		
+		// ajout du nouvel user
 		String nameWithoutPattern = NI.getNicknameWithoutIP(name);
 		User user = NI.addUser(nameWithoutPattern, ipAddress) ;
-		
 	}
 	
 	/**

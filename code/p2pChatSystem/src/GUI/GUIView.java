@@ -152,6 +152,9 @@ public class GUIView implements Observer{
 				this.chatFenetre.pack();
 				this.guiControler.getGUIToControler().addIDListModel(idUser);
 				// On vérifie si une fenêtre est ouverte
+				
+				// on envoit un HelloAck au nouvel user
+				this.guiControler.getGUIToControler().performSendHelloAck(idUser);
 			}
 			
 			else if (NI.getLastChange().equals(typeOfChange.REMOVEUSER)) {
