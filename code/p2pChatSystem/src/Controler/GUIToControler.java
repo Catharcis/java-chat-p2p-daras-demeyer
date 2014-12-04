@@ -31,9 +31,9 @@ public class GUIToControler {
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
-	// Constructeur par défaut
+	// Constructeur par defaut
 	private GUIToControler(){
-		// On récupère l'instance du NI
+		// On recupere l'instance du NI
 		NI = NI.getInstance();
 	}
 	
@@ -56,6 +56,9 @@ public class GUIToControler {
 		this.niCon = niCont.getInstance();
 	}
 	
+	public NetworkInformation getNetInfo () {
+		return this.NI ;
+	}
 	
 	/************************************************* 
 	 * 					METHODS
@@ -147,36 +150,13 @@ public class GUIToControler {
 		
 	}
 	
-	/**
-	 * Permet d'obtenir le nom d'un User en connaissant son id
-	 * @param id : id du User
-	 * @return le nom du User
-	 */
-	public String getNicknameOfId(int id){
-		
-		String nickname = null;
-		User user = null;
-		// On parcourt l'ensemble de la hashmap pour retrouver l'utilisateur
-		Collection<User> listOfUsers = NI.getUserList().values();
-		Iterator<User> it = listOfUsers.iterator();
-		while (it.hasNext() && nickname == null){
-			user = it.next();
-			if (user.getIdUser() == id){
-				nickname = user.getNickname();
-			}
-		}
-	
-		return nickname;
-	}
 	
 	/**
 	 * Permet d'ajouter l'id user a la liste des positions du composant graphique JList
 	 * @param id : id de l'utilisateur
 	 */
 	public void addIDListModel(int id){
-		
-		NI.getArrayPositionsListModel().add(id);
-		
+		NI.getArrayPositionsListModel().add(id);	
 	}
 	
 	/**

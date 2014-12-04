@@ -133,10 +133,10 @@ public class NetworkToControler {
 		System.out.println("Liste des utilisateurs concernes : " + listOfIDs.toString());
 		System.out.println("Message : " + message);
 		
-		// On définit le format d'affichage du message
+		// On definit le format d'affichage du message
 		String finalMessage = user.getNickname()+" : "+message+"\n";
 		
-		// Ajouter le message à l'historique et notifier la vue
+		// Ajouter le message a� l'historique et notifier la vue
 		if (NI.getHistoricConversations().containsKey(listOfIDs)){
 			NI.getHistoricConversations().get(listOfIDs).concat(finalMessage);
 		}

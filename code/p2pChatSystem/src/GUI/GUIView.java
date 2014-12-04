@@ -147,7 +147,7 @@ public class GUIView implements Observer{
 			else if (NI.getLastChange().equals(typeOfChange.ADDUSER)){
 				
 				int idUser = (Integer)arg1;
-				String nickname = guiControler.getGUIToControler().getNicknameOfId(idUser);
+				String nickname = guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname() ;
 				this.chatFenetre.getContactsListPanel().getDefaultListModel().addElement(nickname);
 				this.chatFenetre.pack();
 				this.guiControler.getGUIToControler().addIDListModel(idUser);
@@ -157,7 +157,7 @@ public class GUIView implements Observer{
 			else if (NI.getLastChange().equals(typeOfChange.REMOVEUSER)) {
 				
 				int idUser = (Integer)arg1;
-				String nickname = guiControler.getGUIToControler().getNicknameOfId(idUser);
+				String nickname = guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname() ;
 				if (this.chatFenetre.getContactsListPanel().getDefaultListModel().removeElement(nickname)){
 					System.out.println("JList : remove "+nickname+" success");
 				}

@@ -132,7 +132,6 @@ public class ConversationFenetre extends AbstractFenetre{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-
 		if (arg0.getSource() == sendButton){
 			if (guiView.getGUIControler().getEtat() == Etats.connected) {
 				if (this.writerArea.getText() != null) {
