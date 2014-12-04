@@ -154,7 +154,7 @@ public class GUIView implements Observer{
 				// On vérifie si une fenêtre est ouverte
 				
 				// on envoit un HelloAck au nouvel user
-				this.guiControler.getGUIToControler().performSendHelloAck(idUser);
+				//this.guiControler.getGUIToControler().performSendHelloAck(idUser);
 			}
 			
 			else if (NI.getLastChange().equals(typeOfChange.REMOVEUSER)) {
