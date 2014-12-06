@@ -208,17 +208,18 @@ public class ChatFenetre extends AbstractFenetre{
 	
 	@Override
 	public void mouseClicked(MouseEvent evt) {
-        if (evt.getClickCount() == 2) {
-            int index = this.contactsListPanel.getList().locationToIndex(evt.getPoint());
-            ListModel dlm = this.contactsListPanel.getList().getModel();
-            Object item = dlm.getElementAt(index);;
-            this.contactsListPanel.getList().ensureIndexIsVisible(index);
-            // creation de la fenetre
-            int idUser = this.guiView.getGUIControler().getGUIToControler().getNetInfo().getArrayPositionsListModel().get(index);
-            ConversationFenetre newConversation = new ConversationFenetre(item.toString(), idUser) ;
-            newConversation.setGuiView(guiView) ;
-            this.guiView.getConversationFenetre().add(newConversation);
-            
+		if (this.guiView.getGUIControler().getEtat() != Etats.disconnected) {
+	        if (evt.getClickCount() == 2) {
+	            int index = this.contactsListPanel.getList().locationToIndex(evt.getPoint());
+	            ListModel dlm = this.contactsListPanel.getList().getModel();
+	            Object item = dlm.getElementAt(index);;
+	            this.contactsListPanel.getList().ensureIndexIsVisible(index);
+	            // creation de la fenetre
+	            int idUser = this.guiView.getGUIControler().getGUIToControler().getNetInfo().getArrayPositionsListModel().get(index);
+	            ConversationFenetre newConversation = new ConversationFenetre(item.toString(), idUser) ;
+	            newConversation.setGuiView(guiView) ;
+	            this.guiView.getConversationFenetre().add(newConversation);
+	        }
         }
 	}
 
