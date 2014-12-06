@@ -162,18 +162,15 @@ public class GUIToControler {
 	 * @param id : id du User
 	 */
 	public void removeIDListModel(int id){
-		
 		boolean find = false;
-		int compteur = -1;
-		ArrayList<Integer> array = NI.getArrayPositionsListModel();
-		Iterator<Integer> it = array.iterator();
-		while (it.hasNext() && !find){
-			compteur++;
-			if (it.next() == id){
-				find = true;
+		int compteur = 0 ;
+		while (!find && compteur<NI.getArrayPositionsListModel().size()) {
+			if (NI.getArrayPositionsListModel().get(compteur) == id) {
+				find = true ;
 			}
 		}
-		NI.getArrayPositionsListModel().remove(compteur);
-		
+		if (find == true) {
+			NI.getArrayPositionsListModel().remove(compteur);
+		}
 	}
 }
