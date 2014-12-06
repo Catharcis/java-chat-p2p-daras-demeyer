@@ -176,6 +176,8 @@ public class ChatFenetre extends AbstractFenetre{
 		this.connectDisconnectPanel.getButtonConnectOnOff().addActionListener(this);
 		this.connectDisconnectPanel.getNicknameField().addKeyListener(this);
 		this.contactsListPanel.getList().addMouseListener(this) ; 
+		
+		this.pack();
 	}
 	
 /*	
