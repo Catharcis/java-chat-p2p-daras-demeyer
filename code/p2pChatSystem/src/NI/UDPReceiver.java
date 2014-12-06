@@ -113,7 +113,8 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 					ArrayList<String> list = textMessage.getListNicknamesDest();
 					if (list.remove(myUsername)){
 						System.out.println("UDPReceiver - TextMessage - Remove myUsername success : "+myUsername);
-						System.out.println("UDPReceiver - TextMessage - Source :"+list.get(0));
+						if (list == null)
+							System.out.println("UDPReceiver - TextMessage - Source :"+list.get(0));
 					}
 					else{
 						System.out.println("UDPReceiver - TextMessage - [ERROR] This message was not for us");
