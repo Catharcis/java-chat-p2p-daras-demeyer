@@ -85,7 +85,6 @@ public class ContactsListPanel extends JPanel{
 		this.setVisible(true);
 		String[] data = new String [10] ;
 		data[0] = "Michel" ;
-		dlm.addElement("Michel");
 	}
 	
 	public void miseAJour(Observable arg0) {
