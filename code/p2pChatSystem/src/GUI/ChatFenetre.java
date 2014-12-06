@@ -127,7 +127,7 @@ public class ChatFenetre extends AbstractFenetre{
 	    JPanel cell6 = new JPanel();
 	    cell6.setBackground(Color.BLUE);
 	    cell6.setPreferredSize(new Dimension(200, 250));
-	    //cell6.add(this.contactsListPanel.getList()) ;
+	    cell6.add(this.contactsListPanel.getList()) ;
 	    
 	    
 	    //Le conteneur principal
