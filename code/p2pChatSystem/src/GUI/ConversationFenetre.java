@@ -119,6 +119,19 @@ public class ConversationFenetre extends AbstractFenetre{
 		
 	}
 
+	public void miseAJourTitre () {
+		String title = null ;
+		for (int i = 0; i<this.listOfNicknames.size();i++) {
+			// cas du dernier element
+			if (i == this.listOfNicknames.size()-1) {
+				title = title + this.listOfNicknames.get(i) ;
+			}
+			else 
+				title = title + "this.listOfNicknames.get(i), ";
+		}
+		this.setTitle(title) ;
+	}
+	
 		
 	public void miseAJour(Observable arg0) {
 

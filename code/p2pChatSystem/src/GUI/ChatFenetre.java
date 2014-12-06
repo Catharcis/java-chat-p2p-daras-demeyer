@@ -153,7 +153,10 @@ public class ChatFenetre extends AbstractFenetre{
             this.contactsListPanel.getList().ensureIndexIsVisible(index);
             // creation de la fenetre
             int idUser = this.guiView.getGUIControler().getGUIToControler().getNetInfo().getArrayPositionsListModel().get(index);
-            this.guiView.getConversationFenetre().add(new ConversationFenetre(item.toString(), idUser)); 
+            ConversationFenetre newConversation = new ConversationFenetre(item.toString(), idUser) ;
+            newConversation.setGuiView(guiView) ;
+            this.guiView.getConversationFenetre().add(newConversation);
+            
         }
 	}
 
