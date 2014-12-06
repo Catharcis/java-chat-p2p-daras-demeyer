@@ -161,14 +161,31 @@ public class GUIView implements Observer{
 				
 				int idUser = (Integer)arg1;
 				String nickname = guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname() ;
+				// suppression du user de la liste de contact
 				if (this.chatFenetre.getContactsListPanel().getDefaultListModel().removeElement(nickname)){
 					System.out.println("JList : remove "+nickname+" success");
 				}
 				else{
 					System.out.println("JList - ERROR : remove "+nickname+" failed !");
 				}
+				// remise en forme de la liste visuelle
 				this.chatFenetre.pack();
 				this.guiControler.getGUIToControler().removeIDListModel(idUser);
+				
+				//suppression du user des conversations
+				for (int i = 0; i<this.conversationFenetre.size(); i++) {
+					// on supprime l'ID du user de toutes les conversations
+					this.conversationFenetre.get(i).getListOfIds().remove(idUser) ;
+					// on supprime son nickname de toutes les conversations
+					this.conversationFenetre.get(i).getListOfNicknames().remove(this.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser)) ;
+					System.out.println("Le user a ete supprime d'une conversation") ;
+					// si la conversation est alors vide, on la supprime de la liste
+					if (this.conversationFenetre.get(i).getListOfIds().isEmpty()) {
+						this.conversationFenetre.remove(i) ;
+						System.out.println("Toute une conversation a ete supprime") ;
+					}
+				}
+				
 				
 			}
 			
