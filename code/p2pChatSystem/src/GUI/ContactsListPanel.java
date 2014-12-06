@@ -10,13 +10,14 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList; 
 import java.util.Observable; 
  
+
 import javax.swing.DefaultListModel; 
-import javax.swing.JList; 
+import javax.swing.JList;
 import javax.swing.JPanel; 
 import javax.swing.JScrollPane; 
 import javax.swing.ListModel; 
 import javax.swing.ListSelectionModel; 
-import javax.swing.border.Border; 
+
  
 @SuppressWarnings("serial") 
 public class ContactsListPanel extends JPanel{ 
@@ -28,7 +29,9 @@ public class ContactsListPanel extends JPanel{
     private static ContactsListPanel singleton; 
      
     // Permet d'avoir une liste de noms (pour le visuel) 
-    private JList<String> list; 
+    String[] data = {"one", "two", "three", "four"};
+    JList myList = new JList(data);
+    private JList list; 
      
     // Modele de la JList pour pouvoir la modifier facilement 
     private DefaultListModel dlm; 
@@ -61,7 +64,7 @@ public class ContactsListPanel extends JPanel{
      *                 GETTERS & SETTERS 
      ************************************************/ 
      
-    public JList<String> getList(){ 
+    public JList getList(){ 
         return list; 
     } 
      
