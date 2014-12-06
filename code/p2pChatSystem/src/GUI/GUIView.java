@@ -144,8 +144,7 @@ public class GUIView implements Observer{
 				guiControler.setEtatDisconnect();
 			}
 			
-			else if (NI.getLastChange().equals(typeOfChange.ADDUSER)){
-				
+			else if (NI.getLastChange().equals(typeOfChange.ADDUSER_HELLO)){	
 				int idUser = (Integer)arg1;
 				String nickname = guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname() ;
 				this.chatFenetre.getContactsListPanel().getDefaultListModel().addElement(nickname);
@@ -155,6 +154,16 @@ public class GUIView implements Observer{
 				
 				// on envoit un HelloAck au nouvel user
 				this.guiControler.getGUIToControler().performSendHelloAck(idUser);
+			}
+			
+			else if (NI.getLastChange().equals(typeOfChange.ADDUSER_HELLO_ACK)){	
+				int idUser = (Integer)arg1;
+				String nickname = guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname() ;
+				this.chatFenetre.getContactsListPanel().getDefaultListModel().addElement(nickname);
+				this.chatFenetre.pack();
+				this.guiControler.getGUIToControler().addIDListModel(idUser);
+				// On vérifie si une fenêtre est ouverte
+				
 			}
 			
 			else if (NI.getLastChange().equals(typeOfChange.REMOVEUSER)) {

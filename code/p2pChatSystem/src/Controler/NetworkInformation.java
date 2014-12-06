@@ -151,11 +151,15 @@ public class NetworkInformation extends Observable {
 	 * @param ip : son adresse IP
 	 * @return l'objet User contenant les informations passees en parametres
 	 */
-	public User addUser (String nickname, InetAddress ip) {
+	public User addUser (String nickname, InetAddress ip, boolean HelloAck) {
 		User user = new User (nickname) ;
 		this.usersIPAddress.put(ip, user) ;
 		this.userList.add(user) ;
-		notifyLastChange(typeOfChange.ADDUSER,user.getIdUser());		
+		if (HelloAck == true) {
+			notifyLastChange(typeOfChange.ADDUSER_HELLO_ACK,user.getIdUser());	
+		}
+		else 
+			notifyLastChange(typeOfChange.ADDUSER_HELLO,user.getIdUser());	
 		return user; 
 	}
 	
@@ -202,9 +206,7 @@ public class NetworkInformation extends Observable {
 		        InetAddress i = (InetAddress) ee.nextElement();
 		        if (i.getHostAddress().startsWith("192.") | i.getHostAddress().startsWith("10.")) {
 		        	found = true ;
-		        	
 		        	ip = i.getHostAddress() ;
-		        	System.out.println("NETINFO - getLocalIPAddress : " + ip) ;
 		        }
 		    }
 		}
@@ -237,8 +239,7 @@ public class NetworkInformation extends Observable {
 			}
 		}
 		else {
-			System.out.println("USER IP @ : "+ InfoSingleton.getIPAddressOfUser(user)) ;
-			return (user.getNickname()+"@"+(InfoSingleton.getIPAddressOfUser(user)).toString()) ;
+			return (user.getNickname()+"@"+(InfoSingleton.getIPAddressOfUser(user)).getHostAddress()) ;
 		}
 	}
 	
