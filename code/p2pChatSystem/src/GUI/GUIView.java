@@ -51,8 +51,7 @@ public class GUIView implements Observer{
 		//nicknames.add("name2") ;
 		TreeSet<Integer> listIds = new TreeSet() ;
 		listIds.add(0) ;
-		//listIds.add(1) ;
-		System.out.println("Fin construction view") ;
+		//listIds.add(1) 
 		conversationFenetre = conversationFenetre.getInstance(nicknames, listIds) ;
 	}
 	

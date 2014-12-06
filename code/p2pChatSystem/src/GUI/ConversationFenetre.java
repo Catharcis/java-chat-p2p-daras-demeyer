@@ -50,7 +50,6 @@ public class ConversationFenetre extends AbstractFenetre{
 	 ************************************************/
 	
 	private ConversationFenetre(ArrayList<String> nicknames, TreeSet <Integer> listOfId) {
-		System.out.println("Debut de constructeur Conversation") ;
 		String title = new String();
 		for (int i = 0 ; i<nicknames.size(); i++ ) {
 			// cas du dernier nom de la liste
@@ -71,7 +70,6 @@ public class ConversationFenetre extends AbstractFenetre{
 	}
 	
 	public static ConversationFenetre getInstance(ArrayList<String> nicknames, TreeSet<Integer> listIds) {
-		System.out.println("Debut getInstance") ;
 		if (singleton == null){
 			singleton = new ConversationFenetre(nicknames, listIds);
 		}
