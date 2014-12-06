@@ -80,6 +80,7 @@ public class GUIView implements Observer{
 	
 	/************************************************* 
 	 * 					METHODS 
+	 * @throws UnknownHostException 
 	 ************************************************/
 
 	public static void initChatSystem (GUIView guiView) {
@@ -101,7 +102,7 @@ public class GUIView implements Observer{
 		niCon.getUDPReceiver().setNiCon(niCon);
 	}	
 	
-	protected void Connection (String name) {
+	protected void Connection (String name) throws UnknownHostException {
 		if (name.length() == 0)
 			JOptionPane.showMessageDialog(null, "Please choose a nickname.", "Error", JOptionPane.ERROR_MESSAGE);
 		else {

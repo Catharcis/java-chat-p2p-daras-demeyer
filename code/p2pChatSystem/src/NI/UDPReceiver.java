@@ -3,6 +3,7 @@ package NI;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 import Controler.NetworkInformation;
 import Controler.NetworkToControler;
@@ -42,8 +43,8 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 		return singleton;
 	}
 	
-	public void setNiCon (NIControler NiCont){
-		this.NiCon = NiCont.getInstance() ;
+	public void setNiCon (NIControler NiCont) {
+			this.NiCon = NiCont.getInstance() ;
 	}
 	
 	
@@ -92,7 +93,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 				if (message.getTypeContenu() == typeContenu.HELLO) {
 					String name = message.getNickname();
 					System.out.println("UDPReceiver : Hello, I am " +name) ;
-					NiCon.receivedHello(name, packet.getAddress()) ;						
+					NiCon.receivedHello(name, packet.getAddress()) ;
 				}
 				
 				if (message.getTypeContenu() == typeContenu.HELLOACK) {

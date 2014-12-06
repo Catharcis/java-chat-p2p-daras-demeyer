@@ -34,10 +34,10 @@ public class NIControler {
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
+	 * @throws UnknownHostException 
 	 ************************************************/
 	
-	private NIControler () 
-	{
+	private NIControler ()	{
 		udpReceiver = udpReceiver.getInstanceUDPReceiver() ;
 		createThreadUDPReceiver();
 		this.udpSender = udpSender.getInstanceUDPSender() ;
