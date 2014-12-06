@@ -27,44 +27,9 @@ import Signals.Hello;
 public class Test2 {
 
 	public static void main(String[] args) {
-		/* 
-		ArrayList<String> nicknames = new ArrayList() ;
-		nicknames.add("name1") ;
-		nicknames.add("name2") ;
-		TreeSet<Integer> listIds = new TreeSet() ;
-		listIds.add(1) ;
-		listIds.add(2) ;
-	//	ConversationFenetre conv = new ConversationFenetre(nicknames, listIds);
-		*/
 		
 		JFrame frame = new JFrame() ;
-		frame.setTitle("Chat System") ;
-	/*	frame.setLocationRelativeTo(null) ;
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(500,400) ;
-		*/
-	/*	
-		//On crée nos différents conteneurs de couleur différente
-	    JPanel cell1 = new JPanel();
-	    cell1.setBackground(Color.YELLOW);
-	    cell1.setPreferredSize(new Dimension(160, 75));		
-	    JPanel cell2 = new JPanel();
-	    cell2.setBackground(Color.red);
-	    cell2.setPreferredSize(new Dimension(180, 75));
-	    JPanel cell3 = new JPanel();
-	    cell3.setBackground(Color.green);
-	    cell3.setPreferredSize(new Dimension(160, 75));
-	    JPanel cell4 = new JPanel();
-	    cell4.setBackground(Color.black);
-	    cell4.setPreferredSize(new Dimension(500, 75));
-	    JPanel cell5 = new JPanel();
-	    cell5.setBackground(Color.cyan);
-	    cell5.setPreferredSize(new Dimension(300, 250));
-	    JPanel cell6 = new JPanel();
-	    cell6.setBackground(Color.BLUE);
-	    cell6.setPreferredSize(new Dimension(200, 250));
-		*/
-	    
+		frame.setTitle("Chat System") ; 
 		frame.setSize(500, 400);
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.setLocationRelativeTo(null);
