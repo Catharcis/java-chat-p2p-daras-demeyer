@@ -85,7 +85,8 @@ public class ConnectDisconnectPanel extends JPanel {
 	}
 	
 	public void setImageStatus(ImageIcon newIcon) {
-		this.imageStatus = new JLabel(newIcon) ;
+		this.imageStatus.setIcon(newIcon);;
+		this.validate();
 	}
 	
 	public JLabel getImageChat() {
