@@ -133,7 +133,8 @@ public class ConversationFenetre extends AbstractFenetre{
 		writerArea.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 		this.historic.setSize(300, 350);
 		this.writerArea.setSize(300,75);
-	    
+		
+		
 	    JPanel cell1 = new JPanel();
 	    cell1.setBackground(Color.white);
 	    cell1.setPreferredSize(new Dimension(400, 50));
@@ -215,7 +216,7 @@ public class ConversationFenetre extends AbstractFenetre{
 		this.sendButton.addActionListener(this); 
 		
 		// On s'assure du bon placement des composants
-		//this.pack();
+		this.pack();
 		
 	}
 
