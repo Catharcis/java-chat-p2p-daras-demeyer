@@ -1,7 +1,10 @@
 package Controler;
 import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -185,31 +188,46 @@ public class NetworkInformation extends Observable {
 		return ip;
 	}
 	
+	
+	public InetAddress getLocalIPAddress () throws UnknownHostException, SocketException {
+		Enumeration e = NetworkInterface.getNetworkInterfaces();
+		while(e.hasMoreElements())
+		{
+		    NetworkInterface n = (NetworkInterface) e.nextElement();
+		    Enumeration ee = n.getInetAddresses();
+		    while (ee.hasMoreElements())
+		    {
+		        InetAddress i = (InetAddress) ee.nextElement();
+		        System.out.println(i.getHostAddress());
+		    }
+		}
+		return InetAddress.getByName("192.168.1.20") ;
+	}
+	
+	
 	/**
 	 *  Methode qui ajoute le pattern @IP au nickname 
 	 * @param user : le User contenant le nom
 	 * @return "nom@IP"
 	 * @throws UnknownHostException
+	 * @throws SocketException 
 	 */
 	 
 	public String getNicknameWithIP (User user) throws UnknownHostException {
-		if (user == null) {
-			System.out.println("USER NULL ") ;
-		}
-		NetworkInformation NI = null;
-		NI = NI.getInstance();
-		if (user.getIdUser() == NI.getLocalUser().getIdUser()) {
+		if (user.getIdUser() == InfoSingleton.getLocalUser().getIdUser()) {
 			try {
-				return (user.getNickname()+"@"+(InetAddress.getLocalHost()).getHostAddress()) ;
+				return (user.getNickname()+"@"+this.getLocalIPAddress()) ;
 			} catch (UnknownHostException e) {
 				System.out.println("Erreur lors de l'acquisition de l'@IP locale") ;
 				return "0" ;
+			} catch (SocketException e) {
+				e.printStackTrace();
+				return "0" ;
 			}
-			
 		}
 		else {
-			System.out.println("USER IP @ : "+ NI.getIPAddressOfUser(user)) ;
-			return (user.getNickname()+"@"+(NI.getIPAddressOfUser(user)).toString()) ;
+			System.out.println("USER IP @ : "+ InfoSingleton.getIPAddressOfUser(user)) ;
+			return (user.getNickname()+"@"+(InfoSingleton.getIPAddressOfUser(user)).toString()) ;
 		}
 	}
 	

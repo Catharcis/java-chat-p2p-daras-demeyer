@@ -49,6 +49,7 @@ public class GUIToControler {
 
 	/************************************************* 
 	 * 				GETTERS & SETTERS
+	 * @throws UnknownHostException 
 	 ************************************************/
 	
 	// Permet d'assigner la valeur du NIControler
@@ -90,7 +91,7 @@ public class GUIToControler {
 	
 	public void performSendHelloAck(int idDestUser){
 		try {
-			// On envoie un HelloAck a  celui qui nous a envoye un Hello
+			// On envoie un HelloAck aï¿½ celui qui nous a envoye un Hello
 			String localNameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
 			
 			String destNameWithPattern = NI.getNicknameWithIP(this.NI.getUserWithId(idDestUser));

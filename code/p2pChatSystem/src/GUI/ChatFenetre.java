@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+import java.net.UnknownHostException;
 import java.util.Observable;
 
 import javax.swing.JPanel;
@@ -119,7 +120,12 @@ public class ChatFenetre extends AbstractFenetre{
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == connectDisconnectPanel.getButtonConnectOnOff()){
 			if (guiView.getGUIControler().getEtat() == Etats.disconnected) {
-				getGUIView().Connection(connectDisconnectPanel.getNameOfLocalUser());
+				try {
+					getGUIView().Connection(connectDisconnectPanel.getNameOfLocalUser());
+				} catch (UnknownHostException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				this.pack();
 			}
 			else
@@ -181,10 +187,11 @@ public class ChatFenetre extends AbstractFenetre{
 	public void windowClosing(WindowEvent e) {
 		
 		System.out.println("Arret du Chat System...");
-		if (NetworkInformation.getInstance().getLastChange() != typeOfChange.DISCONNECTION){
-			this.getGUIView().getGUIControler().getGUIToControler().performDisconnect();
+		if (this.guiView.getGUIControler().getEtat() != Etats.disconnected) {
+			if (NetworkInformation.getInstance().getLastChange() != typeOfChange.DISCONNECTION){
+				this.getGUIView().getGUIControler().getGUIToControler().performDisconnect();
+			}
 		}
-		
 	}
 
 	@Override
@@ -212,7 +219,12 @@ public class ChatFenetre extends AbstractFenetre{
 		if (arg0.getSource() == connectDisconnectPanel.getNicknameField()) {
 			if (arg0.getKeyCode() == KeyEvent.VK_ENTER ) {
 				if (guiView.getGUIControler().getEtat() == Etats.disconnected) {
-					getGUIView().Connection(connectDisconnectPanel.getNameOfLocalUser());
+					try {
+						getGUIView().Connection(connectDisconnectPanel.getNameOfLocalUser());
+					} catch (UnknownHostException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					this.pack();
 				}
 			}

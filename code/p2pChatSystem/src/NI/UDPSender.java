@@ -10,6 +10,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import Controler.NetworkInformation;
@@ -23,20 +24,24 @@ public class UDPSender extends AbstractSender {
 	
 	private static UDPSender singleton = null;
 	
+	private InetAddress localAddress ;
+	
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
+	 * @throws UnknownHostException 
 	 ************************************************/
 	
-	private UDPSender(){
+	private UDPSender() {
 		this.setPortEnvoi(5000);
 		this.setPortEcoute(9876) ;
 	}
 	
 	/**
 	 * Methode pour recuperer l'instance 
+	 * @throws UnknownHostException 
 	 **/
-	public static UDPSender getInstanceUDPSender(){
+	public static UDPSender getInstanceUDPSender() {
 		if (singleton == null){
 			singleton = new UDPSender();
 		}
@@ -84,7 +89,7 @@ public class UDPSender extends AbstractSender {
 		}
 	}
 	
-	/** Methode permettant d'envoyer un message a  une liste d'utilisateurs **/
+	/** Methode permettant d'envoyer un message aï¿½ une liste d'utilisateurs **/
 	public void send(AbstractMessage message, ArrayList<String> listOfUsers, ArrayList<InetAddress> ipAddressesList){
 		/** On rï¿½cupï¿½re les informations reseaux **/
 		NetworkInformation NI = null;
