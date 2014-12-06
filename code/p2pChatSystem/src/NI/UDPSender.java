@@ -110,7 +110,7 @@ public class UDPSender extends AbstractSender {
 				  	out.writeObject(message);
 				  	byte[] buf = bos.toByteArray();
 				  	DatagramPacket packet = new DatagramPacket (buf, buf.length, ipAddressesList.get(i), this.getPortEcoute()) ;
-				  	System.out.println("UDPSender : Paquet "+message.toString()+" concu ! Adresse IP destinataire : " + ipAddressesList.get(i)) ;
+				  	System.out.println("UDPSender : Paquet "+message.toString()+" concu ! @IP dest : " + ipAddressesList.get(i).getHostAddress()) ;
 	
 				  	/** Envoi du paquet **/
 				  	socket.send(packet);

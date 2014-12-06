@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.List;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -32,7 +33,7 @@ public class ContactsListPanel extends JPanel{
 	// Modele de la JList pour pouvoir la modifier facilement
 	private DefaultListModel dlm;
 	
-	// Permet d'associer le num�ro de la liste "list" � l'id utilisateur
+	// Permet d'associer le numero de la liste "list" a l'id utilisateur
 	private ArrayList<String> arrayIdListToIdUser;
 	
 	/************************************************* 
@@ -85,7 +86,6 @@ public class ContactsListPanel extends JPanel{
 		data[0] = "Michel" ;
 		
 	}
-	
 	
 	public void miseAJour(Observable arg0) {
 

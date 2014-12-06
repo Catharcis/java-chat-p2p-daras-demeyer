@@ -15,7 +15,7 @@ public static void initGUI () {
 	GUIView guiView = null ;
 	guiView = guiView.getInstance() ;
 	guiView.getChatFenetre().setGuiView(guiView);
-	guiView.getConversationFenetre().setGuiView(guiView);
+//	guiView.getConversationFenetre().setGuiView(guiView);
 }
 	
 	

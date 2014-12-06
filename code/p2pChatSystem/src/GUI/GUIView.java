@@ -36,7 +36,7 @@ public class GUIView implements Observer{
 	
 	private GUIControler guiControler ;
 
-	private ConversationFenetre conversationFenetre ;
+	private ArrayList<ConversationFenetre> conversationFenetre ;
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
@@ -46,13 +46,7 @@ public class GUIView implements Observer{
 		chatFenetre = chatFenetre.getInstance();
 		chatFenetre.setVisible(true);
 		guiControler = guiControler.getInstance() ;
-		ArrayList<String> nicknames = new ArrayList() ;
-		nicknames.add("name1") ;
-		//nicknames.add("name2") ;
-		TreeSet<Integer> listIds = new TreeSet() ;
-		listIds.add(0) ;
-		//listIds.add(1) 
-		conversationFenetre = conversationFenetre.getInstance(nicknames, listIds) ;
+		conversationFenetre = new ArrayList<ConversationFenetre>() ;
 	}
 	
 	public static GUIView getInstance(){
@@ -74,7 +68,7 @@ public class GUIView implements Observer{
 		return this.guiControler;
 	}
 	
-	public ConversationFenetre getConversationFenetre () {
+	public ArrayList<ConversationFenetre> getConversationFenetre () {
 		return this.conversationFenetre ;
 	}
 	
@@ -150,8 +144,7 @@ public class GUIView implements Observer{
 				this.chatFenetre.getContactsListPanel().getDefaultListModel().addElement(nickname);
 				this.chatFenetre.pack();
 				this.guiControler.getGUIToControler().addIDListModel(idUser);
-				// On vérifie si une fenêtre est ouverte
-				
+
 				// on envoit un HelloAck au nouvel user
 				this.guiControler.getGUIToControler().performSendHelloAck(idUser);
 			}
@@ -162,8 +155,6 @@ public class GUIView implements Observer{
 				this.chatFenetre.getContactsListPanel().getDefaultListModel().addElement(nickname);
 				this.chatFenetre.pack();
 				this.guiControler.getGUIToControler().addIDListModel(idUser);
-				// On vérifie si une fenêtre est ouverte
-				
 			}
 			
 			else if (NI.getLastChange().equals(typeOfChange.REMOVEUSER)) {
