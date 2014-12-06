@@ -108,7 +108,7 @@ public class NIControler {
 	public void sendTextMessage (ArrayList<String> usernameList, String data, ArrayList<InetAddress> ipAddressList) throws UnknownHostException {
 		
 		/** Construction de l'Abstract message a envoye **/
-		AbstractMessage message = new TextMessage (data, usernameList) ;
+		AbstractMessage message = new TextMessage (NI.getNicknameWithIP(NI.getLocalUser()), data, usernameList) ;
 		this.udpSender.send(message, usernameList, ipAddressList); 
 		
 	}
