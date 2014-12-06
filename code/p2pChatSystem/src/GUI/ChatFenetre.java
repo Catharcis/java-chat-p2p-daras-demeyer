@@ -3,7 +3,10 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -12,7 +15,13 @@ import java.awt.event.WindowEvent;
 import java.net.UnknownHostException;
 import java.util.Observable;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.ListModel;
 
 import Controler.NetworkInformation;
@@ -78,14 +87,122 @@ public class ChatFenetre extends AbstractFenetre{
 	 * 					METHODS 
 	 ************************************************/
 
+	public void initializeComponents() {	
+		this.setTitle("Chat System") ; 
+		this.setResizable(false) ;
+		this.setSize(500, 400);
+	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    this.setLocationRelativeTo(null);
+	    
+	    
+	    // On crée nos différents conteneurs
+	    JPanel cell1 = new JPanel();
+	    cell1.setBackground(Color.white);
+	    cell1.setPreferredSize(new Dimension(160, 75));	
+	    
+	    JPanel cell2 = new JPanel();
+	    cell2.setBackground(Color.white);
+	    cell2.setPreferredSize(new Dimension(180, 75));
+	    cell2.add(this.connectDisconnectPanel.getLabelNickname(), BorderLayout.NORTH) ;
+	    cell2.add(this.connectDisconnectPanel.getNicknameField(), BorderLayout.CENTER) ;
+	    
+	    JPanel cell3 = new JPanel();
+	    cell3.setBackground(Color.white);
+	    cell3.setPreferredSize(new Dimension(160, 75));
+	    cell3.setLayout(new BorderLayout());
+	    cell3.add(this.connectDisconnectPanel.getImageStatus(), BorderLayout.CENTER) ;
+	    
+	    JPanel cell4 = new JPanel();
+	    cell4.setBackground(Color.white);
+	    cell4.setPreferredSize(new Dimension(500, 75));
+	    this.connectDisconnectPanel.getButtonConnectOnOff().setMargin(new Insets(10,10,10,10)) ;
+	    cell4.add(this.connectDisconnectPanel.getButtonConnectOnOff()) ;
+	    
+	    JPanel cell5 = new JPanel();
+	    cell5.setBackground(Color.white);
+	    cell5.setPreferredSize(new Dimension(300, 250));
+	    cell5.setLayout(new BorderLayout());
+	    cell5.add(this.connectDisconnectPanel.getImageChat(), JLabel.CENTER) ;
+	    
+	    JPanel cell6 = new JPanel();
+	    cell6.setBackground(Color.BLUE);
+	    cell6.setPreferredSize(new Dimension(200, 250));
+	    //cell6.add(this.contactsListPanel.getList()) ;
+	    
+	    
+	    //Le conteneur principal
+	    JPanel connectDisconnectPanel = new JPanel();
+	    connectDisconnectPanel.setSize(new Dimension(500, 400));
+	    connectDisconnectPanel.setBackground(Color.WHITE);
+	    //On définit le layout manager
+	    connectDisconnectPanel.setLayout(new GridBagLayout());
+	    
+	    //L'objet servant à positionner les composants
+	    GridBagConstraints gbc = new GridBagConstraints();
+			
+	    //On positionne la case de départ du composant
+	    gbc.gridx = 0;
+	    gbc.gridy = 0;
+	    //La taille en hauteur et en largeur
+	    gbc.gridheight = 1;
+	    gbc.gridwidth = 1;
+	    connectDisconnectPanel.add(cell1, gbc);
+	    //---------------------------------------------
+	    gbc.gridx = 1;
+	    connectDisconnectPanel.add(cell2, gbc);
+	    //---------------------------------------------
+	    gbc.gridx = 2;		
+	    connectDisconnectPanel.add(cell3, gbc);		
+	    //---------------------------------------------
+	    gbc.gridx = 0;
+	    gbc.gridy = 1;
+	    gbc.gridwidth = 1;
+	    gbc.gridheight = 2;
+	    //Celle-ci indique que la cellule se réplique de façon verticale
+	    gbc.fill = GridBagConstraints.HORIZONTAL;
+	    gbc.gridwidth = GridBagConstraints.REMAINDER;
+	    connectDisconnectPanel.add(cell4, gbc);
+	    //---------------------------------------------
+	    gbc.gridx = 0;
+	    gbc.gridy = 3;
+	    gbc.gridwidth = 1;
+	    gbc.anchor = GridBagConstraints.LAST_LINE_START ;
+	    //Celle-ci indique que la cellule se réplique de façon horizontale
+	    gbc.fill = GridBagConstraints.VERTICAL;
+	    gbc.gridwidth = GridBagConstraints.REMAINDER;
+	    connectDisconnectPanel.add(cell5, gbc);
+	    
+	    //---------------------------------------------
+	    //---------------------------------------------
+	    gbc.gridx = 2;
+	    gbc.gridy = 3;
+	    //Celle-ci indique que la cellule se réplique de façon horizontale
+	    gbc.gridwidth = GridBagConstraints.REMAINDER;
+	    gbc.fill = GridBagConstraints.VERTICAL;
+	    gbc.anchor = GridBagConstraints.LAST_LINE_END ;
+	    //contactsListPanel.add(cell6, gbc);
+	    this.connectDisconnectPanel.add(cell6,gbc);
+	    //---------------------------------------------
+  
+
+
+	    //On ajoute le conteneur
+	    this.setContentPane(connectDisconnectPanel);
+	    this.setVisible(true) ;
+	    
+	    
+		this.connectDisconnectPanel.getButtonConnectOnOff().addActionListener(this);
+		this.connectDisconnectPanel.getNicknameField().addKeyListener(this);
+		this.contactsListPanel.getList().addMouseListener(this) ; 
+	}
 	
+/*	
 	@Override
 	public void initializeComponents() {
-		this.setPreferredSize(new Dimension(300,300)) ;
+		this.setPreferredSize(new Dimension(300,100)) ;
 		this.setResizable(false) ;
 		// On les reunit au sein d'un seule et meme panel
 		JPanel generalPanel = new JPanel(new BorderLayout());
-		generalPanel.setBackground(Color.blue) ;
 		JPanel textFieldAndButton = new JPanel(new BorderLayout());
 		JPanel statusAndImagePanel = new JPanel(new GridLayout(1,2));
 		JPanel nicknameAndStatusAndImagePanel = new JPanel(new BorderLayout());
@@ -96,13 +213,11 @@ public class ChatFenetre extends AbstractFenetre{
 		textFieldAndButton.add(connectDisconnectPanel.getButtonConnectOnOff(),BorderLayout.EAST);
 		
 		// On les ajoute a notre panel
-		statusAndImagePanel.add(connectDisconnectPanel.getStatus());
 		statusAndImagePanel.add(connectDisconnectPanel.getImageStatus());
 		
 		generalConnectPanel.add(connectDisconnectPanel.getImageChat()) ;
 		
 		nicknameAndStatusAndImagePanel.add(statusAndImagePanel,BorderLayout.NORTH);
-		nicknameAndStatusAndImagePanel.add(connectDisconnectPanel.getLabelNickname(),BorderLayout.SOUTH);
 		
 		generalConnectPanel.add(nicknameAndStatusAndImagePanel,BorderLayout.NORTH);
 		generalConnectPanel.add(textFieldAndButton,BorderLayout.SOUTH);
@@ -122,7 +237,7 @@ public class ChatFenetre extends AbstractFenetre{
 		contactsListPanel.getList().addMouseListener(this) ;
 	}
 
-
+*/
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

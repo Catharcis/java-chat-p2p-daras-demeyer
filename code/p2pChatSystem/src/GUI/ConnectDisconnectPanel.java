@@ -23,8 +23,6 @@ public class ConnectDisconnectPanel extends JPanel {
 	
 	private JButton buttonConnectOnOff;
 	
-	private JLabel status;
-	
 	private JLabel imageStatus;
 	
 	private JLabel imageChat;
@@ -35,13 +33,11 @@ public class ConnectDisconnectPanel extends JPanel {
 	
 	private ConnectDisconnectPanel(){
 		// On initialise les parametres
-		labelNickname = new JLabel("Please choose your nickname : ");
-		status = new JLabel("Status : ");
-		nameOfLocalUser = new JTextField(10) ;
+		labelNickname = new JLabel("Nickname : ");
+		nameOfLocalUser = new JTextField(15) ;
 		buttonConnectOnOff = new JButton("Connexion");
 		imageStatus = new JLabel(new ImageIcon("offline.png"));
-		imageChat = new JLabel(new ImageIcon("chat.png")) ;
-		this.setVisible(true);
+		imageChat = new JLabel(new ImageIcon("imagechat.png")) ;
 		}
 	
 	/************************************************* 
@@ -76,10 +72,6 @@ public class ConnectDisconnectPanel extends JPanel {
 		return buttonConnectOnOff;
 	}
 	
-	public JLabel getStatus(){
-		return status;
-	}
-	
 	public JLabel getImageStatus(){
 		return imageStatus;
 	}
@@ -109,16 +101,6 @@ public class ConnectDisconnectPanel extends JPanel {
 		return singleton;
 	}
 	
-	/*
-	 * Attention, les m�thodes suivantes :
-	 * public void actionPerformed(ActionEvent arg0)
-	 * public void update(Observable arg0, Object arg1)
-	 * doivent �tre impl�menter dans les classes filles
-	 */
-
-	/*
-	 * Permet de mettre � jour la fen�tre dans le cas o� un objet observ� a �t� modifi�
-	 */
 	public void miseAJour(Observable arg0) {
 
 		
