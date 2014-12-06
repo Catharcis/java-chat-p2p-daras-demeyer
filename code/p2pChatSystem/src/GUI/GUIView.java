@@ -35,8 +35,8 @@ public class GUIView implements Observer{
 	private ChatFenetre chatFenetre;
 	
 	private GUIControler guiControler ;
-
-	private ArrayList<ConversationFenetre> conversationFenetre ;
+	
+	private ArrayList<ConversationFenetre> listOfConversationFenetre ;
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
@@ -46,7 +46,7 @@ public class GUIView implements Observer{
 		chatFenetre = chatFenetre.getInstance();
 		chatFenetre.setVisible(true);
 		guiControler = guiControler.getInstance() ;
-		conversationFenetre = new ArrayList<ConversationFenetre>() ;
+		listOfConversationFenetre = new ArrayList<ConversationFenetre>() ;
 	}
 	
 	public static GUIView getInstance(){
@@ -69,7 +69,7 @@ public class GUIView implements Observer{
 	}
 	
 	public ArrayList<ConversationFenetre> getConversationFenetre () {
-		return this.conversationFenetre ;
+		return this.listOfConversationFenetre ;
 	}
 	
 	/************************************************* 
@@ -173,16 +173,16 @@ public class GUIView implements Observer{
 				this.guiControler.getGUIToControler().removeIDListModel(idUser);
 				
 				//suppression du user des conversations
-				for (int i = 0; i<this.conversationFenetre.size(); i++) {
+				for (int i = 0; i<this.listOfConversationFenetre.size(); i++) {
 					// on supprime l'ID du user de toutes les conversations
-					this.conversationFenetre.get(i).getListOfIds().remove(idUser) ;
+					this.listOfConversationFenetre.get(i).getListOfIds().remove(idUser) ;
 					// on supprime son nickname de toutes les conversations
-					this.conversationFenetre.get(i).getListOfNicknames().remove(this.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser)) ;
-					System.out.println("Le user a ete supprime d'une conversation") ;
+					this.listOfConversationFenetre.get(i).getListOfNicknames().remove(this.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser)) ;
+					// mise a jour du titre de la fenetre
+					this.listOfConversationFenetre.get(i).miseAJourTitre() ;
 					// si la conversation est alors vide, on la supprime de la liste
-					if (this.conversationFenetre.get(i).getListOfIds().isEmpty()) {
-						this.conversationFenetre.remove(i) ;
-						System.out.println("Toute une conversation a ete supprime") ;
+					if (this.listOfConversationFenetre.get(i).getListOfIds().isEmpty()) {
+						this.listOfConversationFenetre.remove(i) ;
 					}
 				}
 				

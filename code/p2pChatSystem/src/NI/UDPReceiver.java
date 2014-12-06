@@ -112,7 +112,8 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 					// On ajoute l'utilisateur distant et on nous retire de la liste
 					ArrayList<String> list = textMessage.getListNicknamesDest();
 					if (list.remove(myUsername)){
-						System.out.println("UDPReceiver - TextMessage - Remove myUsername success");
+						System.out.println("UDPReceiver - TextMessage - Remove myUsername success : "+myUsername);
+						System.out.println("UDPReceiver - TextMessage - Source :"+list.get(0));
 					}
 					else{
 						System.out.println("UDPReceiver - TextMessage - [ERROR] This message was not for us");
