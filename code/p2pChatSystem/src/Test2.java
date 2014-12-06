@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.plaf.FileChooserUI;
@@ -30,6 +31,7 @@ public class Test2 {
 		
 		JFrame frame = new JFrame() ;
 		frame.setTitle("Chat System") ; 
+		frame.setResizable(false) ;
 		frame.setSize(500, 400);
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.setLocationRelativeTo(null);
@@ -71,14 +73,15 @@ public class Test2 {
 	    JPanel cell6 = new JPanel();
 	    cell6.setBackground(Color.BLUE);
 	    cell6.setPreferredSize(new Dimension(200, 250));
+	    cell6.add(new JList<Integer>()) ;
 
 		
 	    //Le conteneur principal
-	    JPanel content = new JPanel();
-	    content.setSize(new Dimension(500, 400));
-	    content.setBackground(Color.WHITE);
+	    JPanel connectDisconnectPanel = new JPanel();
+	    connectDisconnectPanel.setSize(new Dimension(500, 400));
+	    connectDisconnectPanel.setBackground(Color.WHITE);
 	    //On définit le layout manager
-	    content.setLayout(new GridBagLayout());
+	    connectDisconnectPanel.setLayout(new GridBagLayout());
 			
 	    //L'objet servant à positionner les composants
 	    GridBagConstraints gbc = new GridBagConstraints();
@@ -89,13 +92,13 @@ public class Test2 {
 	    //La taille en hauteur et en largeur
 	    gbc.gridheight = 1;
 	    gbc.gridwidth = 1;
-	    content.add(cell1, gbc);
+	    connectDisconnectPanel.add(cell1, gbc);
 	    //---------------------------------------------
 	    gbc.gridx = 1;
-	    content.add(cell2, gbc);
+	    connectDisconnectPanel.add(cell2, gbc);
 	    //---------------------------------------------
 	    gbc.gridx = 2;		
-	    content.add(cell3, gbc);		
+	    connectDisconnectPanel.add(cell3, gbc);		
 	    //---------------------------------------------
 	    gbc.gridx = 0;
 	    gbc.gridy = 1;
@@ -104,7 +107,7 @@ public class Test2 {
 	    //Celle-ci indique que la cellule se réplique de façon verticale
 	    gbc.fill = GridBagConstraints.HORIZONTAL;
 	    gbc.gridwidth = GridBagConstraints.REMAINDER;
-	    content.add(cell4, gbc);
+	    connectDisconnectPanel.add(cell4, gbc);
 	    //---------------------------------------------
 	    gbc.gridx = 0;
 	    gbc.gridy = 3;
@@ -113,7 +116,7 @@ public class Test2 {
 	    //Celle-ci indique que la cellule se réplique de façon horizontale
 	    gbc.fill = GridBagConstraints.VERTICAL;
 	    gbc.gridwidth = GridBagConstraints.REMAINDER;
-	    content.add(cell5, gbc);
+	    connectDisconnectPanel.add(cell5, gbc);
 	    //---------------------------------------------
 	    //---------------------------------------------
 	    gbc.gridx = 1;
@@ -122,11 +125,11 @@ public class Test2 {
 	    gbc.gridwidth = GridBagConstraints.REMAINDER;
 	    gbc.fill = GridBagConstraints.VERTICAL;
 	    gbc.anchor = GridBagConstraints.LAST_LINE_END ;
-	    content.add(cell6, gbc);
+	    connectDisconnectPanel.add(cell6, gbc);
 	    //---------------------------------------------
-
+  
 	    //On ajoute le conteneur
-	    frame.setContentPane(content);
+	    frame.setContentPane(connectDisconnectPanel);
 		frame.setVisible(true) ;
 	}
 
