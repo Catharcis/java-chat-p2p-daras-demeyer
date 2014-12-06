@@ -122,7 +122,7 @@ public class ChatFenetre extends AbstractFenetre{
 	    cell5.setBackground(Color.white);
 	    cell5.setPreferredSize(new Dimension(300, 250));
 	    cell5.setLayout(new BorderLayout());
-	    cell5.add(this.connectDisconnectPanel.getImageChat(), JLabel.CENTER) ;
+	    cell5.add(this.connectDisconnectPanel.getImageChat(), BorderLayout.CENTER) ;
 	    
 	    JPanel cell6 = new JPanel();
 	    cell6.setBackground(Color.BLUE);
@@ -166,7 +166,7 @@ public class ChatFenetre extends AbstractFenetre{
 	    gbc.gridx = 0;
 	    gbc.gridy = 3;
 	    gbc.gridwidth = 1;
-	    gbc.anchor = GridBagConstraints.LAST_LINE_START ;
+	    gbc.anchor = GridBagConstraints.CENTER ;
 	    //Celle-ci indique que la cellule se réplique de façon horizontale
 	    gbc.fill = GridBagConstraints.VERTICAL;
 	    gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -194,6 +194,10 @@ public class ChatFenetre extends AbstractFenetre{
 		this.connectDisconnectPanel.getButtonConnectOnOff().addActionListener(this);
 		this.connectDisconnectPanel.getNicknameField().addKeyListener(this);
 		this.contactsListPanel.getList().addMouseListener(this) ; 
+		
+		// On s'assure du bon placement des composants
+		this.pack();
+
 	}
 	
 /*	
