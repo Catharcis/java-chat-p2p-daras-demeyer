@@ -76,8 +76,7 @@ public class GUIToControler {
 			String nameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
 			niCon.sendHello(nameWithPattern);
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("GUIToControler - PERFORM CONNECT : UnknownHostException") ;
 		}
 		
 		// Si la socket est dans l'etat "closed", cela indique qu'elle a deja ete ouverte et qu'il faut la remplace
@@ -94,11 +93,9 @@ public class GUIToControler {
 			// On envoie un HelloAck a celui qui nous a envoye un Hello
 			String localNameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
 			String destNameWithPattern = NI.getNicknameWithIP(this.NI.getUserWithId(idDestUser));
-			System.out.println("PERFORM SEND HELLO ACK - LOCAL @ : "+localNameWithPattern+ "DEST @ :"+destNameWithPattern+"\n") ;
 			niCon.sendHelloAck(localNameWithPattern,destNameWithPattern,NI.getIPAddressOfUser(this.NI.getUserWithId(idDestUser)));
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("GUIToControler - PERFORM SEND HELLO ACK : UnknownHostException") ;
 		}
 	}
 	
@@ -112,8 +109,7 @@ public class GUIToControler {
 			NI.notifyLastChange(typeOfChange.DISCONNECTION);
 			NI.reinitializeVariables();
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("GUIToControler - PERFORM DISCONNECT : UnknownHostException") ;
 		}		
 	}
 	

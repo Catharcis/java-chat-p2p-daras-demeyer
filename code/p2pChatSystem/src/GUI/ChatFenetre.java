@@ -11,6 +11,7 @@ import java.net.UnknownHostException;
 import java.util.Observable;
 
 import javax.swing.JPanel;
+import javax.swing.ListModel;
 
 import Controler.NetworkInformation;
 import Controler.typeOfChange;
@@ -112,6 +113,7 @@ public class ChatFenetre extends AbstractFenetre{
 	    this.pack();
 		connectDisconnectPanel.getButtonConnectOnOff().addActionListener(this);
 		connectDisconnectPanel.getNicknameField().addKeyListener(this);
+		contactsListPanel.getList().addMouseListener(this) ;
 	}
 
 
@@ -140,12 +142,19 @@ public class ChatFenetre extends AbstractFenetre{
 	public void miseAJour(Observable arg0) {
 		
 	}
-
+	
 	
 	@Override
-	public void mouseClicked(MouseEvent e) {
-
-		
+	public void mouseClicked(MouseEvent evt) {
+        if (evt.getClickCount() == 2) {
+            int index = this.contactsListPanel.getList().locationToIndex(evt.getPoint());
+            ListModel dlm = this.contactsListPanel.getList().getModel();
+            Object item = dlm.getElementAt(index);;
+            this.contactsListPanel.getList().ensureIndexIsVisible(index);
+            // creation de la fenetre
+            int idUser = this.guiView.getGUIControler().getGUIToControler().getNetInfo().getArrayPositionsListModel().get(index);
+            this.guiView.getConversationFenetre().add(new ConversationFenetre(item.toString(), idUser)); 
+        }
 	}
 
 	@Override

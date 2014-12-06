@@ -31,8 +31,6 @@ public class ConversationFenetre extends AbstractFenetre{
 	/************************************************* 
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
-	private static ConversationFenetre singleton ;
-	
 	private static GUIView guiView ;
 	
 	private JTextArea historic;
@@ -49,32 +47,18 @@ public class ConversationFenetre extends AbstractFenetre{
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
-	private ConversationFenetre(ArrayList<String> nicknames, TreeSet <Integer> listOfId) {
-		String title = new String();
-		for (int i = 0 ; i<nicknames.size(); i++ ) {
-			// cas du dernier nom de la liste
-			if (i == nicknames.size()-1)
-				title = title+nicknames.get(i) ;
-			else
-				title = title + nicknames.get(i)+", " ;
-		}
-		
-		this.setTitle(title);
+	public ConversationFenetre(String nickname, int UserId) {
+		this.setTitle(nickname);
 		historic = new JTextArea(20,30);
 		JScrollPane scrollPane = new JScrollPane(historic);
 		writerArea = new JTextArea(10,30);
 		sendButton = new JButton("Send");
 		invite = new JButton("Invite");
 		initializeComponents();
-		this.listOfId = listOfId ;
+		this.listOfId = new TreeSet<Integer>() ;
+		this.listOfId.add(UserId) ;
 	}
 	
-	public static ConversationFenetre getInstance(ArrayList<String> nicknames, TreeSet<Integer> listIds) {
-		if (singleton == null){
-			singleton = new ConversationFenetre(nicknames, listIds);
-		}
-		return singleton;
-	}
 	
 	/************************************************* 
 	 * 				GETTERS & SETTERS
