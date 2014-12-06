@@ -179,50 +179,7 @@ public class ChatFenetre extends AbstractFenetre{
 		
 		this.pack();
 	}
-	
-/*	
-	@Override
-	public void initializeComponents() {
-		this.setPreferredSize(new Dimension(300,100)) ;
-		this.setResizable(false) ;
-		// On les reunit au sein d'un seule et meme panel
-		JPanel generalPanel = new JPanel(new BorderLayout());
-		JPanel textFieldAndButton = new JPanel(new BorderLayout());
-		JPanel statusAndImagePanel = new JPanel(new GridLayout(1,2));
-		JPanel nicknameAndStatusAndImagePanel = new JPanel(new BorderLayout());
-		JPanel generalConnectPanel = new JPanel(new BorderLayout());
 		
-		
-		textFieldAndButton.add(connectDisconnectPanel.getTextFieldNameOfLocalUser(),BorderLayout.WEST);
-		textFieldAndButton.add(connectDisconnectPanel.getButtonConnectOnOff(),BorderLayout.EAST);
-		
-		// On les ajoute a notre panel
-		statusAndImagePanel.add(connectDisconnectPanel.getImageStatus());
-		
-		generalConnectPanel.add(connectDisconnectPanel.getImageChat()) ;
-		
-		nicknameAndStatusAndImagePanel.add(statusAndImagePanel,BorderLayout.NORTH);
-		
-		generalConnectPanel.add(nicknameAndStatusAndImagePanel,BorderLayout.NORTH);
-		generalConnectPanel.add(textFieldAndButton,BorderLayout.SOUTH);
-		
-		generalPanel.add(generalConnectPanel,BorderLayout.NORTH);
-		generalPanel.add(contactsListPanel,BorderLayout.SOUTH);
-		
-		this.getContentPane().add(generalPanel);
-		
-		// On ajoute les informations utiles a la fenetre
-		this.setTitle("Chat System");
-		this.setLocationRelativeTo(null);
-	    this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-	    this.pack();
-		connectDisconnectPanel.getButtonConnectOnOff().addActionListener(this);
-		connectDisconnectPanel.getNicknameField().addKeyListener(this);
-		contactsListPanel.getList().addMouseListener(this) ;
-	}
-
-*/
-	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == connectDisconnectPanel.getButtonConnectOnOff()){
