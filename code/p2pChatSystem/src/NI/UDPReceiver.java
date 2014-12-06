@@ -71,8 +71,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 			} catch (SocketException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-				
+			}	
 		}
 		
 		try {
@@ -86,7 +85,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 			
 			AbstractMessage message = this.bufToMessage(buf) ;
 			
-			String myUsername = NiCon.getNetInfo().getLocalUser().getNickname()+"@"+(InetAddress.getLocalHost()).getHostAddress();
+			String myUsername = NiCon.getNetInfo().getLocalUser().getNickname()+"@"+NiCon.getNetInfo().getLocalIPAddress();
 			
 			if (!(message.getNickname().equals(myUsername))){
 			

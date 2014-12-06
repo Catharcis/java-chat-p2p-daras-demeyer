@@ -189,10 +189,10 @@ public class NetworkInformation extends Observable {
 	}
 	
 	
-	public InetAddress getLocalIPAddress () throws UnknownHostException, SocketException {
+	public String getLocalIPAddress () throws UnknownHostException, SocketException {
 		Enumeration e = NetworkInterface.getNetworkInterfaces();
 		boolean found = false ;
-		InetAddress ip = null ;
+		String ip = null ;
 		while(e.hasMoreElements())
 		{
 		    NetworkInterface n = (NetworkInterface) e.nextElement();
@@ -202,12 +202,14 @@ public class NetworkInformation extends Observable {
 		        InetAddress i = (InetAddress) ee.nextElement();
 		        if (i.getHostAddress().startsWith("192.") | i.getHostAddress().startsWith("10.")) {
 		        	found = true ;
-		        	ip = i ;
+		        	
+		        	ip = i.getHostAddress() ;
+		        	System.out.println("NETINFO - getLocalIPAddress : " + ip) ;
 		        }
 		    }
 		}
 		if (found == false) {
-			return InetAddress.getByName("192.168.1.23") ;
+			return InetAddress.getByName("192.168.1.23").getHostAddress() ;
 		}
 		else 
 			return ip ;

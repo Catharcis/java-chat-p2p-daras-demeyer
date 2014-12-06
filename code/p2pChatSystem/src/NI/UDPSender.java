@@ -24,8 +24,6 @@ public class UDPSender extends AbstractSender {
 	
 	private static UDPSender singleton = null;
 	
-	private InetAddress localAddress ;
-	
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
@@ -89,9 +87,9 @@ public class UDPSender extends AbstractSender {
 		}
 	}
 	
-	/** Methode permettant d'envoyer un message a� une liste d'utilisateurs **/
+	/** Methode permettant d'envoyer un message a une liste d'utilisateurs **/
 	public void send(AbstractMessage message, ArrayList<String> listOfUsers, ArrayList<InetAddress> ipAddressesList){
-		/** On r�cup�re les informations reseaux **/
+		/** On recupere les informations reseaux **/
 		NetworkInformation NI = null;
 		NI = NI.getInstance();
 		
@@ -112,11 +110,11 @@ public class UDPSender extends AbstractSender {
 				  	out.writeObject(message);
 				  	byte[] buf = bos.toByteArray();
 				  	DatagramPacket packet = new DatagramPacket (buf, buf.length, ipAddressesList.get(i), this.getPortEcoute()) ;
-				  	System.out.println("UDPSender : Paquet concu ! Adresse IP destinataire : " + ipAddressesList.get(i)) ;
+				  	System.out.println("UDPSender : Paquet "+message.toString()+" concu ! Adresse IP destinataire : " + ipAddressesList.get(i)) ;
 	
 				  	/** Envoi du paquet **/
 				  	socket.send(packet);
-				  	System.out.println("UDPSender : Paquet envoye!") ;
+				  	System.out.println("UDPSender : Paquet "+message.toString()+" envoye!") ;
 				} catch (IOException e) {
 					System.out.println("UDPSender : Erreur lors de l'ecriture") ;
 				}
