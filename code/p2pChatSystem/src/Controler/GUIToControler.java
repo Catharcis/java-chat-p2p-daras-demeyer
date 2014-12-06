@@ -91,10 +91,10 @@ public class GUIToControler {
 	
 	public void performSendHelloAck(int idDestUser){
 		try {
-			// On envoie un HelloAck a� celui qui nous a envoye un Hello
+			// On envoie un HelloAck a celui qui nous a envoye un Hello
 			String localNameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
-			
 			String destNameWithPattern = NI.getNicknameWithIP(this.NI.getUserWithId(idDestUser));
+			System.out.println("PERFORM SEND HELLO ACK - LOCAL @ : "+localNameWithPattern+ "DEST @ :"+destNameWithPattern+"\n") ;
 			niCon.sendHelloAck(localNameWithPattern,destNameWithPattern,NI.getIPAddressOfUser(this.NI.getUserWithId(idDestUser)));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
