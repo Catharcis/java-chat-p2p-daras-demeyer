@@ -5,23 +5,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.net.UnknownHostException;
 import java.util.Observable;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.ListModel;
 
 import Controler.NetworkInformation;
@@ -48,7 +42,7 @@ public class ChatFenetre extends AbstractFenetre{
 	 ************************************************/
 	
 	private ChatFenetre(){
-		// On recupere les deux panels
+		this.initializeWindow() ;
 		connectDisconnectPanel = connectDisconnectPanel.getInstance();
 		contactsListPanel = contactsListPanel.getInstance();
 		this.addWindowListener(this);
@@ -87,15 +81,16 @@ public class ChatFenetre extends AbstractFenetre{
 	 * 					METHODS 
 	 ************************************************/
 
-	public void initializeComponents() {	
+	public void initializeWindow() {
 		this.setTitle("Chat System") ; 
 		this.setResizable(false) ;
 		this.setSize(500, 400);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setLocationRelativeTo(null);
-	    
-	    
-	    // On crée nos différents conteneurs
+	}
+	
+	public void initializeComponents() {	
+		// On crée nos différents conteneurs
 	    JPanel cell1 = new JPanel();
 	    cell1.setBackground(Color.white);
 	    cell1.setPreferredSize(new Dimension(160, 75));	
@@ -125,79 +120,62 @@ public class ChatFenetre extends AbstractFenetre{
 	    cell5.add(this.connectDisconnectPanel.getImageChat(), BorderLayout.CENTER) ;
 	    
 	    JPanel cell6 = new JPanel();
-	    cell6.setBackground(Color.BLUE);
+	    cell6.setBackground(Color.white);
 	    cell6.setPreferredSize(new Dimension(200, 250));
+	    this.contactsListPanel.initComponents() ;
 	    cell6.add(this.contactsListPanel.getList()) ;
 	    
-	    
 	    //Le conteneur principal
-	    JPanel connectDisconnectPanel = new JPanel();
 	    connectDisconnectPanel.setSize(new Dimension(500, 400));
-	    connectDisconnectPanel.setBackground(Color.WHITE);
-	    //On définit le layout manager
+	    connectDisconnectPanel.setBackground(Color.white);
 	    connectDisconnectPanel.setLayout(new GridBagLayout());
 	    
 	    //L'objet servant à positionner les composants
 	    GridBagConstraints gbc = new GridBagConstraints();
 			
-	    //On positionne la case de départ du composant
+	    //On positionne les composants
 	    gbc.gridx = 0;
 	    gbc.gridy = 0;
-	    //La taille en hauteur et en largeur
-	    gbc.gridheight = 1;
-	    gbc.gridwidth = 1;
 	    connectDisconnectPanel.add(cell1, gbc);
 	    //---------------------------------------------
 	    gbc.gridx = 1;
 	    connectDisconnectPanel.add(cell2, gbc);
 	    //---------------------------------------------
 	    gbc.gridx = 2;		
+	    gbc.anchor = GridBagConstraints.FIRST_LINE_END ;
 	    connectDisconnectPanel.add(cell3, gbc);		
 	    //---------------------------------------------
 	    gbc.gridx = 0;
 	    gbc.gridy = 1;
-	    gbc.gridwidth = 1;
-	    gbc.gridheight = 2;
-	    //Celle-ci indique que la cellule se réplique de façon verticale
 	    gbc.fill = GridBagConstraints.HORIZONTAL;
 	    gbc.gridwidth = GridBagConstraints.REMAINDER;
 	    connectDisconnectPanel.add(cell4, gbc);
 	    //---------------------------------------------
 	    gbc.gridx = 0;
 	    gbc.gridy = 3;
-	    gbc.gridwidth = 1;
-	    gbc.anchor = GridBagConstraints.CENTER ;
-	    //Celle-ci indique que la cellule se réplique de façon horizontale
-	    gbc.fill = GridBagConstraints.VERTICAL;
-	    gbc.gridwidth = GridBagConstraints.REMAINDER;
+	    gbc.anchor = GridBagConstraints.LAST_LINE_START ;
+	    gbc.fill = GridBagConstraints.NONE;
+	    gbc.gridheight = GridBagConstraints.REMAINDER;
 	    connectDisconnectPanel.add(cell5, gbc);
-	    
 	    //---------------------------------------------
-	    //---------------------------------------------
-	    gbc.gridx = 2;
+	    gbc.gridx = 0;
 	    gbc.gridy = 3;
-	    //Celle-ci indique que la cellule se réplique de façon horizontale
-	    gbc.gridwidth = GridBagConstraints.REMAINDER;
-	    gbc.fill = GridBagConstraints.VERTICAL;
 	    gbc.anchor = GridBagConstraints.LAST_LINE_END ;
+	    gbc.fill = GridBagConstraints.NONE;
+	    gbc.gridheight = GridBagConstraints.REMAINDER;
+	    gbc.gridwidth = GridBagConstraints.REMAINDER;
 	    //contactsListPanel.add(cell6, gbc);
 	    this.connectDisconnectPanel.add(cell6,gbc);
 	    //---------------------------------------------
-  
-
 
 	    //On ajoute le conteneur
 	    this.setContentPane(connectDisconnectPanel);
 	    this.setVisible(true) ;
 	    
-	    
+	    // On ajoute les Listener
 		this.connectDisconnectPanel.getButtonConnectOnOff().addActionListener(this);
 		this.connectDisconnectPanel.getNicknameField().addKeyListener(this);
 		this.contactsListPanel.getList().addMouseListener(this) ; 
-		
-		// On s'assure du bon placement des composants
-		this.pack();
-
 	}
 	
 /*	

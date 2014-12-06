@@ -32,7 +32,6 @@ public class ConnectDisconnectPanel extends JPanel {
 	 ************************************************/
 	
 	private ConnectDisconnectPanel(){
-		// On initialise les parametres
 		labelNickname = new JLabel("Nickname : ");
 		nameOfLocalUser = new JTextField(15) ;
 		buttonConnectOnOff = new JButton("Connexion");
