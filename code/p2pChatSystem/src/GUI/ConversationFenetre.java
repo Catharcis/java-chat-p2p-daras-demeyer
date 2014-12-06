@@ -41,6 +41,8 @@ public class ConversationFenetre extends AbstractFenetre{
 	
 	private JButton invite;
 	
+	private ArrayList<String> listOfNicknames ;
+	
 	private TreeSet <Integer> listOfId ;
 	
 	/************************************************* 
@@ -55,6 +57,8 @@ public class ConversationFenetre extends AbstractFenetre{
 		sendButton = new JButton("Send");
 		invite = new JButton("Invite");
 		initializeComponents();
+		this.listOfNicknames = new ArrayList<String>() ;
+		this.listOfNicknames.add(nickname) ;
 		this.listOfId = new TreeSet<Integer>() ;
 		this.listOfId.add(UserId) ;
 	}
@@ -68,9 +72,16 @@ public class ConversationFenetre extends AbstractFenetre{
 		return guiView;
 	}
 
-	
 	public void setGuiView (GUIView view) {
 		guiView = view.getInstance() ;
+	}
+	
+	public TreeSet<Integer> getListOfIds () {
+		return this.listOfId ;
+	}
+	
+	public ArrayList<String> getListOfNicknames() {
+		return this.listOfNicknames ;
 	}
 	
 	/************************************************* 
@@ -108,6 +119,7 @@ public class ConversationFenetre extends AbstractFenetre{
 		
 	}
 
+		
 	public void miseAJour(Observable arg0) {
 
 	}
