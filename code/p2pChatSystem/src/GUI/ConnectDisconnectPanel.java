@@ -25,7 +25,9 @@ public class ConnectDisconnectPanel extends JPanel {
 	
 	private JLabel status;
 	
-	private JLabel image;
+	private JLabel imageStatus;
+	
+	private JLabel imageChat;
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
@@ -37,7 +39,8 @@ public class ConnectDisconnectPanel extends JPanel {
 		status = new JLabel("Status : ");
 		nameOfLocalUser = new JTextField(10) ;
 		buttonConnectOnOff = new JButton("Connexion");
-		image = new JLabel(new ImageIcon("offline.png"));
+		imageStatus = new JLabel(new ImageIcon("offline.png"));
+		imageChat = new JLabel(new ImageIcon("chat.png")) ;
 		this.setVisible(true);
 		}
 	
@@ -77,12 +80,20 @@ public class ConnectDisconnectPanel extends JPanel {
 		return status;
 	}
 	
-	public JLabel getImage(){
-		return image;
+	public JLabel getImageStatus(){
+		return imageStatus;
 	}
 	
-	public void setImage(ImageIcon newIcon) {
-		this.image = new JLabel(newIcon) ;
+	public void setImageStatus(ImageIcon newIcon) {
+		this.imageStatus = new JLabel(newIcon) ;
+	}
+	
+	public JLabel getImageChat() {
+		return imageChat ;
+	}
+	
+	public void setImageChat(ImageIcon newIcon) {
+		this.imageChat = new JLabel(newIcon) ;
 	}
 	
 	

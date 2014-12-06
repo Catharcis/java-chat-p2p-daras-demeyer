@@ -1,6 +1,8 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -79,21 +81,25 @@ public class ChatFenetre extends AbstractFenetre{
 	
 	@Override
 	public void initializeComponents() {
-		
+		this.setPreferredSize(new Dimension(300,300)) ;
+		this.setResizable(false) ;
 		// On les reunit au sein d'un seule et meme panel
 		JPanel generalPanel = new JPanel(new BorderLayout());
+		generalPanel.setBackground(Color.blue) ;
 		JPanel textFieldAndButton = new JPanel(new BorderLayout());
 		JPanel statusAndImagePanel = new JPanel(new GridLayout(1,2));
 		JPanel nicknameAndStatusAndImagePanel = new JPanel(new BorderLayout());
 		JPanel generalConnectPanel = new JPanel(new BorderLayout());
 		
+		
 		textFieldAndButton.add(connectDisconnectPanel.getTextFieldNameOfLocalUser(),BorderLayout.WEST);
 		textFieldAndButton.add(connectDisconnectPanel.getButtonConnectOnOff(),BorderLayout.EAST);
-			
 		
 		// On les ajoute a notre panel
 		statusAndImagePanel.add(connectDisconnectPanel.getStatus());
-		statusAndImagePanel.add(connectDisconnectPanel.getImage());
+		statusAndImagePanel.add(connectDisconnectPanel.getImageStatus());
+		
+		generalConnectPanel.add(connectDisconnectPanel.getImageChat()) ;
 		
 		nicknameAndStatusAndImagePanel.add(statusAndImagePanel,BorderLayout.NORTH);
 		nicknameAndStatusAndImagePanel.add(connectDisconnectPanel.getLabelNickname(),BorderLayout.SOUTH);
