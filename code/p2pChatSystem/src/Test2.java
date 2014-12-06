@@ -29,6 +29,10 @@ public class Test2 {
 
 	public static void main(String[] args) {
 		
+		
+		ConversationFenetre fen = new ConversationFenetre("Michel",1);
+		
+		/**
 		JFrame frame = new JFrame() ;
 		frame.setTitle("Chat System") ; 
 		frame.setResizable(false) ;
@@ -131,6 +135,8 @@ public class Test2 {
 	    //On ajoute le conteneur
 	    frame.setContentPane(connectDisconnectPanel);
 		frame.setVisible(true) ;
+		
+		**/
 	}
 
 }

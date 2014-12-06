@@ -2,7 +2,11 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -15,6 +19,7 @@ import java.util.TreeSet;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -51,9 +56,9 @@ public class ConversationFenetre extends AbstractFenetre{
 	
 	public ConversationFenetre(String nickname, int UserId) {
 		this.setTitle(nickname);
-		historic = new JTextArea(20,30);
+		historic = new JTextArea();
 		JScrollPane scrollPane = new JScrollPane(historic);
-		writerArea = new JTextArea(10,30);
+		writerArea = new JTextArea();
 		sendButton = new JButton("Send");
 		invite = new JButton("Invite");
 		initializeComponents();
@@ -96,6 +101,7 @@ public class ConversationFenetre extends AbstractFenetre{
 	 */
 	
 	public void initializeComponents(){
+		/**
 		historic.setEditable(false);
 		historic.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 		writerArea.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
@@ -115,7 +121,101 @@ public class ConversationFenetre extends AbstractFenetre{
 		generalPanel.add(writePartPanel,BorderLayout.SOUTH);
 		this.getContentPane().add(generalPanel);
 		this.pack();
-		this.setVisible(true);
+		this.setVisible(true);**/
+		
+		// Parametres de la fenetre et des composants
+		this.setResizable(false) ;
+		this.setSize(400, 550);
+	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    this.setLocationRelativeTo(null);
+	    historic.setEditable(false);
+	    historic.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+		writerArea.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+		this.historic.setSize(300, 350);
+		this.writerArea.setSize(300,75);
+	    
+	    JPanel cell1 = new JPanel();
+	    cell1.setBackground(Color.white);
+	    cell1.setPreferredSize(new Dimension(400, 50));
+	    this.invite.setMargin(new Insets(7,7,7,7));
+	    cell1.add(this.invite, BorderLayout.CENTER) ;
+	    
+	    JPanel cell2 = new JPanel();
+	    cell2.setBackground(Color.white);
+	    cell2.setPreferredSize(new Dimension(400, 350));
+	    cell2.setLayout(new BorderLayout());
+	    cell2.add(this.historic, BorderLayout.CENTER) ;
+	    
+	    JPanel cell3 = new JPanel();
+	    cell3.setBackground(Color.white);
+	    cell3.setPreferredSize(new Dimension(350,150));
+	    cell3.add(this.writerArea, BorderLayout.WEST) ;
+	    
+	    JPanel cell4 = new JPanel();
+	    cell4.setBackground(Color.white);
+	    cell4.setPreferredSize(new Dimension(50, 150));
+	    cell4.setLayout(new BorderLayout());
+	    this.sendButton.setMargin(new Insets(10,10,10,10));
+	    cell4.add(this.sendButton, BorderLayout.CENTER) ;
+	    
+	    
+	    //Le conteneur principal
+	    JPanel conversationPanel = new JPanel();
+	    conversationPanel.setSize(new Dimension(400, 550));
+	    conversationPanel.setBackground(Color.WHITE);
+	    //On définit le layout manager
+	    conversationPanel.setLayout(new GridBagLayout());
+	    
+	    //L'objet servant à positionner les composants
+	    GridBagConstraints gbc = new GridBagConstraints();
+			
+	    //---------------------------------------------
+	    gbc.gridx = 0;
+	    gbc.gridy = 0;
+	    //Celle-ci indique que la cellule se réplique de façon verticale
+	    gbc.fill = GridBagConstraints.HORIZONTAL;
+	    gbc.gridwidth = GridBagConstraints.REMAINDER;
+	    conversationPanel.add(cell1, gbc);
+	    //---------------------------------------------
+	    gbc.gridx = 0;
+	    gbc.gridy = 1;
+	    gbc.gridwidth = 1;
+	    gbc.anchor = GridBagConstraints.CENTER ;
+	    //Celle-ci indique que la cellule se réplique de façon horizontale
+	    gbc.fill = GridBagConstraints.VERTICAL;
+	    gbc.gridwidth = GridBagConstraints.REMAINDER;
+	    conversationPanel.add(cell3, gbc);
+	    
+	    //---------------------------------------------
+	    //---------------------------------------------
+	    gbc.gridx = 0;
+	    gbc.gridy = 2;
+	    //Celle-ci indique que la cellule se réplique de façon horizontale
+	    gbc.gridwidth = GridBagConstraints.REMAINDER;
+	    gbc.fill = GridBagConstraints.VERTICAL;
+	    gbc.anchor = GridBagConstraints.LAST_LINE_END ;
+	    conversationPanel.add(cell4,gbc);
+	    //---------------------------------------------
+	    gbc.gridx = 1;
+	    gbc.gridy = 2;
+	    //Celle-ci indique que la cellule se réplique de façon horizontale
+	    gbc.gridwidth = GridBagConstraints.REMAINDER;
+	    gbc.fill = GridBagConstraints.VERTICAL;
+	    gbc.anchor = GridBagConstraints.LAST_LINE_END ;
+	    conversationPanel.add(cell4,gbc);
+	    //---------------------------------------------
+
+
+	    //On ajoute le conteneur
+	    this.setContentPane(conversationPanel);
+	    this.setVisible(true) ;
+	    
+	    
+		this.invite.addActionListener(this);
+		this.sendButton.addActionListener(this); 
+		
+		// On s'assure du bon placement des composants
+		//this.pack();
 		
 	}
 
