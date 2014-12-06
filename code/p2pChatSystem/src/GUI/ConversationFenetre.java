@@ -54,19 +54,19 @@ public class ConversationFenetre extends AbstractFenetre{
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
-	public ConversationFenetre(String nickname, int UserId) {
-		this.setTitle(nickname);
-		historic = new JTextArea();
-		JScrollPane scrollPane = new JScrollPane(historic);
-		writerArea = new JTextArea();
-		sendButton = new JButton("Send");
-		invite = new JButton("Invite");
-		initializeComponents();
-		this.listOfNicknames = new ArrayList<String>() ;
-		this.listOfNicknames.add(nickname) ;
-		this.listOfId = new TreeSet<Integer>() ;
-		this.listOfId.add(UserId) ;
-	}
+    public ConversationFenetre(String nickname, int UserId){
+        historic = new JTextArea(20,30);
+        JScrollPane scrollPane = new JScrollPane( historic );
+        writerArea = new JTextArea(10,30);
+        sendButton = new JButton("Send");
+        invite = new JButton("Invite");
+        this.listOfNicknames = new ArrayList<String>() ;
+        this.listOfNicknames.add(nickname) ;
+        this.listOfId = new TreeSet<Integer>() ;
+        this.listOfId.add(UserId) ;
+        initializeComponents();
+}
+
 	
 	
 	/************************************************* 
@@ -102,10 +102,11 @@ public class ConversationFenetre extends AbstractFenetre{
 	
 	public void initializeComponents(){
 		
-        historic.setEditable(false);
+		historic.setEditable(false);
+        writerArea.setSize(400, 100);
+        sendButton.addActionListener(this);
         historic.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
         writerArea.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-        sendButton.addActionListener(this);
         JPanel generalPanel = new JPanel(new BorderLayout());
         JPanel writePartPanel = new JPanel();
         JPanel invitePanel = new JPanel();
@@ -122,6 +123,7 @@ public class ConversationFenetre extends AbstractFenetre{
         this.getContentPane().add(generalPanel);
         this.pack();
         this.setVisible(true);
+
 
 	}
 
