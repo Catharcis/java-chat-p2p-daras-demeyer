@@ -118,13 +118,16 @@ public class GUIToControler {
 		/** Conversation existante **/
 		if (NI.getHistoricConversations().containsKey(listOfId)) {
 			/** ajout du message a envoyer **/
-			String historic = NI.getHistoricConversations().get(listOfId) + NI.getLocalUser().getNickname()+" : "+message+"\n";
+			String historic = NI.getHistoricConversations().get(listOfId) + "Me : "+message+"\n";
+			System.out.println("GUITOCon - PERFORM SEND TEXT MESSAGE - historic : "+historic) ;
 			NI.getHistoricConversations().put(listOfId, historic);
 		}
 		/** Conversation non existante et donc a creer **/
 		else {
-			NI.getHistoricConversations().put(listOfId, NI.getLocalUser().getNickname()+" : "+message+"\n") ;
+			System.out.println("GUITOCon - PERFORM SEND TEXT MESSAGE - New historic : Me : "+message) ;
+			NI.getHistoricConversations().put(listOfId, "Me : "+message+"\n") ;
 		}
+		NI.notifyLastChange(typeOfChange.NEWINCOMINGTEXTMESSAGE, listOfId) ;
 		
 		/** Construction d'une List de String sous format NICKNAME@XX.XX.XX.XX**/
 		ArrayList<String> nicknameList = new ArrayList <String> () ;

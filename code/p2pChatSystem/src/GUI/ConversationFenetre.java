@@ -135,17 +135,27 @@ public class ConversationFenetre extends AbstractFenetre{
 
 	}
 
-	public void miseAJourTitre () {
-		String title = null ;
-		for (int i = 0; i<this.listOfNicknames.size();i++) {
-			// cas du dernier element
-			if (i == this.listOfNicknames.size()-1) {
-				title = title + this.listOfNicknames.get(i) ;
-			}
-			else 
-				title = title + "this.listOfNicknames.get(i), ";
+	public void miseAJourFenetre () {	
+		if (this.listOfNicknames.isEmpty()) {
+			System.out.println("List of NICKNAMES is EMPTY") ;
+			// conversation terminee
+			this.writerArea.setForeground(Color.red) ;
+			this.writerArea.setText("Your partner is disconnected.\nYou can close this window.") ;
+			this.writerArea.setEditable(false) ;
+			this.sendButton.setEnabled(false) ;
 		}
-		this.setTitle(title) ;
+		else {
+			String title = null ;
+			for (int i = 0; i<this.listOfNicknames.size();i++) {
+				// cas du dernier element
+				if (i == this.listOfNicknames.size()-1) {
+					title = title + this.listOfNicknames.get(i) ;
+				}
+				else 
+					title = title + "this.listOfNicknames.get(i), ";
+			}
+			this.setTitle(title) ;
+		}
 	}
 	
 		
