@@ -115,13 +115,10 @@ public class GUIView implements Observer{
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		
 		if (arg0 instanceof NetworkInformation){
-			
 			NetworkInformation NI = NetworkInformation.getInstance();
 			
 			if (NI.getLastChange().equals(typeOfChange.CONNECTION)) {
-				
 				/** le bouton connect change d'aspect **/
 				this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Deconnexion");
 				this.chatFenetre.getConnectDisconnectPanel().getNicknameField().setEditable(false);
@@ -130,7 +127,6 @@ public class GUIView implements Observer{
 			}
 			
 			else if (NI.getLastChange().equals(typeOfChange.DISCONNECTION)) {
-				
 				/** le bouton connect change d'aspect **/
 				this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Connexion");
 				this.chatFenetre.getConnectDisconnectPanel().getNicknameField().setEditable(true);
@@ -138,12 +134,9 @@ public class GUIView implements Observer{
 				this.chatFenetre.getContactsListPanel().getDefaultListModel().clear() ;
 				guiControler.setEtatDisconnect();
 			}
-			
 			else if (NI.getLastChange().equals(typeOfChange.ADDUSER_HELLO)){	
 				int idUser = (Integer)arg1;
-				System.out.println("GUIVIEW - UPDATE HELLO - ID USER :"+guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser));
 				String nickname = guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname() ;
-				System.out.println("Nickname : " +nickname) ;
 				this.chatFenetre.getContactsListPanel().getDefaultListModel().addElement(nickname);
 				this.chatFenetre.pack();
 				this.guiControler.getGUIToControler().addIDListModel(idUser);
@@ -154,10 +147,6 @@ public class GUIView implements Observer{
 			
 			else if (NI.getLastChange().equals(typeOfChange.ADDUSER_HELLO_ACK)){	
 				int idUser = (Integer)arg1;
-				if (guiControler == null ) {
-					System.out.println("guiControler NULL");
-				}
-				System.out.println("GUIVIEW - UPDATE HELLO ACK- ID USER :"+guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser));
 				String nickname = guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname() ;
 				this.chatFenetre.getContactsListPanel().getDefaultListModel().addElement(nickname);
 				this.chatFenetre.pack();
@@ -192,23 +181,27 @@ public class GUIView implements Observer{
 						this.listOfConversationFenetre.remove(i) ;
 					}
 				}
-				
-				
 			}
-			
+
 			else if (NI.getLastChange().equals(typeOfChange.NEWINCOMINGTEXTMESSAGE)){
-				
 				// On récupère la conversation
-				String conversation = NI.getHistoricConversations().get((TreeSet<Integer>)arg1);
+				TreeSet<Integer> listOfIds = (TreeSet<Integer>)arg1 ;
+				String conversation = NI.getHistoricConversations().get(listOfIds);
+				
+				boolean found = false ;
+				int i = 0 ;
+				while (!found && i < this.listOfConversationFenetre.size()) {
+					if (this.listOfConversationFenetre.get(i).getListOfIds().equals(listOfIds)) {
+						found = true ;
+						this.listOfConversationFenetre.get(i).getHistoricArea().setText(conversation) ;
+					}
+				}
 				
 				// On vérifie si une fenêtre est ouverte
-				this.chatFenetre.getContactsListPanel().getList().getComponent(0).setBackground(Color.blue);
-				
-				
-			}
-			
-		}
+				//this.chatFenetre.getContactsListPanel().getList().getComponent(0).setBackground(Color.blue);
 
+			}
+		}
 		// Permet de placer correctement l'ensemble des composants
 		this.getChatFenetre().pack();
 			
