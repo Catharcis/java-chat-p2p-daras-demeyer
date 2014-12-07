@@ -153,8 +153,7 @@ public class NetworkInformation extends Observable {
 	 */
 	public User addUser (String nickname, InetAddress ip, boolean HelloAck) {
 		User user = new User (nickname) ;
-		if (this.usersIPAddress == null)
-			System.out.println("NETINFO - ADD USER : usersIPAddress is NULL") ;
+		System.out.println("NETINFO - ADD USER : USER ID :"+user.getIdUser()) ;
 		this.usersIPAddress.put(ip, user) ;
 		this.userList.add(user) ;
 		if (HelloAck == true) {

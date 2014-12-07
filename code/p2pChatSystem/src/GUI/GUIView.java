@@ -141,12 +141,7 @@ public class GUIView implements Observer{
 			
 			else if (NI.getLastChange().equals(typeOfChange.ADDUSER_HELLO)){	
 				int idUser = (Integer)arg1;
-				if (arg1 == null) {
-					System.out.println("IDUSER NULL") ;
-				}
-				if (guiControler == null) {
-					System.out.println("guiControler NULL") ;
-				}
+				System.out.println("GUIVIEW - UPDATE HELLO - ID USER :"+guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser));
 				String nickname = guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname() ;
 				System.out.println("Nickname : " +nickname) ;
 				this.chatFenetre.getContactsListPanel().getDefaultListModel().addElement(nickname);
@@ -162,6 +157,7 @@ public class GUIView implements Observer{
 				if (guiControler == null ) {
 					System.out.println("guiControler NULL");
 				}
+				System.out.println("GUIVIEW - UPDATE HELLO ACK- ID USER :"+guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser));
 				String nickname = guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname() ;
 				this.chatFenetre.getContactsListPanel().getDefaultListModel().addElement(nickname);
 				this.chatFenetre.pack();
