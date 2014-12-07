@@ -135,6 +135,7 @@ public class GUIView implements Observer{
 				this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Connexion");
 				this.chatFenetre.getConnectDisconnectPanel().getNicknameField().setEditable(true);
 				this.chatFenetre.getConnectDisconnectPanel().setImageStatus(new ImageIcon("offline.png"));
+				this.chatFenetre.getContactsListPanel().getDefaultListModel().clear() ;
 				guiControler.setEtatDisconnect();
 			}
 			

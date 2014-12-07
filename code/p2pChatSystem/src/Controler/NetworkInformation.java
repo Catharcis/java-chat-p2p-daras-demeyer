@@ -153,6 +153,8 @@ public class NetworkInformation extends Observable {
 	 */
 	public User addUser (String nickname, InetAddress ip, boolean HelloAck) {
 		User user = new User (nickname) ;
+		if (this.usersIPAddress == null)
+			System.out.println("NETINFO - ADD USER : usersIPAddress is NULL") ;
 		this.usersIPAddress.put(ip, user) ;
 		this.userList.add(user) ;
 		if (HelloAck == true) {
@@ -300,7 +302,8 @@ public class NetworkInformation extends Observable {
 	 * Methodes permettant de reinitialise les variables du systeme en cas de plusieurs connexions/deconnexions
 	 */
 	public void reinitializeVariables() {
-		this.usersIPAddress.clear();
+		this.userList = null ;
+		this.usersIPAddress = null ;
 		this.localUser = null;
 		this.arrayPositionsListModel.clear();
 		this.historicConversations.clear();

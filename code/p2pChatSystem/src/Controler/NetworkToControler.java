@@ -94,8 +94,10 @@ public class NetworkToControler {
 	 * @param ipAddress : l'adresse IP de la personne
 	 */
 	public void processGoodbye(String name, InetAddress ipAddress){
-		if (NI.getUserList().containsKey(ipAddress))
-			NI.removeUser(ipAddress);
+		if (NI.getUserList() != null) {
+			if (NI.getUserList().containsKey(ipAddress))
+				NI.removeUser(ipAddress);
+		}
 	}
 	
 	/**
