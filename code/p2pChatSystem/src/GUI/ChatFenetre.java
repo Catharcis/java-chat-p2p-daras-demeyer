@@ -120,7 +120,7 @@ public class ChatFenetre extends AbstractFenetre{
 	    cell5.add(this.connectDisconnectPanel.getImageChat(), BorderLayout.CENTER) ;
 	    
 	    JPanel cell6 = new JPanel();
-	    cell6.setBackground(Color.blue);
+	    cell6.setBackground(Color.white);
 	    cell6.setPreferredSize(new Dimension(200, 250));
 	    this.contactsListPanel.initComponents() ;
 	    cell6.add(this.contactsListPanel.getList()) ;
@@ -132,7 +132,7 @@ public class ChatFenetre extends AbstractFenetre{
 	    
 	    //L'objet servant à positionner les composants
 	    GridBagConstraints gbc = new GridBagConstraints();
-			
+		
 	    //On positionne les composants
 	    gbc.gridx = 0;
 	    gbc.gridy = 0;

@@ -89,6 +89,14 @@ public class ConversationFenetre extends AbstractFenetre{
 		return this.listOfNicknames ;
 	}
 	
+	public JTextArea getHistoricArea () {
+		return this.historic ;
+	}
+	
+	public JTextArea getWriteArea () {
+		return this.writerArea ;
+	}
+	
 	/************************************************* 
 	 * 					METHODS 
 	 ************************************************/
@@ -152,6 +160,7 @@ public class ConversationFenetre extends AbstractFenetre{
 				if (this.writerArea.getText() != null) {
 					try {
 						getGUIView().TextMessage(this.writerArea.getText(), listOfId);
+						this.writerArea.setText("") ;
 					} catch (UnknownHostException e) {
 						System.out.println("ERREUR Conversation : UnknownHostException") ;
 					}
