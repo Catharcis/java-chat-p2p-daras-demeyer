@@ -47,4 +47,13 @@ public class User {
 		return "[id = "+this.idUser+", name = "+this.nickname+"]";
 	}
 	
+	/************************************************* 
+	 * 					METHODS
+	 ************************************************/
+	
+	@SuppressWarnings("static-access")
+	public void reinitializeUsers () {
+		this.lastID = 0 ;
+		
+	}
 }
