@@ -64,6 +64,7 @@ public class ConversationFenetre extends AbstractFenetre{
         this.listOfNicknames.add(nickname) ;
         this.listOfId = new TreeSet<Integer>() ;
         this.listOfId.add(UserId) ;
+        this.setTitle(nickname);
         initializeComponents();
 }
 
@@ -143,6 +144,7 @@ public class ConversationFenetre extends AbstractFenetre{
 			this.writerArea.setText("Your partner is disconnected.\nYou can close this window.") ;
 			this.writerArea.setEditable(false) ;
 			this.sendButton.setEnabled(false) ;
+			this.invite.setEnabled(false) ;
 		}
 		else {
 			String title = null ;
