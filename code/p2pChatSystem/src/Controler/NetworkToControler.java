@@ -134,7 +134,7 @@ public class NetworkToControler {
 		// On definit le format d'affichage du message
 		String finalMessage = user.getNickname()+" : "+message+"\n";
 		
-		// Ajouter le message a� l'historique et notifier la vue
+		// Ajouter le message a l'historique et notifier la vue
 		if (NI.getHistoricConversations().containsKey(listOfIDs)){
 			NI.getHistoricConversations().get(listOfIDs).concat(finalMessage);
 		}
