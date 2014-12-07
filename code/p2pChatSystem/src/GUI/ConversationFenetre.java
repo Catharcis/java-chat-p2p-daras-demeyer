@@ -167,7 +167,7 @@ public class ConversationFenetre extends AbstractFenetre{
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == sendButton){
 			if (guiView.getGUIControler().getEtat() == Etats.connected) {
-				if (this.writerArea.getText() != null) {
+				if (!this.writerArea.getText().isEmpty()) {
 					try {
 						getGUIView().TextMessage(this.writerArea.getText(), listOfId);
 						this.writerArea.setText("") ;
