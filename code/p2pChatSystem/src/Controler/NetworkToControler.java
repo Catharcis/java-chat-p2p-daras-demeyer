@@ -132,16 +132,12 @@ public class NetworkToControler {
 		System.out.println("Message : " + message);
 		
 		// On definit le format d'affichage du message
-		String finalMessage = user.getNickname()+" : "+message+"\n";
+		String finalMessage = NI.getHistoricConversations().get(listOfIDs) + user.getNickname()+" : "+message+"\n";
 		
-		// Ajouter le message a l'historique et notifier la vue
-		if (NI.getHistoricConversations().containsKey(listOfIDs)){
-			NI.getHistoricConversations().get(listOfIDs).concat(finalMessage);
-		}
-		else {
-			NI.getHistoricConversations().put(listOfIDs, finalMessage);
-		}
-		
+		// Ajout du message a l'historique 
+		System.out.println("Ajout du message a une conversation existante") ;
+		NI.getHistoricConversations().put(listOfIDs, finalMessage);
+
 		// Notification envoyée à la vue
 		NI.notifyLastChange(typeOfChange.NEWINCOMINGTEXTMESSAGE, listOfIDs);
 	}
