@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.net.UnknownHostException;
 import java.util.Observable;
+import java.util.TreeSet;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -43,8 +44,8 @@ public class ChatFenetre extends AbstractFenetre{
 	
 	private ChatFenetre(){
 		this.initializeWindow() ;
-		connectDisconnectPanel = connectDisconnectPanel.getInstance();
-		contactsListPanel = contactsListPanel.getInstance();
+		connectDisconnectPanel = ConnectDisconnectPanel.getInstance();
+		contactsListPanel = ContactsListPanel.getInstance();
 		this.addWindowListener(this);
 	    this.initializeComponents();
 	}
@@ -62,7 +63,7 @@ public class ChatFenetre extends AbstractFenetre{
 	 ************************************************/
 	
 	public void setGuiView (GUIView view) {
-		guiView = view.getInstance() ;
+		guiView = GUIView.getInstance() ;
 	}
 	
 	public static GUIView getGUIView() {
@@ -208,17 +209,37 @@ public class ChatFenetre extends AbstractFenetre{
 	
 	@Override
 	public void mouseClicked(MouseEvent evt) {
-		if (this.guiView.getGUIControler().getEtat() != Etats.disconnected) {
+		if (ChatFenetre.guiView.getGUIControler().getEtat() != Etats.disconnected) {
 	        if (evt.getClickCount() == 2) {
 	            int index = this.contactsListPanel.getList().locationToIndex(evt.getPoint());
 	            ListModel dlm = this.contactsListPanel.getList().getModel();
 	            Object item = dlm.getElementAt(index);;
 	            this.contactsListPanel.getList().ensureIndexIsVisible(index);
+	            
 	            // creation de la fenetre
-	            int idUser = this.guiView.getGUIControler().getGUIToControler().getNetInfo().getArrayPositionsListModel().get(index);
-	            ConversationFenetre newConversation = new ConversationFenetre(item.toString(), idUser) ;
-	            newConversation.setGuiView(guiView) ;
-	            this.guiView.getConversationFenetre().add(newConversation);
+	            int idUser = ChatFenetre.guiView.getGUIControler().getGUIToControler().getNetInfo().getArrayPositionsListModel().get(index);
+	            TreeSet<Integer> idList = new TreeSet<Integer> () ;
+	            idList.add(idUser) ;
+	            if (!ChatFenetre.guiView.getConversationFenetre().contains(idList)) {
+	            	ConversationFenetre newConversation = new ConversationFenetre(item.toString(), idUser) ;
+		            newConversation.setGuiView(guiView) ;
+		            ChatFenetre.guiView.getConversationFenetre().add(newConversation);
+	            }
+	            else {
+	            	// ouvrir la fenetre qui existe
+	            	/* 
+	            	 * 
+	            	 * NE MARCHE PAS : A REVOIR
+	            	 * ON CHERCHE A RENDRE VISIBLE LA FENETRE QUI EXISTE DEJA
+	            	 * 
+	            	 */
+	            	for (int i = 0; i<ChatFenetre.guiView.getConversationFenetre().size(); i++) {
+	            		if (ChatFenetre.guiView.getConversationFenetre().get(i).equals(idList)) {
+	            			ChatFenetre.guiView.getConversationFenetre().get(i).setVisible(true) ;
+	            		}
+	            	}
+	            }
+	            
 	        }
         }
 	}
@@ -262,9 +283,9 @@ public class ChatFenetre extends AbstractFenetre{
 	public void windowClosing(WindowEvent e) {
 		
 		System.out.println("Arret du Chat System...");
-		if (this.guiView.getGUIControler().getEtat() != Etats.disconnected) {
+		if (ChatFenetre.guiView.getGUIControler().getEtat() != Etats.disconnected) {
 			if (NetworkInformation.getInstance().getLastChange() != typeOfChange.DISCONNECTION){
-				this.getGUIView().getGUIControler().getGUIToControler().performDisconnect();
+				ChatFenetre.getGUIView().getGUIControler().getGUIToControler().performDisconnect();
 			}
 		}
 	}
