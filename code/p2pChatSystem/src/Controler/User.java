@@ -51,9 +51,9 @@ public class User {
 	 * 					METHODS
 	 ************************************************/
 	
-	@SuppressWarnings("static-access")
-	public void reinitializeUsers () {
-		this.lastID = 0 ;
+	public static void reinitializeUsers () {
+		lastID = 0 ;
 		
 	}
+	
 }

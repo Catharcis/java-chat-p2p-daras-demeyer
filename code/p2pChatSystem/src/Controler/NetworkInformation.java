@@ -301,12 +301,12 @@ public class NetworkInformation extends Observable {
 	 * Methodes permettant de reinitialise les variables du systeme en cas de plusieurs connexions/deconnexions
 	 */
 	public void reinitializeVariables() {
-		
 		this.localUser = null;
 		this.usersIPAddress = new HashMap <InetAddress, User> () ;
 		this.userList = new ArrayList<User> () ;
 		this.arrayPositionsListModel = new ArrayList<Integer>();
 		this.historicConversations = new HashMap<TreeSet<Integer>,String>();
+		User.reinitializeUsers() ;
 	}
 	
 	
