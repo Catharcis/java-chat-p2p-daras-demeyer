@@ -199,6 +199,7 @@ public class GUIView implements Observer{
 				while (!found && i < this.listOfConversationFenetre.size()) {
 					if (this.listOfConversationFenetre.get(i).getListOfIds().equals(listOfIds)) {
 						found = true ;
+						System.out.println("Conversation complete: "+conversation) ;
 						this.listOfConversationFenetre.get(i).getHistoricArea().setText(conversation) ;
 					}
 				}
