@@ -138,7 +138,6 @@ public class ConversationFenetre extends AbstractFenetre{
 
 	public void miseAJourFenetre () {	
 		if (this.listOfNicknames.isEmpty()) {
-			System.out.println("List of NICKNAMES is EMPTY") ;
 			// conversation terminee
 			this.writerArea.setForeground(Color.red) ;
 			this.writerArea.setText("Your partner is disconnected.\nYou can close this window.") ;
