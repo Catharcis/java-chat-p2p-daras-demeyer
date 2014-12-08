@@ -174,6 +174,8 @@ public class GUIView implements Observer{
 					if (this.listOfConversationFenetre.get(i).getListOfIds().contains(idUser))
 						this.listOfConversationFenetre.get(i).getListOfIds().remove(idUser) ;
 					// on supprime son nickname de toutes les conversations
+					if (this.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser) == null)
+						System.out.println("USER NULL") ;
 					String name = this.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname() ;
 					System.out.println("BUG : "+name) ;
 					if (this.listOfConversationFenetre.get(i).getListOfNicknames().contains(this.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname()))
