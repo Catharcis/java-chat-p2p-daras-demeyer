@@ -236,6 +236,9 @@ public class ChatFenetre extends AbstractFenetre{
 	            	for (int i = 0; i<ChatFenetre.guiView.getConversationFenetre().size(); i++) {
 	            		if (ChatFenetre.guiView.getConversationFenetre().get(i).equals(idList)) {
 	            			ChatFenetre.guiView.getConversationFenetre().get(i).setVisible(true) ;
+	            			String historic = ChatFenetre.guiView.getGUIControler().getGUIToControler().getNetInfo().getHistoricConversations().get(idList);
+	            			System.out.println("RE OUVERTURE FENETRE - HISTORIC : "+historic) ;
+	            			ChatFenetre.guiView.getConversationFenetre().get(i).getHistoricArea().setText(historic) ;
 	            		}
 	            	}
 	            }
