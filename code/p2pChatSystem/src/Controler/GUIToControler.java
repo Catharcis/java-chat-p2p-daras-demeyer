@@ -171,9 +171,10 @@ public class GUIToControler {
 			if (NI.getArrayPositionsListModel().get(compteur) == id) {
 				find = true ;
 			}
+			compteur ++ ;
 		}
 		if (find == true) {
-			NI.getArrayPositionsListModel().remove(compteur);
+			NI.getArrayPositionsListModel().remove(compteur-1);
 		}
 	}
 }
