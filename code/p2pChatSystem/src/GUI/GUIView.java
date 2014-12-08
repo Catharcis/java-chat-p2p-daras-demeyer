@@ -190,7 +190,7 @@ public class GUIView implements Observer{
 			}
 
 			else if (NI.getLastChange().equals(typeOfChange.NEWINCOMINGTEXTMESSAGE)){
-				// On récupère la conversation
+				// On recupere la conversation
 				TreeSet<Integer> listOfIds = (TreeSet<Integer>)arg1 ;
 				String conversation = NI.getHistoricConversations().get(listOfIds);
 				

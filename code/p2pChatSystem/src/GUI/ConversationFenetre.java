@@ -110,7 +110,7 @@ public class ConversationFenetre extends AbstractFenetre{
 	 */
 	
 	public void initializeComponents(){
-		
+		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		historic.setEditable(false);
         writerArea.setSize(400, 100);
         sendButton.addActionListener(this);
