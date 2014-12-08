@@ -96,18 +96,19 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 				
 				if (message.getTypeContenu() == typeContenu.HELLOACK) {
 					String name = message.getNickname();
-					NiCon.receivedHelloAck(name, packet.getAddress()) ;
 					System.out.println("UDPReceiver : Hello (Ack), I am " +name) ;	
+					NiCon.receivedHelloAck(name, packet.getAddress()) ;
 				}
 				
 				if (message.getTypeContenu() == typeContenu.GOODBYE) {
 					String name = message.getNickname();
-					NiCon.receivedGoodbye(name, packet.getAddress()) ;
 					System.out.println("UDPReceiver : Goodbye, my name was " +name) ;
+					NiCon.receivedGoodbye(name, packet.getAddress()) ;
 				}
 				
 				if (message.getTypeContenu() == typeContenu.TEXTMESSAGE) {
 					TextMessage textMessage = (TextMessage) message;
+					System.out.println("UDPReceiver : TextMessage Received") ;
 					// On ajoute l'utilisateur distant et on nous retire de la liste
 					ArrayList<String> list = textMessage.getListNicknamesDest();
 					if (list.remove(myUsername)){
