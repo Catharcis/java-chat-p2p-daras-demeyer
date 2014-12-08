@@ -1,5 +1,6 @@
 package GUI;
 
+import java.io.File;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.TreeSet;
@@ -75,6 +76,10 @@ public class GUIControler {
 	
 	protected void TextMessage (String message, TreeSet <Integer> listOfId) throws UnknownHostException {
 		guiToCon.performSendTextMessage(message, listOfId);
+	}
+	
+	protected void FileMessage (File file, TreeSet <Integer> listOfId) throws UnknownHostException{
+		guiToCon.performSendFile(file, listOfId);
 	}
 	
 }

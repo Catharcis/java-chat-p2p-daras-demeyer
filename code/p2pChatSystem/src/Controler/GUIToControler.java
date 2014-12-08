@@ -1,5 +1,6 @@
 package Controler;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -147,7 +148,39 @@ public class GUIToControler {
 		
 	}
 	
-	public void performSendFile(){
+	public void performSendFile(File file, TreeSet<Integer> listOfId) throws UnknownHostException{
+		
+		/** Gestion des conversations **/
+		/** Conversation existante **/
+		if (NI.getHistoricConversations().containsKey(listOfId)) {
+			/** ajout du file a envoyer **/
+			String historic = NI.getHistoricConversations().get(listOfId) + "Me : Sending file - "+file.getName()+"\n";
+			System.out.println("GUITOCon - PERFORM SEND FILE MESSAGE - historic : "+historic) ;
+			NI.getHistoricConversations().put(listOfId, historic);
+		}
+		/** Conversation non existante et donc a creer **/
+		else {
+			System.out.println("GUITOCon - PERFORM FILE TEXT MESSAGE - New historic : Me : Send file - "+file.getName()) ;
+			NI.getHistoricConversations().put(listOfId, "Me : Sending file - "+file.getName()+"\n") ;
+		}
+		
+		NI.notifyLastChange(typeOfChange.NEWINCOMINGFILEMESSAGE, listOfId) ;
+		
+		/** Construction d'une List de String sous format NICKNAME@XX.XX.XX.XX**/
+		ArrayList<String> nicknameList = new ArrayList <String> () ;
+		ArrayList<InetAddress> ipAddressesList = new ArrayList<InetAddress>();
+		Iterator l = listOfId.iterator() ;
+		for (Integer i : listOfId) {
+			int id = (int) i ;
+			User user = NI.getUserWithId(id) ;
+			
+			/** On recupere les informations reseaux **/
+			nicknameList.add(NI.getNicknameWithIP(user)) ;
+			ipAddressesList.add(NI.getIPAddressOfUser(user));
+		}
+		
+		// On envoie le message sur le reseau
+		niCon.sendFileMessage(nicknameList, file, ipAddressesList);
 		
 	}
 	

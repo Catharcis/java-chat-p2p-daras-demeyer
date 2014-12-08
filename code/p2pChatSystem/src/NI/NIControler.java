@@ -41,6 +41,9 @@ public class NIControler {
 		udpReceiver = udpReceiver.getInstanceUDPReceiver() ;
 		createThreadUDPReceiver();
 		this.udpSender = udpSender.getInstanceUDPSender() ;
+		this.tcpServer = tcpServer.getInstanceTCPServer();
+		createThreadTCPServer();
+		this.tcpSender = tcpSender.getInstanceTCPSender();
 		NI = NI.getInstance();
 	}
 	
@@ -85,6 +88,11 @@ public class NIControler {
 		tUdpReceiver.start() ;
 	}
 	
+	public void createThreadTCPServer(){
+		Thread tTcpServer = new Thread (tcpServer, "tcpServer") ;
+		tTcpServer.start() ;
+	}
+	
 	public void sendHello (String name) throws UnknownHostException {
 		AbstractMessage message = new Hello (name) ;
 		this.udpSender.sendBroadcast(message); 
@@ -113,7 +121,12 @@ public class NIControler {
 		
 	}
 	
-	public void sendFileMessage (ArrayList<User> userList, File file) {
+	public void sendFileMessage (ArrayList<String> usernameList, File file, ArrayList<InetAddress> ipAddressList) throws UnknownHostException {
+		
+		/** Construction de l'Abstract message a envoye **/
+		AbstractMessage message = new FileMessage (file.getName(), usernameList, file.length()) ;
+		message.setNickname(NI.getNicknameWithIP(NI.getLocalUser()));
+		this.tcpSender.sendFile(message, usernameList, ipAddressList, file); 
 		
 	}
 	
