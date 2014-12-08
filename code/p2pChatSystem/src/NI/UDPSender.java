@@ -59,7 +59,8 @@ public class UDPSender extends AbstractSender {
 			socket = new DatagramSocket (this.getPortEnvoi()) ;
 			System.out.println("UDPSender : Creation du socket UDPSender") ;
 			
-
+			System.out.println(message.getNickname());
+			
 			/** Creation du Datagram Packet **/
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			ObjectOutput out = null;
