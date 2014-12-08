@@ -88,7 +88,6 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 			String myUsername = NiCon.getNetInfo().getLocalUser().getNickname()+"@"+NiCon.getNetInfo().getLocalIPAddress();
 			
 			if (!(message.getNickname().equals(myUsername))){
-				System.out.println("TEST AFTER RECEIVING PACKET") ;
 				if (message.getTypeContenu() == typeContenu.HELLO) {
 					String name = message.getNickname();
 					System.out.println("UDPReceiver : Hello, I am " +name) ;
