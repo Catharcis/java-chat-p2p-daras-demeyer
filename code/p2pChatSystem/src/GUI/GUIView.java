@@ -194,8 +194,21 @@ public class GUIView implements Observer{
 					if (this.listOfConversationFenetre.get(i).getListOfIds().equals(listOfIds)) {
 						found = true ;
 						this.listOfConversationFenetre.get(i).getHistoricArea().setText(conversation) ;
+						if (!this.listOfConversationFenetre.get(i).isVisible()) {
+							System.out.println("FENETRE NOT VISIBLE") ;
+							String nicknames = null ;
+							for (Integer aux : listOfIds) {
+								if (nicknames ==null) 
+									nicknames = this.getGUIControler().getGUIToControler().getNetInfo().getUserWithId(aux).getNickname()+", " ;
+								else
+									nicknames = nicknames + this.getGUIControler().getGUIToControler().getNetInfo().getUserWithId(aux).getNickname()+", " ;
+							}
+							JOptionPane.showMessageDialog(null, "There is a new message in your conversation with "+nicknames, "New Message Notification", JOptionPane.INFORMATION_MESSAGE);
+						}
 					}
+					i++ ;
 				}
+				
 			}
 		}
 		// Permet de placer correctement l'ensemble des composants
