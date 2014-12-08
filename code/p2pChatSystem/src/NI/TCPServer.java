@@ -7,13 +7,22 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class TCPServer extends AbstractReceiver {
+public class TCPServer extends AbstractReceiver implements Runnable {
 
+	private static TCPServer singleton;
 	
-	public TCPServer(){
+	
+	private TCPServer(){
 		this.setPortEcoute(6789);
 	}
 	
+	
+	public static TCPServer getInstanceTCPServer(){
+		if (singleton == null){
+			singleton = new TCPServer();
+		}
+		return singleton;
+	}
 	
 	/*
 	 * Redéfinition de la méthode d'écoute des paquets UDP sur le réseau
@@ -50,6 +59,10 @@ public class TCPServer extends AbstractReceiver {
 		}
 		}
 		
+	}
+	
+	public void run(){
+		listen();
 	}
 	
 }

@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -19,6 +20,7 @@ import java.util.TreeSet;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -50,6 +52,10 @@ public class ConversationFenetre extends AbstractFenetre{
 	
 	private TreeSet <Integer> listOfId ;
 	
+	private JButton fileButton;
+	
+	private JFileChooser fileChooser;
+	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
 	 ************************************************/
@@ -60,6 +66,8 @@ public class ConversationFenetre extends AbstractFenetre{
         writerArea = new JTextArea(10,30);
         sendButton = new JButton("Send");
         invite = new JButton("Invite");
+        fileButton = new JButton("File");
+        fileChooser = new JFileChooser();
         this.listOfNicknames = new ArrayList<String>() ;
         this.listOfNicknames.add(nickname) ;
         this.listOfId = new TreeSet<Integer>() ;
@@ -114,10 +122,12 @@ public class ConversationFenetre extends AbstractFenetre{
 		historic.setEditable(false);
         writerArea.setSize(400, 100);
         sendButton.addActionListener(this);
+        fileButton.addActionListener(this);
         historic.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
         writerArea.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         JPanel generalPanel = new JPanel(new BorderLayout());
         JPanel writePartPanel = new JPanel();
+        JPanel buttonsPanel = new JPanel(new BorderLayout());
         JPanel invitePanel = new JPanel();
         JPanel historicAndInvitePanel = new JPanel(new BorderLayout());
         JPanel historicPanel = new JPanel();
@@ -126,7 +136,9 @@ public class ConversationFenetre extends AbstractFenetre{
         historicAndInvitePanel.add(invitePanel,BorderLayout.NORTH);
         historicAndInvitePanel.add(historicPanel,BorderLayout.SOUTH);
         writePartPanel.add(writerArea);
-        writePartPanel.add(sendButton);
+        buttonsPanel.add(sendButton,BorderLayout.NORTH);
+        buttonsPanel.add(fileButton,BorderLayout.SOUTH);
+        writePartPanel.add(buttonsPanel);
         generalPanel.add(historicAndInvitePanel,BorderLayout.NORTH);
         generalPanel.add(writePartPanel,BorderLayout.SOUTH);
         this.getContentPane().add(generalPanel);
@@ -177,6 +189,16 @@ public class ConversationFenetre extends AbstractFenetre{
 					}
 				}
 			}
+		}
+		else if (arg0.getSource() == fileButton){
+			int returnVal = fileChooser.showOpenDialog(this);
+			
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+	            File file = fileChooser.getSelectedFile();
+			}
+			
+			
+			
 		}
 		
 	}

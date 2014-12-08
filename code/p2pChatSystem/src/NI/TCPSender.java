@@ -14,10 +14,21 @@ import Signals.FileMessage;
 
 public class TCPSender extends AbstractSender {
 
+	private static TCPSender singleton;
 	
-	public TCPSender() {
+	
+	
+	private TCPSender() {
 		this.setPortEnvoi(5001) ;
 		this.setPortEcoute(6789) ;
+	}
+	
+	
+	public static TCPSender getInstanceTCPSender(){
+		if (singleton == null){
+			singleton = new TCPSender();
+		}
+		return singleton;
 	}
 	
 	/*
@@ -39,6 +50,7 @@ public class TCPSender extends AbstractSender {
 				objectOut.writeObject(message) ;
 				outMessage.write(byteOut.toByteArray()) ;
 				
+				// On envoie ensuite le fichier
 				
 				FileInputStream filein = new FileInputStream (file) ;
 				OutputStream outFile = client.getOutputStream();
