@@ -171,9 +171,13 @@ public class GUIView implements Observer{
 				//suppression du user des conversations
 				for (int i = 0; i<this.listOfConversationFenetre.size(); i++) {
 					// on supprime l'ID du user de toutes les conversations
-					this.listOfConversationFenetre.get(i).getListOfIds().remove(idUser) ;
+					if (this.listOfConversationFenetre.get(i).getListOfIds().contains(idUser))
+						this.listOfConversationFenetre.get(i).getListOfIds().remove(idUser) ;
 					// on supprime son nickname de toutes les conversations
-					this.listOfConversationFenetre.get(i).getListOfNicknames().remove(this.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname()) ;
+					String name = this.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname() ;
+					System.out.println("BUG : "+name) ;
+					if (this.listOfConversationFenetre.get(i).getListOfNicknames().contains(this.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname()))
+						this.listOfConversationFenetre.get(i).getListOfNicknames().remove(this.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname()) ;
 					// mise a jour de la fenetre
 					this.listOfConversationFenetre.get(i).miseAJourFenetre() ;
 					// si la conversation est alors vide, on la supprime de la liste
