@@ -211,6 +211,7 @@ public class ChatFenetre extends AbstractFenetre{
 	public void mouseClicked(MouseEvent evt) {
 		if (ChatFenetre.guiView.getGUIControler().getEtat() != Etats.disconnected) {
 	        if (evt.getClickCount() == 2) {
+	        	
 	            int index = this.contactsListPanel.getList().locationToIndex(evt.getPoint());
 	            ListModel dlm = this.contactsListPanel.getList().getModel();
 	            Object item = dlm.getElementAt(index);;
@@ -220,29 +221,27 @@ public class ChatFenetre extends AbstractFenetre{
 	            int idUser = ChatFenetre.guiView.getGUIControler().getGUIToControler().getNetInfo().getArrayPositionsListModel().get(index);
 	            TreeSet<Integer> idList = new TreeSet<Integer> () ;
 	            idList.add(idUser) ;
-	            if (!ChatFenetre.guiView.getConversationFenetre().contains(idList)) {
+	            
+	            int i = 0;
+	            boolean found = false ;
+	            
+	            // on cherche si une fenetre correspondant a cette conversation existe deja 
+	            while (i < ChatFenetre.guiView.getConversationFenetre().size() && !found) {
+	            	System.out.println("OUT IF") ;
+	            	if (ChatFenetre.guiView.getConversationFenetre().get(i).getListOfIds().equals(idList)) {
+            			ChatFenetre.guiView.getConversationFenetre().get(i).setVisible(true) ;
+            			String historic = ChatFenetre.guiView.getGUIControler().getGUIToControler().getNetInfo().getHistoricConversations().get(idList);
+            			ChatFenetre.guiView.getConversationFenetre().get(i).getHistoricArea().setText(historic) ;
+            			found = true ;
+            		}
+	            	i++ ;
+	            }
+	            // si on n'a pas trouve de conversation existante, on en cree une
+	            if (!found) {
 	            	ConversationFenetre newConversation = new ConversationFenetre(item.toString(), idUser) ;
 		            newConversation.setGuiView(guiView) ;
 		            ChatFenetre.guiView.getConversationFenetre().add(newConversation);
-	            }
-	            else {
-	            	// ouvrir la fenetre qui existe
-	            	/* 
-	            	 * 
-	            	 * NE MARCHE PAS : A REVOIR
-	            	 * ON CHERCHE A RENDRE VISIBLE LA FENETRE QUI EXISTE DEJA
-	            	 * 
-	            	 */
-	            	for (int i = 0; i<ChatFenetre.guiView.getConversationFenetre().size(); i++) {
-	            		if (ChatFenetre.guiView.getConversationFenetre().get(i).equals(idList)) {
-	            			ChatFenetre.guiView.getConversationFenetre().get(i).setVisible(true) ;
-	            			String historic = ChatFenetre.guiView.getGUIControler().getGUIToControler().getNetInfo().getHistoricConversations().get(idList);
-	            			System.out.println("RE OUVERTURE FENETRE - HISTORIC : "+historic) ;
-	            			ChatFenetre.guiView.getConversationFenetre().get(i).getHistoricArea().setText(historic) ;
-	            		}
-	            	}
-	            }
-	            
+            	}
 	        }
         }
 	}
