@@ -88,7 +88,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 			String myUsername = NiCon.getNetInfo().getLocalUser().getNickname()+"@"+NiCon.getNetInfo().getLocalIPAddress();
 			
 			if (!(message.getNickname().equals(myUsername))){
-			
+				System.out.println("TEST AFTER RECEIVING PACKET") ;
 				if (message.getTypeContenu() == typeContenu.HELLO) {
 					String name = message.getNickname();
 					System.out.println("UDPReceiver : Hello, I am " +name) ;
@@ -135,7 +135,8 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 		} catch (SocketException e2) {
 			System.out.println("UDPReceiver : Creation of UDP SocketReceiver failed.") ;
 		} catch (IOException e3) {
-			System.out.println("UDPReceiver : IOException during Receive.") ;
+			System.out.println("UDPReceiver : IOException during Receive : "+e3.getCause()) ;
+			
 		} catch (ClassNotFoundException e4) {
 			System.out.println("UDPReceiver : Lecture du message en réception impossible.") ;			
 		}
