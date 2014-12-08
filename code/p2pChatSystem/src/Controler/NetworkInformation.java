@@ -1,5 +1,6 @@
 package Controler;
 import java.net.InetAddress;
+import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -213,6 +214,30 @@ public class NetworkInformation extends Observable {
 		}
 		if (found == false) {
 			return InetAddress.getByName("192.168.1.23").getHostAddress() ;
+		}
+		else 
+			return ip ;
+	}
+	
+	public String getLocalBroadcast () throws UnknownHostException, SocketException {
+		Enumeration e = NetworkInterface.getNetworkInterfaces();
+		boolean found = false ;
+		String ip = null ;
+		while(e.hasMoreElements())
+		{
+		    NetworkInterface n = (NetworkInterface) e.nextElement();
+		    Enumeration ee = n.getInetAddresses();
+		    while (ee.hasMoreElements())
+		    {
+		    	InterfaceAddress i = (InterfaceAddress) ee.nextElement();
+		        if (i.toString() == this.getLocalIPAddress()) {
+		        	found = true ;
+		        	ip = i.getBroadcast().getHostAddress() ;
+		        }
+		    }
+		}
+		if (found == false) {
+			return InetAddress.getByName("255.255.255.255").getHostAddress() ;
 		}
 		else 
 			return ip ;
