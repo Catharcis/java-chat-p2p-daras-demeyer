@@ -227,7 +227,6 @@ public class ChatFenetre extends AbstractFenetre{
 	            
 	            // on cherche si une fenetre correspondant a cette conversation existe deja 
 	            while (i < ChatFenetre.guiView.getConversationFenetre().size() && !found) {
-	            	System.out.println("OUT IF") ;
 	            	if (ChatFenetre.guiView.getConversationFenetre().get(i).getListOfIds().equals(idList)) {
             			ChatFenetre.guiView.getConversationFenetre().get(i).setVisible(true) ;
             			String historic = ChatFenetre.guiView.getGUIControler().getGUIToControler().getNetInfo().getHistoricConversations().get(idList);

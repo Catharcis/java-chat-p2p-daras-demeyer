@@ -173,9 +173,8 @@ public class GUIView implements Observer{
 					// on supprime l'ID du user de toutes les conversations
 					this.listOfConversationFenetre.get(i).getListOfIds().remove(idUser) ;
 					// on supprime son nickname de toutes les conversations
-					this.listOfConversationFenetre.get(i).getListOfNicknames().remove(this.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname()) ;				
-					
-					// mise a jour du titre de la fenetre
+					this.listOfConversationFenetre.get(i).getListOfNicknames().remove(this.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname()) ;
+					// mise a jour de la fenetre
 					this.listOfConversationFenetre.get(i).miseAJourFenetre() ;
 					// si la conversation est alors vide, on la supprime de la liste
 					if (this.listOfConversationFenetre.get(i).getListOfIds().isEmpty()) {
@@ -197,10 +196,6 @@ public class GUIView implements Observer{
 						this.listOfConversationFenetre.get(i).getHistoricArea().setText(conversation) ;
 					}
 				}
-				
-				// On vérifie si une fenêtre est ouverte
-				//this.chatFenetre.getContactsListPanel().getList().getComponent(0).setBackground(Color.blue);
-
 			}
 		}
 		// Permet de placer correctement l'ensemble des composants

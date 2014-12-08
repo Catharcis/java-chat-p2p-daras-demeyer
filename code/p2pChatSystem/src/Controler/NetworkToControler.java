@@ -127,15 +127,17 @@ public class NetworkToControler {
 				System.out.println("ERREUR - ProcessTextMessage - User who has the ip address "+ip+" doesn't exist");
 			}
 		}
-		
-		System.out.println("Liste des utilisateurs concernes : " + listOfIDs.toString());
-		System.out.println("Message : " + message);
-		
+
 		// On definit le format d'affichage du message
-		String finalMessage = NI.getHistoricConversations().get(listOfIDs) + user.getNickname()+" : "+message+"\n";
+		String finalMessage ;
+		if (NI.getHistoricConversations().get(listOfIDs) == null) {
+			finalMessage = user.getNickname()+" : "+message+"\n";
+		}
+		else {
+			finalMessage = NI.getHistoricConversations().get(listOfIDs) + user.getNickname()+" : "+message+"\n";
+		}
 		
 		// Ajout du message a l'historique 
-		System.out.println("Ajout du message a une conversation existante") ;
 		NI.getHistoricConversations().put(listOfIDs, finalMessage);
 
 		// Notification envoyée à la vue
