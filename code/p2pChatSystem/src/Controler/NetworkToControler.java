@@ -18,6 +18,7 @@ public class NetworkToControler {
 	private static NetworkToControler netToContSingleton ;
 	
 	// Reference a GUIControler
+	@SuppressWarnings("unused")
 	private static GUIControler guiCon;
 	
 	// Reference a NetworkInformation
