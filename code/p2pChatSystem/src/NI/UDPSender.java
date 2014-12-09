@@ -1,6 +1,5 @@
 package NI;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutput;
@@ -12,8 +11,6 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-
-import Controler.NetworkInformation;
 import Signals.*;
 
 public class UDPSender extends AbstractSender {
@@ -69,11 +66,11 @@ public class UDPSender extends AbstractSender {
 			  	out.writeObject(message);
 			  	byte[] buf = bos.toByteArray();
 			  	DatagramPacket packet = new DatagramPacket (buf, buf.length, InetAddress.getByName("10.1.255.255"), this.getPortEcoute()) ;
-			  	System.out.println("UDPSender : "+message.toString()+" concu !") ;
+			  	System.out.println("UDPSender : "+message.getTypeContenu() +" concu !") ;
 
 			  	/** Envoi du paquet **/
 			  	socket.send(packet);
-			  	System.out.println("UDPSender : "+message.toString()+" envoye!") ;
+			  	System.out.println("UDPSender : "+message.getTypeContenu()+" envoye!") ;
 			} catch (IOException e) {
 				System.out.println("UDPSender : Erreur lors de l'ecriture dans le UDP Sender") ;
 			}
@@ -90,10 +87,6 @@ public class UDPSender extends AbstractSender {
 	
 	/** Methode permettant d'envoyer un message a une liste d'utilisateurs **/
 	public void send(AbstractMessage message, ArrayList<String> listOfUsers, ArrayList<InetAddress> ipAddressesList){
-		/** On recupere les informations reseaux **/
-		NetworkInformation NI = null;
-		NI = NI.getInstance();
-		
 		/** Creation d'un socket UDP**/
 		DatagramSocket socket = null;
 		try {
@@ -111,11 +104,11 @@ public class UDPSender extends AbstractSender {
 				  	out.writeObject(message);
 				  	byte[] buf = bos.toByteArray();
 				  	DatagramPacket packet = new DatagramPacket (buf, buf.length, ipAddressesList.get(i), this.getPortEcoute()) ;
-				  	System.out.println("UDPSender : Paquet "+message.toString()+" concu ! @IP dest : " + ipAddressesList.get(i).getHostAddress()) ;
+				  	System.out.println("UDPSender : Paquet "+message.getTypeContenu()+" concu ! @IP dest : " + ipAddressesList.get(i).getHostAddress()) ;
 	
 				  	/** Envoi du paquet **/
 				  	socket.send(packet);
-				  	System.out.println("UDPSender : Paquet "+message.toString()+" envoye!") ;
+				  	System.out.println("UDPSender : Paquet "+message.getTypeContenu()+" envoye!") ;
 				} catch (IOException e) {
 					System.out.println("UDPSender : Erreur lors de l'ecriture") ;
 				}

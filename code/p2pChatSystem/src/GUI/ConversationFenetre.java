@@ -2,11 +2,6 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -16,20 +11,13 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.TreeSet;
-
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.border.Border;
-
-import org.omg.CORBA.portable.UnknownException;
-
 import GUI.GUIControler.Etats;
 
 @SuppressWarnings("serial")
@@ -87,7 +75,7 @@ public class ConversationFenetre extends AbstractFenetre{
 	}
 
 	public void setGuiView (GUIView view) {
-		guiView = view.getInstance() ;
+		guiView = GUIView.getInstance() ;
 	}
 	
 	public TreeSet<Integer> getListOfIds () {
@@ -144,8 +132,6 @@ public class ConversationFenetre extends AbstractFenetre{
         this.getContentPane().add(generalPanel);
         this.pack();
         this.setVisible(true);
-
-
 	}
 
 	public void miseAJourFenetre () {	
@@ -172,9 +158,7 @@ public class ConversationFenetre extends AbstractFenetre{
 	}
 	
 		
-	public void miseAJour(Observable arg0) {
-
-	}
+	public void miseAJour(Observable arg0) { }
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -199,92 +183,53 @@ public class ConversationFenetre extends AbstractFenetre{
 			
 			
 			
-		}
-		
+		}	
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-
-		
-	}
+	public void mouseClicked(MouseEvent e) { }
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
-
-		
-	}
+	public void mouseEntered(MouseEvent e) { }
 
 	@Override
-	public void mouseExited(MouseEvent e) {
-
-		
-	}
+	public void mouseExited(MouseEvent e) { }
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-
-		
-	}
+	public void mousePressed(MouseEvent e) { }
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-
-		
-	}
+	public void mouseReleased(MouseEvent e) { }
 	
 	@Override
-	public void windowActivated(WindowEvent arg0) {
-		
-	}
+	public void windowActivated(WindowEvent arg0) { }
 
 	@Override
-	public void windowClosed(WindowEvent e) {
-		
-	}
+	public void windowClosed(WindowEvent e) { }
 
 	@Override
-	public void windowClosing(WindowEvent e) {
-		
-	}
+	public void windowClosing(WindowEvent e) { }
 
 	@Override
-	public void windowDeactivated(WindowEvent e) {
-		
-	}
+	public void windowDeactivated(WindowEvent e) { }
 
 	@Override
-	public void windowDeiconified(WindowEvent e) {
-		
-	}
+	public void windowDeiconified(WindowEvent e) { }
 
 	@Override
-	public void windowIconified(WindowEvent e) {
-		
-	}
+	public void windowIconified(WindowEvent e) { }
 
 	@Override
-	public void windowOpened(WindowEvent e) {
-		
-	}
+	public void windowOpened(WindowEvent e) { }
 
 	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyPressed(KeyEvent e) { }
 
 	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyReleased(KeyEvent e) { }
 
 	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyTyped(KeyEvent e) { }
 
 
 	

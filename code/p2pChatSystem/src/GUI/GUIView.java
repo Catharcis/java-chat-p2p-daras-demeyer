@@ -1,27 +1,18 @@
 package GUI;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.TreeSet;
 
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
 
 import Controler.GUIToControler;
 import Controler.NetworkInformation;
 import Controler.NetworkToControler;
 import Controler.typeOfChange;
-import GUI.GUIControler.Etats;
 import NI.NIControler;
 
 public class GUIView implements Observer{
@@ -43,9 +34,9 @@ public class GUIView implements Observer{
 	 ************************************************/
 	
 	private GUIView() {
-		chatFenetre = chatFenetre.getInstance();
+		chatFenetre = ChatFenetre.getInstance();
 		chatFenetre.setVisible(true);
-		guiControler = guiControler.getInstance() ;
+		guiControler = GUIControler.getInstance() ;
 		listOfConversationFenetre = new ArrayList<ConversationFenetre>() ;
 	}
 	
@@ -80,14 +71,14 @@ public class GUIView implements Observer{
 	public static void initChatSystem (GUIView guiView) {
 		/** Initialisation du Controler **/
 		NetworkToControler netToCon = null ;
-		netToCon = netToCon.getInstance() ;
+		netToCon = NetworkToControler.getInstance() ;
 		
 		GUIToControler guiToCon = null ;
-		guiToCon = guiToCon.getInstance() ;
+		guiToCon = GUIToControler.getInstance() ;
 		
 		/** Initialisation du NI **/
 		NIControler niCon = null ;
-		niCon = niCon.getInstance() ;
+		niCon = NIControler.getInstance() ;
 		
 		/** Creation des liens **/
 		netToCon.getNetInfo().setGuiView(guiView);
@@ -191,6 +182,7 @@ public class GUIView implements Observer{
 
 			else if (NI.getLastChange().equals(typeOfChange.NEWINCOMINGTEXTMESSAGE)){
 				// On recupere la conversation
+				@SuppressWarnings("unchecked")
 				TreeSet<Integer> listOfIds = (TreeSet<Integer>)arg1 ;
 				String conversation = NI.getHistoricConversations().get(listOfIds);
 				
@@ -220,6 +212,7 @@ public class GUIView implements Observer{
 			else if (NI.getLastChange().equals(typeOfChange.NEWINCOMINGFILEMESSAGE)){
 				
 				// On recupere la conversation
+				@SuppressWarnings("unchecked")
 				TreeSet<Integer> listOfIds = (TreeSet<Integer>)arg1 ;
 				String conversation = NI.getHistoricConversations().get(listOfIds);
 				

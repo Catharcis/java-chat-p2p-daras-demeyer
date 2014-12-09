@@ -1,11 +1,5 @@
 package NI;
 
-import java.net.InetAddress;
-import java.util.ArrayList;
-
-import Controler.User;
-import Signals.*;
-
 public abstract class AbstractSender extends AbstractNetwork {
 
 	/************************************************* 

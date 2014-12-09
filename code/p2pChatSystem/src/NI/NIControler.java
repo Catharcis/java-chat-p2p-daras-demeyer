@@ -4,10 +4,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
-
 import Controler.NetworkInformation;
 import Controler.NetworkToControler;
-import Controler.User;
 import Signals.* ;
 
 public class NIControler {
@@ -38,13 +36,13 @@ public class NIControler {
 	 ************************************************/
 	
 	private NIControler ()	{
-		udpReceiver = udpReceiver.getInstanceUDPReceiver() ;
+		udpReceiver = UDPReceiver.getInstanceUDPReceiver() ;
 		createThreadUDPReceiver();
-		this.udpSender = udpSender.getInstanceUDPSender() ;
-		this.tcpServer = tcpServer.getInstanceTCPServer();
+		this.udpSender = UDPSender.getInstanceUDPSender() ;
+		this.tcpServer = TCPServer.getInstanceTCPServer();
 		createThreadTCPServer();
-		this.tcpSender = tcpSender.getInstanceTCPSender();
-		NI = NI.getInstance();
+		this.tcpSender = TCPSender.getInstanceTCPSender();
+		NI = NetworkInformation.getInstance();
 	}
 	
 	public static NIControler getInstance () {
@@ -70,7 +68,7 @@ public class NIControler {
 		return NI ;
 	}
 	public void setNetToCon (NetworkToControler netCon) {
-		netToCont = netCon.getInstance();	
+		netToCont = NetworkToControler.getInstance();	
 	}
 	
 	

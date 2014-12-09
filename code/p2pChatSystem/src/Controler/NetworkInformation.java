@@ -13,11 +13,7 @@ import java.util.Observable;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import GUI.ConnectDisconnectPanel;
 import GUI.GUIView;
-import Signals.AbstractMessage;
-import Signals.Hello;
 import Controler.typeOfChange;
 
 public class NetworkInformation extends Observable {
@@ -96,7 +92,7 @@ public class NetworkInformation extends Observable {
 
 	/** Setter du GUIView**/
 	public void setGuiView (GUIView guiview) {
-		guiView = guiView.getInstance();
+		guiView = GUIView.getInstance();
 		addObserver(guiView);
 	}
 	
@@ -196,13 +192,13 @@ public class NetworkInformation extends Observable {
 	
 	
 	public String getLocalIPAddress () throws UnknownHostException, SocketException {
-		Enumeration e = NetworkInterface.getNetworkInterfaces();
+		Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces();
 		boolean found = false ;
 		String ip = null ;
 		while(e.hasMoreElements())
 		{
 		    NetworkInterface n = (NetworkInterface) e.nextElement();
-		    Enumeration ee = n.getInetAddresses();
+		    Enumeration<InetAddress> ee = n.getInetAddresses();
 		    while (ee.hasMoreElements())
 		    {
 		        InetAddress i = (InetAddress) ee.nextElement();
@@ -220,13 +216,13 @@ public class NetworkInformation extends Observable {
 	}
 	
 	public String getLocalBroadcast () throws UnknownHostException, SocketException {
-		Enumeration e = NetworkInterface.getNetworkInterfaces();
+		Enumeration<?> e = NetworkInterface.getNetworkInterfaces();
 		boolean found = false ;
 		String ip = null ;
 		while(e.hasMoreElements())
 		{
 		    NetworkInterface n = (NetworkInterface) e.nextElement();
-		    Enumeration ee = n.getInetAddresses();
+		    Enumeration<?> ee = n.getInetAddresses();
 		    while (ee.hasMoreElements())
 		    {
 		    	InterfaceAddress i = (InterfaceAddress) ee.nextElement();

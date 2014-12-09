@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+
 import Signals.AbstractMessage;
 import Signals.FileMessage;
 
@@ -51,7 +52,7 @@ public class TCPSender extends AbstractSender {
 				outMessage.write(byteOut.toByteArray()) ;
 				
 				// On envoie ensuite le fichier
-				
+				@SuppressWarnings("resource")
 				FileInputStream filein = new FileInputStream (file) ;
 				OutputStream outFile = client.getOutputStream();
 				byte[] buf = new byte[(int)((FileMessage)message).getFileSize()] ;
@@ -61,10 +62,8 @@ public class TCPSender extends AbstractSender {
 				System.out.println("Client closed "+System.currentTimeMillis());
 				client.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("TCP SENDER - IOEXCEPTION ERROR DURING SENDING") ;
 			}
-			
 		}
 	}
 	

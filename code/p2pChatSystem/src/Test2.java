@@ -1,28 +1,4 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.TreeSet;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.plaf.FileChooserUI;
-
-import GUI.ChatFenetre;
-import GUI.ConnectDisconnectPanel;
 import GUI.ConversationFenetre;
-import GUI.GUIView;
-import NI.NIControler;
-import Signals.Hello;
 
 
 public class Test2 {
