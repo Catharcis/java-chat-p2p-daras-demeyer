@@ -32,7 +32,7 @@ public class NetworkToControler {
 	 * Constructeur par defaut
 	 */
 	private NetworkToControler(){
-		NI = NI.getInstance();
+		NI = NetworkInformation.getInstance();
 	}
 	
 	/** Methode qui permet d'obtenir l'instance de la classe **/
@@ -52,7 +52,7 @@ public class NetworkToControler {
 	 * @param guiCont : le guiControler
 	 */
 	public void setGuiCon (GUIControler guiCont) {
-		this.guiCon = guiCont.getInstance();
+		NetworkToControler.guiCon = GUIControler.getInstance();
 	}
 	
 	/**

@@ -4,11 +4,7 @@ import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.TreeSet;
-
-import GUI.GUIControler;
 import NI.NIControler;
 
 
@@ -35,7 +31,7 @@ public class GUIToControler {
 	// Constructeur par defaut
 	private GUIToControler(){
 		// On recupere l'instance du NI
-		NI = NI.getInstance();
+		NI = NetworkInformation.getInstance();
 	}
 	
 	
@@ -55,11 +51,11 @@ public class GUIToControler {
 	
 	// Permet d'assigner la valeur du NIControler
 	public void setNiCon (NIControler niCont) {
-		this.niCon = niCont.getInstance();
+		GUIToControler.niCon = NIControler.getInstance();
 	}
 	
 	public NetworkInformation getNetInfo () {
-		return this.NI ;
+		return GUIToControler.NI ;
 	}
 	
 	/************************************************* 
@@ -93,8 +89,8 @@ public class GUIToControler {
 		try {
 			// On envoie un HelloAck a celui qui nous a envoye un Hello
 			String localNameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
-			String destNameWithPattern = NI.getNicknameWithIP(this.NI.getUserWithId(idDestUser));
-			niCon.sendHelloAck(localNameWithPattern,destNameWithPattern,NI.getIPAddressOfUser(this.NI.getUserWithId(idDestUser)));
+			String destNameWithPattern = NI.getNicknameWithIP(GUIToControler.NI.getUserWithId(idDestUser));
+			niCon.sendHelloAck(localNameWithPattern,destNameWithPattern,NI.getIPAddressOfUser(GUIToControler.NI.getUserWithId(idDestUser)));
 		} catch (UnknownHostException e) {
 			System.out.println("GUIToControler - PERFORM SEND HELLO ACK : UnknownHostException") ;
 		}
@@ -133,7 +129,6 @@ public class GUIToControler {
 		/** Construction d'une List de String sous format NICKNAME@XX.XX.XX.XX**/
 		ArrayList<String> nicknameList = new ArrayList <String> () ;
 		ArrayList<InetAddress> ipAddressesList = new ArrayList<InetAddress>();
-		Iterator l = listOfId.iterator() ;
 		for (Integer i : listOfId) {
 			int id = (int) i ;
 			User user = NI.getUserWithId(id) ;
@@ -169,7 +164,6 @@ public class GUIToControler {
 		/** Construction d'une List de String sous format NICKNAME@XX.XX.XX.XX**/
 		ArrayList<String> nicknameList = new ArrayList <String> () ;
 		ArrayList<InetAddress> ipAddressesList = new ArrayList<InetAddress>();
-		Iterator l = listOfId.iterator() ;
 		for (Integer i : listOfId) {
 			int id = (int) i ;
 			User user = NI.getUserWithId(id) ;

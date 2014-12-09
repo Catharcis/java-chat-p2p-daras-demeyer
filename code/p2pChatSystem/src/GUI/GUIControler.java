@@ -2,9 +2,7 @@ package GUI;
 
 import java.io.File;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.TreeSet;
-
 import Controler.GUIToControler;
 
 public class GUIControler {
@@ -25,7 +23,7 @@ public class GUIControler {
 	 ************************************************/
 	
 	private GUIControler () {
-		guiToCon = guiToCon.getInstance() ;
+		guiToCon = GUIToControler.getInstance() ;
 		etat = Etats.disconnected ;
 	}
 	

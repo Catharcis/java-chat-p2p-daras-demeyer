@@ -15,7 +15,6 @@ import java.util.Observable;
 import java.util.TreeSet;
 
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListModel;
 
@@ -23,6 +22,7 @@ import Controler.NetworkInformation;
 import Controler.typeOfChange;
 import GUI.GUIControler.Etats;
 
+@SuppressWarnings("serial")
 public class ChatFenetre extends AbstractFenetre{
 
 
@@ -188,8 +188,7 @@ public class ChatFenetre extends AbstractFenetre{
 				try {
 					getGUIView().Connection(connectDisconnectPanel.getNameOfLocalUser());
 				} catch (UnknownHostException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("CHAT FENETRE - UNKNOWNHOST EXCEPTION ERROR !") ;
 				}
 				this.pack();
 			}
@@ -319,8 +318,7 @@ public class ChatFenetre extends AbstractFenetre{
 					try {
 						getGUIView().Connection(connectDisconnectPanel.getNameOfLocalUser());
 					} catch (UnknownHostException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						System.out.println("CHATFENETRE - UNKNOWNHOSTEXCEPTION ERROR") ;
 					}
 					this.pack();
 				}
@@ -329,16 +327,10 @@ public class ChatFenetre extends AbstractFenetre{
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyReleased(KeyEvent arg0) { }
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyTyped(KeyEvent arg0) { }
 
 
 

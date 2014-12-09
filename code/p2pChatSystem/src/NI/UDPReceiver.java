@@ -3,11 +3,6 @@ package NI;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
-import java.util.Enumeration;
-
-import Controler.NetworkInformation;
-import Controler.NetworkToControler;
-import Controler.User;
 import Signals.*;
 
 public class UDPReceiver extends AbstractReceiver implements Runnable {
@@ -31,8 +26,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 		try {
 			socket = new DatagramSocket (this.getPortEcoute()) ;
 		} catch (SocketException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("UDPRECEIVER - CONSTRUCTOR : SocketEXCEPTION ! ") ;
 		}
 	}
 	
@@ -44,7 +38,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 	}
 	
 	public void setNiCon (NIControler NiCont) {
-			this.NiCon = NiCont.getInstance() ;
+			UDPReceiver.NiCon = NIControler.getInstance() ;
 	}
 	
 	
@@ -69,8 +63,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 				socket = new DatagramSocket(this.getPortEcoute());
 				this.setStateListen(true);
 			} catch (SocketException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("UDPRECEIVER - NEW SOCKET ERROR : SocketEXCEPTION ! ") ;
 			}	
 		}
 		

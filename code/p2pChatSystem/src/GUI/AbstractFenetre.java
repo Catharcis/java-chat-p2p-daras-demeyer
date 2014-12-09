@@ -1,16 +1,15 @@
 package GUI;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowListener;
 import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JFrame;
 
 
+@SuppressWarnings("serial")
 public abstract class AbstractFenetre extends JFrame implements ActionListener, MouseListener, WindowListener, KeyListener {
 
 	/************************************************* 

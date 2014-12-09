@@ -1,21 +1,10 @@
 package GUI; 
  
-import java.awt.Color; 
-import java.awt.Component; 
-import java.awt.Dimension; 
-import java.awt.List; 
-import java.awt.event.ActionEvent; 
-import java.awt.event.MouseAdapter; 
-import java.awt.event.MouseEvent; 
 import java.util.ArrayList; 
 import java.util.Observable; 
- 
-
 import javax.swing.DefaultListModel; 
 import javax.swing.JList;
 import javax.swing.JPanel; 
-import javax.swing.JScrollPane; 
-import javax.swing.ListModel; 
 import javax.swing.ListSelectionModel; 
 
  

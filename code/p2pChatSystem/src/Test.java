@@ -1,8 +1,4 @@
 import java.net.UnknownHostException;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import GUI.GUIView;
 
 
@@ -13,7 +9,7 @@ public class Test {
 public static void initGUI () {
 	/** Initialisation de la GUI **/
 	GUIView guiView = null ;
-	guiView = guiView.getInstance() ;
+	guiView = GUIView.getInstance() ;
 	guiView.getChatFenetre().setGuiView(guiView);
 //	guiView.getConversationFenetre().setGuiView(guiView);
 }
