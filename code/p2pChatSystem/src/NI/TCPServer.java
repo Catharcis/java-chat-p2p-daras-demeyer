@@ -26,9 +26,7 @@ public class TCPServer extends AbstractReceiver implements Runnable {
 			System.out.println("TCPSERVER - Waiting for connection ...");
 		} catch (IOException e) {
 			System.out.println("TCPSERVER ERROR DURING CREATION");
-		}
-		
-		
+		}	
 	}
 
 	public static TCPServer getInstanceTCPServer() {

@@ -36,7 +36,7 @@ public class GUIToControler {
 	}
 	
 	
-	/** Methode qui permet de recuperer l'instance de la classe **/
+	/** Methode qui permet de recuperer l'instance de la calasse **/
 	public static GUIToControler getInstance(){
 		if (guiToContSingleton == null) {
 			guiToContSingleton = new GUIToControler() ;
@@ -102,6 +102,7 @@ public class GUIToControler {
 			// On envoie un Goodbye à l'ensemble du reseau
 			String nameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
 			niCon.getUDPReceiver().setStateListen(false);
+			niCon.getTCPServer().setStateListen(false) ;
 			niCon.getTCPServer().getServerSocket().close();
 			niCon.sendGoodbye(nameWithPattern);
 			// On notifie la vue et on réinitialise des variables

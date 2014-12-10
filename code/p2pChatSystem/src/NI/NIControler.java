@@ -118,7 +118,6 @@ public class NIControler {
 	
 	
 	public void sendTextMessage (ArrayList<String> usernameList, String data, ArrayList<InetAddress> ipAddressList) throws UnknownHostException {
-		
 		/** Construction de l'Abstract message a envoye **/
 		AbstractMessage message = new TextMessage (NI.getNicknameWithIP(NI.getLocalUser()), data, usernameList) ;
 		this.udpSender.send(message, usernameList, ipAddressList); 
@@ -126,7 +125,6 @@ public class NIControler {
 	}
 	
 	public void sendFileMessage (ArrayList<String> usernameList, File file, ArrayList<InetAddress> ipAddressList) throws UnknownHostException {
-		
 		/** Construction de l'Abstract message a envoye **/
 		AbstractMessage message = new FileMessage (file.getName(), usernameList, file.length()) ;
 		message.setNickname(NI.getNicknameWithIP(NI.getLocalUser()));
