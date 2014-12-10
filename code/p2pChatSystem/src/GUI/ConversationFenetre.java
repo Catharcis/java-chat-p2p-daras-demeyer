@@ -48,7 +48,7 @@ public class ConversationFenetre extends AbstractFenetre{
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
-    public ConversationFenetre(String nickname, int UserId){
+    public ConversationFenetre(ArrayList<String> listNicknames, TreeSet<Integer> listUserId, boolean visible){
         historic = new JTextArea(20,30);
         JScrollPane scrollPane = new JScrollPane( historic );
         writerArea = new JTextArea(10,30);
@@ -57,11 +57,18 @@ public class ConversationFenetre extends AbstractFenetre{
         fileButton = new JButton("File");
         fileChooser = new JFileChooser();
         this.listOfNicknames = new ArrayList<String>() ;
-        this.listOfNicknames.add(nickname) ;
-        this.listOfId = new TreeSet<Integer>() ;
-        this.listOfId.add(UserId) ;
-        this.setTitle(nickname);
-        initializeComponents();
+        this.listOfNicknames =listNicknames ;
+        this.listOfId = new TreeSet(listUserId) ;
+        String title = "" ;
+        for (int i = 0; i<this.listOfNicknames.size() ; i++) {
+        	if (i < this.listOfNicknames.size()-1) {
+        		title += this.listOfNicknames.get(i)+", ";
+        	}
+        	else 
+        		title += this.listOfNicknames.get(i);
+        }
+        this.setTitle(title);
+        initializeComponents(visible);
 }
 
 	
@@ -105,7 +112,7 @@ public class ConversationFenetre extends AbstractFenetre{
 	 * doivent etre implementer dans les classes filles
 	 */
 	
-	public void initializeComponents(){
+	public void initializeComponents(boolean visible){
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		historic.setEditable(false);
         writerArea.setSize(400, 100);
@@ -131,7 +138,7 @@ public class ConversationFenetre extends AbstractFenetre{
         generalPanel.add(writePartPanel,BorderLayout.SOUTH);
         this.getContentPane().add(generalPanel);
         this.pack();
-        this.setVisible(true);
+        this.setVisible(visible);
 	}
 
 	public void miseAJourFenetre () {	

@@ -110,6 +110,7 @@ public class GUIView implements Observer{
 		guiControler.FileMessage(file, listOfId) ;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (arg0 instanceof NetworkInformation){
@@ -184,10 +185,13 @@ public class GUIView implements Observer{
 
 			else if (NI.getLastChange().equals(typeOfChange.NEWINCOMINGTEXTMESSAGE)){
 				// On recupere la conversation
-				@SuppressWarnings("unchecked")
 				TreeSet<Integer> listOfIds = (TreeSet<Integer>)arg1 ;
 				String conversation = NI.getHistoricConversations().get(listOfIds);
 				
+				ArrayList<String> nicknames = new ArrayList<String>() ;
+				for (Integer aux : listOfIds) {
+					nicknames.add(this.getGUIControler().getGUIToControler().getNetInfo().getUserWithId(aux).getNickname()) ;
+				}
 				boolean found = false ;
 				int i = 0 ;
 				while (!found && i < this.listOfConversationFenetre.size()) {
@@ -195,18 +199,16 @@ public class GUIView implements Observer{
 						found = true ;
 						this.listOfConversationFenetre.get(i).getHistoricArea().setText(conversation) ;
 						if (!this.listOfConversationFenetre.get(i).isVisible()) {
-							System.out.println("FENETRE NOT VISIBLE") ;
-							String nicknames = null ;
-							for (Integer aux : listOfIds) {
-								if (nicknames ==null) 
-									nicknames = this.getGUIControler().getGUIToControler().getNetInfo().getUserWithId(aux).getNickname()+", " ;
-								else
-									nicknames = nicknames + this.getGUIControler().getGUIToControler().getNetInfo().getUserWithId(aux).getNickname()+", " ;
-							}
 							JOptionPane.showMessageDialog(null, "There is a new message in your conversation with "+nicknames, "New Message Notification", JOptionPane.INFORMATION_MESSAGE);
 						}
 					}
 					i++ ;
+				}
+				if (!found) {
+					JOptionPane.showMessageDialog(null, "There is a new message in your conversation with "+nicknames, "New Message Notification", JOptionPane.INFORMATION_MESSAGE);
+					ConversationFenetre newConversation = new ConversationFenetre(nicknames, listOfIds, false) ;
+		            newConversation.setGuiView(this) ;
+		            this.getConversationFenetre().add(newConversation);
 				}
 				
 			}
@@ -214,7 +216,6 @@ public class GUIView implements Observer{
 			else if (NI.getLastChange().equals(typeOfChange.NEWINCOMINGFILEMESSAGE)){
 				
 				// On recupere la conversation
-				@SuppressWarnings("unchecked")
 				TreeSet<Integer> listOfIds = (TreeSet<Integer>)arg1 ;
 				String conversation = NI.getHistoricConversations().get(listOfIds);
 				
@@ -237,8 +238,7 @@ public class GUIView implements Observer{
 						}
 					}
 					i++ ;
-				}
-				
+				}			
 				
 			}
 		}

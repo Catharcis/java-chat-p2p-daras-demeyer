@@ -34,13 +34,13 @@ public abstract class AbstractFenetre extends JFrame implements ActionListener, 
 	 ************************************************/
 
 	/*
-	 * Attention, les méthodes suivantes :
+	 * Attention, les mï¿½thodes suivantes :
 	 * public void actionPerformed(ActionEvent arg0)
 	 * public void update(Observable arg0, Object arg1)
-	 * doivent être implémenter dans les classes filles
+	 * doivent ï¿½tre implï¿½menter dans les classes filles
 	 */
 	
-	public abstract void initializeComponents();
+	public abstract void initializeComponents(boolean visible);
 	
 	public abstract void miseAJour(Observable arg0);
 }
