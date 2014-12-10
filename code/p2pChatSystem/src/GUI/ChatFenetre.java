@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.TreeSet;
 
@@ -47,7 +48,7 @@ public class ChatFenetre extends AbstractFenetre{
 		connectDisconnectPanel = ConnectDisconnectPanel.getInstance();
 		contactsListPanel = ContactsListPanel.getInstance();
 		this.addWindowListener(this);
-	    this.initializeComponents();
+	    this.initializeComponents(true);
 	}
 
 	public static ChatFenetre getInstance(){
@@ -90,7 +91,7 @@ public class ChatFenetre extends AbstractFenetre{
 	    this.setLocationRelativeTo(null);
 	}
 	
-	public void initializeComponents() {	
+	public void initializeComponents(boolean visible) {	
 		// On crée nos différents conteneurs
 	    JPanel cell1 = new JPanel();
 	    cell1.setBackground(Color.white);
@@ -171,7 +172,7 @@ public class ChatFenetre extends AbstractFenetre{
 
 	    //On ajoute le conteneur
 	    this.setContentPane(connectDisconnectPanel);
-	    this.setVisible(true) ;
+	    this.setVisible(visible) ;
 	    
 	    // On ajoute les Listener
 		this.connectDisconnectPanel.getButtonConnectOnOff().addActionListener(this);
@@ -236,7 +237,11 @@ public class ChatFenetre extends AbstractFenetre{
 	            }
 	            // si on n'a pas trouve de conversation existante, on en cree une
 	            if (!found) {
-	            	ConversationFenetre newConversation = new ConversationFenetre(item.toString(), idUser) ;
+	            	TreeSet <Integer> listId = new TreeSet<Integer> () ;
+	            	listId.add(idUser) ;
+	            	ArrayList<String> listNickname = new ArrayList<String>() ;
+	            	listNickname.add(item.toString()) ;
+	            	ConversationFenetre newConversation = new ConversationFenetre(listNickname, listId, true) ;
 		            newConversation.setGuiView(guiView) ;
 		            ChatFenetre.guiView.getConversationFenetre().add(newConversation);
             	}
