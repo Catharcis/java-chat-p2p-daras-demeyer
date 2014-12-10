@@ -1,5 +1,6 @@
 package GUI;
 
+import java.io.File;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -102,6 +103,10 @@ public class GUIView implements Observer{
 	
 	protected void TextMessage (String message, TreeSet <Integer> listOfId) throws UnknownHostException {
 		guiControler.TextMessage(message, listOfId) ;
+	}
+	
+	protected void FileMessage (File file, TreeSet <Integer> listOfId) throws UnknownHostException {
+		guiControler.FileMessage(file, listOfId) ;
 	}
 	
 	@Override

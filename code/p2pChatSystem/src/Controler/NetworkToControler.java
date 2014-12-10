@@ -1,5 +1,6 @@
 package Controler;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -145,7 +146,7 @@ public class NetworkToControler {
 		NI.notifyLastChange(typeOfChange.NEWINCOMINGTEXTMESSAGE, listOfIDs);
 	}
 	
-	public void processFileMessage(){
+	public void processFileMessage(File file, ArrayList<String> listOfUsernames){
 		
 	}
 }

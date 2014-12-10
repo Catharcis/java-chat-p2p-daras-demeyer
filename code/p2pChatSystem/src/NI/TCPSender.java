@@ -42,7 +42,7 @@ public class TCPSender extends AbstractSender {
 		for (int i = 0; i < ipAddressesList.size(); i++){
 		
 			try {
-				client = new Socket(InetAddress.getByName(ipAddressesList.get(i).toString()),this.getPortEcoute());
+				client = new Socket(InetAddress.getByName(ipAddressesList.get(i).getHostAddress()),this.getPortEcoute());
 				System.out.println("TCP SENDER - Socket connected !");
 				// envoi du FileMessage
 				OutputStream outMessage = client.getOutputStream() ;
@@ -52,14 +52,13 @@ public class TCPSender extends AbstractSender {
 				outMessage.write(byteOut.toByteArray()) ;
 				
 				// On envoie ensuite le fichier
-				@SuppressWarnings("resource")
 				FileInputStream filein = new FileInputStream (file) ;
 				OutputStream outFile = client.getOutputStream();
 				byte[] buf = new byte[(int)((FileMessage)message).getFileSize()] ;
 				filein.read(buf) ;
 				outFile.write(buf) ;
-								
-				System.out.println("Client closed "+System.currentTimeMillis());
+							
+				System.out.println("Client closed ");
 				client.close();
 			} catch (IOException e) {
 				System.out.println("TCP SENDER - IOEXCEPTION ERROR DURING SENDING") ;
