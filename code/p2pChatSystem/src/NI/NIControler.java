@@ -3,7 +3,6 @@ import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.List;
 import Controler.NetworkInformation;
 import Controler.NetworkToControler;
 import Signals.* ;
@@ -21,8 +20,6 @@ public class NIControler {
 	private TCPSender tcpSender ;
 	
 	private TCPServer tcpServer ;
-	
-	private List<TCPServer> tcpReceiverList ; 
 	
 	private static NIControler NISingleton ;
 	

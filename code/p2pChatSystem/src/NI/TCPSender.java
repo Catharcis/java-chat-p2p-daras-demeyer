@@ -59,6 +59,7 @@ public class TCPSender extends AbstractSender {
 				byte[] buf = new byte[(int)((FileMessage)message).getFileSize()] ;
 				filein.read(buf) ;
 				outFile.write(buf) ;
+				filein.close() ;
 				System.out.println("TCP SENDER - File Send") ;
 				
 				System.out.println("TCP SENDER -Client closed ");
