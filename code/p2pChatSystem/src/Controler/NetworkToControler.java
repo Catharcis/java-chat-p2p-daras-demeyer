@@ -5,8 +5,6 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
-import GUI.GUIControler;
-
 
 public class NetworkToControler {
 
@@ -16,10 +14,6 @@ public class NetworkToControler {
 	
 	// Reference a NetworkToControler
 	private static NetworkToControler netToContSingleton ;
-	
-	// Reference a GUIControler
-	@SuppressWarnings("unused")
-	private static GUIControler guiCon;
 	
 	// Reference a NetworkInformation
 	private static NetworkInformation NI;
@@ -48,13 +42,6 @@ public class NetworkToControler {
 	 * 				GETTERS & SETTERS
 	 ************************************************/
 	
-	/**
-	 * Permet de fixer le GUIControler
-	 * @param guiCont : le guiControler
-	 */
-	public void setGuiCon (GUIControler guiCont) {
-		NetworkToControler.guiCon = GUIControler.getInstance();
-	}
 	
 	/**
 	 * Getter recuperant NetworkInformation
