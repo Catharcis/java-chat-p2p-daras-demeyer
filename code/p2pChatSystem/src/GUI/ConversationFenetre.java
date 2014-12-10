@@ -179,6 +179,11 @@ public class ConversationFenetre extends AbstractFenetre{
 			
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 	            File file = fileChooser.getSelectedFile();
+	            try {
+					getGUIView().FileMessage(file, listOfId);
+				} catch (UnknownHostException e) {
+					System.out.println("ConversationFentre ERROR - FILE : UnknownHostException") ;
+				}
 			}
 			
 			

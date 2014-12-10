@@ -11,9 +11,7 @@ public static void initGUI () {
 	GUIView guiView = null ;
 	guiView = GUIView.getInstance() ;
 	guiView.getChatFenetre().setGuiView(guiView);
-//	guiView.getConversationFenetre().setGuiView(guiView);
 }
-	
 	
 	public static void main(String[] args) throws UnknownHostException {
 		initGUI() ;

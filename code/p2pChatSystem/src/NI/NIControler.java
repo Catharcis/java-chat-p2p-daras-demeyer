@@ -124,7 +124,7 @@ public class NIControler {
 		/** Construction de l'Abstract message a envoye **/
 		AbstractMessage message = new FileMessage (file.getName(), usernameList, file.length()) ;
 		message.setNickname(NI.getNicknameWithIP(NI.getLocalUser()));
-		this.tcpSender.sendFile(message, usernameList, ipAddressList, file); 
+		this.tcpSender.sendFile(message, usernameList, ipAddressList, file);
 		
 	}
 	
@@ -144,5 +144,8 @@ public class NIControler {
 		netToCont.processTextMessage(text, ListNicknames) ;
 	}
 	
+	protected void receivedFileMessage (File file, ArrayList <String> ListNicknames) throws UnknownHostException {
+		netToCont.processFileMessage(file, ListNicknames) ;
+	}
 	
 }
