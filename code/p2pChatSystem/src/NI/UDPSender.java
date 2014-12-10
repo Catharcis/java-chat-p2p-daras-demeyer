@@ -65,7 +65,7 @@ public class UDPSender extends AbstractSender {
 				out = new ObjectOutputStream(bos);
 			  	out.writeObject(message);
 			  	byte[] buf = bos.toByteArray();
-			  	DatagramPacket packet = new DatagramPacket (buf, buf.length, InetAddress.getByName("10.1.255.255"), this.getPortEcoute()) ;
+			  	DatagramPacket packet = new DatagramPacket (buf, buf.length, InetAddress.getByName("255.255.255.255"), this.getPortEcoute()) ;
 			  	System.out.println("UDPSender : "+message.getTypeContenu() +" concu !") ;
 
 			  	/** Envoi du paquet **/
