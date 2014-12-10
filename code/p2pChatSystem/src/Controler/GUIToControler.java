@@ -1,6 +1,7 @@
 package Controler;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -101,13 +102,16 @@ public class GUIToControler {
 			// On envoie un Goodbye à l'ensemble du reseau
 			String nameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
 			niCon.getUDPReceiver().setStateListen(false);
+			niCon.getTCPServer().getServerSocket().close();
 			niCon.sendGoodbye(nameWithPattern);
 			// On notifie la vue et on réinitialise des variables
 			NI.notifyLastChange(typeOfChange.DISCONNECTION);
 			NI.reinitializeVariables();
 		} catch (UnknownHostException e) {
 			System.out.println("GUIToControler - PERFORM DISCONNECT : UnknownHostException") ;
-		}		
+		} catch (IOException e1){
+			System.out.println("GUIToControler - PERFORM DISCONNECT : IOException when closing TCP Server socket") ;
+		}
 	}
 	
 	public void performSendTextMessage(String message, TreeSet <Integer> listOfId) throws UnknownHostException{
