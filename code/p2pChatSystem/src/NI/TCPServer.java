@@ -1,21 +1,15 @@
 package NI;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import Signals.AbstractMessage;
-import Signals.typeContenu;
+import Signals.FileMessage;
 
 public class TCPServer extends AbstractReceiver implements Runnable {
 
@@ -48,56 +42,52 @@ public class TCPServer extends AbstractReceiver implements Runnable {
 		
 		try {
 			server = new ServerSocket(this.getPortEcoute());
-			System.out.println("Waiting for connection ...");
+			System.out.println("TCPSERVER - Waiting for connection ...");
 			
 			//while (this.isListening()) {
 			try {
 				Socket receiveSocket = server.accept();
-				System.out.println("Recepting connection");
+				System.out.println("TCPSERVER - Recepting connection");
 				
 				// Reception du FileMessage
 				InputStream inMessage = receiveSocket.getInputStream() ;
-				byte[] bMessage = null ;
+				byte[] bMessage = new byte[5000] ;
 				inMessage.read(bMessage) ;
 				ByteArrayInputStream byteIn = new ByteArrayInputStream(bMessage) ;
 				ObjectInputStream objectIn = new ObjectInputStream (byteIn);
-				AbstractMessage fileMessage = (AbstractMessage) objectIn.readObject() ;
+				FileMessage fileMessage = (FileMessage) objectIn.readObject() ;
 				
 				String myUsername = NiCon.getNetInfo().getLocalUser().getNickname()+"@"+NiCon.getNetInfo().getLocalIPAddress();
 				
-				if (!(fileMessage.getNickname().equals(myUsername))){
-					if (fileMessage.getTypeContenu() == typeContenu.FILEMESSAGE) {
-						InputStream inFile = receiveSocket.getInputStream() ;
-						byte[] bFile = null ;
-						inFile.read(bFile) ;
-						ByteArrayInputStream byteFileIn = new ByteArrayInputStream(bFile) ;
-						ObjectInputStream objectFileIn = new ObjectInputStream (byteFileIn);						
-						File file = (File)objectFileIn.readObject() ;
-						
-						
-						ArrayList<String> list = fileMessage.getDest();
-						if (list.remove(myUsername)){
-							System.out.println("UDPReceiver - TextMessage - Remove myUsername success : "+myUsername);
-
-						}
-						else{
-							System.out.println("UDPReceiver - TextMessage - [ERROR] This message was not for us");
-						}
-						
-						// On ajoute l'utilisateur qui nous a envoye le message
-						list.add(textMessage.getNickname());
-						System.out.println("UDPReceiver - TextMessage - Source :"+list.get(0));
-						
-						// On envoie les parametres au NIControler
-						
-						
-						String name = fileMessage.getNickname();
-						System.out.println("UDPReceiver : Received File from " +name) ;
-						NiCon.receivedFileMessage(file, packet.getAddress()) ;
+				if (!(fileMessage.getNickname().equals(myUsername))) {
+					InputStream inFile = receiveSocket.getInputStream() ;
+					byte[] bFile = new byte[(int) fileMessage.getSize()] ;
+					String chemin = "/home/daras/Bureau/4IR/"+fileMessage.getNamefile() ;
+					FileOutputStream fileOut = new FileOutputStream(chemin) ;
+					int tailleLue ;
+					while ((tailleLue = inFile.read(bFile, 0,(int)fileMessage.getSize())) != -1) {
+						fileOut.write(bFile,0,tailleLue);
 					}
+					fileOut.close() ;
+					
+					ArrayList<String> list = ((FileMessage) fileMessage).getDest();
+					if (list.remove(myUsername)){
+						System.out.println("TCPSERVER - FileMessage - Remove myUsername success : "+myUsername);
+					}
+					else{
+						System.out.println("TCPSERVER - FileMessage - [ERROR] This message was not for us ; myNickname was : "+myUsername);
+					}
+
+					// On ajoute l'utilisateur qui nous a envoye le message
+					list.add(fileMessage.getNickname());
+					System.out.println("TCPSERVER - FileMessage - Source :"+list.get(list.size()-1));
+					
+					// On envoie les parametres au NIControler
+					String name = fileMessage.getNickname();
+					System.out.println("TCPSERVER : Received File from " +name) ;
+					NiCon.receivedFileMessage(fileMessage.getNamefile(), list) ;
 				}
 					
-				
 				
 				server.close();
 			} catch (IOException e) {

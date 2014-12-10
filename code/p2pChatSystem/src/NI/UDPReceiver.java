@@ -114,7 +114,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 					
 					// On ajoute l'utilisateur qui nous a envoye le message
 					list.add(textMessage.getNickname());
-					System.out.println("UDPReceiver - TextMessage - Source :"+list.get(0));
+					System.out.println("UDPReceiver - TextMessage - Source :"+list.get(list.size()-1));
 					
 					// On envoie les parametres au NIControler
 					NiCon.receivedTextMessage (textMessage.getMessage(),list) ;

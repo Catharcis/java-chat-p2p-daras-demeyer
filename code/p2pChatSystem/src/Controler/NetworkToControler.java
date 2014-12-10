@@ -146,7 +146,43 @@ public class NetworkToControler {
 		NI.notifyLastChange(typeOfChange.NEWINCOMINGTEXTMESSAGE, listOfIDs);
 	}
 	
-	public void processFileMessage(File file, ArrayList<String> listOfUsernames){
+	public void processFileMessage(String nameFile, ArrayList<String> listOfUsernames) throws UnknownHostException{
+			
+		// On crée une liste d'ID Utilisateurs
+		TreeSet<Integer> listOfIDs = new TreeSet<Integer>();
 		
+		// On déclare un utilisateur pointant sur null pour une utilisation par la suite
+		User user = null;
+		String ipString = null;
+		InetAddress ip = null;
+		
+		// On récupère l'ensemble des id de chaque utilisateur concerné par le message
+		for (int i = 0; i < listOfUsernames.size(); i++){
+			ipString = NI.getIPOfPattern(listOfUsernames.get(i));
+			ip = InetAddress.getByName(ipString);
+			if ((user = NI.getUserList().get(ip)) != null){
+				listOfIDs.add(user.getIdUser());
+			}
+			else{
+				System.out.println("ERREUR - ProcessFileMessage - User who has the ip address "+ip+" doesn't exist");
+			}
+		}
+		
+		// On definit le format d'affichage du message
+		String finalMessage ;
+		if (NI.getHistoricConversations().get(listOfIDs) == null) {
+			finalMessage = user.getNickname()+" : "+nameFile+"\n";
+		}
+		else {
+			finalMessage = NI.getHistoricConversations().get(listOfIDs) + user.getNickname()+" : "+nameFile+"\n";
+		}
+		
+		// Ajout du message a l'historique 
+		NI.getHistoricConversations().put(listOfIDs, finalMessage);
+
+		// Notification envoyée à la vue
+		NI.notifyLastChange(typeOfChange.NEWINCOMINGFILEMESSAGE, listOfIDs);
+				
+				
 	}
 }
