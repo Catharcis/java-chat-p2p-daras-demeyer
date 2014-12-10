@@ -50,6 +50,8 @@ public class TCPSender extends AbstractSender {
 				ObjectOutputStream objectOut = new ObjectOutputStream (byteOut);		
 				objectOut.writeObject(message) ;
 				outMessage.write(byteOut.toByteArray()) ;
+				System.out.println("TCP SENDER - FileMessage Send") ;
+				
 				
 				// On envoie ensuite le fichier
 				FileInputStream filein = new FileInputStream (file) ;
@@ -57,6 +59,7 @@ public class TCPSender extends AbstractSender {
 				byte[] buf = new byte[(int)((FileMessage)message).getFileSize()] ;
 				filein.read(buf) ;
 				outFile.write(buf) ;
+				System.out.println("TCP SENDER - File Send") ;
 				
 				System.out.println("TCP SENDER -Client closed ");
 				client.close();
