@@ -86,6 +86,7 @@ public class GUIView implements Observer{
 		guiToCon.setNiCon(niCon);
 		niCon.setNetToCon(netToCon);
 		niCon.getUDPReceiver().setNiCon(niCon);
+		niCon.getTCPServer().setNiCon(niCon) ;
 	}	
 	
 	protected void Connection (String name) throws UnknownHostException {
@@ -170,10 +171,6 @@ public class GUIView implements Observer{
 					if (this.listOfConversationFenetre.get(i).getListOfIds().contains(idUser))
 						this.listOfConversationFenetre.get(i).getListOfIds().remove(idUser) ;
 					// on supprime son nickname de toutes les conversations
-					if (this.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser) == null)
-						System.out.println("USER NULL") ;
-					String name = this.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname() ;
-					System.out.println("BUG : "+name) ;
 					if (this.listOfConversationFenetre.get(i).getListOfNicknames().contains(this.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname()))
 						this.listOfConversationFenetre.get(i).getListOfNicknames().remove(this.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname()) ;
 					// mise a jour de la fenetre

@@ -57,8 +57,8 @@ public class TCPSender extends AbstractSender {
 				byte[] buf = new byte[(int)((FileMessage)message).getFileSize()] ;
 				filein.read(buf) ;
 				outFile.write(buf) ;
-							
-				System.out.println("Client closed ");
+				
+				System.out.println("TCP SENDER -Client closed ");
 				client.close();
 			} catch (IOException e) {
 				System.out.println("TCP SENDER - IOEXCEPTION ERROR DURING SENDING") ;

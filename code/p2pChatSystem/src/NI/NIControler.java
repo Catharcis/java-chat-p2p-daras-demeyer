@@ -67,8 +67,17 @@ public class NIControler {
 	public NetworkInformation getNetInfo () {
 		return NI ;
 	}
+	
 	public void setNetToCon (NetworkToControler netCon) {
 		netToCont = NetworkToControler.getInstance();	
+	}
+	
+	public TCPServer getTCPServer () {
+		return this.tcpServer ;
+	}
+	
+	public TCPSender getTCPSender() {
+		return this.tcpSender ;
 	}
 	
 	
@@ -144,8 +153,8 @@ public class NIControler {
 		netToCont.processTextMessage(text, ListNicknames) ;
 	}
 	
-	protected void receivedFileMessage (File file, ArrayList <String> ListNicknames) throws UnknownHostException {
-		netToCont.processFileMessage(file, ListNicknames) ;
+	protected void receivedFileMessage (String nameFile, ArrayList <String> ListNicknames) throws UnknownHostException {
+		netToCont.processFileMessage(nameFile, ListNicknames) ;
 	}
 	
 }

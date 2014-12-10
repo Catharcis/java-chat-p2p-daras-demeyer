@@ -23,8 +23,6 @@ public class FileMessage extends AbstractMessage {
 		this.fileName = fileName;
 		this.dest = dest;
 		this.fileSize=fileSize;
-		// AJOUT D'UN PARAMETRE
-		this.type = typeContenu.FILEMESSAGE;
 	}
 
 
