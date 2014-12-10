@@ -69,7 +69,7 @@ public class TCPServer extends AbstractReceiver implements Runnable {
 					if (!(fileMessage.getNickname().equals(myUsername))) {
 						InputStream inFile = receiveSocket.getInputStream();
 						byte[] bFile = new byte[(int) fileMessage.getSize()];
-						String chemin = "/home/daras/Bureau/4IR/"
+						String chemin = "/home/mamadou/Documents/Val/4IR/COO-POO/"
 								+ fileMessage.getNamefile();
 						FileOutputStream fileOut = new FileOutputStream(chemin);
 						int tailleLue;
