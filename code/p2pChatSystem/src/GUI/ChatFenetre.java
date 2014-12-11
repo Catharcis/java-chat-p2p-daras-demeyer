@@ -213,7 +213,8 @@ public class ChatFenetre extends AbstractFenetre{
 	        if (evt.getClickCount() == 2) {
 	        	
 	            int index = this.contactsListPanel.getList().locationToIndex(evt.getPoint());
-	            ListModel dlm = this.contactsListPanel.getList().getModel();
+	            @SuppressWarnings("rawtypes")
+				ListModel dlm = this.contactsListPanel.getList().getModel();
 	            Object item = dlm.getElementAt(index);;
 	            this.contactsListPanel.getList().ensureIndexIsVisible(index);
 	            
@@ -296,24 +297,16 @@ public class ChatFenetre extends AbstractFenetre{
 	}
 
 	@Override
-	public void windowDeactivated(WindowEvent e) {
-		
-	}
+	public void windowDeactivated(WindowEvent e) { }
 
 	@Override
-	public void windowDeiconified(WindowEvent e) {
-		
-	}
+	public void windowDeiconified(WindowEvent e) { }
 
 	@Override
-	public void windowIconified(WindowEvent e) {
-		
-	}
+	public void windowIconified(WindowEvent e) { }
 
 	@Override
-	public void windowOpened(WindowEvent e) {
-		
-	}
+	public void windowOpened(WindowEvent e) { }
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
@@ -337,8 +330,4 @@ public class ChatFenetre extends AbstractFenetre{
 	@Override
 	public void keyTyped(KeyEvent arg0) { }
 
-
-
-
-	
 }
