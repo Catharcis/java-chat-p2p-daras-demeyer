@@ -151,7 +151,7 @@ public class GUIToControler {
 		}
 		/** Conversation non existante et donc a creer **/
 		else {
-			System.out.println("GUITOCon - PERFORM FILE TEXT MESSAGE - New historic : Me : Send file - "+file.getName()) ;
+			System.out.println("GUITOCon - PERFORM FILE TEXT MESSAGE - New historic : Me : Sending file - "+file.getName()) ;
 			NI.getHistoricConversations().put(listOfId, "Me : Sending file - "+file.getName()+"\n") ;
 		}
 		

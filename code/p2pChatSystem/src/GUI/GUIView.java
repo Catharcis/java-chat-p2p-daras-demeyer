@@ -201,7 +201,6 @@ public class GUIView implements Observer{
 						found = true ;
 						this.listOfConversationFenetre.get(i).getHistoricArea().setText(conversation) ;
 						if (!this.listOfConversationFenetre.get(i).isVisible()) {
-							// assuming a JFrame called frame...
 							JFrame frame  = new JFrame() ;
 							JOptionPane optionPane = new JOptionPane("There is a new message in your conversation with "+nicknames);
 							JDialog myDialog = optionPane.createDialog(frame, "New Message Notification");
@@ -259,12 +258,10 @@ public class GUIView implements Observer{
 		            newConversation.setGuiView(this) ;
 		            this.getConversationFenetre().add(newConversation);
 				}
-				
 			}
 		}
 		// Permet de placer correctement l'ensemble des composants
 		this.getChatFenetre().pack();
-			
 	}
 
 	

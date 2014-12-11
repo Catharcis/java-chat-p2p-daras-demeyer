@@ -20,7 +20,7 @@ public class TCPSender extends AbstractSender {
 	
 	
 	private TCPSender() {
-		this.setPortEnvoi(5001) ;
+		this.setPortEnvoi(5003) ;
 		this.setPortEcoute(6789) ;
 	}
 	
@@ -60,9 +60,9 @@ public class TCPSender extends AbstractSender {
 				filein.read(buf) ;
 				outFile.write(buf) ;
 				filein.close() ;
-				System.out.println("TCP SENDER - File Send") ;
+				System.out.println("TCP SENDER - File Sent") ;
 				
-				System.out.println("TCP SENDER -Client closed ");
+				System.out.println("TCP SENDER - Client closed ");
 				client.close();
 			} catch (IOException e) {
 				System.out.println("TCP SENDER - IOEXCEPTION ERROR DURING SENDING") ;

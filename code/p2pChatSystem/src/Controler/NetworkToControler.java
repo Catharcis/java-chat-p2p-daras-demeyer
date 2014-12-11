@@ -175,8 +175,6 @@ public class NetworkToControler {
 		NI.getHistoricConversations().put(listOfIDs, finalMessage);
 
 		// Notification envoyée à la vue
-		NI.notifyLastChange(typeOfChange.NEWINCOMINGFILEMESSAGE, listOfIDs);
-				
-				
+		NI.notifyLastChange(typeOfChange.NEWINCOMINGFILEMESSAGE, listOfIDs);				
 	}
 }
