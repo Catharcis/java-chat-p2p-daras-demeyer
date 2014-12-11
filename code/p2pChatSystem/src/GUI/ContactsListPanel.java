@@ -17,10 +17,10 @@ public class ContactsListPanel extends JPanel{
      
     private static ContactsListPanel singleton; 
     
-    private JList<String> list; 
+    private JList list; 
      
     // Modele de la JList pour pouvoir la modifier facilement 
-    private DefaultListModel<String> dlm; 
+    private DefaultListModel dlm; 
      
     // Permet d'associer le numero de la liste "list" a l'id utilisateur 
     private ArrayList<String> arrayIdListToIdUser; 
@@ -30,8 +30,8 @@ public class ContactsListPanel extends JPanel{
      ************************************************/ 
      
     private ContactsListPanel(){ 
-        this.dlm = new DefaultListModel<String>(); 
-        this.list = new JList<String>(dlm); 
+        this.dlm = new DefaultListModel(); 
+        this.list = new JList(dlm); 
         this.add(list); 
         this.arrayIdListToIdUser = new ArrayList<String> () ;
         this.setVisible(true); 
@@ -50,11 +50,11 @@ public class ContactsListPanel extends JPanel{
      *                 GETTERS & SETTERS 
      ************************************************/ 
      
-    public JList<String> getList(){ 
+    public JList getList(){ 
         return list; 
     } 
      
-    public DefaultListModel<String> getDefaultListModel(){ 
+    public DefaultListModel getDefaultListModel(){ 
         return dlm; 
     } 
      
