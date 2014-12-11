@@ -119,12 +119,10 @@ public class NetworkInformation extends Observable {
 	 * @param lastChange : dernier changement a indique a l'observateur
 	 */
 	public void notifyLastChange(typeOfChange lastChange) {
-		
 		this.lastChange = lastChange;
-		System.out.println("Observer is notified : " + lastChange);
+		System.out.println("NETWORK INFORMATION - Observer is notified : " + lastChange);
 		setChanged();
 		notifyObservers();
-		
 	}
 	
 	/**
@@ -133,12 +131,10 @@ public class NetworkInformation extends Observable {
 	 * @param arg1 : un objet en plus permettant de preciser le changement
 	 */
 	public void notifyLastChange(typeOfChange lastChange, Object arg1) {
-		
 		this.lastChange = lastChange;
-		System.out.println("Observer is notified : " + lastChange);
+		System.out.println("NETWORK INFORMATION - Observer is notified : " + lastChange);
 		setChanged();
 		notifyObservers(arg1);
-		
 	}
 	
 	/** 
