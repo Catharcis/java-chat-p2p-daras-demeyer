@@ -11,7 +11,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
 	
-	private static UDPReceiver singleton = null;
+	private static UDPReceiver singleton ;
 	
 	private static NIControler NiCon ;
 	
@@ -21,7 +21,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
-	private UDPReceiver(){
+	private UDPReceiver() {
 		this.setPortEcoute(9876);
 		try {
 			socket = new DatagramSocket (this.getPortEcoute()) ;
@@ -30,7 +30,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 		}
 	}
 	
-	public static UDPReceiver getInstanceUDPReceiver(){
+	public static UDPReceiver getInstanceUDPReceiver() {
 		if (singleton == null){
 			singleton = new UDPReceiver();
 		}
@@ -122,7 +122,6 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 				
 			}
 		}
-		
 		} catch (BindException e1) {
 			System.out.println("UDPReceiver : Port for UDP SocketReceiver already used.") ;
 		} catch (SocketException e2) {

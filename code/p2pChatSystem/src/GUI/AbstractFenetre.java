@@ -4,7 +4,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowListener;
-import java.util.Observable;
 
 import javax.swing.JFrame;
 
@@ -15,7 +14,6 @@ public abstract class AbstractFenetre extends JFrame implements ActionListener, 
 	/************************************************* 
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
-	
 	
 	
 	/************************************************* 
@@ -42,5 +40,4 @@ public abstract class AbstractFenetre extends JFrame implements ActionListener, 
 	
 	public abstract void initializeComponents(boolean visible);
 	
-	public abstract void miseAJour(Observable arg0);
 }

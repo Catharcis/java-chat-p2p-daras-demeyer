@@ -10,15 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Observable;
 import java.util.TreeSet;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.ListModel;
-
 import Controler.NetworkInformation;
 import Controler.typeOfChange;
 import GUI.GUIControler.Etats;
@@ -43,7 +39,7 @@ public class ChatFenetre extends AbstractFenetre{
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
-	private ChatFenetre(){
+	private ChatFenetre() {
 		this.initializeWindow() ;
 		connectDisconnectPanel = ConnectDisconnectPanel.getInstance();
 		contactsListPanel = ContactsListPanel.getInstance();
@@ -51,7 +47,7 @@ public class ChatFenetre extends AbstractFenetre{
 	    this.initializeComponents(true);
 	}
 
-	public static ChatFenetre getInstance(){
+	public static ChatFenetre getInstance() {
 		if (singleton == null){
 			singleton = new ChatFenetre();
 		}
@@ -186,11 +182,7 @@ public class ChatFenetre extends AbstractFenetre{
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == connectDisconnectPanel.getButtonConnectOnOff()){
 			if (guiView.getGUIControler().getEtat() == Etats.disconnected) {
-				try {
-					getGUIView().Connection(connectDisconnectPanel.getNameOfLocalUser());
-				} catch (UnknownHostException e) {
-					System.out.println("CHAT FENETRE - UNKNOWNHOST EXCEPTION ERROR !") ;
-				}
+				getGUIView().Connection(connectDisconnectPanel.getNameOfLocalUser());
 				this.pack();
 			}
 			else
@@ -201,13 +193,7 @@ public class ChatFenetre extends AbstractFenetre{
 		}
 	}
 
-	@Override
-	public void miseAJour(Observable arg0) {
-		
-	}
 	
-	
-	@Override
 	public void mouseClicked(MouseEvent evt) {
 		if (ChatFenetre.guiView.getGUIControler().getEtat() != Etats.disconnected) {
 	        if (evt.getClickCount() == 2) {
@@ -251,43 +237,26 @@ public class ChatFenetre extends AbstractFenetre{
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
-
-		
-	}
+	public void mouseEntered(MouseEvent e) { }
 
 	@Override
-	public void mouseExited(MouseEvent e) {
-
-		
-	}
+	public void mouseExited(MouseEvent e) { }
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-
-		
-	}
+	public void mousePressed(MouseEvent e) { }
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-
-		
-	}
+	public void mouseReleased(MouseEvent e) { }
 
 	@Override
-	public void windowActivated(WindowEvent arg0) {
-		
-	}
+	public void windowActivated(WindowEvent arg0) { }
 
 
 	@Override
-	public void windowClosed(WindowEvent e) {
-
-	}
+	public void windowClosed(WindowEvent e) { }
 
 	@Override
-	public void windowClosing(WindowEvent e) {
-		
+	public void windowClosing(WindowEvent e) {	
 		System.out.println("Arret du Chat System...");
 		if (ChatFenetre.guiView.getGUIControler().getEtat() != Etats.disconnected) {
 			if (NetworkInformation.getInstance().getLastChange() != typeOfChange.DISCONNECTION){
@@ -313,11 +282,7 @@ public class ChatFenetre extends AbstractFenetre{
 		if (arg0.getSource() == connectDisconnectPanel.getNicknameField()) {
 			if (arg0.getKeyCode() == KeyEvent.VK_ENTER ) {
 				if (guiView.getGUIControler().getEtat() == Etats.disconnected) {
-					try {
-						getGUIView().Connection(connectDisconnectPanel.getNameOfLocalUser());
-					} catch (UnknownHostException e) {
-						System.out.println("CHATFENETRE - UNKNOWNHOSTEXCEPTION ERROR") ;
-					}
+					getGUIView().Connection(connectDisconnectPanel.getNameOfLocalUser());
 					this.pack();
 				}
 			}

@@ -30,14 +30,14 @@ public class GUIToControler {
 	 ************************************************/
 	
 	// Constructeur par defaut
-	private GUIToControler(){
+	private GUIToControler() {
 		// On recupere l'instance du NI
 		NI = NetworkInformation.getInstance();
 	}
 	
 	
 	/** Methode qui permet de recuperer l'instance de la calasse **/
-	public static GUIToControler getInstance(){
+	public static GUIToControler getInstance() {
 		if (guiToContSingleton == null) {
 			guiToContSingleton = new GUIToControler() ;
 		}
@@ -65,17 +65,13 @@ public class GUIToControler {
 	
 	/** Differentes methodes de type perform() permettant d'envoyer un signal au NI**/
 	
-	public void performConnect(String name){
+	public void performConnect(String name) {
 		
 		// On crée le local user grâce à son nom
 		NI.setLocalUser(name);
-		try {
-			// On envoie un hello sur le réseau avec : "nom@IP"
-			String nameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
-			niCon.sendHello(nameWithPattern);
-		} catch (UnknownHostException e) {
-			System.out.println("GUIToControler - PERFORM CONNECT : UnknownHostException") ;
-		}
+		// On envoie un hello sur le réseau avec : "nom@IP"
+		String nameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
+		niCon.sendHello(nameWithPattern);
 		
 		// Si la socket est dans l'etat "closed", cela indique qu'elle a deja ete ouverte et qu'il faut la remplace
 		if (niCon.getUDPReceiver().getSocket().isClosed()){
@@ -87,35 +83,30 @@ public class GUIToControler {
 	}
 	
 	public void performSendHelloAck(int idDestUser){
-		try {
 			// On envoie un HelloAck a celui qui nous a envoye un Hello
 			String localNameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
 			String destNameWithPattern = NI.getNicknameWithIP(GUIToControler.NI.getUserWithId(idDestUser));
 			niCon.sendHelloAck(localNameWithPattern,destNameWithPattern,NI.getIPAddressOfUser(GUIToControler.NI.getUserWithId(idDestUser)));
-		} catch (UnknownHostException e) {
-			System.out.println("GUIToControler - PERFORM SEND HELLO ACK : UnknownHostException") ;
-		}
 	}
 	
-	public void performDisconnect(){
-		try {
+	
+	public void performDisconnect() {
 			// On envoie un Goodbye à l'ensemble du reseau
 			String nameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
 			niCon.getUDPReceiver().setStateListen(false);
 			niCon.getTCPServer().setStateListen(false) ;
-			niCon.getTCPServer().getServerSocket().close();
+			try {
+				niCon.getTCPServer().getServerSocket().close();
+			} catch (IOException e) {
+				System.out.println("GUI TO CONTROLER - performDisconnect : Error during closing socket from TCPServer") ;
+			}
 			niCon.sendGoodbye(nameWithPattern);
 			// On notifie la vue et on réinitialise des variables
 			NI.notifyLastChange(typeOfChange.DISCONNECTION);
 			NI.reinitializeVariables();
-		} catch (UnknownHostException e) {
-			System.out.println("GUIToControler - PERFORM DISCONNECT : UnknownHostException") ;
-		} catch (IOException e1){
-			System.out.println("GUIToControler - PERFORM DISCONNECT : IOException when closing TCP Server socket") ;
-		}
 	}
 	
-	public void performSendTextMessage(String message, TreeSet <Integer> listOfId) throws UnknownHostException{
+	public void performSendTextMessage(String message, TreeSet <Integer> listOfId) {
 		/** Gestion des conversations **/
 		/** Conversation existante **/
 		if (NI.getHistoricConversations().containsKey(listOfId)) {
@@ -148,7 +139,7 @@ public class GUIToControler {
 		
 	}
 	
-	public void performSendFile(File file, TreeSet<Integer> listOfId) throws UnknownHostException{
+	public void performSendFile(File file, TreeSet<Integer> listOfId) {
 		
 		/** Gestion des conversations **/
 		/** Conversation existante **/

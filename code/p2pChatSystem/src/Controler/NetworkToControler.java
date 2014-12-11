@@ -26,12 +26,12 @@ public class NetworkToControler {
 	/**
 	 * Constructeur par defaut
 	 */
-	private NetworkToControler(){
+	private NetworkToControler() {
 		NI = NetworkInformation.getInstance();
 	}
 	
 	/** Methode qui permet d'obtenir l'instance de la classe **/
-	public static NetworkToControler getInstance(){
+	public static NetworkToControler getInstance() {
 			if (netToContSingleton == null) {
 				netToContSingleton = new NetworkToControler() ;
 			}
@@ -60,7 +60,7 @@ public class NetworkToControler {
 	 * @param name : nom de la personne envoyant le message (au format "nom@IP")
 	 * @param ipAddress : l'adresse IP de la personne
 	 */
-	public void processHello(String name, InetAddress ipAddress){
+	public void processHello(String name, InetAddress ipAddress) {
 		// ajout du nouvel user
 		String nameWithoutPattern = NI.getNicknameWithoutIP(name);
 		NI.addUser(nameWithoutPattern, ipAddress, false) ;
@@ -71,7 +71,7 @@ public class NetworkToControler {
 	 * @param name : nom de la personne envoyant le message (au format "nom@IP")
 	 * @param ipAddress : l'adresse IP de la personne
 	 */
-	public void processHelloAck(String name, InetAddress ipAddress){
+	public void processHelloAck(String name, InetAddress ipAddress) {
 		String nameWithoutPattern = NI.getNicknameWithoutIP(name);
 		NI.addUser(nameWithoutPattern, ipAddress, true) ;
 	}
@@ -81,7 +81,7 @@ public class NetworkToControler {
 	 * @param name : nom de la personne envoyant le message (au format "nom@IP")
 	 * @param ipAddress : l'adresse IP de la personne
 	 */
-	public void processGoodbye(String name, InetAddress ipAddress){
+	public void processGoodbye(String name, InetAddress ipAddress) {
 		if (NI.getUserList() != null) {
 			if (NI.getUserList().containsKey(ipAddress))
 				NI.removeUser(ipAddress);
@@ -94,7 +94,7 @@ public class NetworkToControler {
 	 * @param listOfUsernames : la liste des noms d'utilisateurs
 	 * @throws UnknownHostException
 	 */
-	public void processTextMessage(String message, ArrayList<String> listOfUsernames) throws UnknownHostException{
+	public void processTextMessage(String message, ArrayList<String> listOfUsernames) {
 		
 		// On crée une liste d'ID Utilisateurs
 		TreeSet<Integer> listOfIDs = new TreeSet<Integer>();
@@ -107,7 +107,11 @@ public class NetworkToControler {
 		// On récupère l'ensemble des id de chaque utilisateur concerné par le message
 		for (int i = 0; i < listOfUsernames.size(); i++){
 			ipString = NI.getIPOfPattern(listOfUsernames.get(i));
-			ip = InetAddress.getByName(ipString);
+			try {
+				ip = InetAddress.getByName(ipString);
+			} catch (UnknownHostException e) {
+				System.out.println("NETWORK TO CONTROLER - ProcessTextMessage : Impossible de recuperer l'adresse IP de la source du TextMessage") ;
+			}
 			if ((user = NI.getUserList().get(ip)) != null){
 				listOfIDs.add(user.getIdUser());
 			}
@@ -132,7 +136,7 @@ public class NetworkToControler {
 		NI.notifyLastChange(typeOfChange.NEWINCOMINGTEXTMESSAGE, listOfIDs);
 	}
 	
-	public void processFileMessage(String nameFile, ArrayList<String> listOfUsernames) throws UnknownHostException{
+	public void processFileMessage(String nameFile, ArrayList<String> listOfUsernames) {
 			
 		// On crée une liste d'ID Utilisateurs
 		TreeSet<Integer> listOfIDs = new TreeSet<Integer>();
@@ -145,12 +149,16 @@ public class NetworkToControler {
 		// On récupère l'ensemble des id de chaque utilisateur concerné par le message
 		for (int i = 0; i < listOfUsernames.size(); i++){
 			ipString = NI.getIPOfPattern(listOfUsernames.get(i));
-			ip = InetAddress.getByName(ipString);
+			try {
+				ip = InetAddress.getByName(ipString);
+			} catch (UnknownHostException e) {
+				System.out.println("NETWORK TO CONTROLER - ProcessFileMessage : Impossible de recuperer l'adresse IP de la source du FileMessage") ;
+			}
 			if ((user = NI.getUserList().get(ip)) != null){
 				listOfIDs.add(user.getIdUser());
 			}
 			else{
-				System.out.println("ERREUR - ProcessFileMessage - User who has the ip address "+ip+" doesn't exist");
+				System.out.println("NETWORK TO CONTROLER - ProcessFileMessage - User who has the ip address "+ip+" doesn't exist");
 			}
 		}
 		

@@ -87,22 +87,22 @@ public class NIControler {
 	 * 
 	 ************************************************/
 	
-	public void createThreadUDPReceiver(){
+	public void createThreadUDPReceiver() {
 		Thread tUdpReceiver = new Thread (udpReceiver, "ThreadUdpReceiver") ;
 		tUdpReceiver.start() ;
 	}
 	
-	public void createThreadTCPServer(){
+	public void createThreadTCPServer() {
 		Thread tTcpServer = new Thread (tcpServer, "tcpServer") ;
 		tTcpServer.start() ;
 	}
 	
-	public void sendHello (String name) throws UnknownHostException {
+	public void sendHello (String name) {
 		AbstractMessage message = new Hello (name) ;
 		this.udpSender.sendBroadcast(message); 
 	}
 	
-	public void sendHelloAck (String localUsername, String destUsername, InetAddress ipAddress) throws UnknownHostException {
+	public void sendHelloAck (String localUsername, String destUsername, InetAddress ipAddress) {
 		ArrayList <String> userList = new ArrayList<String> () ;
 		ArrayList <InetAddress> ipAddressList = new ArrayList<InetAddress> () ;
 		userList.add(destUsername) ;
@@ -111,20 +111,20 @@ public class NIControler {
 		this.udpSender.send(message, userList, ipAddressList); 
 	}
 	
-	public void sendGoodbye (String name) throws UnknownHostException {
+	public void sendGoodbye (String name) {
 		AbstractMessage message = new Goodbye (name) ;
 		this.udpSender.sendBroadcast(message); 
 	}
 	
 	
-	public void sendTextMessage (ArrayList<String> usernameList, String data, ArrayList<InetAddress> ipAddressList) throws UnknownHostException {
+	public void sendTextMessage (ArrayList<String> usernameList, String data, ArrayList<InetAddress> ipAddressList) {
 		/** Construction de l'Abstract message a envoye **/
 		AbstractMessage message = new TextMessage (NI.getNicknameWithIP(NI.getLocalUser()), data, usernameList) ;
 		this.udpSender.send(message, usernameList, ipAddressList); 
 		
 	}
 	
-	public void sendFileMessage (ArrayList<String> usernameList, File file, ArrayList<InetAddress> ipAddressList) throws UnknownHostException {
+	public void sendFileMessage (ArrayList<String> usernameList, File file, ArrayList<InetAddress> ipAddressList) {
 		/** Construction de l'Abstract message a envoye **/
 		AbstractMessage message = new FileMessage (file.getName(), usernameList, file.length()) ;
 		message.setNickname(NI.getNicknameWithIP(NI.getLocalUser()));
@@ -144,11 +144,11 @@ public class NIControler {
 		netToCont.processGoodbye(name, address) ;
 	}
 	
-	protected void receivedTextMessage (String text, ArrayList <String> ListNicknames) throws UnknownHostException {
+	protected void receivedTextMessage (String text, ArrayList <String> ListNicknames) {
 		netToCont.processTextMessage(text, ListNicknames) ;
 	}
 	
-	protected void receivedFileMessage (String nameFile, ArrayList <String> ListNicknames) throws UnknownHostException {
+	protected void receivedFileMessage (String nameFile, ArrayList <String> ListNicknames) {
 		netToCont.processFileMessage(nameFile, ListNicknames) ;
 	}
 	

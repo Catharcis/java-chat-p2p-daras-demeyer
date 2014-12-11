@@ -1,7 +1,6 @@
 package GUI;
 
 import java.io.File;
-import java.net.UnknownHostException;
 import java.util.TreeSet;
 import Controler.GUIToControler;
 
@@ -38,7 +37,7 @@ public class GUIControler {
 	 * 				GETTERS & SETTERS
 	 ************************************************/
 	
-	public GUIToControler getGUIToControler(){
+	public GUIToControler getGUIToControler() {
 		return guiToCon;
 	}
 
@@ -72,11 +71,11 @@ public class GUIControler {
 		this.setEtatDisconnect();
 	}
 	
-	protected void TextMessage (String message, TreeSet <Integer> listOfId) throws UnknownHostException {
+	protected void TextMessage (String message, TreeSet <Integer> listOfId) {
 		guiToCon.performSendTextMessage(message, listOfId);
 	}
 	
-	protected void FileMessage (File file, TreeSet <Integer> listOfId) throws UnknownHostException{
+	protected void FileMessage (File file, TreeSet <Integer> listOfId) {
 		guiToCon.performSendFile(file, listOfId);
 	}
 	
