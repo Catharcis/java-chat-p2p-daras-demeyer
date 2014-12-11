@@ -67,12 +67,12 @@ public class TCPServer extends AbstractReceiver implements Runnable {
 					if (!(fileMessage.getNickname().equals(myUsername))) {
 						InputStream inFile = receiveSocket.getInputStream();
 						byte[] bFile = new byte[(int) fileMessage.getSize()];
-						String chemin = "/home/mamadou/Documents/Val/4IR/COO-POO/"
-								+ fileMessage.getNamefile();
+						String current = System.getProperty("user.dir") ;
+						System.out.println("CURRENT: "+current) ;
+						String chemin = current+"/"+fileMessage.getNamefile() ;
 						FileOutputStream fileOut = new FileOutputStream(chemin);
 						int tailleLue;
-						while ((tailleLue = inFile.read(bFile, 0,
-								(int) fileMessage.getSize())) != -1) {
+						while ((tailleLue = inFile.read(bFile, 0,(int) fileMessage.getSize())) != -1) {
 							fileOut.write(bFile, 0, tailleLue);
 						}
 						fileOut.close();
