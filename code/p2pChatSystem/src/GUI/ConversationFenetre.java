@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -50,15 +51,18 @@ public class ConversationFenetre extends AbstractFenetre{
 	
     public ConversationFenetre(ArrayList<String> listNicknames, TreeSet<Integer> listUserId, boolean visible){
         historic = new JTextArea(20,30);
+        historic.setLineWrap(true) ;
         JScrollPane scrollPane = new JScrollPane( historic );
+        scrollPane.createVerticalScrollBar() ;
+        scrollPane.setVisible(visible);
         writerArea = new JTextArea(10,30);
+        writerArea.setLineWrap(true) ;
         sendButton = new JButton("Send");
         invite = new JButton("Invite");
         fileButton = new JButton("File");
         fileChooser = new JFileChooser();
-        this.listOfNicknames = new ArrayList<String>() ;
-        this.listOfNicknames =listNicknames ;
-        this.listOfId = new TreeSet(listUserId) ;
+        this.listOfNicknames = new ArrayList<String>(listNicknames) ;
+        this.listOfId = new TreeSet<Integer>(listUserId) ;
         String title = "" ;
         for (int i = 0; i<this.listOfNicknames.size() ; i++) {
         	if (i < this.listOfNicknames.size()-1) {

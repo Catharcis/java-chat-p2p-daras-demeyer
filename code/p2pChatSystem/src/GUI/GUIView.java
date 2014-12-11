@@ -8,6 +8,8 @@ import java.util.Observer;
 import java.util.TreeSet;
 
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import Controler.GUIToControler;
@@ -77,7 +79,7 @@ public class GUIView implements Observer{
 		GUIToControler guiToCon = null ;
 		guiToCon = GUIToControler.getInstance() ;
 		
-		/** Initialisation du NI **/
+		/** Initialisation du Network Interface **/
 		NIControler niCon = null ;
 		niCon = NIControler.getInstance() ;
 		
@@ -199,13 +201,22 @@ public class GUIView implements Observer{
 						found = true ;
 						this.listOfConversationFenetre.get(i).getHistoricArea().setText(conversation) ;
 						if (!this.listOfConversationFenetre.get(i).isVisible()) {
-							JOptionPane.showMessageDialog(null, "There is a new message in your conversation with "+nicknames, "New Message Notification", JOptionPane.INFORMATION_MESSAGE);
+							// assuming a JFrame called frame...
+							JFrame frame  = new JFrame() ;
+							JOptionPane optionPane = new JOptionPane("There is a new message in your conversation with "+nicknames);
+							JDialog myDialog = optionPane.createDialog(frame, "New Message Notification");
+							myDialog.setModal(false);
+							myDialog.setVisible(true);
 						}
 					}
 					i++ ;
 				}
 				if (!found) {
-					JOptionPane.showMessageDialog(null, "There is a new message in your conversation with "+nicknames, "New Message Notification", JOptionPane.INFORMATION_MESSAGE);
+					JFrame frame  = new JFrame() ;
+					JOptionPane optionPane = new JOptionPane("There is a new message in your conversation with "+nicknames);
+					JDialog myDialog = optionPane.createDialog(frame, "New Message Notification");
+					myDialog.setModal(false);
+					myDialog.setVisible(true);
 					ConversationFenetre newConversation = new ConversationFenetre(nicknames, listOfIds, false) ;
 		            newConversation.setGuiView(this) ;
 		            this.getConversationFenetre().add(newConversation);
@@ -229,13 +240,21 @@ public class GUIView implements Observer{
 						found = true ;
 						this.listOfConversationFenetre.get(i).getHistoricArea().setText(conversation) ;
 						if (!this.listOfConversationFenetre.get(i).isVisible()) {
-							JOptionPane.showMessageDialog(null, "There is a new incoming file in your conversation with "+nicknames, "New File Notification", JOptionPane.INFORMATION_MESSAGE);
+							JFrame frame  = new JFrame() ;
+							JOptionPane optionPane = new JOptionPane("There is a new incoming file in your conversation with "+nicknames);
+							JDialog myDialog = optionPane.createDialog(frame, "New File Notification");
+							myDialog.setModal(false);
+							myDialog.setVisible(true);
 						}
 					}
 					i++ ;
 				}	
 				if (!found) {
-					JOptionPane.showMessageDialog(null, "There is a new incoming file in your conversation with "+nicknames, "New File Notification", JOptionPane.INFORMATION_MESSAGE);
+					JFrame frame  = new JFrame() ;
+					JOptionPane optionPane = new JOptionPane("There is a new incoming file in your conversation with "+nicknames);
+					JDialog myDialog = optionPane.createDialog(frame, "New File Notification");
+					myDialog.setModal(false);
+					myDialog.setVisible(true);
 					ConversationFenetre newConversation = new ConversationFenetre(nicknames, listOfIds, false) ;
 		            newConversation.setGuiView(this) ;
 		            this.getConversationFenetre().add(newConversation);
