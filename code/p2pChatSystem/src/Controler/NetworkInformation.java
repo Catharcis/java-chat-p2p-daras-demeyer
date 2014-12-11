@@ -1,6 +1,5 @@
 package Controler;
 import java.net.InetAddress;
-import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -97,17 +96,17 @@ public class NetworkInformation extends Observable {
 	}
 	
 	/** Getter du champ lastChange **/
-	public typeOfChange getLastChange(){
+	public typeOfChange getLastChange() {
 		return lastChange;
 	}
 	
 	/** Getter du tableau des positions du composant JList **/
-	public ArrayList<Integer> getArrayPositionsListModel(){
+	public ArrayList<Integer> getArrayPositionsListModel() {
 		return arrayPositionsListModel;
 	}
 	
 	/** Getter de la hashmap contenant l'historique des conversations **/
-	public HashMap<TreeSet<Integer>,String> getHistoricConversations(){
+	public HashMap<TreeSet<Integer>,String> getHistoricConversations() {
 		return historicConversations;
 	}
 	
@@ -119,7 +118,7 @@ public class NetworkInformation extends Observable {
 	 * Permet d'indiquer aux observateurs qu'il y a eut un changement et de quel type
 	 * @param lastChange : dernier changement a indique a l'observateur
 	 */
-	public void notifyLastChange(typeOfChange lastChange){
+	public void notifyLastChange(typeOfChange lastChange) {
 		
 		this.lastChange = lastChange;
 		System.out.println("Observer is notified : " + lastChange);
@@ -133,7 +132,7 @@ public class NetworkInformation extends Observable {
 	 * @param lastChange : dernier changement a indique a l'observateur
 	 * @param arg1 : un objet en plus permettant de preciser le changement
 	 */
-	public void notifyLastChange(typeOfChange lastChange, Object arg1){
+	public void notifyLastChange(typeOfChange lastChange, Object arg1) {
 		
 		this.lastChange = lastChange;
 		System.out.println("Observer is notified : " + lastChange);
@@ -178,7 +177,7 @@ public class NetworkInformation extends Observable {
 	 * @param user : User dont on veut l'adresse ip
 	 * @return l'adresse ip du User
 	 */
-	public InetAddress getIPAddressOfUser(User user){
+	public InetAddress getIPAddressOfUser(User user) {
 		InetAddress ip = null;
 		Iterator<Entry<InetAddress, User>> it = usersIPAddress.entrySet().iterator();
 		while (it.hasNext() && ip == null){
@@ -215,30 +214,7 @@ public class NetworkInformation extends Observable {
 			return ip ;
 	}
 	
-	public String getLocalBroadcast () throws UnknownHostException, SocketException {
-		Enumeration<?> e = NetworkInterface.getNetworkInterfaces();
-		boolean found = false ;
-		String ip = null ;
-		while(e.hasMoreElements())
-		{
-		    NetworkInterface n = (NetworkInterface) e.nextElement();
-		    Enumeration<?> ee = n.getInetAddresses();
-		    while (ee.hasMoreElements())
-		    {
-		    	InterfaceAddress i = (InterfaceAddress) ee.nextElement();
-		        if (i.toString() == this.getLocalIPAddress()) {
-		        	found = true ;
-		        	ip = i.getBroadcast().getHostAddress() ;
-		        }
-		    }
-		}
-		if (found == false) {
-			return InetAddress.getByName("255.255.255.255").getHostAddress() ;
-		}
-		else 
-			return ip ;
-	}
-	
+
 	
 	/**
 	 *  Methode qui ajoute le pattern @IP au nickname 
@@ -248,7 +224,7 @@ public class NetworkInformation extends Observable {
 	 * @throws SocketException 
 	 */
 	 
-	public String getNicknameWithIP (User user) throws UnknownHostException {
+	public String getNicknameWithIP (User user) {
 		if (user.getIdUser() == InfoSingleton.getLocalUser().getIdUser()) {
 			try {
 				return (user.getNickname()+"@"+this.getLocalIPAddress()) ;

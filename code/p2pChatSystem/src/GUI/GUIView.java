@@ -43,7 +43,7 @@ public class GUIView implements Observer{
 		listOfConversationFenetre = new ArrayList<ConversationFenetre>() ;
 	}
 	
-	public static GUIView getInstance(){
+	public static GUIView getInstance() {
 		if (singleton == null){
 			singleton = new GUIView();
 		}
@@ -58,7 +58,7 @@ public class GUIView implements Observer{
 		return this.chatFenetre ;
 	}
 	
-	public GUIControler getGUIControler(){
+	public GUIControler getGUIControler() {
 		return this.guiControler;
 	}
 	
@@ -91,7 +91,7 @@ public class GUIView implements Observer{
 		niCon.getTCPServer().setNiCon(niCon) ;
 	}	
 	
-	protected void Connection (String name) throws UnknownHostException {
+	protected void Connection (String name) {
 		if (name.length() == 0)
 			JOptionPane.showMessageDialog(null, "Please choose a nickname.", "Error", JOptionPane.ERROR_MESSAGE);
 		else {

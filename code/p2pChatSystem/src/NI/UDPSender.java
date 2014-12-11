@@ -19,7 +19,7 @@ public class UDPSender extends AbstractSender {
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
 	
-	private static UDPSender singleton = null;
+	private static UDPSender singleton ;
 	
 	
 	/************************************************* 
@@ -49,7 +49,7 @@ public class UDPSender extends AbstractSender {
 	 ************************************************/
 	
 	/**Methode permettant d'envoyer un message en broadcast **/
-	public void sendBroadcast(AbstractMessage message){
+	public void sendBroadcast(AbstractMessage message) {
 		/** creation d'un socket UDP**/
 		DatagramSocket socket = null;
 		try {
@@ -86,7 +86,7 @@ public class UDPSender extends AbstractSender {
 	}
 	
 	/** Methode permettant d'envoyer un message a une liste d'utilisateurs **/
-	public void send(AbstractMessage message, ArrayList<String> listOfUsers, ArrayList<InetAddress> ipAddressesList){
+	public void send(AbstractMessage message, ArrayList<String> listOfUsers, ArrayList<InetAddress> ipAddressesList) {
 		/** Creation d'un socket UDP**/
 		DatagramSocket socket = null;
 		try {

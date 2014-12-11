@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.ListSelectionModel; 
 
  
-@SuppressWarnings("serial") 
+@SuppressWarnings("serial")
 public class ContactsListPanel extends JPanel{ 
  
     /*************************************************  
@@ -16,14 +16,11 @@ public class ContactsListPanel extends JPanel{
      ************************************************/ 
      
     private static ContactsListPanel singleton; 
-     
-    // Permet d'avoir une liste de noms (pour le visuel) 
-    String[] data = {"one", "two", "three", "four"};
-    JList myList = new JList(data);
-    private JList list; 
+    
+    private JList<String> list; 
      
     // Modele de la JList pour pouvoir la modifier facilement 
-    private DefaultListModel dlm; 
+    private DefaultListModel<String> dlm; 
      
     // Permet d'associer le numero de la liste "list" a l'id utilisateur 
     private ArrayList<String> arrayIdListToIdUser; 
@@ -33,8 +30,8 @@ public class ContactsListPanel extends JPanel{
      ************************************************/ 
      
     private ContactsListPanel(){ 
-        this.dlm = new DefaultListModel(); 
-        this.list = new JList(dlm); 
+        this.dlm = new DefaultListModel<String>(); 
+        this.list = new JList<String>(dlm); 
         this.add(list); 
         this.arrayIdListToIdUser = new ArrayList<String> () ;
         this.setVisible(true); 
@@ -53,11 +50,11 @@ public class ContactsListPanel extends JPanel{
      *                 GETTERS & SETTERS 
      ************************************************/ 
      
-    public JList getList(){ 
+    public JList<String> getList(){ 
         return list; 
     } 
      
-    public DefaultListModel getDefaultListModel(){ 
+    public DefaultListModel<String> getDefaultListModel(){ 
         return dlm; 
     } 
      
