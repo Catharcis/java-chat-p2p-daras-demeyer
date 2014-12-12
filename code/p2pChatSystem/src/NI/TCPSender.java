@@ -1,5 +1,9 @@
 package NI;
 
+/**
+ * @author Val�rie Daras et Alexandre Demeyer
+ */
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,16 +19,35 @@ import Signals.FileMessage;
 
 public class TCPSender extends AbstractSender {
 
+	/************************************************* 
+	 * 				ATTRIBUTS and FIELDS 
+	 ************************************************/
+	
+	/**
+	 * Singleton
+	 */
 	private static TCPSender singleton;
 	
+	/************************************************* 
+	 * 				CONSTRUCTOR 
+	 ************************************************/
 	
-	
+	/**
+	 * Constructeur par defaut qui initilise les ports
+	 */
 	private TCPSender() {
 		this.setPortEnvoi(5003) ;
 		this.setPortEcoute(6789) ;
 	}
 	
+	/************************************************* 
+	 * 					METHODS 
+	 ************************************************/
 	
+	/**
+	 * Creer l'instance si elle n'est pas cree ou la recupere
+	 * @return l'instance TCPSender
+	 */
 	public static TCPSender getInstanceTCPSender(){
 		if (singleton == null){
 			singleton = new TCPSender();
@@ -32,8 +55,12 @@ public class TCPSender extends AbstractSender {
 		return singleton;
 	}
 	
-	/*
-	 * Méthode permettant d'envoyer un message à une liste d'utilisateurs
+	/**
+	 * Permet d'envoyer un fichier a une liste d'utilisateurs
+	 * @param message : correspond au FileMessage a envoye en premier lieu
+	 * @param listOfUsers : liste des noms d'utilisateurs concernes
+	 * @param ipAddressesList : liste des adresses ip des utilisateurs concernes
+	 * @param file : fichier a envoye
 	 */
 	public void sendFile(AbstractMessage message, ArrayList<String> listOfUsers, ArrayList<InetAddress> ipAddressesList, File file) {
 		
