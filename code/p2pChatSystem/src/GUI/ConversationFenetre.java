@@ -9,15 +9,12 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Observable;
 import java.util.TreeSet;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
