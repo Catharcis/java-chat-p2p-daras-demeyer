@@ -151,6 +151,7 @@ public class ConversationFenetre extends AbstractFenetre{
 			this.writerArea.setText("Your partner is disconnected.\nYou can close this window.") ;
 			this.writerArea.setEditable(false) ;
 			this.sendButton.setEnabled(false) ;
+			this.fileButton.setEnabled(false) ;
 			this.invite.setEnabled(false) ;
 		}
 		else {
@@ -167,9 +168,6 @@ public class ConversationFenetre extends AbstractFenetre{
 		}
 	}
 	
-		
-	public void miseAJour(Observable arg0) { }
-
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == sendButton){

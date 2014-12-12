@@ -132,6 +132,10 @@ public class GUIView implements Observer{
 				this.chatFenetre.getConnectDisconnectPanel().getNicknameField().setEditable(true);
 				this.chatFenetre.getConnectDisconnectPanel().setImageStatus(new ImageIcon("offline.png"));
 				this.chatFenetre.getContactsListPanel().getDefaultListModel().clear() ;
+				for (int i = 0; i<this.listOfConversationFenetre.size(); i++) {
+					this.listOfConversationFenetre.get(i).setVisible(false) ;
+				}
+				this.listOfConversationFenetre.clear() ;
 				guiControler.setEtatDisconnect();
 			}
 			else if (NI.getLastChange().equals(typeOfChange.ADDUSER_HELLO)){	
@@ -167,6 +171,7 @@ public class GUIView implements Observer{
 				// remise en forme de la liste visuelle
 				this.chatFenetre.pack();
 				this.guiControler.getGUIToControler().removeIDListModel(idUser);
+				System.out.println("JList pack()");
 				
 				//suppression du user des conversations
 				for (int i = 0; i<this.listOfConversationFenetre.size(); i++) {
