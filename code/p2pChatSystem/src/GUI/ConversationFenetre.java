@@ -49,11 +49,8 @@ public class ConversationFenetre extends AbstractFenetre{
 	 ************************************************/
 	
     public ConversationFenetre(ArrayList<String> listNicknames, TreeSet<Integer> listUserId, boolean visible){
-        historic = new JTextArea(20,30);
+        historic = new JTextArea(10,30);
         historic.setLineWrap(true) ;
-        JScrollPane scrollPane = new JScrollPane( historic );
-        scrollPane.createVerticalScrollBar() ;
-        scrollPane.setVisible(visible);
         writerArea = new JTextArea(10,30);
         writerArea.setLineWrap(true) ;
         sendButton = new JButton("Send");
@@ -124,7 +121,12 @@ public class ConversationFenetre extends AbstractFenetre{
         historic.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
         writerArea.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         JPanel generalPanel = new JPanel(new BorderLayout());
+        
         JPanel writePartPanel = new JPanel();
+        JScrollPane scrollPane = new JScrollPane(historic, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
+        this.add(scrollPane, BorderLayout.CENTER) ;
+        writePartPanel.add(scrollPane) ;
+        
         JPanel buttonsPanel = new JPanel(new BorderLayout());
         JPanel invitePanel = new JPanel();
         JPanel historicAndInvitePanel = new JPanel(new BorderLayout());
@@ -139,6 +141,8 @@ public class ConversationFenetre extends AbstractFenetre{
         writePartPanel.add(buttonsPanel);
         generalPanel.add(historicAndInvitePanel,BorderLayout.NORTH);
         generalPanel.add(writePartPanel,BorderLayout.SOUTH);
+        
+
         this.getContentPane().add(generalPanel);
         this.pack();
         this.setVisible(visible);
