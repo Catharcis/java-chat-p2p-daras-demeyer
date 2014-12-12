@@ -5,22 +5,38 @@ import java.net.*;
 import java.util.ArrayList;
 import Signals.*;
 
+/**
+ * @author Valérie Daras et Alexandre Demeyer
+ */
+
 public class UDPReceiver extends AbstractReceiver implements Runnable {
 
 	/************************************************* 
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
 	
+	/**
+	 * Singleton
+	 */
 	private static UDPReceiver singleton ;
 	
+	/**
+	 * Pointeur d'objet NIControler
+	 */
 	private static NIControler NiCon ;
 	
+	/**
+	 * Pointeur d'objet DatagramSocket
+	 */
 	private DatagramSocket socket;
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
+	/**
+	 * Constructeur par defaut qui initialise le port d'ecoute
+	 */
 	private UDPReceiver() {
 		this.setPortEcoute(9876);
 		try {
@@ -30,6 +46,10 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 		}
 	}
 	
+	/**
+	 * Creer l'instance si elle n'est pas cree ou la recupere
+	 * @return l'instance UDPReceiver
+	 */
 	public static UDPReceiver getInstanceUDPReceiver() {
 		if (singleton == null){
 			singleton = new UDPReceiver();
@@ -37,24 +57,33 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 		return singleton;
 	}
 	
-	public void setNiCon (NIControler NiCont) {
-			UDPReceiver.NiCon = NIControler.getInstance() ;
-	}
-	
-	
 	/************************************************* 
-	 * 				GETTERS & SETTERS
+	 * 				GETTERS and SETTERS
 	 ************************************************/
 	
+	/**
+	 * Getter de socket (du type DatagramSocket)
+	 * @return l'objet server
+	 */
 	public DatagramSocket getSocket(){
 		return socket;
 	}
 	
+	/**
+	 * Setter de NiCon
+	 * @param NiCont : l'objet NIControler
+	 */
+	public void setNiCon (NIControler NiCont) {
+		UDPReceiver.NiCon = NIControler.getInstance() ;
+	}
 	
 	/************************************************* 
 	 * 					METHODS 
 	 ************************************************/
 	
+	/**
+	 * Redefinition de la methode d'ecoute sur le reseau pour la classe UDPReceiver
+	 */
 	public void listen(){
 		
 		// Cas ou la socket aurait deja ete utilisee et que l'on relance le programme
@@ -142,8 +171,12 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 	}
 
 	/**
-	 * @throws IOException  
-	 * @throws ClassNotFoundException **/
+	 * Permet d'obtenir un AbstractMessage a partir d'un tableau d'octects
+	 * @param buf : tableau d'octets
+	 * @return un AbstractMessage
+	 * @throws IOException : "Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations."
+	 * @throws ClassNotFoundException : "Thrown when an application tries to load in a class through its string name using some methods"
+	 */
 	private AbstractMessage bufToMessage (byte[] buf) throws IOException, ClassNotFoundException {
 		ByteArrayInputStream byteIn = new ByteArrayInputStream(buf);
 		ObjectInput in = new ObjectInputStream(byteIn);

@@ -11,14 +11,38 @@ import java.util.ArrayList;
 
 import Signals.FileMessage;
 
+/**
+ * @author Val�rie Daras et Alexandre Demeyer
+ */
+
 public class TCPServer extends AbstractReceiver implements Runnable {
 
+	/************************************************* 
+	 * 				ATTRIBUTS and FIELDS 
+	 ************************************************/
+	
+	/**
+	 * Singleton
+	 */
 	private static TCPServer singleton;
 
+	/**
+	 * Pointeur d'objet NIControler
+	 */
 	private static NIControler NiCon;
 	
+	/**
+	 * Pointeur d'objet ServerSocket
+	 */
 	private ServerSocket server = null;
 
+	/************************************************* 
+	 * 				CONSTRUCTOR 
+	 ************************************************/
+	
+	/**
+	 * Constructeur par defaut qui demarre un serveur TCP
+	 */
 	private TCPServer() {
 		this.setPortEcoute(6789);
 		try {
@@ -28,7 +52,35 @@ public class TCPServer extends AbstractReceiver implements Runnable {
 			System.out.println("TCPSERVER ERROR DURING CREATION");
 		}	
 	}
+	
+	/************************************************* 
+	 * 				GETTERS and SETTERS
+	 ************************************************/
 
+	/**
+	 * Setter de NiCon
+	 * @param NiCont : l'objet NIControler
+	 */
+	public void setNiCon(NIControler NiCont) {
+		TCPServer.NiCon = NIControler.getInstance();
+	}
+	
+	/**
+	 * Getter de serveur
+	 * @return l'objet ServeurSocket
+	 */
+	public ServerSocket getServerSocket(){
+		return server;
+	}
+	
+	/************************************************* 
+	 * 					METHODS 
+	 ************************************************/
+	
+	/**
+	 * Creer l'instance si elle n'est pas cree ou la recupere
+	 * @return l'instance TCPServer
+	 */
 	public static TCPServer getInstanceTCPServer() {
 		if (singleton == null) {
 			singleton = new TCPServer();
@@ -36,16 +88,8 @@ public class TCPServer extends AbstractReceiver implements Runnable {
 		return singleton;
 	}
 
-	public void setNiCon(NIControler NiCont) {
-		TCPServer.NiCon = NIControler.getInstance();
-	}
-	
-	public ServerSocket getServerSocket(){
-		return server;
-	}
-
-	/*
-	 * Redéfinition de la méthode d'écoute des paquets UDP sur le réseau
+	/**
+	 * Redefinition de la methode d'ecoute sur le reseau pour la classe TCPServer
 	 */
 	public void listen() {
 		
@@ -105,6 +149,9 @@ public class TCPServer extends AbstractReceiver implements Runnable {
 			}
 	}
 
+	/**
+	 * Redefinition de la methode pour indiquer que le thread doit se mettre dans une socket d'ecoute
+	 */
 	public void run() {
 		listen();
 	}

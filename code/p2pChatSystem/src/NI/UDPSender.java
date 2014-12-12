@@ -13,29 +13,38 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import Signals.*;
 
+/**
+ * @author Valérie Daras et Alexandre Demeyer
+ */
+
 public class UDPSender extends AbstractSender {
 
 	/************************************************* 
-	 * 				ATTRIBUTS & FIELDS 
+	 * 				ATTRIBUTS and FIELDS 
 	 ************************************************/
 	
+	/**
+	 * Singleton
+	 */
 	private static UDPSender singleton ;
 	
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
-	 * @throws UnknownHostException 
 	 ************************************************/
 	
+	/**
+	 * Constructeur par defaut qui initialise les numeros de port
+	 */
 	private UDPSender() {
 		this.setPortEnvoi(5000);
 		this.setPortEcoute(9876) ;
 	}
 	
 	/**
-	 * Methode pour recuperer l'instance 
-	 * @throws UnknownHostException 
-	 **/
+	 * Creer l'instance si elle n'est pas cree ou la recupere
+	 * @return l'instance UDPSender
+	 */
 	public static UDPSender getInstanceUDPSender() {
 		if (singleton == null){
 			singleton = new UDPSender();
@@ -48,7 +57,10 @@ public class UDPSender extends AbstractSender {
 	 * 					METHODS
 	 ************************************************/
 	
-	/**Methode permettant d'envoyer un message en broadcast **/
+	/**
+	 * Methode permettant d'envoyer un message en broadcast
+	 * @param message : AbstractMessage a envoye
+	 */
 	public void sendBroadcast(AbstractMessage message) {
 		/** creation d'un socket UDP**/
 		DatagramSocket socket = null;
@@ -83,7 +95,12 @@ public class UDPSender extends AbstractSender {
 		}
 	}
 	
-	/** Methode permettant d'envoyer un message a une liste d'utilisateurs **/
+	/** 
+	 * Methode permettant d'envoyer un message a une liste d'utilisateurs
+	 * @param message : AbstractMessage a envoye
+	 * @param listOfUsers : liste des noms d'utilisateurs concernes
+	 * @param ipAddressesList : liste des adresses IP des utilisateurs concernes
+	 */
 	public void send(AbstractMessage message, ArrayList<String> listOfUsers, ArrayList<InetAddress> ipAddressesList) {
 		/** Creation d'un socket UDP**/
 		DatagramSocket socket = null;
