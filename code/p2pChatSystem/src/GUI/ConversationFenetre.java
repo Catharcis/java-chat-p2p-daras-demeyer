@@ -11,13 +11,16 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.TreeSet;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
 import GUI.GUIControler.Etats;
 
 @SuppressWarnings("serial")
@@ -123,19 +126,21 @@ public class ConversationFenetre extends AbstractFenetre{
         JPanel generalPanel = new JPanel(new BorderLayout());
         
         JPanel writePartPanel = new JPanel();
-        JScrollPane scrollPane = new JScrollPane(historic, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
-        this.add(scrollPane, BorderLayout.CENTER) ;
+        JScrollPane scrollPane = new JScrollPane(historic);
         writePartPanel.add(scrollPane) ;
+        JPanel writeAreaPanel = new JPanel();
+        JScrollPane scrollPane2 = new JScrollPane(writerArea);
+        writeAreaPanel.add(scrollPane2);
         
         JPanel buttonsPanel = new JPanel(new BorderLayout());
         JPanel invitePanel = new JPanel();
         JPanel historicAndInvitePanel = new JPanel(new BorderLayout());
         JPanel historicPanel = new JPanel();
         invitePanel.add(invite);
-        historicPanel.add(historic,BorderLayout.EAST);
+        historicPanel.add(scrollPane,BorderLayout.EAST);
         historicAndInvitePanel.add(invitePanel,BorderLayout.NORTH);
         historicAndInvitePanel.add(historicPanel,BorderLayout.SOUTH);
-        writePartPanel.add(writerArea);
+        writePartPanel.add(scrollPane2);
         buttonsPanel.add(sendButton,BorderLayout.NORTH);
         buttonsPanel.add(fileButton,BorderLayout.SOUTH);
         writePartPanel.add(buttonsPanel);
