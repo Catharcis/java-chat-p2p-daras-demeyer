@@ -8,11 +8,14 @@ import java.util.ArrayList;
 import java.util.TreeSet;
 import NI.NIControler;
 
+/**
+ * @author Valérie Daras et Alexandre Demeyer
+ */
 
 public class GUIToControler {
 
 	/************************************************* 
-	 * 				ATTRIBUTS & FIELDS 
+	 * 				ATTRIBUTS and FIELDS 
 	 ************************************************/
 	
 	// Reference a GUIToControler
@@ -29,14 +32,19 @@ public class GUIToControler {
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
-	// Constructeur par defaut
+	/**
+	 * Constructeur par defaut
+	 */
 	private GUIToControler() {
 		// On recupere l'instance du NI
 		NI = NetworkInformation.getInstance();
 	}
 	
 	
-	/** Methode qui permet de recuperer l'instance de la calasse **/
+	/**
+	 * Methode qui permet de recuperer l'instance de la classe
+	 * @return l'objet GUIToControler
+	 */
 	public static GUIToControler getInstance() {
 		if (guiToContSingleton == null) {
 			guiToContSingleton = new GUIToControler() ;
@@ -50,11 +58,18 @@ public class GUIToControler {
 	 * @throws UnknownHostException 
 	 ************************************************/
 	
-	// Permet d'assigner la valeur du NIControler
+	/**
+	 *  Permet d'assigner la valeur du NIControler
+	 * @param niCont : le NIControler
+	 */
 	public void setNiCon (NIControler niCont) {
 		GUIToControler.niCon = NIControler.getInstance();
 	}
 	
+	/**
+	 * Permet de récupérer l'objet NetworkInformation
+	 * @return l'objet NetworkInformation
+	 */
 	public NetworkInformation getNetInfo () {
 		return GUIToControler.NI ;
 	}
@@ -63,8 +78,10 @@ public class GUIToControler {
 	 * 					METHODS
 	 ************************************************/
 	
-	/** Differentes methodes de type perform() permettant d'envoyer un signal au NI**/
-	
+	/** 
+	 * Permet de notifier le NIControler d'envoyer un Hello
+	 * @param name : nom de l'utilisateur local
+	 */
 	public void performConnect(String name) {
 		
 		// On crÃ©e le local user grÃ¢ce Ã  son nom
@@ -82,6 +99,10 @@ public class GUIToControler {
 		NI.notifyLastChange(typeOfChange.CONNECTION);
 	}
 	
+	/**
+	 * Permet de notifier le NIControler d'envoyer un HelloAck
+	 * @param idDestUser : id de l'utilisateur distant
+	 */
 	public void performSendHelloAck(int idDestUser){
 			// On envoie un HelloAck a celui qui nous a envoye un Hello
 			String localNameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
@@ -89,7 +110,9 @@ public class GUIToControler {
 			niCon.sendHelloAck(localNameWithPattern,destNameWithPattern,NI.getIPAddressOfUser(GUIToControler.NI.getUserWithId(idDestUser)));
 	}
 	
-	
+	/**
+	 * Permet de notifier le NIControler d'envoyer un Goodbye
+	 */
 	public void performDisconnect() {
 			// On envoie un Goodbye Ã  l'ensemble du reseau
 			String nameWithPattern = NI.getNicknameWithIP(NI.getLocalUser());
@@ -106,6 +129,11 @@ public class GUIToControler {
 			NI.reinitializeVariables();
 	}
 	
+	/**
+	 * Permet de notifier le NIControler d'envoyer un TextMessage
+	 * @param message : le message a envoye
+	 * @param listOfId : la liste des id des utilisateurs concernes
+	 */
 	public void performSendTextMessage(String message, TreeSet <Integer> listOfId) {
 		/** Gestion des conversations **/
 		/** Conversation existante **/
@@ -139,6 +167,11 @@ public class GUIToControler {
 		
 	}
 	
+	/**
+	 * Permet de notifier le NIControler d'envoyer un FileMessage
+	 * @param file : le fichier a envoye
+	 * @param listOfId : la liste des id des utilisateurs concernes
+	 */
 	public void performSendFile(File file, TreeSet<Integer> listOfId) {
 		
 		/** Gestion des conversations **/
@@ -185,7 +218,7 @@ public class GUIToControler {
 	
 	/**
 	 * Permet de retirer l'id user en parametre a la liste des positions du composant graphique JList
-	 * @param id : id du User
+	 * @param id : id de l'utilisateur
 	 */
 	public void removeIDListModel(int id){
 		boolean find = false;

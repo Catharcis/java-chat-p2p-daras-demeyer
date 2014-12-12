@@ -1,5 +1,9 @@
 package Controler;
 
+/**
+ * @author Valérie Daras et Alexandre Demeyer
+ */
+
 public enum typeOfChange {
 	CONNECTION,
 	DISCONNECTION,
