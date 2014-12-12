@@ -5,11 +5,14 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
+/**
+ * @author Valérie Daras et Alexandre Demeyer
+ */
 
 public class NetworkToControler {
 
 	/************************************************* 
-	 * 				ATTRIBUTS & FIELDS 
+	 * 				ATTRIBUTS and FIELDS 
 	 ************************************************/
 	
 	// Reference a NetworkToControler
@@ -30,7 +33,10 @@ public class NetworkToControler {
 		NI = NetworkInformation.getInstance();
 	}
 	
-	/** Methode qui permet d'obtenir l'instance de la classe **/
+	/** 
+	 * Methode qui permet d'obtenir l'instance de la classe 
+	 * @return l'objet NetworkToControler
+	 */
 	public static NetworkToControler getInstance() {
 			if (netToContSingleton == null) {
 				netToContSingleton = new NetworkToControler() ;
@@ -89,10 +95,9 @@ public class NetworkToControler {
 	}
 	
 	/**
-	 * Methode permettant de triater la reception d'un TextMessage sur le reseau
+	 * Methode permettant de traiter la reception d'un TextMessage sur le reseau
 	 * @param message : le message envoye aux utilisateurs
-	 * @param listOfUsernames : la liste des noms d'utilisateurs
-	 * @throws UnknownHostException
+	 * @param listOfUsernames : la liste des noms d'utilisateurs concernes
 	 */
 	public void processTextMessage(String message, ArrayList<String> listOfUsernames) {
 		
@@ -136,6 +141,11 @@ public class NetworkToControler {
 		NI.notifyLastChange(typeOfChange.NEWINCOMINGTEXTMESSAGE, listOfIDs);
 	}
 	
+	/**
+	 * Methode permettant de traiter la reception d'un FileMessage sur le reseau
+	 * @param nameFile : nom du fichier
+	 * @param listOfUsernames : la liste des noms d'utilisateurs concernes
+	 */
 	public void processFileMessage(String nameFile, ArrayList<String> listOfUsernames) {
 			
 		// On crÃ©e une liste d'ID Utilisateurs

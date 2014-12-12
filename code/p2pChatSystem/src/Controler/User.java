@@ -1,5 +1,9 @@
 package Controler;
 
+/**
+ * @author Valérie Daras et Alexandre Demeyer
+ */
+
 public class User {
 
 	/************************************************* 
@@ -21,7 +25,10 @@ public class User {
 	 * 					CONSTRUCTOR
 	 ************************************************/
 	
-	/** Constructeur du User **/
+	/** 
+	 * Constructeur du User
+	 * @param nickname : nom de l'utilisateur
+	 */
 	public User (String nickname) {
 		this.nickname = nickname ;
 		this.idUser = lastID++ ;
@@ -32,12 +39,18 @@ public class User {
 	 * 				GETTERS & SETTERS 
 	 ************************************************/
 	
-	/** Getter du idUser **/
+	/** 
+	 * Getter du idUser 
+	 * @return l'id de l'utilisateur
+	 */
 	public int getIdUser () {
 		return idUser ;
 	}
 	
-	/** Getter du Nickname **/
+	/** 
+	 * Getter du Nickname 
+	 * @return le nom de l'utilisateur
+	 */
 	public String getNickname () {
 		return nickname ;
 	}
@@ -51,9 +64,11 @@ public class User {
 	 * 					METHODS
 	 ************************************************/
 	
+	/**
+	 * Permet de réinitialiser les id utilisateur
+	 */
 	public static void reinitializeUsers () {
 		lastID = 0 ;
-		
 	}
 	
 }

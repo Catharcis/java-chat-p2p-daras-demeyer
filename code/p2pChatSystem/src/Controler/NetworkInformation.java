@@ -15,6 +15,10 @@ import java.util.regex.Pattern;
 import GUI.GUIView;
 import Controler.typeOfChange;
 
+/**
+ * @author Valérie Daras et Alexandre Demeyer
+ */
+
 public class NetworkInformation extends Observable {
 
 	/************************************************* 
@@ -28,7 +32,7 @@ public class NetworkInformation extends Observable {
 	private User localUser ;
 	
 	/** Liste de User **/
-	ArrayList<User> userList ;
+	private ArrayList<User> userList ;
 	
 	/** Correspondance entre User et adresse IP **/
 	private HashMap<InetAddress, User> usersIPAddress ;
@@ -49,7 +53,9 @@ public class NetworkInformation extends Observable {
 	/************************************************* 
 	 * 					CONSTRUCTOR
 	 ************************************************/
-	/** Constructeur **/
+	/** 
+	 * Constructeur par defaut
+	*/
 	private NetworkInformation () { 
 		usersIPAddress = new HashMap <InetAddress, User> () ;
 		userList = new ArrayList<User> () ;
@@ -58,7 +64,10 @@ public class NetworkInformation extends Observable {
 		historicConversations = new HashMap<TreeSet<Integer>,String>();
 	}
 	
-	/** Methode creant une instance de classe si necessaire et renvoie l'objet**/
+	/** 
+	 * Methode creant une instance de classe si necessaire et renvoie l'objet
+	 * @return l'objet NetworkInformation
+	 */
 	public static NetworkInformation getInstance () {
 		if (InfoSingleton == null)
 			InfoSingleton = new NetworkInformation () ;
@@ -68,15 +77,21 @@ public class NetworkInformation extends Observable {
 	
 	
 	/************************************************* 
-	 * 				GETTERS & SETTERS 
+	 * 				GETTERS and SETTERS 
 	 ************************************************/
 	
-	/** Getter du localUser **/
+	/**
+	 * Getter du localUser
+	 * @return l'objet localUser
+	 */
 	public User getLocalUser () {
 		return localUser ;
 	}
 	
-	/** Setter du localUser **/
+	/**
+	 * Setter du localUser
+	 * @param name : le nom de l'utilisateur local
+	 */
 	public void setLocalUser (String name) {
 		if (name == null) 
 			this.localUser = null ;
@@ -84,28 +99,43 @@ public class NetworkInformation extends Observable {
 			this.localUser = new User(name) ;
 	}
 	
-	/** Getter du UsersIPAddress **/
+	/**
+	 * Getter du UsersIPAddress
+	 * @return la hashmap contenant les paires (AdresseIP,User)
+	 */
 	public HashMap<InetAddress,User> getUserList () {
 		return usersIPAddress ;		
 	}
 
-	/** Setter du GUIView**/
+	/** 
+	 * Setter du GUIView
+	 * @param guiview : l'objet GUIView a fixe
+	 */
 	public void setGuiView (GUIView guiview) {
 		guiView = GUIView.getInstance();
 		addObserver(guiView);
 	}
 	
-	/** Getter du champ lastChange **/
+	/** 
+	 * Getter du champ lastChange
+	 * @return le champ lastChange
+	 */
 	public typeOfChange getLastChange() {
 		return lastChange;
 	}
 	
-	/** Getter du tableau des positions du composant JList **/
+	/** 
+	 * Getter du tableau des positions du composant JList
+	 * @return le tableau contenant la position des utilisateurs dans la JList
+	 */
 	public ArrayList<Integer> getArrayPositionsListModel() {
 		return arrayPositionsListModel;
 	}
 	
-	/** Getter de la hashmap contenant l'historique des conversations **/
+	/** 
+	 * Getter de la hashmap contenant l'historique des conversations 
+	 * @return la hashmap contenant les conversations
+	 */
 	public HashMap<TreeSet<Integer>,String> getHistoricConversations() {
 		return historicConversations;
 	}
@@ -141,6 +171,7 @@ public class NetworkInformation extends Observable {
 	 * Methode qui cree un User et l'ajoute a la HashMap  
 	 * @param nickname : nom de l'utilisateur
 	 * @param ip : son adresse IP
+	 * @param HelloAck : booleen indiquant si on ajoute un utilisateur a cause d'un HelloAck
 	 * @return l'objet User contenant les informations passees en parametres
 	 */
 	public User addUser (String nickname, InetAddress ip, boolean HelloAck) {
@@ -185,7 +216,12 @@ public class NetworkInformation extends Observable {
 		return ip;
 	}
 	
-	
+	/**
+	 * Permet d'obtenir l'adresse ip locale de l'utilisateur local en prenant garde au reseau utilise
+	 * @return l'adresse ip locale du reseau
+	 * @throws UnknownHostException : "Thrown to indicate that the IP address of a host could not be determined"
+	 * @throws SocketException : "Thrown to indicate that there is an error creating or accessing a Socket."
+	 */
 	public String getLocalIPAddress () throws UnknownHostException, SocketException {
 		Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces();
 		boolean found = false ;
@@ -211,15 +247,11 @@ public class NetworkInformation extends Observable {
 	}
 	
 
-	
 	/**
 	 *  Methode qui ajoute le pattern @IP au nickname 
 	 * @param user : le User contenant le nom
 	 * @return "nom@IP"
-	 * @throws UnknownHostException
-	 * @throws SocketException 
 	 */
-	 
 	public String getNicknameWithIP (User user) {
 		if (user.getIdUser() == InfoSingleton.getLocalUser().getIdUser()) {
 			try {
@@ -273,9 +305,9 @@ public class NetworkInformation extends Observable {
 	
 
 /**
- * 
- * @param id
- * @return
+ * Permet de recuperer un objet User grace à son id
+ * @param id : id de l'utilisateur
+ * @return l'objet User associe a l'id 
  */
 	public User getUserWithId (int id) {
 		User user = null ;
