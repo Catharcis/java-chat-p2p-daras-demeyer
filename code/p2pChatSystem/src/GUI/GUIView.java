@@ -1,7 +1,6 @@
 package GUI;
 
 import java.io.File;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -28,18 +27,32 @@ public class GUIView implements Observer{
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
 	
+	/**
+	 * Singleton GUIView
+	 */
 	private static GUIView singleton;
 	
+	/**
+	 * Field vers la classe fille ChatFenetre
+	 */
 	private ChatFenetre chatFenetre;
 	
+	/** 
+	 * Field vers la classe GUIControler
+	 */
 	private GUIControler guiControler ;
 	
+	/**
+	 * Field correspondant a la liste des fenetres de conversation existantes
+	 */
 	private ArrayList<ConversationFenetre> listOfConversationFenetre ;
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
 	 ************************************************/
-	
+	/**
+	 * Constructeur prive par defaut
+	 */
 	private GUIView() {
 		chatFenetre = ChatFenetre.getInstance();
 		chatFenetre.setVisible(true);
@@ -47,6 +60,10 @@ public class GUIView implements Observer{
 		listOfConversationFenetre = new ArrayList<ConversationFenetre>() ;
 	}
 	
+	/**
+	 * Methode permettant de recuperer l'instance singleton
+	 * @return singleton GUIView
+	 */
 	public static GUIView getInstance() {
 		if (singleton == null){
 			singleton = new GUIView();
@@ -58,23 +75,38 @@ public class GUIView implements Observer{
 	 * 				GETTERS & SETTERS
 	 ************************************************/
 	
+	/**
+	 * Getter de la classe fille chatFenetre
+	 * @return chatFenetre
+	 */
 	public ChatFenetre getChatFenetre () {
 		return this.chatFenetre ;
 	}
 	
+	/**
+	 * Getter de la classe GUIControler
+	 * @return guiControler
+	 */
 	public GUIControler getGUIControler() {
 		return this.guiControler;
 	}
 	
+	/**
+	 * Getter de la liste des fenetres de conversation 
+	 * @return listOfConversationFenetre
+	 */
 	public ArrayList<ConversationFenetre> getConversationFenetre () {
 		return this.listOfConversationFenetre ;
 	}
 	
 	/************************************************* 
 	 * 					METHODS 
-	 * @throws UnknownHostException 
 	 ************************************************/
 
+	/**
+	 * Methode permettant d'initialiser tout le chatSystem lors de la connexion
+	 * @param guiView
+	 */
 	public static void initChatSystem (GUIView guiView) {
 		/** Initialisation du Controler **/
 		NetworkToControler netToCon = null ;
@@ -95,6 +127,10 @@ public class GUIView implements Observer{
 		niCon.getTCPServer().setNiCon(niCon) ;
 	}	
 	
+	/**
+	 * Methode permettant de proceder a la connexion locale
+	 * @param nickname du user local
+	 */
 	protected void Connection (String name) {
 		if (name.length() == 0)
 			JOptionPane.showMessageDialog(null, "Please choose a nickname.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -104,18 +140,37 @@ public class GUIView implements Observer{
 		}
 	}
 
+	/**
+	 * Methode permettant de proceder a la deconnexion locale
+	 */
 	protected void Disconnection () {
 		guiControler.Disconnection();
 	}
 	
-	protected void TextMessage (String message, TreeSet <Integer> listOfId) throws UnknownHostException {
+	/**
+	 * Methode permettant de proceder a l'envoi d'un message texte
+	 * @param message : texte a envoyer
+	 * @param listOfId : liste des ID concernes par la conversation
+	 */
+	protected void TextMessage (String message, TreeSet <Integer> listOfId) {
 		guiControler.TextMessage(message, listOfId) ;
 	}
 	
-	protected void FileMessage (File file, TreeSet <Integer> listOfId) throws UnknownHostException {
+	/**
+	 * Methode permettant de proceder a l'envoi d'un fichier
+	 * @param file : fichier a envoyer
+	 * @param listOfId : liste des ID concernes par la conversation
+	 */
+	protected void FileMessage (File file, TreeSet <Integer> listOfId) {
 		guiControler.FileMessage(file, listOfId) ;
 	}
 	
+	
+	/**
+	 * Methode appelee lors d'une modification dans le modele
+	 * Modifications possibles : CONNECTION, DISCONNECTION, ADDUSER_HELLO, ADDUSER_HELLOACK, REMOVEUSER, 
+	 * NEWINCOMINGTEXTMESSAGE, NEWINCOMINGFILEMESSAGE 
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void update(Observable arg0, Object arg1) {
