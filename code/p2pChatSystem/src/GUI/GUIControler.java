@@ -4,6 +4,10 @@ import java.io.File;
 import java.util.TreeSet;
 import Controler.GUIToControler;
 
+/**
+ * @author Valérie Daras et Alexandre Demeyer
+ */
+
 public class GUIControler {
 
 	/************************************************* 

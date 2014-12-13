@@ -18,6 +18,10 @@ import Controler.NetworkToControler;
 import Controler.typeOfChange;
 import NI.NIControler;
 
+/**
+ * @author Valérie Daras et Alexandre Demeyer
+ */
+
 public class GUIView implements Observer{
 
 	/************************************************* 
