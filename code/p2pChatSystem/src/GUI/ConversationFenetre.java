@@ -7,7 +7,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.TreeSet;
 import javax.swing.BorderFactory;
@@ -30,28 +29,61 @@ public class ConversationFenetre extends AbstractFenetre{
 	/************************************************* 
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
+	/**
+	 * Field vers la classe pere
+	 */
 	private static GUIView guiView ;
 	
+	/**
+	 * JTextArea correspondant a l'historique d'une conversation
+	 */
 	private JTextArea historic;
 	
+	/**
+	 * JTextArea correspondant a l'espace d'ecriture pour une conversation
+	 */
 	private JTextArea writerArea;
 	
+	/**
+	 * Button d'envoi de texte
+	 */
 	private JButton sendButton;
 	
+	/**
+	 * Button d'invite
+	 */
 	private JButton invite;
 	
+	/**
+	 * Liste des nicknames des utilisateurs concernes par la conversation
+	 */
 	private ArrayList<String> listOfNicknames ;
 	
+	/**
+	 * Liste des ID des utilisateurs concernes par la conversation
+	 */
 	private TreeSet <Integer> listOfId ;
 	
+	/**
+	 * Button d'envoi de fichier
+	 */
 	private JButton fileButton;
 	
+	/**
+	 * Object Permettant de choisir un fichier 
+	 */
 	private JFileChooser fileChooser;
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
+	/**
+	 * Constructeur d'une fenetre de conversation
+	 * @param listNicknames : Liste des nicknames des utilisateurs concernes par la conversation
+	 * @param listUserId : Liste des ID des utilisateurs concernes par la conversation
+	 * @param visible : boolean indiquant si la fenetre doit etre visible ou non
+	 */
     public ConversationFenetre(ArrayList<String> listNicknames, TreeSet<Integer> listUserId, boolean visible){
         historic = new JTextArea(10,30);
         historic.setLineWrap(true) ;
@@ -80,27 +112,43 @@ public class ConversationFenetre extends AbstractFenetre{
 	/************************************************* 
 	 * 				GETTERS & SETTERS
 	 ************************************************/
-	
-	public static GUIView getGUIView() {
-		return guiView;
-	}
 
+    /**
+     * Permet d'etablir le lien vers GUIView
+     * @param objet GUIView
+     */
 	public void setGuiView (GUIView view) {
 		guiView = GUIView.getInstance() ;
 	}
-	
+
+	/**
+	 * Getter de la liste des ID des users
+	 * @return la liste des ID de la conversation
+	 */
 	public TreeSet<Integer> getListOfIds () {
 		return this.listOfId ;
 	}
 	
+	/**
+	 * Getter de la liste des nicknames
+	 * @return la liste des nicknames de la conversation
+	 */
 	public ArrayList<String> getListOfNicknames() {
 		return this.listOfNicknames ;
 	}
 	
+	/**
+	 * Getter de l'espace historique
+	 * @return l'objet contenant l'historique
+	 */
 	public JTextArea getHistoricArea () {
 		return this.historic ;
 	}
 	
+	/**
+	 * Getter de l'espace d'ecriture
+	 * @return l'objet contenant l'espace d'ecriture
+	 */
 	public JTextArea getWriteArea () {
 		return this.writerArea ;
 	}
@@ -109,13 +157,11 @@ public class ConversationFenetre extends AbstractFenetre{
 	 * 					METHODS 
 	 ************************************************/
 
-	/*
-	 * Attention, les methodes suivantes :
-	 * public void actionPerformed(ActionEvent arg0)
-	 * public void update(Observable arg0, Object arg1)
-	 * doivent etre implementer dans les classes filles
+
+	/**
+	 * Methode d'initialisation des composants de la fenetre de conversation
+	 * @param boolean indiquant si la fenetre doit etre visible ou non
 	 */
-	
 	public void initializeComponents(boolean visible){
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		historic.setEditable(false);
@@ -154,6 +200,10 @@ public class ConversationFenetre extends AbstractFenetre{
         this.setVisible(visible);
 	}
 
+	/**
+	 * Methode permettant la mise a jour de la fenetre
+	 * Par exemple : lorsque un user quitte la conversation
+	 */
 	public void miseAJourFenetre () {	
 		if (this.listOfNicknames.isEmpty()) {
 			// conversation terminee
@@ -178,17 +228,15 @@ public class ConversationFenetre extends AbstractFenetre{
 		}
 	}
 	
-	@Override
+	/**
+	 * Methode appelee lorsque l'utilisateur agit sur un des boutons de la fenetre
+	 */
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == sendButton){
 			if (guiView.getGUIControler().getEtat() == Etats.connected) {
 				if (!this.writerArea.getText().isEmpty()) {
-					try {
-						getGUIView().TextMessage(this.writerArea.getText(), listOfId);
-						this.writerArea.setText("") ;
-					} catch (UnknownHostException e) {
-						System.out.println("ERREUR Conversation : UnknownHostException") ;
-					}
+					ConversationFenetre.guiView.TextMessage(this.writerArea.getText(), listOfId);
+					this.writerArea.setText("") ;
 				}
 			}
 		}
@@ -197,11 +245,7 @@ public class ConversationFenetre extends AbstractFenetre{
 			
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 	            File file = fileChooser.getSelectedFile();
-	            try {
-					getGUIView().FileMessage(file, listOfId);
-				} catch (UnknownHostException e) {
-					System.out.println("ConversationFentre ERROR - FILE : UnknownHostException") ;
-				}
+	            ConversationFenetre.guiView.FileMessage(file, listOfId);
 			}
 			
 			

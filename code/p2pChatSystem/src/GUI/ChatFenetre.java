@@ -247,16 +247,17 @@ public class ChatFenetre extends AbstractFenetre{
 		if (ChatFenetre.guiView.getGUIControler().getEtat() != Etats.disconnected) {
 	        if (evt.getClickCount() == 2) {
 	        	
-	            int index = this.contactsListPanel.getList().locationToIndex(evt.getPoint());
-	            @SuppressWarnings("rawtypes")
-				ListModel dlm = this.contactsListPanel.getList().getModel();
-	            Object item = dlm.getElementAt(index);;
-	            this.contactsListPanel.getList().ensureIndexIsVisible(index);
-	            
-	            // creation de la fenetre
-	            int idUser = ChatFenetre.guiView.getGUIControler().getGUIToControler().getNetInfo().getArrayPositionsListModel().get(index);
-	            TreeSet<Integer> idList = new TreeSet<Integer> () ;
-	            idList.add(idUser) ;
+	        	// recuperation des users selectionnes
+	        	TreeSet<Integer> idList = new TreeSet<Integer> () ;
+	        	ArrayList<String> listNickname = new ArrayList<String>() ;
+	        	Object obj[ ] = this.contactsListPanel.getList().getSelectedValues(); 
+	        	int index[] = this.contactsListPanel.getList().getSelectedIndices() ;
+	        	int idUser[] = new int[index.length] ;
+	        	for(int i = 0; i < obj.length; i++) { 
+	        		idUser[i] = ChatFenetre.guiView.getGUIControler().getGUIToControler().getNetInfo().getArrayPositionsListModel().get(index[i]);
+	        		idList.add(idUser[i]) ;
+	        		listNickname.add((String)obj[i]) ;
+	        		}         
 	            
 	            int i = 0;
 	            boolean found = false ;
@@ -271,13 +272,10 @@ public class ChatFenetre extends AbstractFenetre{
             		}
 	            	i++ ;
 	            }
+	            
 	            // si on n'a pas trouve de conversation existante, on en cree une
 	            if (!found) {
-	            	TreeSet <Integer> listId = new TreeSet<Integer> () ;
-	            	listId.add(idUser) ;
-	            	ArrayList<String> listNickname = new ArrayList<String>() ;
-	            	listNickname.add(item.toString()) ;
-	            	ConversationFenetre newConversation = new ConversationFenetre(listNickname, listId, true) ;
+	            	ConversationFenetre newConversation = new ConversationFenetre(listNickname, idList, true) ;
 		            newConversation.setGuiView(guiView) ;
 		            ChatFenetre.guiView.getConversationFenetre().add(newConversation);
             	}

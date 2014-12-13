@@ -25,12 +25,12 @@ public class ContactsListPanel extends JPanel{
     /**
      * Pointeur d'objet (composant) JList(String)
      */
-    private JList<String> list; 
+    private JList list; 
      
     /**
      * Modele de la JList pour pouvoir la modifier facilement 
      */
-    private DefaultListModel<String> dlm; 
+    private DefaultListModel dlm; 
      
     /**
      * Permet d'associer le numero de la liste "list" a l'id utilisateur 
@@ -45,8 +45,8 @@ public class ContactsListPanel extends JPanel{
      * Constructeur par defaut qui initialise les parametres
      */
     private ContactsListPanel(){ 
-        this.dlm = new DefaultListModel<String>(); 
-        this.list = new JList<String>(dlm); 
+        this.dlm = new DefaultListModel(); 
+        this.list = new JList(dlm); 
         this.add(list); 
         this.arrayIdListToIdUser = new ArrayList<String> () ;
         this.setVisible(true); 
@@ -73,7 +73,7 @@ public class ContactsListPanel extends JPanel{
      * Getter de list
      * @return l'objet JList(String)
      */
-    public JList<String> getList(){ 
+    public JList getList(){ 
         return list; 
     } 
      
@@ -81,7 +81,7 @@ public class ContactsListPanel extends JPanel{
      * Getter de dlm
      * @return l'objet DefaultListModel(String)
      */
-    public DefaultListModel<String> getDefaultListModel(){ 
+    public DefaultListModel getDefaultListModel(){ 
         return dlm; 
     } 
     
@@ -102,7 +102,7 @@ public class ContactsListPanel extends JPanel{
      */
     public void initComponents () { 
         list.setLayoutOrientation(JList.VERTICAL); 
-        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION) ; 
+        list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION) ; 
         list.setFixedCellWidth(100); 
         list.setFixedCellHeight(10);
         list.setVisibleRowCount(5);
