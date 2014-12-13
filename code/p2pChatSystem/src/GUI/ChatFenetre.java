@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.TreeSet;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.ListModel;
 import Controler.NetworkInformation;
 import Controler.typeOfChange;
 import GUI.GUIControler.Etats;
