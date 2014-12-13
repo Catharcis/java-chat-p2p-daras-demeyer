@@ -20,6 +20,10 @@ import javax.swing.JTextArea;
 
 import GUI.GUIControler.Etats;
 
+/**
+ * @author Valérie Daras et Alexandre Demeyer
+ */
+
 @SuppressWarnings("serial")
 public class ConversationFenetre extends AbstractFenetre{
 

@@ -19,6 +19,10 @@ import Controler.NetworkInformation;
 import Controler.typeOfChange;
 import GUI.GUIControler.Etats;
 
+/**
+ * @author Valérie Daras et Alexandre Demeyer
+ */
+
 @SuppressWarnings("serial")
 public class ChatFenetre extends AbstractFenetre{
 
@@ -27,18 +31,33 @@ public class ChatFenetre extends AbstractFenetre{
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
 	
+	/**
+	 * Singleton
+	 */
 	private static ChatFenetre singleton;
 	
+	/**
+	 * Panel de connexion deconnexion
+	 */
 	private ConnectDisconnectPanel connectDisconnectPanel;
 	
+	/**
+	 * Panel de la liste des contacts
+	 */
 	private ContactsListPanel contactsListPanel;
 	
+	/**
+	 * Pointeur d'objet GUIView
+	 */
 	private static GUIView guiView ;
 	
 	/************************************************* 
 	 * 				CONSTRUCTOR 
 	 ************************************************/
 	
+	/**
+	 * Constructeur par defaut qui initialise les parametres et lance la fenetre
+	 */
 	private ChatFenetre() {
 		this.initializeWindow() ;
 		connectDisconnectPanel = ConnectDisconnectPanel.getInstance();
@@ -47,6 +66,10 @@ public class ChatFenetre extends AbstractFenetre{
 	    this.initializeComponents(true);
 	}
 
+	/**
+	 * Creer l'instance si elle n'est pas cree ou la recupere
+	 * @return l'instance ChatFenetre
+	 */
 	public static ChatFenetre getInstance() {
 		if (singleton == null){
 			singleton = new ChatFenetre();
@@ -59,18 +82,34 @@ public class ChatFenetre extends AbstractFenetre{
 	 * 				GETTERS & SETTERS
 	 ************************************************/
 	
+	/**
+	 * Setter de guiView
+	 * @param view : l'objet GUIView
+	 */
 	public void setGuiView (GUIView view) {
 		guiView = GUIView.getInstance() ;
 	}
 	
+	/**
+	 * Getter de guiView
+	 * @return : l'objet GUIView
+	 */
 	public static GUIView getGUIView() {
 		return guiView;
 	}
 	
+	/**
+	 * Getter de connectDisconnectPanel
+	 * @return : l'objet ConnectDisconnectPanel
+	 */
 	public ConnectDisconnectPanel getConnectDisconnectPanel () {
 		return this.connectDisconnectPanel ;
 	}
 	
+	/**
+	 * Getter de contactsListPanel
+	 * @return : l'objet ContactsListPanel
+	 */
 	public ContactsListPanel getContactsListPanel () {
 		return this.contactsListPanel ;
 	}
@@ -79,6 +118,9 @@ public class ChatFenetre extends AbstractFenetre{
 	 * 					METHODS 
 	 ************************************************/
 
+	/**
+	 * Permet d'initialiser la structure de la fenêtre
+	 */
 	public void initializeWindow() {
 		this.setTitle("Chat System") ; 
 		this.setResizable(false) ;
@@ -87,6 +129,9 @@ public class ChatFenetre extends AbstractFenetre{
 	    this.setLocationRelativeTo(null);
 	}
 	
+	/**
+	 * Permet d'initialiser les composants
+	 */
 	public void initializeComponents(boolean visible) {	
 		// On crÃ©e nos diffÃ©rents conteneurs
 	    JPanel cell1 = new JPanel();
@@ -178,7 +223,9 @@ public class ChatFenetre extends AbstractFenetre{
 		this.pack();
 	}
 		
-	@Override
+	/**
+	 * Permet d'effectuer une action lorsqu'un bouton est reveille
+	 */
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == connectDisconnectPanel.getButtonConnectOnOff()){
 			if (guiView.getGUIControler().getEtat() == Etats.disconnected) {
@@ -193,7 +240,9 @@ public class ChatFenetre extends AbstractFenetre{
 		}
 	}
 
-	
+	/**
+	 * Permet d'effectuer une action lorsque la souris clique sur une personne de la liste
+	 */
 	public void mouseClicked(MouseEvent evt) {
 		if (ChatFenetre.guiView.getGUIControler().getEtat() != Etats.disconnected) {
 	        if (evt.getClickCount() == 2) {
@@ -255,7 +304,9 @@ public class ChatFenetre extends AbstractFenetre{
 	@Override
 	public void windowClosed(WindowEvent e) { }
 
-	@Override
+	/**
+	 * Permet d'effectuer une action lorsque la fenêtre se ferme, en particulier se déconnecter
+	 */
 	public void windowClosing(WindowEvent e) {	
 		System.out.println("Arret du Chat System...");
 		if (ChatFenetre.guiView.getGUIControler().getEtat() != Etats.disconnected) {
@@ -277,7 +328,9 @@ public class ChatFenetre extends AbstractFenetre{
 	@Override
 	public void windowOpened(WindowEvent e) { }
 
-	@Override
+	/**
+	 * Permet d'effectuer une action lorsque l'on appuie sur la touche entrée quand on rempli le champ "Nom d'utilisateur"
+	 */
 	public void keyPressed(KeyEvent arg0) {
 		if (arg0.getSource() == connectDisconnectPanel.getNicknameField()) {
 			if (arg0.getKeyCode() == KeyEvent.VK_ENTER ) {

@@ -7,6 +7,9 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 
+/**
+ * @author Valérie Daras et Alexandre Demeyer
+ */
 
 @SuppressWarnings("serial")
 public abstract class AbstractFenetre extends JFrame implements ActionListener, MouseListener, WindowListener, KeyListener {
@@ -31,13 +34,10 @@ public abstract class AbstractFenetre extends JFrame implements ActionListener, 
 	 * 					METHODS 
 	 ************************************************/
 
-	/*
-	 * Attention, les mï¿½thodes suivantes :
-	 * public void actionPerformed(ActionEvent arg0)
-	 * public void update(Observable arg0, Object arg1)
-	 * doivent ï¿½tre implï¿½menter dans les classes filles
+	/**
+	 * Permet d'initialiser les composants d'une classe
+	 * @param visible : composants visible si vrai sinon faux
 	 */
-	
 	public abstract void initializeComponents(boolean visible);
 	
 }
