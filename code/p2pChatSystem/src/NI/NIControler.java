@@ -206,7 +206,7 @@ public class NIControler {
 	 * @param name : nom de l'utilisateur distant
 	 * @param address : l'adresse ip de l'utilisateur distant
 	 */
-	protected void receivedHello (String name, InetAddress address) {
+	public void receivedHello (String name, InetAddress address) {
 		netToCont.processHello(name, address);
 	}
 	
@@ -215,7 +215,7 @@ public class NIControler {
 	 * @param name : nom de l'utilisateur distant
 	 * @param address : l'adresse ip de l'utilisateur distant
 	 */
-	protected void receivedHelloAck (String name, InetAddress address) {
+	public void receivedHelloAck (String name, InetAddress address) {
 		netToCont.processHelloAck(name, address) ;
 	}
 	
@@ -224,7 +224,7 @@ public class NIControler {
 	 * @param name : nom de l'utilisateur distant
 	 * @param address : l'adresse ip de l'utilisateur distant
 	 */
-	protected void receivedGoodbye (String name, InetAddress address) {
+	public void receivedGoodbye (String name, InetAddress address) {
 		netToCont.processGoodbye(name, address) ;
 	}
 	
@@ -233,7 +233,7 @@ public class NIControler {
 	 * @param text : message recu
 	 * @param ListNicknames : liste des noms d'utilisateurs concernes
 	 */
-	protected void receivedTextMessage (String text, ArrayList <String> ListNicknames) {
+	public void receivedTextMessage (String text, ArrayList <String> ListNicknames) {
 		netToCont.processTextMessage(text, ListNicknames) ;
 	}
 	
@@ -242,7 +242,7 @@ public class NIControler {
 	 * @param nameFile : nom du fichier recu
 	 * @param ListNicknames : liste des noms d'utilisateurs concernes
 	 */
-	protected void receivedFileMessage (String nameFile, ArrayList <String> ListNicknames) {
+	public void receivedFileMessage (String nameFile, ArrayList <String> ListNicknames) {
 		netToCont.processFileMessage(nameFile, ListNicknames) ;
 	}
 	
