@@ -18,7 +18,7 @@ public abstract class AbstractFenetre extends JFrame implements ActionListener, 
 	 * 				ATTRIBUTS & FIELDS 
 	 ************************************************/
 	
-	
+
 	/************************************************* 
 	 * 				CONSTRUCTOR 
 	 ************************************************/
