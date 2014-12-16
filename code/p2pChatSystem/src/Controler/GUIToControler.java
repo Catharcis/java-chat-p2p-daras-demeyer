@@ -92,6 +92,7 @@ public class GUIToControler {
 		// Si la socket est dans l'etat "closed", cela indique qu'elle a deja ete ouverte et qu'il faut la remplace
 		if (niCon.getUDPReceiver().getSocket().isClosed()){
 			niCon.createThreadUDPReceiver();
+			niCon.createThreadTCPServer();
 		}
 		
 		// On notifie la vue du dernier changement
