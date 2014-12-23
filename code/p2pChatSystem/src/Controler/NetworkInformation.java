@@ -148,7 +148,7 @@ public class NetworkInformation extends Observable {
 	 * Permet d'indiquer aux observateurs qu'il y a eut un changement et de quel type
 	 * @param lastChange : dernier changement a indique a l'observateur
 	 */
-	public void notifyLastChange(typeOfChange lastChange) {
+	protected void notifyLastChange(typeOfChange lastChange) {
 		this.lastChange = lastChange;
 		System.out.println("NETWORK INFORMATION - Observer is notified : " + lastChange);
 		setChanged();
@@ -160,7 +160,7 @@ public class NetworkInformation extends Observable {
 	 * @param lastChange : dernier changement a indique a l'observateur
 	 * @param arg1 : un objet en plus permettant de preciser le changement
 	 */
-	public void notifyLastChange(typeOfChange lastChange, Object arg1) {
+	protected void notifyLastChange(typeOfChange lastChange, Object arg1) {
 		this.lastChange = lastChange;
 		System.out.println("NETWORK INFORMATION - Observer is notified : " + lastChange);
 		setChanged();
@@ -174,7 +174,7 @@ public class NetworkInformation extends Observable {
 	 * @param HelloAck : booleen indiquant si on ajoute un utilisateur a cause d'un HelloAck
 	 * @return l'objet User contenant les informations passees en parametres
 	 */
-	public User addUser (String nickname, InetAddress ip, boolean HelloAck) {
+	protected User addUser (String nickname, InetAddress ip, boolean HelloAck) {
 		User user = new User (nickname) ;
 		System.out.println("NETINFO - ADD USER : USER ID :"+user.getIdUser()) ;
 		this.usersIPAddress.put(ip, user) ;
@@ -191,7 +191,7 @@ public class NetworkInformation extends Observable {
 	 * Methode qui supprime un User grace a son adresse IP *
 	 * @param ip : adresse ip de l'utilisateur a supprimes
 	 */
-	public void removeUser (InetAddress ip) {
+	protected void removeUser (InetAddress ip) {
 		int idUser = usersIPAddress.get(ip).getIdUser();
 		notifyLastChange(typeOfChange.REMOVEUSER,idUser);
 		this.usersIPAddress.remove(ip) ;
@@ -204,7 +204,7 @@ public class NetworkInformation extends Observable {
 	 * @param user : User dont on veut l'adresse ip
 	 * @return l'adresse ip du User
 	 */
-	public InetAddress getIPAddressOfUser(User user) {
+	protected InetAddress getIPAddressOfUser(User user) {
 		InetAddress ip = null;
 		Iterator<Entry<InetAddress, User>> it = usersIPAddress.entrySet().iterator();
 		while (it.hasNext() && ip == null){
@@ -274,7 +274,7 @@ public class NetworkInformation extends Observable {
 	 * @param name : nom contenant l'adresse ip
 	 * @return l'adresse ip sans le "nom@"
 	 */
-	public String getIPOfPattern (String name){
+	protected String getIPOfPattern (String name){
 		 Pattern pattern = Pattern.compile("^(.*)@(([0-9]{1,3}[.]){3}[0-9]{1,3})");
 	     Matcher matcher = pattern.matcher(name);
 	     if (matcher.find()){
@@ -291,7 +291,7 @@ public class NetworkInformation extends Observable {
 	 * @param name : nom contenant l'adresse ip
 	 * @return le nom sans l'adresse ip
 	 */
-	public String getNicknameWithoutIP(String name){
+	protected String getNicknameWithoutIP(String name){
 		Pattern pattern = Pattern.compile("^(.*)@(([0-9]{1,3}[.]){3}[0-9]{1,3})");
 	     Matcher matcher = pattern.matcher(name);
 	     if (matcher.find()){
@@ -325,7 +325,7 @@ public class NetworkInformation extends Observable {
 	/**
 	 * Methodes permettant de reinitialise les variables du systeme en cas de plusieurs connexions/deconnexions
 	 */
-	public void reinitializeVariables() {
+	protected void reinitializeVariables() {
 		this.localUser = null;
 		this.usersIPAddress = new HashMap <InetAddress, User> () ;
 		this.userList = new ArrayList<User> () ;

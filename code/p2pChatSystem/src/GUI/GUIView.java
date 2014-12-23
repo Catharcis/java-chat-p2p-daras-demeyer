@@ -35,12 +35,12 @@ public class GUIView implements Observer{
 	/**
 	 * Field vers la classe fille ChatFenetre
 	 */
-	private ChatFenetre chatFenetre;
+	private static ChatFenetre chatFenetre;
 	
 	/** 
 	 * Field vers la classe GUIControler
 	 */
-	private GUIControler guiControler ;
+	private static GUIControler guiControler ;
 	
 	/**
 	 * Field correspondant a la liste des fenetres de conversation existantes
@@ -80,7 +80,7 @@ public class GUIView implements Observer{
 	 * @return chatFenetre
 	 */
 	public ChatFenetre getChatFenetre () {
-		return this.chatFenetre ;
+		return GUIView.chatFenetre ;
 	}
 	
 	/**
@@ -88,7 +88,7 @@ public class GUIView implements Observer{
 	 * @return guiControler
 	 */
 	public GUIControler getGUIControler() {
-		return this.guiControler;
+		return GUIView.guiControler;
 	}
 	
 	/**
@@ -179,18 +179,18 @@ public class GUIView implements Observer{
 			
 			if (NI.getLastChange().equals(typeOfChange.CONNECTION)) {
 				/** le bouton connect change d'aspect **/
-				this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Deconnexion");
-				this.chatFenetre.getConnectDisconnectPanel().getNicknameField().setEditable(false);
-				this.chatFenetre.getConnectDisconnectPanel().setImageStatus(new ImageIcon("online.png"));
+				GUIView.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Deconnexion");
+				GUIView.chatFenetre.getConnectDisconnectPanel().getNicknameField().setEditable(false);
+				GUIView.chatFenetre.getConnectDisconnectPanel().setImageStatus(new ImageIcon("online.png"));
 				guiControler.setEtatConnect();
 			}
 			
 			else if (NI.getLastChange().equals(typeOfChange.DISCONNECTION)) {
 				/** le bouton connect change d'aspect **/
-				this.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Connexion");
-				this.chatFenetre.getConnectDisconnectPanel().getNicknameField().setEditable(true);
-				this.chatFenetre.getConnectDisconnectPanel().setImageStatus(new ImageIcon("offline.png"));
-				this.chatFenetre.getContactsListPanel().getDefaultListModel().clear() ;
+				GUIView.chatFenetre.getConnectDisconnectPanel().getButtonConnectOnOff().setText("Connexion");
+				GUIView.chatFenetre.getConnectDisconnectPanel().getNicknameField().setEditable(true);
+				GUIView.chatFenetre.getConnectDisconnectPanel().setImageStatus(new ImageIcon("offline.png"));
+				GUIView.chatFenetre.getContactsListPanel().getDefaultListModel().clear() ;
 				for (int i = 0; i<this.listOfConversationFenetre.size(); i++) {
 					this.listOfConversationFenetre.get(i).setVisible(false) ;
 				}
@@ -200,20 +200,20 @@ public class GUIView implements Observer{
 			else if (NI.getLastChange().equals(typeOfChange.ADDUSER_HELLO)){	
 				int idUser = (Integer)arg1;
 				String nickname = guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname() ;
-				this.chatFenetre.getContactsListPanel().getDefaultListModel().addElement(nickname);
-				this.chatFenetre.pack();
-				this.guiControler.getGUIToControler().addIDListModel(idUser);
+				GUIView.chatFenetre.getContactsListPanel().getDefaultListModel().addElement(nickname);
+				GUIView.chatFenetre.pack();
+				GUIView.guiControler.getGUIToControler().addIDListModel(idUser);
 
 				// on envoit un HelloAck au nouvel user
-				this.guiControler.getGUIToControler().performSendHelloAck(idUser);
+				GUIView.guiControler.getGUIToControler().performSendHelloAck(idUser);
 			}
 			
 			else if (NI.getLastChange().equals(typeOfChange.ADDUSER_HELLO_ACK)){	
 				int idUser = (Integer)arg1;
 				String nickname = guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname() ;
-				this.chatFenetre.getContactsListPanel().getDefaultListModel().addElement(nickname);
-				this.chatFenetre.pack();
-				this.guiControler.getGUIToControler().addIDListModel(idUser);
+				GUIView.chatFenetre.getContactsListPanel().getDefaultListModel().addElement(nickname);
+				GUIView.chatFenetre.pack();
+				GUIView.guiControler.getGUIToControler().addIDListModel(idUser);
 			}
 			
 			else if (NI.getLastChange().equals(typeOfChange.REMOVEUSER)) {
@@ -221,15 +221,15 @@ public class GUIView implements Observer{
 				int idUser = (Integer)arg1;
 				String nickname = guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname() ;
 				// suppression du user de la liste de contact
-				if (this.chatFenetre.getContactsListPanel().getDefaultListModel().removeElement(nickname)){
+				if (GUIView.chatFenetre.getContactsListPanel().getDefaultListModel().removeElement(nickname)){
 					System.out.println("JList : remove "+nickname+" success");
 				}
 				else{
 					System.out.println("JList - ERROR : remove "+nickname+" failed !");
 				}
 				// remise en forme de la liste visuelle
-				this.chatFenetre.pack();
-				this.guiControler.getGUIToControler().removeIDListModel(idUser);
+				GUIView.chatFenetre.pack();
+				GUIView.guiControler.getGUIToControler().removeIDListModel(idUser);
 				System.out.println("JList pack()");
 				
 				//suppression du user des conversations
@@ -238,8 +238,8 @@ public class GUIView implements Observer{
 					if (this.listOfConversationFenetre.get(i).getListOfIds().contains(idUser))
 						this.listOfConversationFenetre.get(i).getListOfIds().remove(idUser) ;
 					// on supprime son nickname de toutes les conversations
-					if (this.listOfConversationFenetre.get(i).getListOfNicknames().contains(this.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname()))
-						this.listOfConversationFenetre.get(i).getListOfNicknames().remove(this.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname()) ;
+					if (this.listOfConversationFenetre.get(i).getListOfNicknames().contains(GUIView.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname()))
+						this.listOfConversationFenetre.get(i).getListOfNicknames().remove(GUIView.guiControler.getGUIToControler().getNetInfo().getUserWithId(idUser).getNickname()) ;
 					// mise a jour de la fenetre
 					this.listOfConversationFenetre.get(i).miseAJourFenetre() ;
 					// si la conversation est alors vide, on la supprime de la liste
