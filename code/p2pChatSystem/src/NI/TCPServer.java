@@ -91,7 +91,7 @@ public class TCPServer extends AbstractReceiver implements Runnable {
 	/**
 	 * Redefinition de la methode d'ecoute sur le reseau pour la classe TCPServer
 	 */
-	public void listen() {
+	protected void listen() {
 		
 			while (this.isListening()) {
 				try {

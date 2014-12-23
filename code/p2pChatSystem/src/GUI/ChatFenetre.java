@@ -120,7 +120,7 @@ public class ChatFenetre extends AbstractFenetre{
 	/**
 	 * Permet d'initialiser la structure de la fenêtre
 	 */
-	public void initializeWindow() {
+	protected void initializeWindow() {
 		this.setTitle("Chat System") ; 
 		this.setResizable(false) ;
 		this.setSize(500, 400);

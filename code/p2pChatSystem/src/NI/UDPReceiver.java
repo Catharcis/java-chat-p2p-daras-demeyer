@@ -84,7 +84,7 @@ public class UDPReceiver extends AbstractReceiver implements Runnable {
 	/**
 	 * Redefinition de la methode d'ecoute sur le reseau pour la classe UDPReceiver
 	 */
-	public void listen(){
+	protected void listen(){
 		
 		// Cas ou la socket aurait deja ete utilisee et que l'on relance le programme
 		if (!socket.equals(null) && socket.isClosed()){

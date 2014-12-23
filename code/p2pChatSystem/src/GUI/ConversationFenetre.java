@@ -204,7 +204,7 @@ public class ConversationFenetre extends AbstractFenetre{
 	 * Methode permettant la mise a jour de la fenetre
 	 * Par exemple : lorsque un user quitte la conversation
 	 */
-	public void miseAJourFenetre () {	
+	protected void miseAJourFenetre () {	
 		if (this.listOfNicknames.isEmpty()) {
 			// conversation terminee
 			this.writerArea.setForeground(Color.red) ;

@@ -27,7 +27,7 @@ public class GUIControler {
 	/**
 	 * Field vers la classe GUIToControler
 	 */
-	private GUIToControler guiToCon ;
+	private static GUIToControler guiToCon ;
 	
 	/**
 	 * Attribut correspondant a l'etat actuel de l'utilisateur
@@ -73,21 +73,21 @@ public class GUIControler {
 	 * Getter de l'etat actuel de l'utilisateur
 	 * @return etat
 	 */
-	public Etats getEtat () {
+	protected Etats getEtat () {
 		return etat ;
 	}
 	
 	/**
 	 * Methode permettant de passer a l'etat "connected"
 	 */
-	public void setEtatConnect () {
+	protected void setEtatConnect () {
 		etat = Etats.connected ;
 	}
 	
 	/**
 	 * Methode permettant de passer a l'etat "disconnected"
 	 */
-	public void setEtatDisconnect () {
+	protected void setEtatDisconnect () {
 		etat = Etats.disconnected ;
 	}
 	

@@ -1,7 +1,4 @@
-import java.net.UnknownHostException;
 import GUI.GUIView;
-
-
 
 
 public class Test {
@@ -13,7 +10,7 @@ public static void initGUI () {
 	guiView.getChatFenetre().setGuiView(guiView);
 }
 	
-	public static void main(String[] args) throws UnknownHostException {
+	public static void main(String[] args)  {
 		initGUI() ;
 	}
 

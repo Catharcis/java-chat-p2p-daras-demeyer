@@ -62,7 +62,7 @@ public class TCPSender extends AbstractSender {
 	 * @param ipAddressesList : liste des adresses ip des utilisateurs concernes
 	 * @param file : fichier a envoye
 	 */
-	public void sendFile(AbstractMessage message, ArrayList<String> listOfUsers, ArrayList<InetAddress> ipAddressesList, File file) {
+	protected void sendFile(AbstractMessage message, ArrayList<String> listOfUsers, ArrayList<InetAddress> ipAddressesList, File file) {
 		
 		Socket client;
 		

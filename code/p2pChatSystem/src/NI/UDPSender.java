@@ -60,7 +60,7 @@ public class UDPSender extends AbstractSender {
 	 * Methode permettant d'envoyer un message en broadcast
 	 * @param message : AbstractMessage a envoye
 	 */
-	public void sendBroadcast(AbstractMessage message) {
+	protected void sendBroadcast(AbstractMessage message) {
 		/** creation d'un socket UDP**/
 		DatagramSocket socket = null;
 		try {
@@ -100,7 +100,7 @@ public class UDPSender extends AbstractSender {
 	 * @param listOfUsers : liste des noms d'utilisateurs concernes
 	 * @param ipAddressesList : liste des adresses IP des utilisateurs concernes
 	 */
-	public void send(AbstractMessage message, ArrayList<String> listOfUsers, ArrayList<InetAddress> ipAddressesList) {
+	protected void send(AbstractMessage message, ArrayList<String> listOfUsers, ArrayList<InetAddress> ipAddressesList) {
 		/** Creation d'un socket UDP**/
 		DatagramSocket socket = null;
 		try {

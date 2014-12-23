@@ -30,6 +30,6 @@ public abstract class AbstractReceiver extends AbstractNetwork{
 	/**
 	 * Permet de définir comment une classe va ecouter le reseau
 	 */
-	public abstract void listen();
+	protected abstract void listen();
 	
 }
