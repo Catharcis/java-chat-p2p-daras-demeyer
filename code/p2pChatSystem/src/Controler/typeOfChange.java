@@ -4,7 +4,7 @@ package Controler;
  * @author Val�rie Daras et Alexandre Demeyer
  */
 
-public enum TypeOfChange {
+public enum typeOfChange {
 	CONNECTION,
 	DISCONNECTION,
 	ADDUSER_HELLO,
