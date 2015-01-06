@@ -20,7 +20,7 @@ import javax.swing.JTextArea;
 import GUI.GUIControler.Etats;
 
 /**
- * @author Valérie Daras et Alexandre Demeyer
+ * @author Valï¿½rie Daras et Alexandre Demeyer
  */
 
 @SuppressWarnings("serial")
@@ -48,11 +48,6 @@ public class ConversationFenetre extends AbstractFenetre{
 	 * Button d'envoi de texte
 	 */
 	private JButton sendButton;
-	
-	/**
-	 * Button d'invite
-	 */
-	private JButton invite;
 	
 	/**
 	 * Liste des nicknames des utilisateurs concernes par la conversation
@@ -90,7 +85,6 @@ public class ConversationFenetre extends AbstractFenetre{
         writerArea = new JTextArea(10,30);
         writerArea.setLineWrap(true) ;
         sendButton = new JButton("Send");
-        invite = new JButton("Invite");
         fileButton = new JButton("File");
         fileChooser = new JFileChooser();
         this.listOfNicknames = new ArrayList<String>(listNicknames) ;
@@ -183,7 +177,6 @@ public class ConversationFenetre extends AbstractFenetre{
         JPanel invitePanel = new JPanel();
         JPanel historicAndInvitePanel = new JPanel(new BorderLayout());
         JPanel historicPanel = new JPanel();
-        invitePanel.add(invite);
         historicPanel.add(scrollPane,BorderLayout.EAST);
         historicAndInvitePanel.add(invitePanel,BorderLayout.NORTH);
         historicAndInvitePanel.add(historicPanel,BorderLayout.SOUTH);
@@ -212,7 +205,6 @@ public class ConversationFenetre extends AbstractFenetre{
 			this.writerArea.setEditable(false) ;
 			this.sendButton.setEnabled(false) ;
 			this.fileButton.setEnabled(false) ;
-			this.invite.setEnabled(false) ;
 		}
 		else {
 			String title = null ;
