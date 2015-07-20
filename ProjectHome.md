@@ -1,0 +1,1 @@
+This project provides a P2P chat system using Java. We are using TCP for file transmission and UDP for text messages. Moreover, there is a graphic interface.
